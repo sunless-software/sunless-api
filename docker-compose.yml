@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: sunless-postgres
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - sunlessnet
+
+volumes:
+  pgdata:
+
+networks:
+  sunlessnet:
