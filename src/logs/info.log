@@ -1,0 +1,81 @@
+[2025-08-02T09:24:18Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:25:22Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:25:34Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:25:44Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:25:58Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:26:21Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:31:08Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:34:02Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:35:21Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:36:11Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:37:42Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:37:57Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:40:18Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:40:26Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:40:32Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:40:41Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:40:47Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:53:37Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:53:46Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:54:11Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:54:21Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:55:17Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:55:23Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:55:32Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:57:02Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:59:14Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:59:27Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:59:32Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T09:59:35Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:00:54Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:00:54Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:00:59Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:00:59Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-02T10:00:59Z] [error]: database "sunless" does not exist
+[2025-08-02T10:01:19Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:01:19Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:01:21Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:01:21Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-02T10:01:21Z] [error]: getaddrinfo EAI_AGAIN localhostss
+[2025-08-02T10:01:34Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:01:34Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:01:46Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:01:46Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:02:46Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:02:46Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:04:47Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:04:47Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:05:04Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:05:04Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:05:19Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:05:19Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:05:26Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:05:26Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:05:44Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:05:44Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:06:42Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:06:42Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:07:24Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-02T10:07:24Z] [error]: database "sunless" does not exist
+[2025-08-02T10:07:24Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:07:46Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-02T10:07:46Z] [error]: database "sunless" does not exist
+[2025-08-02T10:08:26Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-02T10:08:26Z] [error]: database "sunless" does not exist
+[2025-08-02T10:08:38Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:08:38Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:10:13Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:10:13Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:10:34Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:10:34Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:10:39Z] [error]: You tried to get the DB connection before establish it. Try calling "connectToDB" function before.
+[2025-08-02T10:11:23Z] [error]: You tried to get the DB connection before establish it. Try calling "connectToDB" function before.
+[2025-08-02T10:11:30Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:11:30Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:11:34Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:11:34Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:12:33Z] [error]: You tried to get the DB connection before establish it. Try calling "connectToDB" function before.
+[2025-08-02T10:18:26Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:18:26Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-02T10:20:22Z] [info]: The connection to the DB has been successfully established.
+[2025-08-02T10:20:22Z] [info]: ✅ Server is running on http://localhost:3002
