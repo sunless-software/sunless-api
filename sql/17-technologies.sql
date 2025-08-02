@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS technologies (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TRIGGER trg_technologies_updated_at
+BEFORE UPDATE ON technologies
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
