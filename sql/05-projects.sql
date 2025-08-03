@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS projects (
     end_date DATE,
     estimated_end DATE,
     key TEXT NOT NULL UNIQUE,
+    deleted BOOLEAN NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

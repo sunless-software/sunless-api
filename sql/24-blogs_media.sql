@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS blogs_media (
     url TEXT,
     type_id INT,
     blog_id INT NOT NULL,
+    deleted BOOLEAN NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT FK_blogs_media_type_id FOREIGN KEY (type_id) REFERENCES media_types(id),

@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS projects_media (
     url TEXT,
     type_id INT,
     project_id INT NOT NULL,
+    deleted BOOLEAN NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT FK_projects_media_type_id FOREIGN KEY (type_id) REFERENCES media_types(id),

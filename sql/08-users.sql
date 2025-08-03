@@ -6,6 +6,9 @@ CREATE TABLE IF NOT EXISTS users (
     profile_photo TEXT,
     phone BIGINT,
     email VARCHAR(50) UNIQUE,
+    public BOOLEAN NOT NULL,
+    banned BOOLEAN NOT NULL,
+    deleted BOOLEAN NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
