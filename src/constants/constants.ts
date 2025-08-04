@@ -1,0 +1,5 @@
+export const NODE_ENV_DEVELOPMENT = "development";
+
+export const HTTP_STATUS_CODE_OK = 200;
+export const HTTP_STATUS_CODE_UNAUTHORIZED = 401;
+export const HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR = 500;

@@ -11,3 +11,62 @@
 [2025-08-02T10:10:39Z] [error]: You tried to get the DB connection before establish it. Try calling "connectToDB" function before.
 [2025-08-02T10:11:23Z] [error]: You tried to get the DB connection before establish it. Try calling "connectToDB" function before.
 [2025-08-02T10:12:33Z] [error]: You tried to get the DB connection before establish it. Try calling "connectToDB" function before.
+[2025-08-03T09:43:25Z] [warn]: Development environment detected! Development entities prealoding starting ..
+[2025-08-03T09:44:10Z] [warn]: Development environment detected! entities prealoding starting.
+[2025-08-03T09:44:15Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:45:02Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:45:07Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:45:07Z] [error]: The following error has occurred while trying to create the testing user: 
+[2025-08-03T09:45:07Z] [error]: bind message supplies 8 parameters, but prepared statement "" requires 9
+[2025-08-03T09:45:14Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:47:46Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:48:13Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:48:24Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:48:25Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:48:57Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:49:57Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:53:28Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:55:09Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:56:51Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:57:37Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:58:32Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:58:45Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:59:06Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:59:18Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T09:59:30Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:00:01Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:00:09Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:01:15Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:01:59Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:05:54Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:06:33Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:06:39Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:07:48Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:08:32Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:08:38Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:09:16Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:09:58Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:11:38Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:15:06Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:15:18Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T10:19:22Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T15:43:29Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T15:43:50Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T15:43:56Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T15:44:01Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T15:44:05Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T15:44:25Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-03T15:44:36Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:31:45Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:32:13Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:32:59Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:33:43Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:35:03Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:36:21Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:38:10Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:39:39Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:39:53Z] [warn]: New connection attempt using the username "sunless_testd" was rejected. User not found.
+[2025-08-04T08:41:04Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:41:06Z] [warn]: New connection attempt using the username "sunless_testd" was rejected. User not found.
+[2025-08-04T08:41:11Z] [warn]: New connection attempt from user "sunless_test" was rejected. Invalid credentials.
+[2025-08-04T08:41:27Z] [warn]: Development environment detected! entities prealoding starting ..

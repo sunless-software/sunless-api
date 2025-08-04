@@ -11,3 +11,5 @@
 [2025-08-02T10:10:39Z] [error]: You tried to get the DB connection before establish it. Try calling "connectToDB" function before.
 [2025-08-02T10:11:23Z] [error]: You tried to get the DB connection before establish it. Try calling "connectToDB" function before.
 [2025-08-02T10:12:33Z] [error]: You tried to get the DB connection before establish it. Try calling "connectToDB" function before.
+[2025-08-03T09:45:07Z] [error]: The following error has occurred while trying to create the testing user: 
+[2025-08-03T09:45:07Z] [error]: bind message supplies 8 parameters, but prepared statement "" requires 9

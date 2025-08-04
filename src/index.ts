@@ -7,22 +7,28 @@ import { ApiResponse } from "./interfaces";
 import logger from "./logger";
 import usersRouter from "./routes/users";
 import connectToDB from "./db";
+import preload from "./preload";
+import { DEFAULT_HEALTH_ENDPOINT_RESPONSE } from "./constants/apiResponses";
+import { HTTP_STATUS_CODE_OK } from "./constants/constants";
+import authRouter from "./routes/auth";
 
 async function start() {
   const app = express();
   const apiRouter = Router();
   const port = process.env.PORT || API_DEFAULT_PORT;
   await connectToDB();
+  preload();
 
   app.use("/api/v1", apiRouter);
+
   apiRouter.use(express.json());
-  apiRouter.get("/health", (req, res): Response<ApiResponse<[]>> => {
-    return res.json({
-      status: 200,
-      message: "May the moon shine upon you, Sunless one.",
-      data: [],
-    });
+  apiRouter.get("/health", (_req, res): Response<ApiResponse<[]>> => {
+    return res
+      .status(HTTP_STATUS_CODE_OK)
+      .json(DEFAULT_HEALTH_ENDPOINT_RESPONSE);
   });
+
+  apiRouter.use("/auth", authRouter);
   apiRouter.use(usersRouter);
 
   app.listen(port, () => {
