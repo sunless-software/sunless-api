@@ -3,3 +3,10 @@ export interface ApiResponse<T> {
   message: string;
   data: Array<T>;
 }
+
+export interface UserCredentials {
+  id: number;
+  username: string;
+  iat: number;
+  exp: number;
+}

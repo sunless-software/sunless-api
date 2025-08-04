@@ -3,6 +3,6 @@ import usersController from "../controllers/usersController";
 
 const usersRouter = Router();
 
-usersRouter.get("/users", usersController.getUsers);
+usersRouter.get("/list", usersController.getUsers);
 
 export default usersRouter;

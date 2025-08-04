@@ -11,6 +11,7 @@ import preload from "./preload";
 import { DEFAULT_HEALTH_ENDPOINT_RESPONSE } from "./constants/apiResponses";
 import { HTTP_STATUS_CODE_OK } from "./constants/constants";
 import authRouter from "./routes/auth";
+import authMiddleware from "./middlewares/auth";
 
 async function start() {
   const app = express();
@@ -29,7 +30,7 @@ async function start() {
   });
 
   apiRouter.use("/auth", authRouter);
-  apiRouter.use(usersRouter);
+  apiRouter.use("/users", authMiddleware, usersRouter);
 
   app.listen(port, () => {
     logger.info(`✅ Server is running on http://localhost:${port}`);

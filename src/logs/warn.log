@@ -85,3 +85,20 @@
 [2025-08-04T09:19:40Z] [warn]: Development environment detected! entities prealoding starting ..
 [2025-08-04T09:20:06Z] [warn]: New connection attempt using the username "sunless_tes" was rejected. User not found.
 [2025-08-04T09:20:11Z] [warn]: New connection attempt from user "sunless_test" was rejected. Invalid credentials.
+[2025-08-04T09:38:22Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:38:41Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:38:45Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-04T09:45:09Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:45:37Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:49:33Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:50:17Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:51:51Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:54:44Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:56:31Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:56:37Z] [warn]: A request was rejected because the authorization token was invalid. Token: undefined
+[2025-08-04T09:56:58Z] [warn]: A request was rejected because the authorization token was invalid. Token: efJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJzdW5sZXNzX3Rlc3QiLCJpYXQiOjE3NTQzMDAzOTQsImV4cCI6MTc1NDM4Njc5NH0.psIt3QXjnT_I5acql-siC21D6FbRvJxhUKD24xxC0PE
+[2025-08-04T09:57:34Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-04T09:58:06Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:58:12Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-04T09:58:19Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:58:27Z] [warn]: Development environment detected! entities prealoding starting ..
