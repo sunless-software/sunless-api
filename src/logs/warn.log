@@ -70,3 +70,18 @@
 [2025-08-04T08:41:06Z] [warn]: New connection attempt using the username "sunless_testd" was rejected. User not found.
 [2025-08-04T08:41:11Z] [warn]: New connection attempt from user "sunless_test" was rejected. Invalid credentials.
 [2025-08-04T08:41:27Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:57:34Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:57:58Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T08:58:19Z] [warn]: New connection attempt using the username "" was rejected. User not found.
+[2025-08-04T08:59:56Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:03:00Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:03:03Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:03:05Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:09:47Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:10:52Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:16:23Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:17:41Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:19:23Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:19:40Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T09:20:06Z] [warn]: New connection attempt using the username "sunless_tes" was rejected. User not found.
+[2025-08-04T09:20:11Z] [warn]: New connection attempt from user "sunless_test" was rejected. Invalid credentials.

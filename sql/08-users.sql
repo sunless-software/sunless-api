@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     rol_id INT REFERENCES global_roles(id),
-    username VARCHAR(50) NOT NULL UNIQUE,
+    username VARCHAR(50) NOT NULL UNIQUE CHECK (char_length(username) >= 3),
     password TEXT NOT NULL,
     profile_photo TEXT,
     phone BIGINT,
