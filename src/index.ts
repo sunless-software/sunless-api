@@ -8,10 +8,14 @@ import logger from "./logger";
 import usersRouter from "./routes/users";
 import connectToDB from "./db";
 import preload from "./preload";
-import { DEFAULT_HEALTH_ENDPOINT_RESPONSE } from "./constants/apiResponses";
+import {
+  DEFAULT_API_RESPONSE,
+  DEFAULT_HEALTH_ENDPOINT_MESSAGE,
+} from "./constants/messages";
 import { HTTP_STATUS_CODE_OK } from "./constants/constants";
 import authRouter from "./routes/auth";
 import authMiddleware from "./middlewares/auth";
+import { sendResponse } from "./utils";
 
 async function start() {
   const app = express();
@@ -23,10 +27,11 @@ async function start() {
   app.use("/api/v1", apiRouter);
 
   apiRouter.use(express.json());
-  apiRouter.get("/health", (_req, res): Response<ApiResponse<[]>> => {
-    return res
-      .status(HTTP_STATUS_CODE_OK)
-      .json(DEFAULT_HEALTH_ENDPOINT_RESPONSE);
+  apiRouter.get("/health", (_req, res): Response<ApiResponse<null>> => {
+    return sendResponse(
+      { ...DEFAULT_API_RESPONSE, message: DEFAULT_HEALTH_ENDPOINT_MESSAGE },
+      res
+    );
   });
 
   apiRouter.use("/auth", authRouter);

@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface ApiResponse<T> {
   status: number;
   message: string;
@@ -9,4 +11,13 @@ export interface UserCredentials {
   username: string;
   iat: number;
   exp: number;
+}
+
+export interface AuthRequest extends Request {
+  user: UserCredentials;
+}
+
+export interface Permission {
+  id: number;
+  name: string;
 }

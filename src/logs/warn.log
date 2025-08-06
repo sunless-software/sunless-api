@@ -102,3 +102,207 @@
 [2025-08-04T09:58:12Z] [warn]: A request was rejected because no authorization headers where provided.
 [2025-08-04T09:58:19Z] [warn]: Development environment detected! entities prealoding starting ..
 [2025-08-04T09:58:27Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:03:55Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:04:09Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:04:27Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:05:58Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:06:58Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:09:16Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:09:32Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:11:09Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:12:30Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:13:18Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:14:05Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:14:13Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:14:31Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:14:41Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:14:48Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:14:58Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:15:01Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:16:56Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:17:05Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:48:03Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:48:40Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:49:07Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:57:42Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T10:57:46Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:01:07Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:02:36Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:02:50Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:09:13Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:11:45Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:12:25Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:13:35Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:13:35Z] [error]: The following error has occurred while trying to create the permissions: 
+[2025-08-04T11:13:35Z] [error]: syntax error at or near "VALUES"
+[2025-08-04T11:14:02Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:14:02Z] [error]: The following error has occurred while trying to create the permissions: 
+[2025-08-04T11:14:02Z] [error]: syntax error at or near "VALUES"
+[2025-08-04T11:14:26Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:14:26Z] [error]: The following error has occurred while trying to create the permissions: 
+[2025-08-04T11:14:26Z] [error]: syntax error at or near "VALUES"
+[2025-08-04T11:16:36Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:16:36Z] [error]: The following error has occurred while trying to create the permissions: 
+[2025-08-04T11:16:36Z] [error]: column "create_users" does not exist
+[2025-08-04T11:17:14Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:17:14Z] [error]: The following error has occurred while trying to create the permissions: 
+[2025-08-04T11:17:14Z] [error]: column "CREATE_USERS" does not exist
+[2025-08-04T11:17:56Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:18:06Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T11:18:06Z] [error]: The following error has occurred while trying to create the permissions: 
+[2025-08-04T11:18:06Z] [error]: duplicate key value violates unique constraint "permissions_name_key"
+[2025-08-04T11:18:19Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-04T15:06:03Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-04T15:06:03Z] [error]: the database system is starting up
+[2025-08-06T08:10:18Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:10:18Z] [error]: The following error has occurred while trying to create the roles: 
+[2025-08-06T08:10:18Z] [error]: syntax error at or near "CURRENT_TIMESTAMP"
+[2025-08-06T08:10:46Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:10:46Z] [error]: The following error has occurred while trying to create the roles: 
+[2025-08-06T08:10:46Z] [error]: syntax error at or near "'Dev admin'"
+[2025-08-06T08:12:47Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:12:47Z] [error]: The following error has occurred while trying to create the roles: 
+[2025-08-06T08:12:47Z] [error]: INSERT has more target columns than expressions
+[2025-08-06T08:12:53Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:13:34Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:18:34Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:28:17Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:28:37Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:28:37Z] [error]: The following error has occurred while trying to delete the data from 'users': 
+[2025-08-06T08:28:37Z] [error]: syntax error at or near "$1"
+[2025-08-06T08:28:37Z] [error]: The following error has occurred while trying to delete the data from 'global_role_permissions': 
+[2025-08-06T08:28:37Z] [error]: syntax error at or near "$1"
+[2025-08-06T08:28:37Z] [error]: The following error has occurred while trying to delete the data from 'global_roles': 
+[2025-08-06T08:28:37Z] [error]: syntax error at or near "$1"
+[2025-08-06T08:29:44Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:29:44Z] [error]: The following error has occurred while trying to delete the data from 'users': 
+[2025-08-06T08:29:44Z] [error]: syntax error at or near "$1"
+[2025-08-06T08:29:44Z] [error]: The following error has occurred while trying to delete the data from 'global_roles': 
+[2025-08-06T08:29:44Z] [error]: syntax error at or near "$1"
+[2025-08-06T08:29:44Z] [error]: The following error has occurred while trying to delete the data from 'global_role_permissions': 
+[2025-08-06T08:29:44Z] [error]: syntax error at or near "$1"
+[2025-08-06T08:31:06Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:32:28Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:33:50Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:33:50Z] [error]: The following error has occurred while trying to delete the data from 'users': 
+[2025-08-06T08:33:50Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:33:50Z] [error]: The following error has occurred while trying to delete the data from 'global_roles': 
+[2025-08-06T08:33:50Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:34:18Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:34:18Z] [error]: The following error has occurred while trying to delete the data from 'users': 
+[2025-08-06T08:34:18Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:34:18Z] [error]: The following error has occurred while trying to delete the data from 'global_roles': 
+[2025-08-06T08:34:18Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:34:36Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:34:36Z] [error]: The following error has occurred while trying to delete the data from 'global_roles': 
+[2025-08-06T08:34:36Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:34:36Z] [error]: The following error has occurred while trying to delete the data from 'users': 
+[2025-08-06T08:34:36Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:35:16Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:35:16Z] [error]: The following error has occurred while trying to delete the data from 'users': 
+[2025-08-06T08:35:16Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:35:16Z] [error]: The following error has occurred while trying to delete the data from 'global_roles': 
+[2025-08-06T08:35:16Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:35:39Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:35:39Z] [error]: The following error has occurred while trying to delete the data from 'global_roles': 
+[2025-08-06T08:35:39Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:35:39Z] [error]: The following error has occurred while trying to delete the data from 'users': 
+[2025-08-06T08:35:39Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:36:34Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:36:34Z] [error]: The following error has occurred while trying to delete the data from 'users': 
+[2025-08-06T08:36:34Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:36:34Z] [error]: The following error has occurred while trying to delete the data from 'global_roles': 
+[2025-08-06T08:36:34Z] [error]: cannot truncate a table referenced in a foreign key constraint
+[2025-08-06T08:37:39Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:39:31Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:40:06Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:43:19Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:49:01Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:51:42Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:52:32Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:52:55Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:53:53Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:53:53Z] [error]: The following error has occurred while trying to wipe the DB:
+[2025-08-06T08:53:53Z] [error]: syntax error at or near "`"
+[2025-08-06T08:54:03Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:54:25Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:56:09Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:56:09Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:56:31Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:57:41Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:57:56Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:59:11Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T08:59:27Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:02:38Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:07:42Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:07:42Z] [error]: The following error has occurred while trying to create the development roles: 
+[2025-08-06T09:07:42Z] [error]: INSERT has more target columns than expressions
+[2025-08-06T09:08:13Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:08:13Z] [error]: The following error has occurred while trying to create the development roles: 
+[2025-08-06T09:08:13Z] [error]: INSERT has more target columns than expressions
+[2025-08-06T09:09:21Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:11:28Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:14:01Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:14:23Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:16:57Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:17:13Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:17:39Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:17:54Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:18:01Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:19:03Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:19:25Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:19:40Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:19:50Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:20:05Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:20:11Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:22:04Z] [warn]: Development environment detected! entities prealoding starting ..
+[2025-08-06T09:22:04Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-06T09:22:04Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-06T09:45:55Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:45:55Z] [error]: syntax error at or near "["
+[2025-08-06T09:46:28Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:46:28Z] [error]: syntax error at or near "["
+[2025-08-06T09:47:07Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:47:07Z] [error]: syntax error at end of input
+[2025-08-06T09:47:23Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:47:23Z] [error]: syntax error at end of input
+[2025-08-06T09:48:07Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:48:07Z] [error]: syntax error at end of input
+[2025-08-06T09:49:22Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:49:22Z] [error]: syntax error at end of input
+[2025-08-06T09:49:33Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:49:33Z] [error]: syntax error at end of input
+[2025-08-06T09:50:11Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:50:11Z] [error]: trailing junk after parameter at or near "$2b$10$jGie6rcbwSAfKjZLah"
+[2025-08-06T09:53:03Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:53:03Z] [error]: INSERT has more target columns than expressions
+[2025-08-06T09:53:08Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:53:08Z] [error]: trailing junk after parameter at or near "$2b$10$HtOfWyiMrNMyGPnTlo4PNe4HhirKs3A"
+[2025-08-06T09:56:37Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:56:37Z] [error]: syntax error at or near "["
+[2025-08-06T09:58:14Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:58:14Z] [error]: syntax error at or near "["
+[2025-08-06T09:58:30Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:58:30Z] [error]: INSERT has more target columns than expressions
+[2025-08-06T09:58:42Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:58:42Z] [error]: INSERT has more target columns than expressions
+[2025-08-06T09:59:24Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T09:59:24Z] [error]: INSERT has more target columns than expressions
+[2025-08-06T10:00:10Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T10:00:10Z] [error]: INSERT has more target columns than expressions
+[2025-08-06T10:00:30Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T10:00:30Z] [error]: INSERT has more target columns than expressions
+[2025-08-06T10:01:39Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T10:01:39Z] [error]: syntax error at or near "'),(2, 2, '"
+[2025-08-06T10:02:07Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T10:02:07Z] [error]: there is no parameter $0
+[2025-08-06T10:02:17Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T10:02:17Z] [error]: there is no parameter $0
+[2025-08-06T10:02:31Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T10:02:31Z] [error]: bind message supplies 1 parameters, but prepared statement "" requires 2
+[2025-08-06T10:03:05Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T10:03:05Z] [error]: bind message supplies 1 parameters, but prepared statement "" requires 2
+[2025-08-06T10:03:10Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T10:03:10Z] [error]: bind message supplies 1 parameters, but prepared statement "" requires 2
+[2025-08-06T10:03:20Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-06T10:03:20Z] [error]: bind message supplies 1 parameters, but prepared statement "" requires 2

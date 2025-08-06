@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { sendResponse } from "../utils";
-import { DEFAULT_API_RESPONSE } from "../constants/apiResponses";
+import { DEFAULT_API_RESPONSE } from "../constants/messages";
 import {
   HTTP_STATUS_CODE_FORBIDDEN,
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
@@ -8,11 +8,7 @@ import {
 } from "../constants/constants";
 import logger from "../logger";
 import jwt from "jsonwebtoken";
-import { UserCredentials } from "../interfaces";
-
-interface AuthRequest extends Request {
-  user: UserCredentials;
-}
+import { UserCredentials, AuthRequest } from "../interfaces";
 
 export default function authMiddleware(
   req: Request,

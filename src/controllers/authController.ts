@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import connectToDB from "../db";
-import { DEFAULT_API_RESPONSE } from "../constants/apiResponses";
+import { DEFAULT_API_RESPONSE } from "../constants/messages";
 import { checkPassword, sendResponse, signJWT } from "../utils";
 import {
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,

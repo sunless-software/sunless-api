@@ -7,7 +7,10 @@ import {
   HTTP_STATUS_CODE_BAD_REQUEST,
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
 } from "./constants/constants";
-import { DEFAULT_API_RESPONSE } from "./constants/apiResponses";
+import {
+  DEFAULT_API_RESPONSE,
+  UNEXPECTED_ERROR_DEFAULT_MESSAGE,
+} from "./constants/messages";
 import logger from "./logger";
 
 export async function encryptPassword(password: string) {
@@ -65,8 +68,7 @@ export function validateResult(
       {
         ...DEFAULT_API_RESPONSE,
         status: HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
-        message:
-          "An unexpected error has occurred. If you have acces to the server check logs for more info or contact an admin.",
+        message: UNEXPECTED_ERROR_DEFAULT_MESSAGE,
       },
       res
     );
