@@ -34,35 +34,66 @@ export enum Entities {
 }
 
 export const PERMISSIONS: Record<string, Permission> = {
-  createUsersGlobal: { name: "CREATE_USERS", scope: "GLOBAL" },
-  updateUsersGlobal: { name: "UPDATE_USERS", scope: "GLOBAL" },
-  deleteUsersGlobal: { name: "DELETE_USERS", scope: "GLOBAL" },
-  updateOwnUserGlobal: { name: "UPDATE_OWN_USER", scope: "GLOBAL" },
-  banUsersGlobal: { name: "BAN_USERS", scope: "GLOBAL" },
-  viewPrivateUsersGlobal: { name: "VIEW_PRIVATE_USERS", scope: "GLOBAL" },
+  createUsersGlobal: { id: 1, name: "CREATE_USERS", scope: "GLOBAL" },
+  updateUsersGlobal: { id: 2, name: "UPDATE_USERS", scope: "GLOBAL" },
+  deleteUsersGlobal: { id: 3, name: "DELETE_USERS", scope: "GLOBAL" },
+  updateOwnUserGlobal: { id: 4, name: "UPDATE_OWN_USER", scope: "GLOBAL" },
+  banUsersGlobal: { id: 5, name: "BAN_USERS", scope: "GLOBAL" },
+  viewPrivateUsersGlobal: {
+    id: 6,
+    name: "VIEW_PRIVATE_USERS",
+    scope: "GLOBAL",
+  },
   createPublicProjectsGlobal: {
+    id: 7,
     name: "CREATE_PUBLIC_PROJECTS",
     scope: "GLOBAL",
   },
   inviteToOwnedProjectsGlobal: {
+    id: 8,
     name: "INVITE_TO_OWNED_PROJECTS",
     scope: "GLOBAL",
   },
-  inviteProjectsGlobal: { name: "INVITE_PROJECTS", scope: "GLOBAL" },
-  updateProjectsGlobal: { name: "UPDATE_PROJECTS", scope: "GLOBAL" },
-  deleteProjectsGlobal: { name: "DELETE_PROJECTS", scope: "GLOBAL" },
-  viewPrivateProjectsGlobal: { name: "VIEW_PRIVATE_PROJECTS", scope: "GLOBAL" },
-  viewPrivateBlogsGlobal: { name: "VIEW_PRIVATE_BLOGS", scope: "GLOBAL" },
-  createBlogsGlobal: { name: "CREATE_BLOGS", scope: "GLOBAL" },
-  updateBlogsGlobal: { name: "UPDATE_BLOGS", scope: "GLOBAL" },
-  deleteBlogsGlobal: { name: "DELETE_BLOGS", scope: "GLOBAL" },
+  inviteProjectsGlobal: { id: 9, name: "INVITE_PROJECTS", scope: "GLOBAL" },
+  updateProjectsGlobal: { id: 10, name: "UPDATE_PROJECTS", scope: "GLOBAL" },
+  deleteProjectsGlobal: { id: 11, name: "DELETE_PROJECTS", scope: "GLOBAL" },
+  viewPrivateProjectsGlobal: {
+    id: 12,
+    name: "VIEW_PRIVATE_PROJECTS",
+    scope: "GLOBAL",
+  },
+  viewPrivateBlogsGlobal: {
+    id: 13,
+    name: "VIEW_PRIVATE_BLOGS",
+    scope: "GLOBAL",
+  },
+  createBlogsGlobal: { id: 14, name: "CREATE_BLOGS", scope: "GLOBAL" },
+  updateBlogsGlobal: { id: 15, name: "UPDATE_BLOGS", scope: "GLOBAL" },
+  deleteBlogsGlobal: { id: 16, name: "DELETE_BLOGS", scope: "GLOBAL" },
 };
 
 export const DEVELOPMENT_GLOBAL_ROLES = [
   {
     id: 1,
     name: "admin",
-    permissions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    permissions: [
+      PERMISSIONS.createUsersGlobal,
+      PERMISSIONS.updateUsersGlobal,
+      PERMISSIONS.deleteUsersGlobal,
+      PERMISSIONS.updateOwnUserGlobal,
+      PERMISSIONS.banUsersGlobal,
+      PERMISSIONS.viewPrivateUsersGlobal,
+      PERMISSIONS.createPublicProjectsGlobal,
+      PERMISSIONS.inviteToOwnedProjectsGlobal,
+      PERMISSIONS.inviteProjectsGlobal,
+      PERMISSIONS.updateProjectsGlobal,
+      PERMISSIONS.deleteProjectsGlobal,
+      PERMISSIONS.viewPrivateProjectsGlobal,
+      PERMISSIONS.viewPrivateBlogsGlobal,
+      PERMISSIONS.createBlogsGlobal,
+      PERMISSIONS.updateBlogsGlobal,
+      PERMISSIONS.deleteBlogsGlobal,
+    ],
   },
   {
     id: 2,
@@ -72,7 +103,11 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
   {
     id: 3,
     name: "user",
-    permissions: [1, 2, 3],
+    permissions: [
+      PERMISSIONS.updateOwnUserGlobal,
+      PERMISSIONS.createPublicProjectsGlobal,
+      PERMISSIONS.inviteToOwnedProjectsGlobal,
+    ],
   },
 ];
 

@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import logger from "../logger";
 import { sendResponse } from "../utils";
 import {
-  DEFAULT_ERROR_API_RESPONSE,
   DEFAULT_SUCCES_API_RESPONSE,
   INSUFICIENT_PERMISSIONS_MESSAGE,
   UNEXPECTED_ERROR_DEFAULT_MESSAGE,
@@ -10,12 +9,19 @@ import {
 import {
   HTTP_STATUS_CODE_FORBIDDEN,
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
-  PERMISSIONS,
 } from "../constants/constants";
 import { AuthRequest, Permission } from "../interfaces";
 import connectToDB from "../db";
 import { GET_USER_PERMISSIONS } from "../constants/queries";
 
+/**
+ * This function return a middleware which checks permissions required to reach an endpoint.
+ *
+ * @param oneOf - A list of permissions. At least one should be owned by the user.
+ * @param allOf - A list of permissions. All of them should be owned by the user.
+ *
+ * @returns - A middleware function.
+ */
 export default function roleMiddleware(
   oneOf: Array<Permission> = [],
   allOf: Array<Permission> = []
@@ -45,9 +51,7 @@ export default function roleMiddleware(
     const oneOfFulfilled = oneOf.length
       ? oneOf.some((requiredPermission) =>
           userPermissions.some(
-            (userPermission) =>
-              userPermission.name === requiredPermission.name &&
-              userPermission.scope === requiredPermission.scope
+            (userPermission) => userPermission.id === requiredPermission.id
           )
         )
       : true;
@@ -55,9 +59,7 @@ export default function roleMiddleware(
     const allOfFulfilled = allOf.length
       ? allOf.every((requiredPermissions) =>
           userPermissions.some(
-            (userPermission) =>
-              userPermission.name === requiredPermissions.name &&
-              userPermission.scope === requiredPermissions.scope
+            (userPermission) => userPermission.id === requiredPermissions.id
           )
         )
       : true;

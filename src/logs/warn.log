@@ -320,3 +320,12 @@
 [2025-08-07T10:38:30Z] [error]: The following error has occurred while trying to create the development users: 
 [2025-08-07T10:38:30Z] [error]: duplicate key value violates unique constraint "users_pkey"
 [2025-08-07T10:55:55Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-07T12:43:00Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-07T12:43:00Z] [error]: syntax error at or near "["
+[2025-08-07T12:45:42Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-07T12:45:42Z] [error]: syntax error at or near "["
+[2025-08-07T12:46:39Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-07T12:46:54Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-07T12:47:50Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-07T12:48:03Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-07T12:48:43Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

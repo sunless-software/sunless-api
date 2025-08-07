@@ -18,6 +18,7 @@ export interface AuthRequest extends Request {
 }
 
 export interface Permission {
+  id: number;
   name: string;
   scope: "GLOBAL" | "PROJECT";
 }

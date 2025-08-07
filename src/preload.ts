@@ -54,11 +54,11 @@ async function createPermissions(db: Pool) {
   logger.info(`Creating default permissions ...`);
 
   const initialQuery =
-    'INSERT INTO permissions ("name", "scope", created_at, updated_at) VALUES';
+    'INSERT INTO permissions ("id", "name", "scope", created_at, updated_at) VALUES';
   const values = Object.values(PERMISSIONS)
     .map(
       (permission) =>
-        `('${permission.name}', '${permission.scope}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
+        `(${permission.id} ,'${permission.name}', '${permission.scope}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
     )
     .join(",");
   const finalQuery = `${initialQuery} ${values}`;
@@ -105,8 +105,8 @@ async function associateDevGlobalRolesPermissions(db: Pool) {
 (global_role_id, permission_id, created_at, updated_at) VALUES `;
 
   query += DEVELOPMENT_GLOBAL_ROLES.map((role) => {
-    return role.permissions.map((permission_id) => {
-      return `(${role.id}, ${permission_id}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`;
+    return role.permissions.map((permissions) => {
+      return `(${role.id}, ${permissions.id}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`;
     });
   })
     .filter((associations) => associations.length)
