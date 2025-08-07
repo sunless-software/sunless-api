@@ -22,3 +22,8 @@ export interface Permission {
   name: string;
   scope: "GLOBAL" | "PROJECT";
 }
+
+export interface CustomError {
+  errorType: string;
+  error: unknown;
+}

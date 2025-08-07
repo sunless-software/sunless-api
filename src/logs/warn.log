@@ -329,3 +329,27 @@
 [2025-08-07T12:47:50Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-07T12:48:03Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-07T12:48:43Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-07T14:33:02Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-07T14:33:24Z] [warn]: A request was rejected because the authorization token was invalid. Token: Bearer
+[2025-08-07T14:33:43Z] [warn]: A request was rejected because the authorization token was invalid. Token: Bearer
+[2025-08-07T14:34:19Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-07T14:34:45Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-07T15:39:24Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-07T15:39:24Z] [error]: Connection terminated unexpectedly
+[2025-08-07T17:39:49Z] [error]: The following error has occurred while trying to create the permissions: 
+[2025-08-07T17:39:49Z] [error]: syntax error at or near "GLOBAL"
+[2025-08-07T17:39:49Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-07T17:39:49Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-07T17:40:26Z] [error]: The following error has occurred while trying to create the permissions: 
+[2025-08-07T17:40:26Z] [error]: syntax error at or near "GLOBAL"
+[2025-08-07T17:40:26Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-07T17:40:26Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-07T18:07:36Z] [error]: The following unexpected error has occurred while trying to create a new user: 
+[2025-08-07T18:07:36Z] [error]: [object Object]
+[2025-08-07T18:07:51Z] [error]: The following unexpected error has occurred while trying to create a new user: 
+[2025-08-07T18:07:51Z] [error]: [object Object]
+[2025-08-07T18:34:18Z] [error]: An unhandled not unique contraint violation was throw while trying to create a new user: "users_pkey"
+[2025-08-07T18:38:55Z] [error]: An unhandled pg error was thrown while trying to create a new user: 
+[2025-08-07T18:38:55Z] [error]: [object Object]
+[2025-08-07T18:40:00Z] [error]: An unhandled pg error was thrown while trying to create a new user: 
+[2025-08-07T18:40:00Z] [error]: {"errorType":"CREATE_USER_ERROR","error":{"length":247,"name":"error","severity":"ERROR","code":"23503","detail":"Key (rol_id)=(11) is not present in table \"global_roles\".","schema":"public","table":"users","constraint":"users_rol_id_fkey","file":"ri_triggers.c","line":"2608","routine":"ri_ReportViolation"}}

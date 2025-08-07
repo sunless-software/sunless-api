@@ -3,10 +3,17 @@ import { Permission } from "../interfaces";
 export const NODE_ENV_DEVELOPMENT = "development";
 
 export const HTTP_STATUS_CODE_OK = 200;
+export const HTTP_STATUS_CODE_CREATED = 201;
 export const HTTP_STATUS_CODE_UNAUTHORIZED = 401;
 export const HTTP_STATUS_CODE_FORBIDDEN = 403;
 export const HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR = 500;
 export const HTTP_STATUS_CODE_BAD_REQUEST = 400;
+export const HTTP_STATUS_CODE_CONFLICT = 409;
+
+export const PG_UNIQUE_VIOLATION_CODE = "23505";
+export const PG_FOREIGN_KEY_VIOLATION_CODE = "23503";
+
+export const ERROR_TYPE_CREATE_USER = "CREATE_USER_ERROR";
 
 export enum Entities {
   MEDIA_TYPES = "media_tpyes",
@@ -33,7 +40,7 @@ export enum Entities {
   BLOGS_MEDIA = "blogs_media",
 }
 
-export const PERMISSIONS: Record<string, Permission> = {
+export const PERMISSIONS = {
   createUsersGlobal: { id: 1, name: "CREATE_USERS", scope: "GLOBAL" },
   updateUsersGlobal: { id: 2, name: "UPDATE_USERS", scope: "GLOBAL" },
   deleteUsersGlobal: { id: 3, name: "DELETE_USERS", scope: "GLOBAL" },
@@ -70,7 +77,7 @@ export const PERMISSIONS: Record<string, Permission> = {
   createBlogsGlobal: { id: 14, name: "CREATE_BLOGS", scope: "GLOBAL" },
   updateBlogsGlobal: { id: 15, name: "UPDATE_BLOGS", scope: "GLOBAL" },
   deleteBlogsGlobal: { id: 16, name: "DELETE_BLOGS", scope: "GLOBAL" },
-};
+} satisfies Record<string, Permission>;
 
 export const DEVELOPMENT_GLOBAL_ROLES = [
   {

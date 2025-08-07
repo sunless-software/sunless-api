@@ -16,6 +16,7 @@ import { HTTP_STATUS_CODE_OK } from "./constants/constants";
 import authRouter from "./routes/auth";
 import authMiddleware from "./middlewares/auth";
 import { sendResponse } from "./utils";
+import errorHandlerMiddleware from "./middlewares/errorHandler";
 
 async function start() {
   const app = express();
@@ -39,6 +40,7 @@ async function start() {
 
   apiRouter.use("/auth", authRouter);
   apiRouter.use("/users", authMiddleware, usersRouter);
+  apiRouter.use(errorHandlerMiddleware);
 
   app.listen(port, () => {
     logger.info(`✅ Server is running on http://localhost:${port}`);

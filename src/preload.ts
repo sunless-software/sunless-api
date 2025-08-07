@@ -54,11 +54,11 @@ async function createPermissions(db: Pool) {
   logger.info(`Creating default permissions ...`);
 
   const initialQuery =
-    'INSERT INTO permissions ("id", "name", "scope", created_at, updated_at) VALUES';
+    'INSERT INTO permissions ("name", "scope", created_at, updated_at) VALUES';
   const values = Object.values(PERMISSIONS)
     .map(
       (permission) =>
-        `(${permission.id} ,'${permission.name}', '${permission.scope}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
+        `('${permission.name}', '${permission.scope}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
     )
     .join(",");
   const finalQuery = `${initialQuery} ${values}`;
@@ -79,10 +79,9 @@ async function createPermissions(db: Pool) {
 async function createDevelopmentGlobalRoles(db: Pool) {
   logger.info("Creating development roles ...");
 
-  let query = `INSERT INTO global_roles (id, role_name, created_at, updated_at) VALUES `;
+  let query = `INSERT INTO global_roles (role_name, created_at, updated_at) VALUES `;
   query += DEVELOPMENT_GLOBAL_ROLES.map(
-    (role) =>
-      `(${role.id}, '${role.name}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
+    (role) => `('${role.name}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
   ).join(",");
 
   return db
@@ -130,10 +129,10 @@ async function associateDevGlobalRolesPermissions(db: Pool) {
 async function createDevelopmentUsers(db: Pool) {
   logger.info("Creating development users ...");
 
-  let query = `INSERT INTO users (id, rol_id, username, password, profile_photo, phone, 
+  let query = `INSERT INTO users (rol_id, username, password, profile_photo, phone, 
   email, public, banned, deleted, created_at, updated_at) VALUES `;
   query += DEVELOPMENT_USERS.map((user, index) => {
-    return `(${user.id}, ${user.role_id}, '${user.username}', $${
+    return `(${user.role_id}, '${user.username}', $${
       index + 1
     }, ${null}, ${null}, ${null}, true, false, false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`;
   }).join(",");

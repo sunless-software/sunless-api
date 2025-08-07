@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(50) NOT NULL UNIQUE CHECK (char_length(username) >= 3),
     password TEXT NOT NULL,
     profile_photo TEXT,
-    phone BIGINT,
+    phone text,
     email VARCHAR(50) UNIQUE,
     public BOOLEAN NOT NULL,
     banned BOOLEAN NOT NULL,
