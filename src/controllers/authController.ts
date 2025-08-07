@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import connectToDB from "../db";
-import { DEFAULT_API_RESPONSE } from "../constants/messages";
+import { DEFAULT_SUCCES_API_RESPONSE } from "../constants/messages";
 import { checkPassword, sendResponse, signJWT } from "../utils";
 import {
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
@@ -18,7 +18,7 @@ const authController = {
     const SECRET_NOT_FOUND_MESSAGE = `Secret not found, please, contact an admin or if you have access check server logs for more info`;
     const SUCCESSFUL_LOGIN_MESSAGE = "You are welcome, son of Nix";
     const FAILURE_RESPONSE = {
-      ...DEFAULT_API_RESPONSE,
+      ...DEFAULT_SUCCES_API_RESPONSE,
       status: HTTP_STATUS_CODE_UNAUTHORIZED,
       message: "Invalid credentials",
     };
@@ -30,7 +30,7 @@ const authController = {
 
       return sendResponse(
         {
-          ...DEFAULT_API_RESPONSE,
+          ...DEFAULT_SUCCES_API_RESPONSE,
           status: HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
           message: SECRET_NOT_FOUND_MESSAGE,
         },
@@ -67,7 +67,7 @@ const authController = {
 
     return sendResponse(
       {
-        ...DEFAULT_API_RESPONSE,
+        ...DEFAULT_SUCCES_API_RESPONSE,
         message: SUCCESSFUL_LOGIN_MESSAGE,
         data: [{ token: token }],
       },

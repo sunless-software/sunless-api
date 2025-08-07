@@ -1,3 +1,5 @@
+import { Permission } from "../interfaces";
+
 export const NODE_ENV_DEVELOPMENT = "development";
 
 export const HTTP_STATUS_CODE_OK = 200;
@@ -31,26 +33,30 @@ export enum Entities {
   BLOGS_MEDIA = "blogs_media",
 }
 
-export const PERMISSIONS = [
-  { name: "CREATE_USERS", scope: "GLOBAL" },
-  { name: "UPDATE_USERS", scope: "GLOBAL" },
-  { name: "DELETE_USERS", scope: "GLOBAL" },
-  { name: "UPDATE_OWN_USER", scope: "GLOBAL" },
-  { name: "BAN_USERS", scope: "GLOBAL" },
-  { name: "VIEW_PRIVATE_USERS", scope: "GLOBAL" },
-
-  { name: "CREATE_PUBLIC_PROJECTS", scope: "GLOBAL" },
-  { name: "INVITE_TO_OWNED_PROJECTS", scope: "GLOBAL" },
-  { name: "INVITE_PROJECTS", scope: "GLOBAL" },
-  { name: "UPDATE_PROJECTS", scope: "GLOBAL" },
-  { name: "DELETE_PROJECTS", scope: "GLOBAL" },
-  { name: "VIEW_PRIVATE_PROJECTS", scope: "GLOBAL" },
-  { name: "VIEW_PRIVATE_BLOGS", scope: "GLOBAL" },
-
-  { name: "CREATE_BLOGS", scope: "GLOBAL" },
-  { name: "UPDATE_BLOGS", scope: "GLOBAL" },
-  { name: "DELETE_BLOGS", scope: "GLOBAL" },
-];
+export const PERMISSIONS: Record<string, Permission> = {
+  createUsersGlobal: { name: "CREATE_USERS", scope: "GLOBAL" },
+  updateUsersGlobal: { name: "UPDATE_USERS", scope: "GLOBAL" },
+  deleteUsersGlobal: { name: "DELETE_USERS", scope: "GLOBAL" },
+  updateOwnUserGlobal: { name: "UPDATE_OWN_USER", scope: "GLOBAL" },
+  banUsersGlobal: { name: "BAN_USERS", scope: "GLOBAL" },
+  viewPrivateUsersGlobal: { name: "VIEW_PRIVATE_USERS", scope: "GLOBAL" },
+  createPublicProjectsGlobal: {
+    name: "CREATE_PUBLIC_PROJECTS",
+    scope: "GLOBAL",
+  },
+  inviteToOwnedProjectsGlobal: {
+    name: "INVITE_TO_OWNED_PROJECTS",
+    scope: "GLOBAL",
+  },
+  inviteProjectsGlobal: { name: "INVITE_PROJECTS", scope: "GLOBAL" },
+  updateProjectsGlobal: { name: "UPDATE_PROJECTS", scope: "GLOBAL" },
+  deleteProjectsGlobal: { name: "DELETE_PROJECTS", scope: "GLOBAL" },
+  viewPrivateProjectsGlobal: { name: "VIEW_PRIVATE_PROJECTS", scope: "GLOBAL" },
+  viewPrivateBlogsGlobal: { name: "VIEW_PRIVATE_BLOGS", scope: "GLOBAL" },
+  createBlogsGlobal: { name: "CREATE_BLOGS", scope: "GLOBAL" },
+  updateBlogsGlobal: { name: "UPDATE_BLOGS", scope: "GLOBAL" },
+  deleteBlogsGlobal: { name: "DELETE_BLOGS", scope: "GLOBAL" },
+};
 
 export const DEVELOPMENT_GLOBAL_ROLES = [
   {
@@ -62,6 +68,11 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
     id: 2,
     name: "client",
     permissions: [],
+  },
+  {
+    id: 3,
+    name: "user",
+    permissions: [1, 2, 3],
   },
 ];
 
@@ -77,5 +88,11 @@ export const DEVELOPMENT_USERS = [
     username: "sunless_client",
     password: "Password123!",
     role_id: 2,
+  },
+  {
+    id: 3,
+    username: "sunless_user",
+    password: "Password123!",
+    role_id: 3,
   },
 ];

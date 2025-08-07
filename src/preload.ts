@@ -1,7 +1,6 @@
 import { Pool } from "pg";
 import connectToDB from "./db";
 import { encryptPassword } from "./utils";
-import { CREATE_ROLE, CREATE_USER_NO_CONFLICT } from "./constants/queries";
 import {
   DEVELOPMENT_GLOBAL_ROLES,
   DEVELOPMENT_USERS,
@@ -56,10 +55,12 @@ async function createPermissions(db: Pool) {
 
   const initialQuery =
     'INSERT INTO permissions ("name", "scope", created_at, updated_at) VALUES';
-  const values = PERMISSIONS.map(
-    (permission) =>
-      `('${permission.name}', '${permission.scope}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
-  ).join(",");
+  const values = Object.values(PERMISSIONS)
+    .map(
+      (permission) =>
+        `('${permission.name}', '${permission.scope}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`
+    )
+    .join(",");
   const finalQuery = `${initialQuery} ${values}`;
 
   return db

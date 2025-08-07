@@ -125,3 +125,10 @@
 [2025-08-06T10:03:10Z] [error]: bind message supplies 1 parameters, but prepared statement "" requires 2
 [2025-08-06T10:03:20Z] [error]: The following error has occurred while trying to create the development users: 
 [2025-08-06T10:03:20Z] [error]: bind message supplies 1 parameters, but prepared statement "" requires 2
+[2025-08-07T10:13:05Z] [error]: The retrieved permissions from the DB doesn't follow the interface "Permission".
+[2025-08-07T10:13:28Z] [error]: The retrieved permissions from the DB doesn't follow the interface "Permission".
+[2025-08-07T10:13:37Z] [error]: The retrieved permissions from the DB doesn't follow the interface "Permission".
+[2025-08-07T10:13:54Z] [error]: The retrieved permissions from the DB doesn't follow the interface "Permission".
+[2025-08-07T10:13:58Z] [error]: The retrieved permissions from the DB doesn't follow the interface "Permission".
+[2025-08-07T10:38:30Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-07T10:38:30Z] [error]: duplicate key value violates unique constraint "users_pkey"

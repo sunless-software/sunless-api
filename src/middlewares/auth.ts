@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { sendResponse } from "../utils";
-import { DEFAULT_API_RESPONSE } from "../constants/messages";
+import { DEFAULT_SUCCES_API_RESPONSE } from "../constants/messages";
 import {
   HTTP_STATUS_CODE_FORBIDDEN,
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
@@ -26,7 +26,7 @@ export default function authMiddleware(
 
     return sendResponse(
       {
-        ...DEFAULT_API_RESPONSE,
+        ...DEFAULT_SUCCES_API_RESPONSE,
         status: HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
         message: SECRET_NOT_FOUND_MESSAGE,
       },
@@ -40,7 +40,7 @@ export default function authMiddleware(
     );
     return sendResponse(
       {
-        ...DEFAULT_API_RESPONSE,
+        ...DEFAULT_SUCCES_API_RESPONSE,
         status: HTTP_STATUS_CODE_UNAUTHORIZED,
         message: "You must provide a token",
       },
@@ -61,7 +61,7 @@ export default function authMiddleware(
     );
     sendResponse(
       {
-        ...DEFAULT_API_RESPONSE,
+        ...DEFAULT_SUCCES_API_RESPONSE,
         status: HTTP_STATUS_CODE_FORBIDDEN,
         message: "I see you, little mouse... you don't belong here. Run along!",
       },

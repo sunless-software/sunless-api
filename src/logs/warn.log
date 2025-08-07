@@ -306,3 +306,17 @@
 [2025-08-06T10:03:10Z] [error]: bind message supplies 1 parameters, but prepared statement "" requires 2
 [2025-08-06T10:03:20Z] [error]: The following error has occurred while trying to create the development users: 
 [2025-08-06T10:03:20Z] [error]: bind message supplies 1 parameters, but prepared statement "" requires 2
+[2025-08-07T05:09:01Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJzdW5sZXNzX3Rlc3QiLCJpYXQiOjE3NTQzMDAzOTQsImV4cCI6MTc1NDM4Njc5NH0.psIt3QXjnT_I5acql-siC21D6FbRvJxhUKD24xxC0PE
+[2025-08-07T05:09:51Z] [warn]: New connection attempt using the username "sunless_tes" was rejected. User not found.
+[2025-08-07T05:10:00Z] [warn]: New connection attempt using the username "sunless_testsdsdsd" was rejected. User not found.
+[2025-08-07T05:10:58Z] [warn]: New connection attempt using the username "sunless_test" was rejected. User not found.
+[2025-08-07T05:11:02Z] [warn]: New connection attempt using the username "sunless_test" was rejected. User not found.
+[2025-08-07T05:11:17Z] [warn]: New connection attempt using the username "sunless_test" was rejected. User not found.
+[2025-08-07T10:13:05Z] [error]: The retrieved permissions from the DB doesn't follow the interface "Permission".
+[2025-08-07T10:13:28Z] [error]: The retrieved permissions from the DB doesn't follow the interface "Permission".
+[2025-08-07T10:13:37Z] [error]: The retrieved permissions from the DB doesn't follow the interface "Permission".
+[2025-08-07T10:13:54Z] [error]: The retrieved permissions from the DB doesn't follow the interface "Permission".
+[2025-08-07T10:13:58Z] [error]: The retrieved permissions from the DB doesn't follow the interface "Permission".
+[2025-08-07T10:38:30Z] [error]: The following error has occurred while trying to create the development users: 
+[2025-08-07T10:38:30Z] [error]: duplicate key value violates unique constraint "users_pkey"
+[2025-08-07T10:55:55Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

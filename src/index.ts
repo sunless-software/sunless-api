@@ -9,7 +9,7 @@ import usersRouter from "./routes/users";
 import connectToDB from "./db";
 import preload from "./preload";
 import {
-  DEFAULT_API_RESPONSE,
+  DEFAULT_SUCCES_API_RESPONSE,
   DEFAULT_HEALTH_ENDPOINT_MESSAGE,
 } from "./constants/messages";
 import { HTTP_STATUS_CODE_OK } from "./constants/constants";
@@ -29,7 +29,10 @@ async function start() {
   apiRouter.use(express.json());
   apiRouter.get("/health", (_req, res): Response<ApiResponse<null>> => {
     return sendResponse(
-      { ...DEFAULT_API_RESPONSE, message: DEFAULT_HEALTH_ENDPOINT_MESSAGE },
+      {
+        ...DEFAULT_SUCCES_API_RESPONSE,
+        message: DEFAULT_HEALTH_ENDPOINT_MESSAGE,
+      },
       res
     );
   });

@@ -8,7 +8,7 @@ import {
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
 } from "./constants/constants";
 import {
-  DEFAULT_API_RESPONSE,
+  DEFAULT_SUCCES_API_RESPONSE,
   UNEXPECTED_ERROR_DEFAULT_MESSAGE,
 } from "./constants/messages";
 import logger from "./logger";
@@ -66,7 +66,7 @@ export function validateResult(
     );
     return sendResponse(
       {
-        ...DEFAULT_API_RESPONSE,
+        ...DEFAULT_SUCCES_API_RESPONSE,
         status: HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
         message: UNEXPECTED_ERROR_DEFAULT_MESSAGE,
       },
