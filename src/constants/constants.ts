@@ -14,6 +14,7 @@ export const PG_UNIQUE_VIOLATION_CODE = "23505";
 export const PG_FOREIGN_KEY_VIOLATION_CODE = "23503";
 
 export const ERROR_TYPE_CREATE_USER = "CREATE_USER_ERROR";
+export const ERROR_TYPE_GET_USERS = "GET_USERS_ERROR";
 
 export enum Entities {
   MEDIA_TYPES = "media_tpyes",

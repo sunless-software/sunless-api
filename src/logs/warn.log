@@ -353,3 +353,47 @@
 [2025-08-07T18:38:55Z] [error]: [object Object]
 [2025-08-07T18:40:00Z] [error]: An unhandled pg error was thrown while trying to create a new user: 
 [2025-08-07T18:40:00Z] [error]: {"errorType":"CREATE_USER_ERROR","error":{"length":247,"name":"error","severity":"ERROR","code":"23503","detail":"Key (rol_id)=(11) is not present in table \"global_roles\".","schema":"public","table":"users","constraint":"users_rol_id_fkey","file":"ri_triggers.c","line":"2608","routine":"ri_ReportViolation"}}
+[2025-08-08T09:12:42Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T09:12:42Z] [error]: {}
+[2025-08-08T09:13:08Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T09:13:08Z] [error]: {}
+[2025-08-08T09:13:38Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T09:13:38Z] [error]: {}
+[2025-08-08T09:13:48Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T09:13:48Z] [error]: {}
+[2025-08-08T09:13:59Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T09:13:59Z] [error]: {}
+[2025-08-08T09:14:10Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T09:14:10Z] [error]: {}
+[2025-08-08T09:14:23Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T09:14:23Z] [error]: {}
+[2025-08-08T10:09:23Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T10:09:23Z] [error]: {"errorType":"GET_USERS_ERROR","error":{"length":137,"name":"error","severity":"ERROR","code":"08P01","file":"postgres.c","line":"1731","routine":"exec_bind_message"}}
+[2025-08-08T10:09:42Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T10:09:42Z] [error]: {"errorType":"GET_USERS_ERROR","error":{"length":137,"name":"error","severity":"ERROR","code":"08P01","file":"postgres.c","line":"1731","routine":"exec_bind_message"}}
+[2025-08-08T10:10:09Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T10:10:09Z] [error]: {"errorType":"GET_USERS_ERROR","error":{"length":137,"name":"error","severity":"ERROR","code":"08P01","file":"postgres.c","line":"1731","routine":"exec_bind_message"}}
+[2025-08-08T10:10:15Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T10:10:15Z] [error]: {"errorType":"GET_USERS_ERROR","error":{"length":137,"name":"error","severity":"ERROR","code":"08P01","file":"postgres.c","line":"1731","routine":"exec_bind_message"}}
+[2025-08-08T10:12:03Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T10:12:03Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"offset\": 0,\n    \"limit\": 10,\n}","type":"entity.parse.failed"}
+[2025-08-08T10:16:49Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-08T10:16:49Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T10:16:49Z] [error]: {"errorType":"GET_USERS_ERROR","error":{"code":"ERR_HTTP_HEADERS_SENT"}}
+[2025-08-08T10:17:24Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-08T10:17:24Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T10:17:24Z] [error]: {"errorType":"GET_USERS_ERROR","error":{"code":"ERR_HTTP_HEADERS_SENT"}}
+[2025-08-08T10:18:03Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-08T10:18:03Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T10:18:03Z] [error]: {"errorType":"GET_USERS_ERROR","error":{"code":"ERR_HTTP_HEADERS_SENT"}}
+[2025-08-08T10:21:19Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-08T10:21:47Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-08T10:22:12Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-08T10:22:34Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-08T10:22:34Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T10:22:34Z] [error]: {"code":"ERR_HTTP_HEADERS_SENT"}
+[2025-08-08T10:23:10Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-08T10:23:10Z] [error]: The following unhandled error has occurred: 
+[2025-08-08T10:23:10Z] [error]: {"code":"ERR_HTTP_HEADERS_SENT"}
+[2025-08-08T10:24:29Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-08T10:24:51Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.

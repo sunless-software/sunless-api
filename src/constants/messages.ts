@@ -12,6 +12,8 @@ export const DUPLICATED_PRIMARY_KEY_MESSAGE =
   "A user with the same primary key already exists.";
 export const ROLE_FOREIGN_KEY_VIOLATION_MESSAGE =
   "The provided 'roleID' does not correspond to a valid role.";
+export const USERS_SUCCESSFULLY_RETRIEVED_MESSAGE =
+  "Users successfully retrieved.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
