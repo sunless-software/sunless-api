@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { CustomError } from "../interfaces";
-import { ERROR_TYPE_CREATE_USER } from "../constants/constants";
+import { ERROR_TYPE_CREATE_USER } from "../constants/customErrors";
 import { sendResponse } from "../utils";
 import { DEFAULT_ERROR_API_RESPONSE } from "../constants/messages";
 import logger from "../logger";

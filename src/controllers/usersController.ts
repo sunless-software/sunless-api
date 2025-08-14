@@ -7,25 +7,37 @@ import {
   USER_SUCCESSFUL_CREATION_MESSAGE,
   USERS_SUCCESSFULLY_RETRIEVED_MESSAGE,
 } from "../constants/messages";
+import { HTTP_STATUS_CODE_CREATED } from "../constants/httpStatusCodes";
 import {
   ERROR_TYPE_CREATE_USER,
   ERROR_TYPE_GET_USERS,
-  HTTP_STATUS_CODE_CREATED,
-  PERMISSIONS,
-} from "../constants/constants";
+} from "../constants/customErrors";
 import { CustomError, User } from "../interfaces";
 import { GET_USERS_DEFAULT_LIMIT } from "../constants/setup";
 
+// TODO: (soft) delete users
+// TODO: ban users
+// TODO: get users full info (maybe endpoint to create related entities before)
 const usersController = {
   getUsers: async (req: Request, res: Response, next: NextFunction) => {
     const {
       offset = 0,
       limit = GET_USERS_DEFAULT_LIMIT,
       showPrivateUsers = false,
-    } = req.body;
+      showBannedUsers = false,
+      showDeletedUsers = false,
+    } = req.query;
 
     const db = await connectToDB();
-    const whereClause = !showPrivateUsers ? `WHERE public = true` : "";
+
+    const conditions = [
+      ...(!showPrivateUsers ? ["public = true"] : []),
+      ...(!showBannedUsers ? ["banned = false"] : []),
+      ...(!showDeletedUsers ? ["deleted = false"] : []),
+    ];
+    const whereClause = conditions.length
+      ? `WHERE ${conditions.join(" AND ")}`
+      : "";
     const query = GET_USERS.replace(`_1`, whereClause);
 
     try {

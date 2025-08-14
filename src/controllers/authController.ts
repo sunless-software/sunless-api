@@ -5,7 +5,7 @@ import { checkPassword, sendResponse, signJWT } from "../utils";
 import {
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
   HTTP_STATUS_CODE_UNAUTHORIZED,
-} from "../constants/constants";
+} from "../constants/httpStatusCodes";
 import { GET_USER_CREDENTIALS } from "../constants/queries";
 import { SESSION_LIFE_TIME } from "../constants/setup";
 import logger from "../logger";

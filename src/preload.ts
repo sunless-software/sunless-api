@@ -4,10 +4,10 @@ import { encryptPassword } from "./utils";
 import {
   DEVELOPMENT_GLOBAL_ROLES,
   DEVELOPMENT_USERS,
-  Entities,
-  NODE_ENV_DEVELOPMENT,
-  PERMISSIONS,
-} from "./constants/constants";
+} from "./constants/developmentData";
+import { Entities } from "./constants/entities";
+import { NODE_ENV_DEVELOPMENT } from "./constants/constants";
+import { GLOBAL_PERMISSIONS } from "./constants/globalPermissions";
 import logger from "./logger";
 
 export default async function preload() {
@@ -55,7 +55,7 @@ async function createPermissions(db: Pool) {
 
   const initialQuery =
     'INSERT INTO permissions ("name", "scope", created_at, updated_at) VALUES';
-  const values = Object.values(PERMISSIONS)
+  const values = Object.values(GLOBAL_PERMISSIONS)
     .map(
       (permission) =>
         `('${permission.name}', '${permission.scope}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`

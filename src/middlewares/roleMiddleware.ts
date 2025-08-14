@@ -9,7 +9,7 @@ import {
 import {
   HTTP_STATUS_CODE_FORBIDDEN,
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
-} from "../constants/constants";
+} from "../constants/httpStatusCodes";
 import { AuthRequest, Permission } from "../interfaces";
 import connectToDB from "../db";
 import { GET_USER_PERMISSIONS } from "../constants/queries";

@@ -5,7 +5,7 @@ import {
   HTTP_STATUS_CODE_FORBIDDEN,
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
   HTTP_STATUS_CODE_UNAUTHORIZED,
-} from "../constants/constants";
+} from "../constants/httpStatusCodes";
 import logger from "../logger";
 import jwt from "jsonwebtoken";
 import { UserCredentials, AuthRequest } from "../interfaces";

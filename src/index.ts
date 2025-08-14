@@ -12,7 +12,6 @@ import {
   DEFAULT_SUCCES_API_RESPONSE,
   DEFAULT_HEALTH_ENDPOINT_MESSAGE,
 } from "./constants/messages";
-import { HTTP_STATUS_CODE_OK } from "./constants/constants";
 import authRouter from "./routes/auth";
 import authMiddleware from "./middlewares/auth";
 import { sendResponse } from "./utils";

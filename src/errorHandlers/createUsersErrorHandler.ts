@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { isPgError, sendResponse } from "../utils";
 import {
   DEFAULT_ERROR_API_RESPONSE,
-  DEFAULT_SUCCES_API_RESPONSE,
   DUPLICATED_PRIMARY_KEY_MESSAGE,
   EMAIL_ALREADY_IN_USE_MESSAGE,
   ROLE_FOREIGN_KEY_VIOLATION_MESSAGE,
@@ -11,10 +10,10 @@ import {
 import { CustomError } from "../interfaces";
 import logger from "../logger";
 import {
-  HTTP_STATUS_CODE_CONFLICT,
   PG_FOREIGN_KEY_VIOLATION_CODE,
   PG_UNIQUE_VIOLATION_CODE,
-} from "../constants/constants";
+} from "../constants/pgErrorCodes";
+import { HTTP_STATUS_CODE_CONFLICT } from "../constants/httpStatusCodes";
 
 export default function createUserErrorHandler(
   err: CustomError,
