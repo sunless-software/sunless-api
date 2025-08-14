@@ -6,7 +6,7 @@ import { ValidationError, validationResult } from "express-validator";
 import {
   HTTP_STATUS_CODE_BAD_REQUEST,
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
-} from "./constants/constants";
+} from "./constants/httpStatusCodes";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
   UNEXPECTED_ERROR_DEFAULT_MESSAGE,

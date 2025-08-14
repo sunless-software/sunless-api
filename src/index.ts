@@ -16,6 +16,8 @@ import authRouter from "./routes/auth";
 import authMiddleware from "./middlewares/auth";
 import { sendResponse } from "./utils";
 import errorHandlerMiddleware from "./middlewares/errorHandler";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./swagger";
 
 async function start() {
   const app = express();
@@ -23,6 +25,13 @@ async function start() {
   const port = process.env.PORT || API_DEFAULT_PORT;
   await connectToDB();
   preload();
+
+  if (process.env.NODE_ENV) {
+    logger.info(
+      `Development environment detect. Documentation available at 'http://locahost:${port}/documentation'`
+    );
+    app.use("/documentation", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  }
 
   app.use("/api/v1", apiRouter);
 

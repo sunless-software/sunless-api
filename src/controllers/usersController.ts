@@ -15,9 +15,11 @@ import {
 import { CustomError, User } from "../interfaces";
 import { GET_USERS_DEFAULT_LIMIT } from "../constants/setup";
 
-// TODO: (soft) delete users
+// TODO: create user
+// TODO: patch user (can't delete, ban)
 // TODO: ban users
-// TODO: get users full info (maybe endpoint to create related entities before)
+// TODO: delete users
+
 const usersController = {
   getUsers: async (req: Request, res: Response, next: NextFunction) => {
     const {
