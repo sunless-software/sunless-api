@@ -14,6 +14,10 @@ export const ROLE_FOREIGN_KEY_VIOLATION_MESSAGE =
   "The provided 'roleID' does not correspond to a valid role.";
 export const USERS_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "Users successfully retrieved.";
+export const USER_SUCCESSFULLY_DELETED_MESSAGE =
+  "The user has been successfully deleted.";
+export const USER_NOT_FOUND_MESSAGE =
+  "The user with the given id does not exists.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

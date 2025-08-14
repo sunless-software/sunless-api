@@ -1,24 +1,24 @@
 import { NextFunction, Request, Response } from "express";
 import connectToDB from "../db";
-import { CREATE_USER, GET_USERS } from "../constants/queries";
+import { CREATE_USER, GET_USERS, SOFT_DELETE_USER } from "../constants/queries";
 import { encryptPassword, sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
   USER_SUCCESSFUL_CREATION_MESSAGE,
+  USER_SUCCESSFULLY_DELETED_MESSAGE,
   USERS_SUCCESSFULLY_RETRIEVED_MESSAGE,
 } from "../constants/messages";
-import { HTTP_STATUS_CODE_CREATED } from "../constants/httpStatusCodes";
+import {
+  HTTP_STATUS_CODE_CREATED,
+  HTTP_STATUS_CODE_NOT_FOUND,
+} from "../constants/httpStatusCodes";
 import {
   ERROR_TYPE_CREATE_USER,
+  ERROR_TYPE_DELETE_USER,
   ERROR_TYPE_GET_USERS,
 } from "../constants/customErrors";
 import { CustomError, User } from "../interfaces";
 import { GET_USERS_DEFAULT_LIMIT } from "../constants/setup";
-
-// TODO: create user
-// TODO: patch user (can't delete, ban)
-// TODO: ban users
-// TODO: delete users
 
 const usersController = {
   getUsers: async (req: Request, res: Response, next: NextFunction) => {
@@ -66,7 +66,6 @@ const usersController = {
       return next(customError);
     }
   },
-
   createUsers: async (req: Request, res: Response, next: NextFunction) => {
     const {
       username,
@@ -107,6 +106,34 @@ const usersController = {
     } catch (err) {
       const customError: CustomError = {
         errorType: ERROR_TYPE_CREATE_USER,
+        error: err,
+      };
+
+      return next(customError);
+    }
+  },
+  deleteUser: async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const db = await connectToDB();
+
+    try {
+      const response = await db.query(SOFT_DELETE_USER, [id]);
+      const affectedRows = response.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: USER_SUCCESSFULLY_DELETED_MESSAGE,
+        },
+        res
+      );
+    } catch (err) {
+      const customError: CustomError = {
+        errorType: ERROR_TYPE_DELETE_USER,
         error: err,
       };
 

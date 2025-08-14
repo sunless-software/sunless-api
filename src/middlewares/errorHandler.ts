@@ -1,10 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { CustomError } from "../interfaces";
-import { ERROR_TYPE_CREATE_USER } from "../constants/customErrors";
+import {
+  ERROR_TYPE_CREATE_USER,
+  ERROR_TYPE_DELETE_USER,
+} from "../constants/customErrors";
 import { sendResponse } from "../utils";
 import { DEFAULT_ERROR_API_RESPONSE } from "../constants/messages";
 import logger from "../logger";
 import createUserErrorHandler from "../errorHandlers/createUsersErrorHandler";
+import deleteUserErrorHandler from "../errorHandlers/deleteUserErrorHandler";
 
 export default async function errorHandlerMiddleware(
   err: CustomError,
@@ -15,6 +19,8 @@ export default async function errorHandlerMiddleware(
   switch (err.errorType) {
     case ERROR_TYPE_CREATE_USER:
       return createUserErrorHandler(err, req, res);
+    case ERROR_TYPE_DELETE_USER:
+      return deleteUserErrorHandler(err, req, res);
   }
 
   logger.error("The following unhandled error has occurred: ");
