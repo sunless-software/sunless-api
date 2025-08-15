@@ -5,6 +5,7 @@ export const DEFAULT_HEALTH_ENDPOINT_MESSAGE =
 export const UNEXPECTED_ERROR_DEFAULT_MESSAGE =
   "An unexpected error has occurred, if you have acces to the server check logs for more info or contact an admin.";
 export const INSUFICIENT_PERMISSIONS_MESSAGE = "You shall not pass!";
+export const INVALID_USER_STATUS_MESSAGE = "You are no longer welcome here.";
 export const USER_SUCCESSFUL_CREATION_MESSAGE = "User successfully created.";
 export const USERNAME_ALREADY_IN_USE_MESSAGE = "username already in use.";
 export const EMAIL_ALREADY_IN_USE_MESSAGE = "email already in use.";

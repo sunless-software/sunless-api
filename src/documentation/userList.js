@@ -3,7 +3,10 @@
  * /api/v1/users/list:
  *   get:
  *     summary: Retrieve a list of users
- *     description: Fetch a paginated list of users. Some query parameters require specific permissions.
+ *     description: >
+ *      Fetch a paginated list of users. Some query parameters require specific permissions. In ORDER to be
+ *      able to retrieve private users you need a role with the permission VIEW_PRIVATE_USERS, to get the deleted users VIEW_DELETED_USERS
+ *      and for banned users VIEW_BANNED_USERS
  *     parameters:
  *       - in: query
  *         name: limit
@@ -144,7 +147,7 @@
  *                   type: array
  *                   items: {}
  *       403:
- *         description: Forbidden, insufficient permissions
+ *         description: Forbidden, insufficient permissions or user is banned/deleted
  *         content:
  *           application/json:
  *             schema:

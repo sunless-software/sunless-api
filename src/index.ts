@@ -48,6 +48,7 @@ async function start() {
 
   apiRouter.use("/auth", authRouter);
   apiRouter.use("/users", authMiddleware, usersRouter);
+
   apiRouter.use(errorHandlerMiddleware);
 
   app.listen(port, () => {

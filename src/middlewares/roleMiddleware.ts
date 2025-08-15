@@ -4,6 +4,7 @@ import { sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
   INSUFICIENT_PERMISSIONS_MESSAGE,
+  INVALID_USER_STATUS_MESSAGE,
   UNEXPECTED_ERROR_DEFAULT_MESSAGE,
 } from "../constants/messages";
 import {
@@ -12,7 +13,7 @@ import {
 } from "../constants/httpStatusCodes";
 import { AuthRequest, Permission } from "../interfaces";
 import connectToDB from "../db";
-import { GET_USER_PERMISSIONS } from "../constants/queries";
+import { GET_USER_PERMISSIONS, GET_USER_STATUS } from "../constants/queries";
 
 /**
  * This function return a middleware which checks permissions required to reach an endpoint.
@@ -45,6 +46,22 @@ export default function roleMiddleware(
 
     const jwtPayload = (req as AuthRequest).user;
     const db = await connectToDB();
+
+    const userStatus = await db.query(GET_USER_STATUS, [jwtPayload.id]);
+    const banned = userStatus.rows[0].banned;
+    const deleted = userStatus.rows[0].deleted;
+
+    if (banned || deleted) {
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          status: HTTP_STATUS_CODE_FORBIDDEN,
+          message: INVALID_USER_STATUS_MESSAGE,
+        },
+        res
+      );
+    }
+
     const result = await db.query(GET_USER_PERMISSIONS, [jwtPayload.id]);
     const userPermissions = result.rows;
 

@@ -38,7 +38,6 @@ usersRouter.post(
   usersController.createUsers
 );
 
-// TODO: Al eliminar un usuario deberias verificar en el middleware de autenticacion si el usuario esta baneado o borrado
 // TODO: Agregar documentacion al endpoint de borrado
 usersRouter.delete(
   "/delete/:id",

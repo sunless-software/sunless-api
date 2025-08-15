@@ -1,29 +1,20 @@
 /**
  * @openapi
- * /api/v1/auth/login:
- *   post:
- *     summary: User login
- *     description: Authenticate a user which is not banned or deleted with username and password. Returns a JWT token on success.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - username
- *             properties:
- *               username:
- *                 type: string
- *                 description: The user's username
- *                 example: "john_doe"
- *               password:
- *                 type: string
- *                 description: The user's password
- *                 example: "secret123"
+ * /api/v1/users/delete:
+ *   delete:
+ *     summary: Delete a user
+ *     description: Soft-delete a user by their ID. Requires a role with DELETE_USERS permission.
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         schema:
+ *           type: integer
+ *           example: 5
+ *         required: true
+ *         description: The ID of the user to delete
  *     responses:
  *       200:
- *         description: Successful login
+ *         description: User successfully deleted
  *         content:
  *           application/json:
  *             schema:
@@ -34,18 +25,12 @@
  *                   example: 200
  *                 message:
  *                   type: string
- *                   example: "You are welcome, son of Nix"
+ *                   example: "The user has been successfully deleted."
  *                 data:
  *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       token:
- *                         type: string
- *                         description: JWT token
- *                         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ *                   items: {}
  *       400:
- *         description: Validation errors
+ *         description: Validation error
  *         content:
  *           application/json:
  *             schema:
@@ -70,15 +55,15 @@
  *                         example: ""
  *                       msg:
  *                         type: string
- *                         example: "'username' cannot be blank"
+ *                         example: "user 'id' must be a number"
  *                       path:
  *                         type: string
- *                         example: "username"
+ *                         example: "id"
  *                       location:
  *                         type: string
- *                         example: "body"
+ *                         example: "query"
  *       401:
- *         description: Invalid credentials
+ *         description: Missing or invalid token
  *         content:
  *           application/json:
  *             schema:
@@ -89,12 +74,12 @@
  *                   example: 401
  *                 message:
  *                   type: string
- *                   example: "Invalid credentials"
+ *                   example: "You must provide a token"
  *                 data:
  *                   type: array
  *                   items: {}
- *       500:
- *         description: Server misconfiguration (secret not found)
+ *       403:
+ *         description: Forbidden, insufficient permissions or user is banned/deleted
  *         content:
  *           application/json:
  *             schema:
@@ -102,10 +87,26 @@
  *               properties:
  *                 status:
  *                   type: integer
- *                   example: 500
+ *                   example: 403
  *                 message:
  *                   type: string
- *                   example: "Secret not found, please, contact an admin..."
+ *                   example: "You shall not pass!"
+ *                 data:
+ *                   type: array
+ *                   items: {}
+ *       404:
+ *         description: User with given ID does not exist
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 404
+ *                 message:
+ *                   type: string
+ *                   example: "The user with the given id does not exists."
  *                 data:
  *                   type: array
  *                   items: {}
