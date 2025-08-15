@@ -8,6 +8,8 @@ where u.id = $1`;
 
 export const GET_USERS = `SELECT * FROM users _1 ORDER BY created_at DESC OFFSET $1 LIMIT $2;`;
 
+export const COUNT_USERS = `SELECT COUNT(*) AS total FROM users _1`;
+
 export const GET_USER_STATUS = `SELECT banned, deleted FROM users WHERE id = $1`;
 
 export const CREATE_USER = `INSERT INTO users (rol_id, username, "password", profile_photo, phone, email, public, banned, deleted, created_at, updated_at)

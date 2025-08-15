@@ -1,6 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import connectToDB from "../db";
-import { CREATE_USER, GET_USERS, SOFT_DELETE_USER } from "../constants/queries";
+import {
+  COUNT_USERS,
+  CREATE_USER,
+  GET_USERS,
+  SOFT_DELETE_USER,
+} from "../constants/queries";
 import { encryptPassword, sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
@@ -40,11 +45,16 @@ const usersController = {
     const whereClause = conditions.length
       ? `WHERE ${conditions.join(" AND ")}`
       : "";
-    const query = GET_USERS.replace(`_1`, whereClause);
+
+    const countUsersQuery = COUNT_USERS.replace(`_1`, whereClause);
+    const getUsersQuery = GET_USERS.replace(`_1`, whereClause);
 
     try {
-      const result = await db.query(query, [offset, limit]);
-      const users: Array<User> = result.rows.map((user: User) => ({
+      const [countUsersResult, getUsersResult] = await Promise.all([
+        db.query(countUsersQuery),
+        db.query(getUsersQuery, [offset, limit]),
+      ]);
+      const users: Array<User> = getUsersResult.rows.map((user: User) => ({
         ...user,
         password: "****",
       }));
@@ -54,6 +64,16 @@ const usersController = {
           ...DEFAULT_SUCCES_API_RESPONSE,
           message: USERS_SUCCESSFULLY_RETRIEVED_MESSAGE,
           data: [users],
+          pagination: {
+            offset:
+              typeof offset === "string"
+                ? parseInt(offset)
+                : (offset as number),
+            limit:
+              typeof limit === "string" ? parseInt(limit) : (limit as number),
+            count: users.length,
+            total: parseInt(countUsersResult.rows[0].total),
+          },
         },
         res
       );

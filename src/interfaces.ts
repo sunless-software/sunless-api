@@ -1,9 +1,11 @@
 import { Request } from "express";
+import { Pagination } from "./types";
 
 export interface ApiResponse<T> {
   status: number;
   message: string;
   data: Array<T>;
+  pagination: Pagination;
 }
 
 export interface UserCredentials {

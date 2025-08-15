@@ -24,10 +24,22 @@ export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
   message: "Sucessful request",
   data: [],
+  pagination: {
+    offset: 0,
+    limit: 0,
+    count: 0,
+    total: 0,
+  },
 };
 
 export const DEFAULT_ERROR_API_RESPONSE: ApiResponse<[]> = {
   status: 500,
   message: UNEXPECTED_ERROR_DEFAULT_MESSAGE,
   data: [],
+  pagination: {
+    offset: 0,
+    limit: 0,
+    count: 0,
+    total: 0,
+  },
 };
