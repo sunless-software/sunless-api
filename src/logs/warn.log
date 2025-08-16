@@ -39,3 +39,5 @@
 [2025-08-16T09:10:30Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-16T09:15:44Z] [warn]: A request was rejected because no authorization headers where provided.
 [2025-08-16T09:26:48Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-16T09:29:01Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU1MzM2NTI3LCJleHAiOjE3NTU0MjI5Mjd9.9AKqzRhCt0jPI4s8IqgWR1NEG4D9kt-XtQnObM3kVNM"
+[2025-08-16T09:29:04Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU1MzM2NTI3LCJleHAiOjE3NTU0MjI5Mjd9.9AKqzRhCt0jPI4s8IqgWR1NEG4D9kt-XtQnObM3kVNM"

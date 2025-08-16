@@ -119,7 +119,7 @@ const usersController = {
           ...DEFAULT_SUCCES_API_RESPONSE,
           status: HTTP_STATUS_CODE_CREATED,
           message: USER_SUCCESSFUL_CREATION_MESSAGE,
-          data: [{ ...createdUserData, password: "****" }],
+          data: [createdUserData],
         },
         res
       );
