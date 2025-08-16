@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import connectToDB from "../db";
 import {
+  BAN_USER,
   COUNT_USERS,
   CREATE_USER,
   GET_USERS,
@@ -10,6 +11,7 @@ import { encryptPassword, sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
   USER_SUCCESSFUL_CREATION_MESSAGE,
+  USER_SUCCESSFULLY_BANNED_MESSAGE,
   USER_SUCCESSFULLY_DELETED_MESSAGE,
   USERS_SUCCESSFULLY_RETRIEVED_MESSAGE,
 } from "../constants/messages";
@@ -18,6 +20,7 @@ import {
   HTTP_STATUS_CODE_NOT_FOUND,
 } from "../constants/httpStatusCodes";
 import {
+  ERROR_TYPE_BAN_USER,
   ERROR_TYPE_CREATE_USER,
   ERROR_TYPE_DELETE_USER,
   ERROR_TYPE_GET_USERS,
@@ -54,10 +57,7 @@ const usersController = {
         db.query(countUsersQuery),
         db.query(getUsersQuery, [offset, limit]),
       ]);
-      const users: Array<User> = getUsersResult.rows.map((user: User) => ({
-        ...user,
-        password: "****",
-      }));
+      const users: Array<User> = getUsersResult.rows;
 
       return sendResponse(
         {
@@ -154,6 +154,34 @@ const usersController = {
     } catch (err) {
       const customError: CustomError = {
         errorType: ERROR_TYPE_DELETE_USER,
+        error: err,
+      };
+
+      return next(customError);
+    }
+  },
+  banUser: async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const db = await connectToDB();
+
+    try {
+      const response = await db.query(BAN_USER, [id]);
+      const affectedRows = response.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: USER_SUCCESSFULLY_BANNED_MESSAGE,
+        },
+        res
+      );
+    } catch (err) {
+      const customError: CustomError = {
+        errorType: ERROR_TYPE_BAN_USER,
         error: err,
       };
 

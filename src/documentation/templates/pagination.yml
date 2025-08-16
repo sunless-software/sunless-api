@@ -1,0 +1,14 @@
+type: object
+properties:
+  offset:
+    type: integer
+    example: 0
+  limit:
+    type: integer
+    example: 0
+  count:
+    type: integer
+    example: 0
+  total:
+    type: integer
+    example: 0

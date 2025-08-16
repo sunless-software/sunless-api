@@ -1,0 +1,256 @@
+openapi: 3.0.3
+info:
+  title: Auth API
+  version: 1.0.0
+
+paths:
+  /api/v1/auth/login:
+    post:
+      summary: User login
+      description: Authenticate a user which is not banned or deleted with username and password. Returns a JWT token on success.
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginSuccess"
+        "400":
+          description: Validation errors
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing token or invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Invalid token (for demonstration)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenError"
+        "404":
+          description: User not found (for demonstration)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserNotFoundError"
+        "500":
+          description: Server misconfiguration (secret not found)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          description: The user's username
+          example: john_doe
+        password:
+          type: string
+          description: The user's password
+          example: secret123
+
+    LoginSuccess:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: You are welcome, son of Nix
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              token:
+                type: string
+                description: JWT token
+                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+    ValidationError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: Invalid request
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: field
+              value:
+                type: string
+                example: ""
+              msg:
+                type: string
+                example: "'username' cannot be blank"
+              path:
+                type: string
+                example: username
+              location:
+                type: string
+                example: body
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
+
+    UnauthorizedError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: You must provide a token
+        data:
+          type: array
+          items:
+            type: object
+          example: []
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
+
+    ForbiddenError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 403
+        message:
+          type: string
+          example: I see you, little mouse... you don't belong here. Run along!
+        data:
+          type: array
+          items:
+            type: object
+          example: []
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
+
+    UserNotFoundError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: The user with the given id does not exist.
+        data:
+          type: array
+          items:
+            type: object
+          example: []
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
+
+    ServerError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 500
+        message:
+          type: string
+          example: Secret not found, please, contact an admin...
+        data:
+          type: array
+          items:
+            type: object
+          example: []
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0

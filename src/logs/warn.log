@@ -26,3 +26,16 @@
 [2025-08-15T18:57:29Z] [error]: The following unhandled error has occurred: 
 [2025-08-15T18:57:29Z] [error]: {"length":94,"name":"error","severity":"ERROR","code":"42P02","position":"46","file":"parse_expr.c","line":"864","routine":"transformParamRef"}
 [2025-08-15T19:07:58Z] [warn]: New connection attempt using the username "sunless_admin" was rejected. User not found.
+[2025-08-16T07:39:23Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU1MjMwNTU2LCJleHAiOjE3NTUzMTY5NTZ9.3jqHfmnaQMQcYiNhgCyF0DyxyLrPxfnfCYZyxmjyVpo
+[2025-08-16T07:57:34Z] [error]: The following unexpected postgres error has occurred while trying to delete a user: 
+[2025-08-16T07:57:34Z] [error]: [object Object]
+[2025-08-16T08:16:49Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-16T08:17:21Z] [warn]: A request was rejected because the authorization token was invalid. Token: yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU1MzI5OTc4LCJleHAiOjE3NTU0MTYzNzh9.-OH0xhp8VILPHuiZEDyEN-9Pt_Jt0SZYUtAKKFD2UZE
+[2025-08-16T08:23:20Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-16T08:24:51Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-16T08:24:57Z] [warn]: New connection attempt using the username "sunless_admin" was rejected. User not found.
+[2025-08-16T08:25:02Z] [warn]: New connection attempt using the username "sunless_admin" was rejected. User not found.
+[2025-08-16T08:25:24Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-16T09:10:30Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-16T09:15:44Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-16T09:26:48Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.

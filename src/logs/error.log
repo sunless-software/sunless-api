@@ -12,3 +12,5 @@
 [2025-08-14T16:38:04Z] [error]: {}
 [2025-08-15T18:57:29Z] [error]: The following unhandled error has occurred: 
 [2025-08-15T18:57:29Z] [error]: {"length":94,"name":"error","severity":"ERROR","code":"42P02","position":"46","file":"parse_expr.c","line":"864","routine":"transformParamRef"}
+[2025-08-16T07:57:34Z] [error]: The following unexpected postgres error has occurred while trying to delete a user: 
+[2025-08-16T07:57:34Z] [error]: [object Object]

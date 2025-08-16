@@ -17,6 +17,8 @@ export const USERS_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "Users successfully retrieved.";
 export const USER_SUCCESSFULLY_DELETED_MESSAGE =
   "The user has been successfully deleted.";
+export const USER_SUCCESSFULLY_BANNED_MESSAGE =
+  "The user has been successfully banned.";
 export const USER_NOT_FOUND_MESSAGE =
   "The user with the given id does not exists.";
 

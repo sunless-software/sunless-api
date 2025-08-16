@@ -21,7 +21,7 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: [path.join(__dirname, "documentation", "*.js")],
+  apis: [path.join(__dirname, "documentation", "*.yml")],
 };
 
 const swaggerSpec = swaggerJSDoc(options);

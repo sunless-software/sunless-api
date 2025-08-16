@@ -46,22 +46,6 @@ export default function roleMiddleware(
 
     const jwtPayload = (req as AuthRequest).user;
     const db = await connectToDB();
-
-    const userStatus = await db.query(GET_USER_STATUS, [jwtPayload.id]);
-    const banned = userStatus.rows[0].banned;
-    const deleted = userStatus.rows[0].deleted;
-
-    if (banned || deleted) {
-      return sendResponse(
-        {
-          ...DEFAULT_SUCCES_API_RESPONSE,
-          status: HTTP_STATUS_CODE_FORBIDDEN,
-          message: INVALID_USER_STATUS_MESSAGE,
-        },
-        res
-      );
-    }
-
     const result = await db.query(GET_USER_PERMISSIONS, [jwtPayload.id]);
     const userPermissions = result.rows;
 

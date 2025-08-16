@@ -1,16 +1,24 @@
 import { NextFunction, Request, Response } from "express";
 import { sendResponse } from "../utils";
-import { DEFAULT_SUCCES_API_RESPONSE } from "../constants/messages";
+import {
+  DEFAULT_ERROR_API_RESPONSE,
+  DEFAULT_SUCCES_API_RESPONSE,
+  INVALID_USER_STATUS_MESSAGE,
+  USER_NOT_FOUND_MESSAGE,
+} from "../constants/messages";
 import {
   HTTP_STATUS_CODE_FORBIDDEN,
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
+  HTTP_STATUS_CODE_NOT_FOUND,
   HTTP_STATUS_CODE_UNAUTHORIZED,
 } from "../constants/httpStatusCodes";
 import logger from "../logger";
 import jwt from "jsonwebtoken";
 import { UserCredentials, AuthRequest } from "../interfaces";
+import { GET_USER_STATUS } from "../constants/queries";
+import connectToDB from "../db";
 
-export default function authMiddleware(
+export default async function authMiddleware(
   req: Request,
   res: Response,
   next: NextFunction
@@ -52,9 +60,35 @@ export default function authMiddleware(
 
   try {
     const decodedPayload = jwt.verify(token, secret) as UserCredentials;
-    (req as AuthRequest).user = decodedPayload;
+    const db = await connectToDB();
+    const userStatus = await db.query(GET_USER_STATUS, [decodedPayload.id]);
 
-    next();
+    if (!userStatus.rows.length) {
+      return sendResponse(
+        {
+          ...DEFAULT_ERROR_API_RESPONSE,
+          status: HTTP_STATUS_CODE_NOT_FOUND,
+          message: USER_NOT_FOUND_MESSAGE,
+        },
+        res
+      );
+    }
+
+    const banned = userStatus.rows[0].banned;
+
+    if (banned) {
+      return sendResponse(
+        {
+          ...DEFAULT_ERROR_API_RESPONSE,
+          status: HTTP_STATUS_CODE_FORBIDDEN,
+          message: INVALID_USER_STATUS_MESSAGE,
+        },
+        res
+      );
+    }
+
+    (req as AuthRequest).user = decodedPayload;
+    return next();
   } catch (err) {
     logger.warn(
       `A request was rejected because the authorization token was invalid. Token: ${token}`

@@ -5,6 +5,7 @@ import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import createUserValidation from "../validations/createUser";
 import getUsersValidation from "../validations/getUsers";
 import deleteUserValidation from "../validations/deleteUser";
+import banUserValidation from "../validations/banUser";
 
 const usersRouter = Router();
 
@@ -38,12 +39,18 @@ usersRouter.post(
   usersController.createUsers
 );
 
-// TODO: Agregar documentacion al endpoint de borrado
 usersRouter.delete(
   "/delete/:id",
   roleMiddleware([GLOBAL_PERMISSIONS.deleteUsers]),
   deleteUserValidation,
   usersController.deleteUser
+);
+
+usersRouter.patch(
+  `/ban/:id`,
+  roleMiddleware([GLOBAL_PERMISSIONS.banUsers]),
+  banUserValidation,
+  usersController.banUser
 );
 
 export default usersRouter;
