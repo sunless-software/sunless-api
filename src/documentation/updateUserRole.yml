@@ -4,23 +4,34 @@ info:
   version: 1.0.0
 
 paths:
-  /api/v1/users/ban/{id}:
+  /api/v1/users/role/{id}:
     patch:
-      summary: Ban a user
-      description: Ban a user by their ID. Requires a role with BAN_USERS permission.
+      summary: Update user role
+      description: Update the role of a user by their ID. Requires a role with MANAGE_USER_ROLES permission.
       tags:
         - Users
       parameters:
-        - in: query
+        - in: path
           name: id
           schema:
             type: integer
             example: 5
           required: true
-          description: The ID of the user to ban
+          description: The ID of the user to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roleID:
+                  type: integer
+                  example: 2
+                  description: The ID of the new role to assign to the user
       responses:
         "200":
-          description: User successfully banned
+          description: Role updated successfully
           content:
             application/json:
               schema:
@@ -31,7 +42,7 @@ paths:
                     example: 200
                   message:
                     type: string
-                    example: The user has been successfully banned.
+                    example: Role updated successfully.
                   data:
                     type: array
                     items:
@@ -79,6 +90,39 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserNotFoundError"
+
+        "409":
+          description: Provided roleID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: The provided 'roleID' does not correspond to a valid role.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
 
 components:
   schemas:

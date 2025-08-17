@@ -4,10 +4,10 @@ info:
   version: 1.0.0
 
 paths:
-  /api/v1/users/ban/{id}:
+  /api/v1/users/unban/{id}:
     patch:
-      summary: Ban a user
-      description: Ban a user by their ID. Requires a role with BAN_USERS permission.
+      summary: Unban a user
+      description: Unban a user by their ID. Requires a role with UNBAN_USERS permission.
       tags:
         - Users
       parameters:
@@ -17,10 +17,10 @@ paths:
             type: integer
             example: 5
           required: true
-          description: The ID of the user to ban
+          description: The ID of the user to unban
       responses:
         "200":
-          description: User successfully banned
+          description: User successfully unbanned
           content:
             application/json:
               schema:
@@ -31,7 +31,7 @@ paths:
                     example: 200
                   message:
                     type: string
-                    example: The user has been successfully banned.
+                    example: The user has been successfully unbanned.
                   data:
                     type: array
                     items:

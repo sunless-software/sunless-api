@@ -16,3 +16,17 @@
 [2025-08-16T07:57:34Z] [error]: [object Object]
 [2025-08-17T13:55:59Z] [error]: The following unhandled error has occurred: 
 [2025-08-17T13:55:59Z] [error]: {"errorType":"UNBAN_USER_ERROR","error":{}}
+[2025-08-17T15:16:56Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:16:56Z] [error]: [object Object]
+[2025-08-17T15:17:04Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:17:04Z] [error]: [object Object]
+[2025-08-17T15:17:18Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:17:18Z] [error]: [object Object]
+[2025-08-17T15:18:36Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:18:36Z] [error]: [object Object]
+[2025-08-17T15:18:52Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:18:52Z] [error]: [object Object]
+[2025-08-17T15:20:14Z] [error]: The following unexpected error has occurred while trying to update the role of a user: 
+[2025-08-17T15:20:14Z] [error]: [object Object]
+[2025-08-17T15:22:33Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:22:33Z] [error]: {"errorType":"ERROR_TYPE_UPDATE_USER_ROLE","error":{"length":247,"name":"error","severity":"ERROR","code":"23503","detail":"Key (rol_id)=(11) is not present in table \"global_roles\".","schema":"public","table":"users","constraint":"users_rol_id_fkey","file":"ri_triggers.c","line":"2608","routine":"ri_ReportViolation"}}

@@ -2718,3 +2718,199 @@
 [2025-08-17T14:50:02Z] [info]: Development users successfully created.
 [2025-08-17T14:50:14Z] [info]: New connection from user "sunless_client"
 [2025-08-17T14:50:36Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-17T15:14:20Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:14:20Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:14:20Z] [info]: Non production environment detected!
+[2025-08-17T15:14:20Z] [info]: Wiping DB ...
+[2025-08-17T15:14:20Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:14:20Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:14:20Z] [info]: Creating default permissions ...
+[2025-08-17T15:14:20Z] [info]: Default permissions successfully created.
+[2025-08-17T15:14:20Z] [info]: Creating development roles ...
+[2025-08-17T15:14:20Z] [info]: Development roles successfully created.
+[2025-08-17T15:14:20Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:14:20Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:14:20Z] [info]: Creating development users ...
+[2025-08-17T15:14:20Z] [info]: Development users successfully created.
+[2025-08-17T15:15:05Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-17T15:15:37Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-17T15:16:30Z] [info]: New connection from user "sunless_admin"
+[2025-08-17T15:16:56Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:16:56Z] [error]: [object Object]
+[2025-08-17T15:17:04Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:17:04Z] [error]: [object Object]
+[2025-08-17T15:17:18Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:17:18Z] [error]: [object Object]
+[2025-08-17T15:18:26Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:18:26Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:18:26Z] [info]: Non production environment detected!
+[2025-08-17T15:18:26Z] [info]: Wiping DB ...
+[2025-08-17T15:18:26Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:18:26Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:18:26Z] [info]: Creating default permissions ...
+[2025-08-17T15:18:26Z] [info]: Default permissions successfully created.
+[2025-08-17T15:18:26Z] [info]: Creating development roles ...
+[2025-08-17T15:18:26Z] [info]: Development roles successfully created.
+[2025-08-17T15:18:26Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:18:26Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:18:26Z] [info]: Creating development users ...
+[2025-08-17T15:18:26Z] [info]: Development users successfully created.
+[2025-08-17T15:18:36Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:18:36Z] [error]: [object Object]
+[2025-08-17T15:18:52Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:18:52Z] [error]: [object Object]
+[2025-08-17T15:20:11Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:20:11Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:20:11Z] [info]: Non production environment detected!
+[2025-08-17T15:20:11Z] [info]: Wiping DB ...
+[2025-08-17T15:20:11Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:20:11Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:20:11Z] [info]: Creating default permissions ...
+[2025-08-17T15:20:11Z] [info]: Default permissions successfully created.
+[2025-08-17T15:20:11Z] [info]: Creating development roles ...
+[2025-08-17T15:20:11Z] [info]: Development roles successfully created.
+[2025-08-17T15:20:11Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:20:11Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:20:11Z] [info]: Creating development users ...
+[2025-08-17T15:20:11Z] [info]: Development users successfully created.
+[2025-08-17T15:20:14Z] [error]: The following unexpected error has occurred while trying to update the role of a user: 
+[2025-08-17T15:20:14Z] [error]: [object Object]
+[2025-08-17T15:21:42Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:21:42Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:21:42Z] [info]: Non production environment detected!
+[2025-08-17T15:21:42Z] [info]: Wiping DB ...
+[2025-08-17T15:21:42Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:21:42Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:21:42Z] [info]: Creating default permissions ...
+[2025-08-17T15:21:42Z] [info]: Default permissions successfully created.
+[2025-08-17T15:21:42Z] [info]: Creating development roles ...
+[2025-08-17T15:21:42Z] [info]: Development roles successfully created.
+[2025-08-17T15:21:42Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:21:42Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:21:42Z] [info]: Creating development users ...
+[2025-08-17T15:21:43Z] [info]: Development users successfully created.
+[2025-08-17T15:22:04Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:22:04Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:22:04Z] [info]: Non production environment detected!
+[2025-08-17T15:22:04Z] [info]: Wiping DB ...
+[2025-08-17T15:22:04Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:22:04Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:22:04Z] [info]: Creating default permissions ...
+[2025-08-17T15:22:04Z] [info]: Default permissions successfully created.
+[2025-08-17T15:22:04Z] [info]: Creating development roles ...
+[2025-08-17T15:22:04Z] [info]: Development roles successfully created.
+[2025-08-17T15:22:04Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:22:04Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:22:04Z] [info]: Creating development users ...
+[2025-08-17T15:22:04Z] [info]: Development users successfully created.
+[2025-08-17T15:22:11Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:22:11Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:22:11Z] [info]: Non production environment detected!
+[2025-08-17T15:22:11Z] [info]: Wiping DB ...
+[2025-08-17T15:22:11Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:22:11Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:22:11Z] [info]: Creating default permissions ...
+[2025-08-17T15:22:11Z] [info]: Default permissions successfully created.
+[2025-08-17T15:22:11Z] [info]: Creating development roles ...
+[2025-08-17T15:22:11Z] [info]: Development roles successfully created.
+[2025-08-17T15:22:11Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:22:11Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:22:11Z] [info]: Creating development users ...
+[2025-08-17T15:22:11Z] [info]: Development users successfully created.
+[2025-08-17T15:22:30Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:22:30Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:22:30Z] [info]: Non production environment detected!
+[2025-08-17T15:22:30Z] [info]: Wiping DB ...
+[2025-08-17T15:22:30Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:22:31Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:22:31Z] [info]: Creating default permissions ...
+[2025-08-17T15:22:31Z] [info]: Default permissions successfully created.
+[2025-08-17T15:22:31Z] [info]: Creating development roles ...
+[2025-08-17T15:22:31Z] [info]: Development roles successfully created.
+[2025-08-17T15:22:31Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:22:31Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:22:31Z] [info]: Creating development users ...
+[2025-08-17T15:22:31Z] [info]: Development users successfully created.
+[2025-08-17T15:22:33Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
+[2025-08-17T15:22:33Z] [error]: {"errorType":"ERROR_TYPE_UPDATE_USER_ROLE","error":{"length":247,"name":"error","severity":"ERROR","code":"23503","detail":"Key (rol_id)=(11) is not present in table \"global_roles\".","schema":"public","table":"users","constraint":"users_rol_id_fkey","file":"ri_triggers.c","line":"2608","routine":"ri_ReportViolation"}}
+[2025-08-17T15:22:36Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:22:36Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:22:36Z] [info]: Non production environment detected!
+[2025-08-17T15:22:36Z] [info]: Wiping DB ...
+[2025-08-17T15:22:36Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:22:37Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:22:37Z] [info]: Creating default permissions ...
+[2025-08-17T15:22:37Z] [info]: Default permissions successfully created.
+[2025-08-17T15:22:37Z] [info]: Creating development roles ...
+[2025-08-17T15:22:37Z] [info]: Development roles successfully created.
+[2025-08-17T15:22:37Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:22:37Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:22:37Z] [info]: Creating development users ...
+[2025-08-17T15:22:37Z] [info]: Development users successfully created.
+[2025-08-17T15:23:14Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:23:14Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:23:14Z] [info]: Non production environment detected!
+[2025-08-17T15:23:14Z] [info]: Wiping DB ...
+[2025-08-17T15:23:14Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:23:15Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:23:15Z] [info]: Creating default permissions ...
+[2025-08-17T15:23:15Z] [info]: Default permissions successfully created.
+[2025-08-17T15:23:15Z] [info]: Creating development roles ...
+[2025-08-17T15:23:15Z] [info]: Development roles successfully created.
+[2025-08-17T15:23:15Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:23:15Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:23:15Z] [info]: Creating development users ...
+[2025-08-17T15:23:15Z] [info]: Development users successfully created.
+[2025-08-17T15:23:24Z] [info]: New connection from user "sunless_client"
+[2025-08-17T15:23:39Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-17T15:23:50Z] [info]: New connection from user "sunless_admin"
+[2025-08-17T15:24:13Z] [info]: New connection from user "sunless_client"
+[2025-08-17T15:24:26Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-17T15:24:27Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-17T15:24:31Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-17T15:24:44Z] [info]: New connection from user "sunless_admin"
+[2025-08-17T15:25:05Z] [info]: New connection from user "sunless_client"
+[2025-08-17T15:25:18Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:25:18Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:25:18Z] [info]: Non production environment detected!
+[2025-08-17T15:25:18Z] [info]: Wiping DB ...
+[2025-08-17T15:25:18Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:25:18Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:25:18Z] [info]: Creating default permissions ...
+[2025-08-17T15:25:18Z] [info]: Default permissions successfully created.
+[2025-08-17T15:25:18Z] [info]: Creating development roles ...
+[2025-08-17T15:25:18Z] [info]: Development roles successfully created.
+[2025-08-17T15:25:18Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:25:18Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:25:18Z] [info]: Creating development users ...
+[2025-08-17T15:25:18Z] [info]: Development users successfully created.
+[2025-08-17T15:28:59Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-17T15:29:05Z] [info]: New connection from user "sunless_admin"
+[2025-08-17T15:30:41Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:30:41Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:30:41Z] [info]: Non production environment detected!
+[2025-08-17T15:30:41Z] [info]: Wiping DB ...
+[2025-08-17T15:30:41Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:30:41Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:30:41Z] [info]: Creating default permissions ...
+[2025-08-17T15:30:41Z] [info]: Default permissions successfully created.
+[2025-08-17T15:30:41Z] [info]: Creating development roles ...
+[2025-08-17T15:30:41Z] [info]: Development roles successfully created.
+[2025-08-17T15:30:41Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:30:41Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:30:41Z] [info]: Creating development users ...
+[2025-08-17T15:30:41Z] [info]: Development users successfully created.
+[2025-08-17T15:32:38Z] [info]: The connection to the DB has been successfully established.
+[2025-08-17T15:32:38Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-17T15:32:38Z] [info]: Non production environment detected!
+[2025-08-17T15:32:38Z] [info]: Wiping DB ...
+[2025-08-17T15:32:38Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-17T15:32:38Z] [info]: All data from DB was successfully wiped.
+[2025-08-17T15:32:38Z] [info]: Creating default permissions ...
+[2025-08-17T15:32:38Z] [info]: Default permissions successfully created.
+[2025-08-17T15:32:38Z] [info]: Creating development roles ...
+[2025-08-17T15:32:38Z] [info]: Development roles successfully created.
+[2025-08-17T15:32:38Z] [info]: Associating development roles and permissions ...
+[2025-08-17T15:32:38Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-17T15:32:38Z] [info]: Creating development users ...
+[2025-08-17T15:32:39Z] [info]: Development users successfully created.

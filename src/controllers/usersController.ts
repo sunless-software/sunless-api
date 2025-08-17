@@ -8,10 +8,12 @@ import {
   RECOVER_USER,
   SOFT_DELETE_USER,
   UNBAN_USER,
+  UPDATE_USER_ROLE,
 } from "../constants/queries";
 import { encryptPassword, sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
+  USER_ROLE_SUCCESSFULY_UPDATED,
   USER_SUCCESSFUL_CREATION_MESSAGE,
   USER_SUCCESSFULLY_BANNED_MESSAGE,
   USER_SUCCESSFULLY_DELETED_MESSAGE,
@@ -30,6 +32,7 @@ import {
   ERROR_TYPE_GET_USERS,
   ERROR_TYPE_RECOVER_USER,
   ERROR_TYPE_UNBAN_USER,
+  ERROR_TYPE_UPDATE_USER_ROLE,
 } from "../constants/customErrors";
 import { CustomError, User } from "../interfaces";
 import { GET_USERS_DEFAULT_LIMIT } from "../constants/setup";
@@ -138,7 +141,6 @@ const usersController = {
       return next(customError);
     }
   },
-  // TODO: Si queres eliminar tu propio usuario no deberias necesitar el mismo permiso
   deleteUser: async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     const db = await connectToDB();
@@ -245,6 +247,35 @@ const usersController = {
     } catch (err) {
       const customError: CustomError = {
         errorType: ERROR_TYPE_UNBAN_USER,
+        error: err,
+      };
+
+      return next(customError);
+    }
+  },
+  updateRole: async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const { roleID } = req.body;
+    const db = await connectToDB();
+
+    try {
+      const result = await db.query(UPDATE_USER_ROLE, [roleID, id]);
+      const affectedRows = result.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: USER_ROLE_SUCCESSFULY_UPDATED,
+        },
+        res
+      );
+    } catch (err) {
+      const customError: CustomError = {
+        errorType: ERROR_TYPE_UPDATE_USER_ROLE,
         error: err,
       };
 

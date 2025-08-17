@@ -4,7 +4,7 @@ info:
   version: 1.0.0
 
 paths:
-  /api/v1/users/recover:
+  /api/v1/users/recover/{id}:
     patch:
       summary: Recover a user
       description: Recover a previously soft-deleted user by their ID. Requires a role with RECOVER_USERS permission.

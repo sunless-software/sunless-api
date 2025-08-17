@@ -25,6 +25,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.createBlogs,
       GLOBAL_PERMISSIONS.updateBlogs,
       GLOBAL_PERMISSIONS.deleteBlogs,
+      GLOBAL_PERMISSIONS.manageUserRoles,
     ],
   },
   {

@@ -9,6 +9,7 @@ import banUserValidation from "../validations/banUser";
 import unbanUserValidation from "../validations/unbanUser";
 import recoverUserValidation from "../validations/recoverUser";
 import { AuthRequest } from "../interfaces";
+import updateUserRoleValidation from "../validations/updateUserRole";
 
 const usersRouter = Router();
 
@@ -77,6 +78,13 @@ usersRouter.patch(
   roleMiddleware([GLOBAL_PERMISSIONS.unbanUsers]),
   unbanUserValidation,
   usersController.unbanUser
+);
+
+usersRouter.patch(
+  `/role/:id`,
+  roleMiddleware([GLOBAL_PERMISSIONS.manageUserRoles]),
+  updateUserRoleValidation,
+  usersController.updateRole
 );
 
 export default usersRouter;

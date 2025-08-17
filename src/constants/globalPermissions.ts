@@ -49,4 +49,5 @@ export const GLOBAL_PERMISSIONS = {
   createBlogs: { id: 18, name: "CREATE_BLOGS", scope: "GLOBAL" },
   updateBlogs: { id: 19, name: "UPDATE_BLOGS", scope: "GLOBAL" },
   deleteBlogs: { id: 20, name: "DELETE_BLOGS", scope: "GLOBAL" },
+  manageUserRoles: { id: 21, name: "MANAGE_USER_ROLES", scope: "GLOBAL" },
 } satisfies Record<string, Permission>;

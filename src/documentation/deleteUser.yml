@@ -4,7 +4,7 @@ info:
   version: 1.0.0
 
 paths:
-  /api/v1/users/delete:
+  /api/v1/users/delete/{id}:
     delete:
       summary: Delete a user
       description: Soft-delete a user by their ID. Requires a role with DELETE_USERS permission but no permissions are needed to delete your own user.

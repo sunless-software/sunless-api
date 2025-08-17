@@ -22,3 +22,5 @@ export const RECOVER_USER = `UPDATE users SET deleted = false WHERE id = $1`;
 export const BAN_USER = `UPDATE users SET banned = true WHERE id = $1 AND deleted = false`;
 
 export const UNBAN_USER = `UPDATE users SET banned = false WHERE id = $1 AND deleted = false`;
+
+export const UPDATE_USER_ROLE = `UPDATE users SET rol_id = $1 WHERE id = $2 AND deleted = false`;
