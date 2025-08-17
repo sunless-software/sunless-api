@@ -4,6 +4,8 @@ import {
   ERROR_TYPE_BAN_USER,
   ERROR_TYPE_CREATE_USER,
   ERROR_TYPE_DELETE_USER,
+  ERROR_TYPE_RECOVER_USER,
+  ERROR_TYPE_UNBAN_USER,
 } from "../constants/customErrors";
 import { sendResponse } from "../utils";
 import { DEFAULT_ERROR_API_RESPONSE } from "../constants/messages";
@@ -11,6 +13,8 @@ import logger from "../logger";
 import createUserErrorHandler from "../errorHandlers/createUsersErrorHandler";
 import deleteUserErrorHandler from "../errorHandlers/deleteUserErrorHandler";
 import banUserErrorHandler from "../errorHandlers/banUserErrorHandler";
+import unbanUserErrorHandler from "../errorHandlers/unbanUserErrorHandler";
+import recoverUserErrorHandler from "../errorHandlers/recoverUserErrorHandler";
 
 export default async function errorHandlerMiddleware(
   err: CustomError,
@@ -25,6 +29,10 @@ export default async function errorHandlerMiddleware(
       return deleteUserErrorHandler(err, req, res);
     case ERROR_TYPE_BAN_USER:
       return banUserErrorHandler(err, req, res);
+    case ERROR_TYPE_UNBAN_USER:
+      return unbanUserErrorHandler(err, req, res);
+    case ERROR_TYPE_RECOVER_USER:
+      return recoverUserErrorHandler(err, req, res);
   }
 
   logger.error("The following unhandled error has occurred: ");

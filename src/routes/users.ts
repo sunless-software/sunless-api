@@ -6,6 +6,8 @@ import createUserValidation from "../validations/createUser";
 import getUsersValidation from "../validations/getUsers";
 import deleteUserValidation from "../validations/deleteUser";
 import banUserValidation from "../validations/banUser";
+import unbanUserValidation from "../validations/unbanUser";
+import recoverUserValidation from "../validations/recoverUser";
 
 const usersRouter = Router();
 
@@ -47,10 +49,24 @@ usersRouter.delete(
 );
 
 usersRouter.patch(
+  "/recover/:id",
+  roleMiddleware([GLOBAL_PERMISSIONS.recoverUsers]),
+  recoverUserValidation,
+  usersController.recoverUser
+);
+
+usersRouter.patch(
   `/ban/:id`,
   roleMiddleware([GLOBAL_PERMISSIONS.banUsers]),
   banUserValidation,
   usersController.banUser
+);
+
+usersRouter.patch(
+  `/unban/:id`,
+  roleMiddleware([GLOBAL_PERMISSIONS.unbanUsers]),
+  unbanUserValidation,
+  usersController.unbanUser
 );
 
 export default usersRouter;
