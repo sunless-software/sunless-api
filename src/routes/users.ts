@@ -8,6 +8,7 @@ import deleteUserValidation from "../validations/deleteUser";
 import banUserValidation from "../validations/banUser";
 import unbanUserValidation from "../validations/unbanUser";
 import recoverUserValidation from "../validations/recoverUser";
+import { AuthRequest } from "../interfaces";
 
 const usersRouter = Router();
 
@@ -43,7 +44,16 @@ usersRouter.post(
 
 usersRouter.delete(
   "/delete/:id",
-  roleMiddleware([GLOBAL_PERMISSIONS.deleteUsers]),
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = (req as AuthRequest).user;
+    const { id } = req.params;
+
+    if (id === user.id.toString()) {
+      return next();
+    }
+
+    return roleMiddleware([GLOBAL_PERMISSIONS.deleteUsers])(req, res, next);
+  },
   deleteUserValidation,
   usersController.deleteUser
 );

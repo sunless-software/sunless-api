@@ -138,6 +138,7 @@ const usersController = {
       return next(customError);
     }
   },
+  // TODO: Si queres eliminar tu propio usuario no deberias necesitar el mismo permiso
   deleteUser: async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     const db = await connectToDB();
@@ -249,6 +250,10 @@ const usersController = {
 
       return next(customError);
     }
+  },
+  recoverPassword: async (req: Request, res: Response, next: NextFunction) => {
+    // Quiero recuprera MI password
+    // El endpoint recibe el mail del usuario y
   },
   updateUser: async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;

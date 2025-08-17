@@ -46,3 +46,4 @@
 [2025-08-17T13:53:38Z] [warn]: The user with id "1" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-17T13:55:59Z] [error]: The following unhandled error has occurred: 
 [2025-08-17T13:55:59Z] [error]: {"errorType":"UNBAN_USER_ERROR","error":{}}
+[2025-08-17T14:50:36Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
