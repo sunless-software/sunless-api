@@ -68,3 +68,7 @@
 [2025-08-17T15:24:27Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-17T15:24:31Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-17T15:28:59Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-17T19:10:17Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJzdW5sZXNzX3VzZXIiLCJpYXQiOjE3NTU0NTc4MDMsImV4cCI6MTc1NTU0NDIwM30.ch_mwqaBujrOHlR6asaBM3uVnN0UivPhqnh82RFkdlM"
+[2025-08-17T19:10:19Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJzdW5sZXNzX3VzZXIiLCJpYXQiOjE3NTU0NTc4MDMsImV4cCI6MTc1NTU0NDIwM30.ch_mwqaBujrOHlR6asaBM3uVnN0UivPhqnh82RFkdlM"
+[2025-08-17T19:10:31Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-17T19:10:33Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

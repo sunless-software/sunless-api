@@ -10,6 +10,7 @@ import unbanUserValidation from "../validations/unbanUser";
 import recoverUserValidation from "../validations/recoverUser";
 import { AuthRequest } from "../interfaces";
 import updateUserRoleValidation from "../validations/updateUserRole";
+import updateUserValidation from "../validations/updateUser";
 
 const usersRouter = Router();
 
@@ -85,6 +86,22 @@ usersRouter.patch(
   roleMiddleware([GLOBAL_PERMISSIONS.manageUserRoles]),
   updateUserRoleValidation,
   usersController.updateRole
+);
+
+usersRouter.patch(
+  `/:id`,
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = (req as AuthRequest).user;
+    const { id } = req.params;
+
+    if (id === user.id.toString()) {
+      return roleMiddleware([GLOBAL_PERMISSIONS.updateOwnUser])(req, res, next);
+    }
+
+    return roleMiddleware([GLOBAL_PERMISSIONS.updateUsers])(req, res, next);
+  },
+  updateUserValidation,
+  usersController.updateUser
 );
 
 export default usersRouter;

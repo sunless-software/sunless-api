@@ -11,7 +11,7 @@ paths:
       tags:
         - Users
       parameters:
-        - in: query
+        - in: path
           name: id
           schema:
             type: integer

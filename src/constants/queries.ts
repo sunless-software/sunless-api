@@ -24,3 +24,8 @@ export const BAN_USER = `UPDATE users SET banned = true WHERE id = $1 AND delete
 export const UNBAN_USER = `UPDATE users SET banned = false WHERE id = $1 AND deleted = false`;
 
 export const UPDATE_USER_ROLE = `UPDATE users SET rol_id = $1 WHERE id = $2 AND deleted = false`;
+
+export const PATCH_USER = `UPDATE users SET username = COALESCE($1, username), profile_photo = COALESCE($2, profile_photo), phone = COALESCE($3, phone),
+email = COALESCE($4, email), public = COALESCE($5, public) WHERE id = $6 RETURNING id, rol_id, username, '****' as "password",
+coalesce(profile_photo, '') as "profile_photo", coalesce(phone, '') as "phone", coalesce(email, '') as "email", public, banned, deleted, 
+created_at, updated_at`;

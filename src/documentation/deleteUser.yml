@@ -11,7 +11,7 @@ paths:
       tags:
         - Users
       parameters:
-        - in: query
+        - in: path
           name: id
           schema:
             type: integer
@@ -74,7 +74,7 @@ paths:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
 
         "404":
-          description: User with given ID does not exist
+          description: User with given ID does not exists
           content:
             application/json:
               schema:

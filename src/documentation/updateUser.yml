@@ -4,10 +4,13 @@ info:
   version: 1.0.0
 
 paths:
-  /api/v1/users/unban/{id}:
+  /api/v1/users/{id}:
     patch:
-      summary: Unban a user
-      description: Unban a user by their ID. Requires a role with UNBAN_USERS permission.
+      summary: Update a user
+      description: |
+        Update user information by ID.  
+        Requires a role with `UPDATE_USERS` permission to update other users, or `UPDATE_OWN_USER` permission to update your own user.  
+        All fields in the request body are optional, but will be validated if provided.
       tags:
         - Users
       parameters:
@@ -17,10 +20,43 @@ paths:
             type: integer
             example: 5
           required: true
-          description: The ID of the user to unban
+          description: The ID of the user to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+                  description: Must be a non-empty string
+                roleID:
+                  type: integer
+                  example: 2
+                  description: Must be a number
+                profilePhoto:
+                  type: string
+                  format: uri
+                  example: "https://example.com/photo.jpg"
+                  description: Must be a valid URL
+                phone:
+                  type: string
+                  example: "1234567890"
+                  description: Must be a valid phone number
+                email:
+                  type: string
+                  format: email
+                  example: "johndoe@example.com"
+                  description: Must be a valid email
+                publicProfile:
+                  type: boolean
+                  example: true
+                  description: Must be a boolean
       responses:
         "200":
-          description: User successfully unbanned
+          description: User successfully updated
           content:
             application/json:
               schema:
@@ -31,11 +67,30 @@ paths:
                     example: 200
                   message:
                     type: string
-                    example: The user has been successfully unbanned.
+                    example: The user has been successfully updated.
                   data:
                     type: array
                     items:
                       type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 5
+                        username:
+                          type: string
+                          example: johndoe
+                        email:
+                          type: string
+                          example: johndoe@example.com
+                        phone:
+                          type: string
+                          example: "1234567890"
+                        profilePhoto:
+                          type: string
+                          example: "https://example.com/photo.jpg"
+                        publicProfile:
+                          type: boolean
+                          example: true
                   pagination:
                     type: object
                     properties:
@@ -104,13 +159,13 @@ components:
                 example: ""
               msg:
                 type: string
-                example: "user 'id' must be a number"
+                example: "username must be a string"
               path:
                 type: string
-                example: id
+                example: username
               location:
                 type: string
-                example: query
+                example: body
         pagination:
           type: object
           properties:

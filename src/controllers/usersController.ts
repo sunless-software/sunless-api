@@ -5,6 +5,7 @@ import {
   COUNT_USERS,
   CREATE_USER,
   GET_USERS,
+  PATCH_USER,
   RECOVER_USER,
   SOFT_DELETE_USER,
   UNBAN_USER,
@@ -19,6 +20,7 @@ import {
   USER_SUCCESSFULLY_DELETED_MESSAGE,
   USER_SUCCESSFULLY_RECOVERED_MESSAGE,
   USER_SUCCESSFULLY_UNBANNED_MESSAGE,
+  USER_SUCESSFULLY_UPDATED,
   USERS_SUCCESSFULLY_RETRIEVED_MESSAGE,
 } from "../constants/messages";
 import {
@@ -32,6 +34,7 @@ import {
   ERROR_TYPE_GET_USERS,
   ERROR_TYPE_RECOVER_USER,
   ERROR_TYPE_UNBAN_USER,
+  ERROR_TYPE_UPDATE_USER,
   ERROR_TYPE_UPDATE_USER_ROLE,
 } from "../constants/customErrors";
 import { CustomError, User } from "../interfaces";
@@ -288,19 +291,40 @@ const usersController = {
   },
   updateUser: async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
+    const { username, profilePhoto, phone, email, publicProfile } = req.body;
+    const db = await connectToDB();
 
-    /* id = Se recibe por params, si no existe devolver error,
-    rol_id = Este es el campo mas problematico, hay que validar bien los roles, un usuario de bajo nivel podria usar el endpoint para asignarse un rol de alto nivel y tomar control del sistema, 
-    username = un String hay que fijarse que sea unique, sin problemas,
-    password = Requiere flujo especial, hay que encriptarla,
-    profile_photo = Un string que sea una url, sin problemas,
-    phone = Un string que cumpla con la condiciones de un numero de telefono, sin problemas,
-    email = Un string, hay que fijarse que sea unique solamente,
-    public = Booleana sin relacion, sin problemas,
-    banned = No se deberia poder mandar como true hay un endpoint especifico,
-    deleted = No se deberia poder mandar como true hay un endpoint especifico,
-    created_at = Se establece solo, no se recibe,
-    updated_at = Se establece solo, no se recibe */
+    try {
+      const result = await db.query(PATCH_USER, [
+        username,
+        profilePhoto,
+        phone,
+        email,
+        publicProfile,
+        id,
+      ]);
+      const affectedRows = result.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: USER_SUCESSFULLY_UPDATED,
+          data: result.rows[0],
+        },
+        res
+      );
+    } catch (err) {
+      const customError: CustomError = {
+        errorType: ERROR_TYPE_UPDATE_USER,
+        error: err,
+      };
+
+      return next(customError);
+    }
   },
 };
 

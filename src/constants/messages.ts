@@ -26,6 +26,8 @@ export const USER_SUCCESSFULLY_UNBANNED_MESSAGE =
 export const USER_NOT_FOUND_MESSAGE =
   "The user with the given id does not exists.";
 export const USER_ROLE_SUCCESSFULY_UPDATED = "Role updated successfully.";
+export const USER_SUCESSFULLY_UPDATED =
+  "The user has been successfully updated.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
