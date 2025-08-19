@@ -39,6 +39,7 @@ export const EXPERIENCE_SUCCESSFULLY_CREATED =
   "The experience has been successfully created.";
 export const EXPERIENCE_SUCCESSFULY_UPDATED =
   "Experience updated successfully.";
+export const EDUCATION_SUCCESSFULLY_CREATED = "Study successfully created.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

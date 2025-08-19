@@ -42,3 +42,7 @@ export const DELETE_EXPERIENCE = `DELETE FROM experiences WHERE id = $1`;
 
 export const GET_EXPERIENCE_USER_ID =
   "SELECT user_id FROM experiences WHERE id = $1 LIMIT 1";
+
+export const CREATE_EDUCATION = `INSERT INTO education (user_id, start_date, end_date, institution, field, "location", description, created_at, updated_at) 
+select u.id, $1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP from users u where u.id = $7 and u.deleted = false returning id, start_date, 
+end_date, institution, field, location, coalesce(description, '') as description, created_at, updated_at`;

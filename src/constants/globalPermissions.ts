@@ -76,4 +76,14 @@ export const GLOBAL_PERMISSIONS = {
     name: "UPDATE_EXPERIENCES",
     scope: "GLOBAL",
   },
+  createOwnEducations: {
+    id: 28,
+    name: "CREATE_OWN_EDUCATIONS",
+    scope: "GLOBAL",
+  },
+  createEducations: {
+    id: 29,
+    name: "CREATE_EDUCATIONS",
+    scope: "GLOBAL",
+  },
 } satisfies Record<string, Permission>;
