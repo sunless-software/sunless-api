@@ -34,6 +34,8 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.updateExperiences,
       GLOBAL_PERMISSIONS.createOwnEducations,
       GLOBAL_PERMISSIONS.createEducations,
+      GLOBAL_PERMISSIONS.deleteOwnEducation,
+      GLOBAL_PERMISSIONS.deleteEducations,
     ],
   },
   {
@@ -52,6 +54,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.deleteOwnExperiences,
       GLOBAL_PERMISSIONS.updateOwnExperiences,
       GLOBAL_PERMISSIONS.createOwnEducations,
+      GLOBAL_PERMISSIONS.deleteOwnEducation,
     ],
   },
 ];

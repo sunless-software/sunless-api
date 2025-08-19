@@ -5,6 +5,7 @@ import {
   ERROR_TYPE_CREATE_EDUCATION,
   ERROR_TYPE_CREATE_EXPERIENCE,
   ERROR_TYPE_CREATE_USER,
+  ERROR_TYPE_DELETE_EDUCATION,
   ERROR_TYPE_DELETE_EXPERIENCE,
   ERROR_TYPE_DELETE_USER,
   ERROR_TYPE_RECOVER_USER,
@@ -27,6 +28,7 @@ import createExperienceErrorHandler from "../errorHandlers/createExperienceError
 import deleteExperienceErrorHandler from "../errorHandlers/deleteExperienceErrorHandler";
 import updateExperienceErrorHandler from "../errorHandlers/updateExperienceErrorHandler";
 import createEducationErrorHandler from "../errorHandlers/createEducationErrorHandler";
+import deleteEducationErrorHandler from "../errorHandlers/deleteEducationErrorHandler";
 
 export default async function errorHandlerMiddleware(
   err: CustomError,
@@ -57,6 +59,8 @@ export default async function errorHandlerMiddleware(
       return updateExperienceErrorHandler(err, req, res);
     case ERROR_TYPE_CREATE_EDUCATION:
       return createEducationErrorHandler(err, req, res);
+    case ERROR_TYPE_DELETE_EDUCATION:
+      return deleteEducationErrorHandler(err, req, res);
   }
 
   logger.error("The following unhandled error has occurred: ");
