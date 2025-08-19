@@ -30,6 +30,8 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.createExperiences,
       GLOBAL_PERMISSIONS.deleteOwnExperiences,
       GLOBAL_PERMISSIONS.deleteExperiences,
+      GLOBAL_PERMISSIONS.updateOwnExperiences,
+      GLOBAL_PERMISSIONS.updateExperiences,
     ],
   },
   {
@@ -46,6 +48,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.inviteToOwnedProjects,
       GLOBAL_PERMISSIONS.createOwnExperiences,
       GLOBAL_PERMISSIONS.deleteOwnExperiences,
+      GLOBAL_PERMISSIONS.updateOwnExperiences,
     ],
   },
 ];

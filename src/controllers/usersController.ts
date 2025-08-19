@@ -314,7 +314,7 @@ const usersController = {
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
           message: USER_SUCESSFULLY_UPDATED,
-          data: result.rows[0],
+          data: result.rows,
         },
         res
       );

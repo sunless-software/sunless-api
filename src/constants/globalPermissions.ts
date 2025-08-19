@@ -66,4 +66,14 @@ export const GLOBAL_PERMISSIONS = {
     name: "DELETE_EXPERIENCES",
     scope: "GLOBAL",
   },
+  updateOwnExperiences: {
+    id: 26,
+    name: "UPDATE_OWN_EXPERIENCES",
+    scope: "GLOBAL",
+  },
+  updateExperiences: {
+    id: 27,
+    name: "UPDATE_EXPERIENCES",
+    scope: "GLOBAL",
+  },
 } satisfies Record<string, Permission>;

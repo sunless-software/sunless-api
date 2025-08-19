@@ -243,3 +243,71 @@
 [2025-08-19T09:48:26Z] [error]: {"length":144,"name":"error","severity":"ERROR","code":"22P02","where":"unnamed portal parameter $1 = '...'","file":"numutils.c","line":"617","routine":"pg_strtoint32_safe"}
 [2025-08-19T09:48:40Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-19T09:48:47Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:23:46Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:24:11Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:24:14Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:24:14Z] [error]: {}
+[2025-08-19T10:26:14Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:26:14Z] [error]: {}
+[2025-08-19T10:26:39Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:26:39Z] [error]: {"length":144,"name":"error","severity":"ERROR","code":"22P02","where":"unnamed portal parameter $1 = '...'","file":"numutils.c","line":"617","routine":"pg_strtoint32_safe"}
+[2025-08-19T10:26:42Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:26:42Z] [error]: {"length":144,"name":"error","severity":"ERROR","code":"22P02","where":"unnamed portal parameter $1 = '...'","file":"numutils.c","line":"617","routine":"pg_strtoint32_safe"}
+[2025-08-19T10:26:54Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:26:54Z] [error]: {"length":144,"name":"error","severity":"ERROR","code":"22P02","where":"unnamed portal parameter $1 = '...'","file":"numutils.c","line":"617","routine":"pg_strtoint32_safe"}
+[2025-08-19T10:27:06Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:27:06Z] [error]: {"length":144,"name":"error","severity":"ERROR","code":"22P02","where":"unnamed portal parameter $1 = '...'","file":"numutils.c","line":"617","routine":"pg_strtoint32_safe"}
+[2025-08-19T10:30:30Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:30:30Z] [error]: {"length":144,"name":"error","severity":"ERROR","code":"22P02","where":"unnamed portal parameter $1 = '...'","file":"numutils.c","line":"617","routine":"pg_strtoint32_safe"}
+[2025-08-19T10:30:59Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:30:59Z] [error]: {"length":144,"name":"error","severity":"ERROR","code":"22P02","where":"unnamed portal parameter $1 = '...'","file":"numutils.c","line":"617","routine":"pg_strtoint32_safe"}
+[2025-08-19T10:32:02Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:32:02Z] [error]: {"length":144,"name":"error","severity":"ERROR","code":"22P02","where":"unnamed portal parameter $1 = '...'","file":"numutils.c","line":"617","routine":"pg_strtoint32_safe"}
+[2025-08-19T10:32:28Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:32:28Z] [error]: {"length":144,"name":"error","severity":"ERROR","code":"22P02","where":"unnamed portal parameter $1 = '...'","file":"numutils.c","line":"617","routine":"pg_strtoint32_safe"}
+[2025-08-19T10:32:51Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:32:51Z] [error]: {}
+[2025-08-19T10:32:59Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:32:59Z] [error]: {}
+[2025-08-19T10:33:11Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:33:11Z] [error]: {}
+[2025-08-19T10:33:29Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:33:29Z] [error]: {}
+[2025-08-19T10:35:27Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:35:27Z] [error]: {}
+[2025-08-19T10:36:31Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:36:31Z] [error]: {}
+[2025-08-19T10:36:59Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:36:59Z] [error]: {}
+[2025-08-19T10:37:33Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:37:33Z] [error]: {}
+[2025-08-19T10:37:48Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:37:48Z] [error]: {}
+[2025-08-19T10:37:55Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:37:55Z] [error]: {}
+[2025-08-19T10:38:10Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:38:10Z] [error]: {}
+[2025-08-19T10:38:25Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:38:25Z] [error]: {}
+[2025-08-19T10:38:39Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:38:39Z] [error]: {}
+[2025-08-19T10:38:52Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:38:52Z] [error]: {}
+[2025-08-19T10:39:51Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T10:39:51Z] [error]: {}
+[2025-08-19T10:43:17Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:43:25Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:43:30Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:44:27Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:44:32Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:45:30Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:45:54Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:46:33Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:47:17Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:48:56Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:51:04Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:51:05Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:51:15Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:51:25Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:51:36Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T10:53:00Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

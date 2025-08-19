@@ -8,6 +8,7 @@ import {
   ERROR_TYPE_DELETE_USER,
   ERROR_TYPE_RECOVER_USER,
   ERROR_TYPE_UNBAN_USER,
+  ERROR_TYPE_UPDATE_EXPERIENCE,
   ERROR_TYPE_UPDATE_USER,
   ERROR_TYPE_UPDATE_USER_ROLE,
 } from "../constants/customErrors";
@@ -23,6 +24,7 @@ import updateUserRoleHandler from "../errorHandlers/updateUserRoleHandler";
 import updateUserErrorHandler from "../errorHandlers/updateUserErrorHandler";
 import createExperienceErrorHandler from "../errorHandlers/createExperienceErrorHandler";
 import deleteExperienceErrorHandler from "../errorHandlers/deleteExperienceErrorHandler";
+import updateExperienceErrorHandler from "../errorHandlers/updateExperienceErrorHandler";
 
 export default async function errorHandlerMiddleware(
   err: CustomError,
@@ -49,6 +51,8 @@ export default async function errorHandlerMiddleware(
       return createExperienceErrorHandler(err, req, res);
     case ERROR_TYPE_DELETE_EXPERIENCE:
       return deleteExperienceErrorHandler(err, req, res);
+    case ERROR_TYPE_UPDATE_EXPERIENCE:
+      return updateExperienceErrorHandler(err, req, res);
   }
 
   logger.error("The following unhandled error has occurred: ");

@@ -37,6 +37,8 @@ export const USER_SUCESSFULLY_UPDATED =
   "The user has been successfully updated.";
 export const EXPERIENCE_SUCCESSFULLY_CREATED =
   "The experience has been successfully created.";
+export const EXPERIENCE_SUCCESSFULY_UPDATED =
+  "Experience updated successfully.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

@@ -7,6 +7,7 @@ import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import deleteExperienceValidation from "../validations/deleteExperience";
 import connectToDB from "../db";
 import { GET_EXPERIENCE_USER_ID } from "../constants/queries";
+import updateExperienceValidation from "../validations/updateExperience";
 
 const experiencesRouter = Router();
 
@@ -36,16 +37,47 @@ experiencesRouter.post(
   experiencesController.createExperience
 );
 
-experiencesRouter.delete(
+experiencesRouter.patch(
   "/:id",
-  deleteExperienceValidation,
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
+    if (isNaN(Number(id))) return next();
+
+    const user = (req as AuthRequest).user;
     const db = await connectToDB();
     const result = await db.query(GET_EXPERIENCE_USER_ID, [id]);
     const experienceUserID: number | undefined = result.rows[0]?.user_id;
 
-    if (experienceUserID && id === experienceUserID.toString()) {
+    if (experienceUserID && user.id === experienceUserID) {
+      return roleMiddleware([GLOBAL_PERMISSIONS.updateOwnExperiences])(
+        req,
+        res,
+        next
+      );
+    }
+
+    return roleMiddleware([GLOBAL_PERMISSIONS.updateExperiences])(
+      req,
+      res,
+      next
+    );
+  },
+  updateExperienceValidation,
+  experiencesController.updateExperience
+);
+
+experiencesRouter.delete(
+  "/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    if (isNaN(Number(id))) return next();
+
+    const user = (req as AuthRequest).user;
+    const db = await connectToDB();
+    const result = await db.query(GET_EXPERIENCE_USER_ID, [id]);
+    const experienceUserID: number | undefined = result.rows[0]?.user_id;
+
+    if (experienceUserID && user.id === experienceUserID) {
       return roleMiddleware([GLOBAL_PERMISSIONS.deleteOwnExperiences])(
         req,
         res,
@@ -59,6 +91,7 @@ experiencesRouter.delete(
       next
     );
   },
+  deleteExperienceValidation,
   experiencesController.deleteExperience
 );
 
