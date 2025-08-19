@@ -18,6 +18,7 @@ import { sendResponse } from "./utils";
 import errorHandlerMiddleware from "./middlewares/errorHandler";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger";
+import experiencesRouter from "./routes/experiences";
 
 async function start() {
   const app = express();
@@ -48,6 +49,7 @@ async function start() {
 
   apiRouter.use("/auth", authRouter);
   apiRouter.use("/users", authMiddleware, usersRouter);
+  apiRouter.use("/experiences", authMiddleware, experiencesRouter);
 
   apiRouter.use(errorHandlerMiddleware);
 

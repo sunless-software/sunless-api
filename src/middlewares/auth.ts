@@ -3,6 +3,7 @@ import { sendResponse } from "../utils";
 import {
   DEFAULT_ERROR_API_RESPONSE,
   DEFAULT_SUCCES_API_RESPONSE,
+  INVALID_USER_MESSAGE,
   INVALID_USER_STATUS_MESSAGE,
   USER_NOT_FOUND_MESSAGE,
 } from "../constants/messages";
@@ -68,7 +69,7 @@ export default async function authMiddleware(
         {
           ...DEFAULT_ERROR_API_RESPONSE,
           status: HTTP_STATUS_CODE_NOT_FOUND,
-          message: USER_NOT_FOUND_MESSAGE,
+          message: INVALID_USER_MESSAGE,
         },
         res
       );

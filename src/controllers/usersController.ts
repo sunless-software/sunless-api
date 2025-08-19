@@ -285,10 +285,11 @@ const usersController = {
       return next(customError);
     }
   },
-  recoverPassword: async (req: Request, res: Response, next: NextFunction) => {
-    // Quiero recuprera MI password
-    // El endpoint recibe el mail del usuario y
-  },
+  recoverPassword: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {},
   updateUser: async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     const { username, profilePhoto, phone, email, publicProfile } = req.body;

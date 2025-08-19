@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { CustomError } from "../interfaces";
 import {
   ERROR_TYPE_BAN_USER,
+  ERROR_TYPE_CREATE_EXPERIENCE,
   ERROR_TYPE_CREATE_USER,
   ERROR_TYPE_DELETE_USER,
   ERROR_TYPE_RECOVER_USER,
@@ -19,6 +20,7 @@ import unbanUserErrorHandler from "../errorHandlers/unbanUserErrorHandler";
 import recoverUserErrorHandler from "../errorHandlers/recoverUserErrorHandler";
 import updateUserRoleHandler from "../errorHandlers/updateUserRoleHandler";
 import updateUserErrorHandler from "../errorHandlers/updateUserErrorHandler";
+import createExperienceErrorHandler from "../errorHandlers/createExperienceErrorHandler";
 
 export default async function errorHandlerMiddleware(
   err: CustomError,
@@ -41,6 +43,8 @@ export default async function errorHandlerMiddleware(
       return updateUserRoleHandler(err, req, res);
     case ERROR_TYPE_UPDATE_USER:
       return updateUserErrorHandler(err, req, res);
+    case ERROR_TYPE_CREATE_EXPERIENCE:
+      return createExperienceErrorHandler(err, req, res);
   }
 
   logger.error("The following unhandled error has occurred: ");

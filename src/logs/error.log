@@ -30,3 +30,19 @@
 [2025-08-17T15:20:14Z] [error]: [object Object]
 [2025-08-17T15:22:33Z] [error]: The following unexpected postgres error has occurred while trying to update role of a user: 
 [2025-08-17T15:22:33Z] [error]: {"errorType":"ERROR_TYPE_UPDATE_USER_ROLE","error":{"length":247,"name":"error","severity":"ERROR","code":"23503","detail":"Key (rol_id)=(11) is not present in table \"global_roles\".","schema":"public","table":"users","constraint":"users_rol_id_fkey","file":"ri_triggers.c","line":"2608","routine":"ri_ReportViolation"}}
+[2025-08-19T08:11:12Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-19T08:11:12Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-19T08:12:04Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-19T08:12:04Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-19T08:12:26Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-19T08:12:26Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-19T08:14:46Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-19T08:14:46Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-19T08:58:00Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T08:58:00Z] [error]: {"errorType":"ERROR_TYPE_CREATE_EXPERIENCE","error":{"length":109,"name":"error","severity":"ERROR","code":"22007","position":"369","file":"datetime.c","line":"4026","routine":"DateTimeParseError"}}
+[2025-08-19T08:58:40Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T08:58:40Z] [error]: {"errorType":"ERROR_TYPE_CREATE_EXPERIENCE","error":{"length":109,"name":"error","severity":"ERROR","code":"22007","position":"369","file":"datetime.c","line":"4026","routine":"DateTimeParseError"}}
+[2025-08-19T09:04:42Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T09:04:42Z] [error]: {"errorType":"ERROR_TYPE_CREATE_EXPERIENCE","error":{}}
+[2025-08-19T09:07:09Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T09:07:09Z] [error]: {"errorType":"ERROR_TYPE_CREATE_EXPERIENCE","error":{}}

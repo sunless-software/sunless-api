@@ -72,3 +72,45 @@
 [2025-08-17T19:10:19Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJzdW5sZXNzX3VzZXIiLCJpYXQiOjE3NTU0NTc4MDMsImV4cCI6MTc1NTU0NDIwM30.ch_mwqaBujrOHlR6asaBM3uVnN0UivPhqnh82RFkdlM"
 [2025-08-17T19:10:31Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-17T19:10:33Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:09:43Z] [warn]: A request was rejected because the authorization token was invalid. Token: undefined
+[2025-08-19T08:09:57Z] [warn]: A request was rejected because the authorization token was invalid. Token: undefined
+[2025-08-19T08:09:58Z] [warn]: A request was rejected because the authorization token was invalid. Token: undefined
+[2025-08-19T08:10:26Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:11:12Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-19T08:11:12Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-19T08:11:15Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:11:16Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:11:34Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:11:35Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJzdW5sZXNzX3VzZXIiLCJpYXQiOjE3NTU1OTEwODgsImV4cCI6MTc1NTY3NzQ4OH0.2AfvKYbq0BGgqoSF1sOcDED9ETIeB2-ct6HIsAD61-k"
+[2025-08-19T08:12:04Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-19T08:12:04Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-19T08:12:05Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJzdW5sZXNzX3VzZXIiLCJpYXQiOjE3NTU1OTEwODgsImV4cCI6MTc1NTY3NzQ4OH0.2AfvKYbq0BGgqoSF1sOcDED9ETIeB2-ct6HIsAD61-k"
+[2025-08-19T08:12:06Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJzdW5sZXNzX3VzZXIiLCJpYXQiOjE3NTU1OTEwODgsImV4cCI6MTc1NTY3NzQ4OH0.2AfvKYbq0BGgqoSF1sOcDED9ETIeB2-ct6HIsAD61-k"
+[2025-08-19T08:12:26Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-19T08:12:26Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-19T08:14:23Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:14:46Z] [error]: The following error has occurred while trying to associate the permissions with the developemnt roles: 
+[2025-08-19T08:14:46Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-19T08:14:49Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:14:55Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:14:57Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:15:36Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:15:42Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:16:43Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:16:47Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:16:49Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:17:20Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:17:21Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:17:38Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:17:42Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:18:08Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:30:40Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:31:00Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-19T08:58:00Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T08:58:00Z] [error]: {"errorType":"ERROR_TYPE_CREATE_EXPERIENCE","error":{"length":109,"name":"error","severity":"ERROR","code":"22007","position":"369","file":"datetime.c","line":"4026","routine":"DateTimeParseError"}}
+[2025-08-19T08:58:40Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T08:58:40Z] [error]: {"errorType":"ERROR_TYPE_CREATE_EXPERIENCE","error":{"length":109,"name":"error","severity":"ERROR","code":"22007","position":"369","file":"datetime.c","line":"4026","routine":"DateTimeParseError"}}
+[2025-08-19T09:04:42Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T09:04:42Z] [error]: {"errorType":"ERROR_TYPE_CREATE_EXPERIENCE","error":{}}
+[2025-08-19T09:07:09Z] [error]: The following unhandled error has occurred: 
+[2025-08-19T09:07:09Z] [error]: {"errorType":"ERROR_TYPE_CREATE_EXPERIENCE","error":{}}

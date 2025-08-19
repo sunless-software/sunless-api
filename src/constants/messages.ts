@@ -13,6 +13,8 @@ export const DUPLICATED_PRIMARY_KEY_MESSAGE =
   "A user with the same primary key already exists.";
 export const ROLE_FOREIGN_KEY_VIOLATION_MESSAGE =
   "The provided 'roleID' does not correspond to a valid role.";
+export const USER_FOREIGN_KEY_VIOLATION_MESSAGE =
+  "The provided 'userID' does not correspond to a valid user.";
 export const USERS_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "Users successfully retrieved.";
 export const USER_SUCCESSFULLY_DELETED_MESSAGE =
@@ -25,9 +27,12 @@ export const USER_SUCCESSFULLY_UNBANNED_MESSAGE =
   "The user has been successfully unbanned.";
 export const USER_NOT_FOUND_MESSAGE =
   "The user with the given id does not exists.";
+export const INVALID_USER_MESSAGE = "Your current user is invalid.";
 export const USER_ROLE_SUCCESSFULY_UPDATED = "Role updated successfully.";
 export const USER_SUCESSFULLY_UPDATED =
   "The user has been successfully updated.";
+export const EXPERIENCE_SUCCESSFULLY_CREATED =
+  "The experience has been successfully created.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
