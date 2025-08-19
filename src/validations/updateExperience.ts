@@ -4,10 +4,6 @@ import { validateResult } from "../utils";
 
 const updateExperienceValidation = [
   param("id").isNumeric().withMessage("user 'id' must be a number"),
-  body("userID")
-    .optional()
-    .isNumeric()
-    .withMessage("'userID' must be a number"),
   body("companyName")
     .optional()
     .bail()

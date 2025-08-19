@@ -96,4 +96,14 @@ export const GLOBAL_PERMISSIONS = {
     name: "DELETE_EDUCATIONS",
     scope: "GLOBAL",
   },
+  updateOwnEducations: {
+    id: 32,
+    name: "UPDATE_OWN_EDUCATIONS",
+    scope: "GLOBAL",
+  },
+  updateEducations: {
+    id: 33,
+    name: "UPDATE_EDUCATIONS",
+    scope: "GLOBAL",
+  },
 } satisfies Record<string, Permission>;

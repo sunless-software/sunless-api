@@ -43,6 +43,7 @@ export const EDUCATION_SUCCESSFULLY_CREATED = "Study successfully created.";
 export const EDUCATION_SUCCESSFULLY_DELETED = "Study successfully deleted.";
 export const EDUCATION_NOT_FOUND_MESSAGE =
   "The education with the given id does not exists.";
+export const EDUCATION_SUCCESSFULY_UPDATED = "Education updated successfully.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

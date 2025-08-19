@@ -51,3 +51,7 @@ export const DELETE_EDUCATION = "DELETE FROM education WHERE id = $1";
 
 export const GET_EDUCATION_USER_ID =
   "SELECT user_id FROM education WHERE id = $1 LIMIT 1";
+
+export const PATCH_EDUCATION = `UPDATE education SET start_date=COALESCE($1, start_date), end_date=COALESCE($2, end_date), institution=COALESCE($3, institution),
+field=COALESCE($4, field), "location"=COALESCE($5, location), description=COALESCE($6, description) WHERE id=$7
+returning id, start_date, end_date, institution, field, location, coalesce(description, '') as description, created_at, updated_at`;
