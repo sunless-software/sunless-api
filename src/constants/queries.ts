@@ -33,3 +33,8 @@ created_at, updated_at`;
 export const CREATE_EXPERIENCE = `INSERT INTO experiences (user_id, company_name, "role", description, "location", start_date, end_date, 
 company_logo, created_at, updated_at) select u.id, $1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP from users u
 where u.id = $8 and u.deleted = false RETURNING id, user_id, company_name, role, description, location, start_date, end_date, coalesce(company_logo, '') as "company_logo", created_at, updated_at`;
+
+export const DELETE_EXPERIENCE = `DELETE FROM experiences WHERE id = $1`;
+
+export const GET_EXPERIENCE_USER_ID =
+  "SELECT user_id FROM experiences WHERE id = $1 LIMIT 1";

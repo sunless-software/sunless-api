@@ -120,7 +120,7 @@ async function associateDevGlobalRolesPermissions(db: Pool) {
     })
     .catch((err) => {
       logger.error(
-        `The following error has occurred while trying to associate the permissions with the developemnt roles: `
+        `The following error has occurred while trying to associate the permissions with the development roles: `
       );
       logger.error(err);
     });

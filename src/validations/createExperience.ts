@@ -4,9 +4,7 @@ import { validateResult } from "../utils";
 
 const createExperienceValidation = [
   body("userID")
-    .exists()
-    .withMessage("'userID' must be provided")
-    .bail()
+    .optional()
     .isNumeric()
     .withMessage("'userID' must be a number"),
   body("companyName")

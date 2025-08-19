@@ -19,6 +19,8 @@ export const USERS_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "Users successfully retrieved.";
 export const USER_SUCCESSFULLY_DELETED_MESSAGE =
   "The user has been successfully deleted.";
+export const EXPERIENCE_SUCCESSFULLY_DELETED_MESSAGE =
+  "The experience has been successfully deleted.";
 export const USER_SUCCESSFULLY_RECOVERED_MESSAGE =
   "The user has been successfully recovered.";
 export const USER_SUCCESSFULLY_BANNED_MESSAGE =
@@ -27,6 +29,8 @@ export const USER_SUCCESSFULLY_UNBANNED_MESSAGE =
   "The user has been successfully unbanned.";
 export const USER_NOT_FOUND_MESSAGE =
   "The user with the given id does not exists.";
+export const EXPERIENCE_NOT_FOUND_MESSAGE =
+  "The experience with the given id does not exists.";
 export const INVALID_USER_MESSAGE = "Your current user is invalid.";
 export const USER_ROLE_SUCCESSFULY_UPDATED = "Role updated successfully.";
 export const USER_SUCESSFULLY_UPDATED =

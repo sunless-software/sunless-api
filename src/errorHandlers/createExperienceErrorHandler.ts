@@ -35,13 +35,13 @@ export default function createExperienceErrorHandler(
           },
           res
         );
-      default:
-        logger.error(
-          `An unhandled error was thrown while trying to create a new experience: `
-        );
-        logger.error(JSON.stringify(err));
-
-        return sendResponse(DEFAULT_ERROR_API_RESPONSE, res);
     }
   }
+
+  logger.error(
+    `An unhandled error was thrown while trying to create a new experience: `
+  );
+  logger.error(JSON.stringify(err));
+
+  return sendResponse(DEFAULT_ERROR_API_RESPONSE, res);
 }
