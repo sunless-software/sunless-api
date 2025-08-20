@@ -27,16 +27,6 @@ import {
   HTTP_STATUS_CODE_CREATED,
   HTTP_STATUS_CODE_NOT_FOUND,
 } from "../constants/httpStatusCodes";
-import {
-  ERROR_TYPE_BAN_USER,
-  ERROR_TYPE_CREATE_USER,
-  ERROR_TYPE_DELETE_USER,
-  ERROR_TYPE_GET_USERS,
-  ERROR_TYPE_RECOVER_USER,
-  ERROR_TYPE_UNBAN_USER,
-  ERROR_TYPE_UPDATE_USER,
-  ERROR_TYPE_UPDATE_USER_ROLE,
-} from "../constants/customErrors";
 import { CustomError, User } from "../interfaces";
 import { GET_USERS_DEFAULT_LIMIT } from "../constants/setup";
 
@@ -90,12 +80,7 @@ const usersController = {
         res
       );
     } catch (err) {
-      const customError: CustomError = {
-        errorType: ERROR_TYPE_GET_USERS,
-        error: err,
-      };
-
-      return next(customError);
+      return next(err);
     }
   },
   createUsers: async (req: Request, res: Response, next: NextFunction) => {
@@ -136,12 +121,7 @@ const usersController = {
         res
       );
     } catch (err) {
-      const customError: CustomError = {
-        errorType: ERROR_TYPE_CREATE_USER,
-        error: err,
-      };
-
-      return next(customError);
+      return next(err);
     }
   },
   deleteUser: async (req: Request, res: Response, next: NextFunction) => {
@@ -164,12 +144,7 @@ const usersController = {
         res
       );
     } catch (err) {
-      const customError: CustomError = {
-        errorType: ERROR_TYPE_DELETE_USER,
-        error: err,
-      };
-
-      return next(customError);
+      return next(err);
     }
   },
   recoverUser: async (req: Request, res: Response, next: NextFunction) => {
@@ -192,12 +167,7 @@ const usersController = {
         res
       );
     } catch (err) {
-      const customError: CustomError = {
-        errorType: ERROR_TYPE_RECOVER_USER,
-        error: err,
-      };
-
-      return next(customError);
+      return next(err);
     }
   },
   banUser: async (req: Request, res: Response, next: NextFunction) => {
@@ -220,12 +190,7 @@ const usersController = {
         res
       );
     } catch (err) {
-      const customError: CustomError = {
-        errorType: ERROR_TYPE_BAN_USER,
-        error: err,
-      };
-
-      return next(customError);
+      return next(err);
     }
   },
   unbanUser: async (req: Request, res: Response, next: NextFunction) => {
@@ -248,12 +213,7 @@ const usersController = {
         res
       );
     } catch (err) {
-      const customError: CustomError = {
-        errorType: ERROR_TYPE_UNBAN_USER,
-        error: err,
-      };
-
-      return next(customError);
+      return next(err);
     }
   },
   updateRole: async (req: Request, res: Response, next: NextFunction) => {
@@ -277,12 +237,7 @@ const usersController = {
         res
       );
     } catch (err) {
-      const customError: CustomError = {
-        errorType: ERROR_TYPE_UPDATE_USER_ROLE,
-        error: err,
-      };
-
-      return next(customError);
+      return next(err);
     }
   },
   recoverPassword: async (
@@ -319,12 +274,7 @@ const usersController = {
         res
       );
     } catch (err) {
-      const customError: CustomError = {
-        errorType: ERROR_TYPE_UPDATE_USER,
-        error: err,
-      };
-
-      return next(customError);
+      return next(err);
     }
   },
 };

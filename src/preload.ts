@@ -8,6 +8,7 @@ import {
 import { Entities } from "./constants/entities";
 import { NODE_ENV_DEVELOPMENT } from "./constants/constants";
 import { GLOBAL_PERMISSIONS } from "./constants/globalPermissions";
+import { DEFAULT_SKILLS } from "./constants/defaultData";
 import logger from "./logger";
 
 export default async function preload() {
@@ -19,7 +20,10 @@ export default async function preload() {
     await wipeDB(dbConnection);
   }
 
-  await createPermissions(dbConnection);
+  await Promise.all([
+    createPermissions(dbConnection),
+    createDefaultSkills(dbConnection),
+  ]);
 
   if (development) {
     await createDevelopmentGlobalRoles(dbConnection);
@@ -148,6 +152,27 @@ async function createDevelopmentUsers(db: Pool) {
     .catch((err) => {
       logger.error(
         `The following error has occurred while trying to create the development users: `
+      );
+      logger.error(err);
+    });
+}
+
+async function createDefaultSkills(db: Pool) {
+  logger.info("Creating default skills ...");
+
+  let query = `INSERT INTO skills ("name", created_at, updated_at) VALUES `;
+  query += DEFAULT_SKILLS.map((skill) => {
+    return `('${skill.name}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`;
+  }).join(",");
+
+  return db
+    .query(query)
+    .then(() => {
+      logger.info("Default skills successfully created.");
+    })
+    .catch((err) => {
+      logger.error(
+        `The following error has occurred while trying to create the default skills: `
       );
       logger.error(err);
     });

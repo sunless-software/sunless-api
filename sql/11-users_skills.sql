@@ -1,7 +1,6 @@
 CREATE TABLE IF NOT EXISTS users_skills (
     user_id INT,
     skill_id INT,
-    name VARCHAR(50) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_id, skill_id),

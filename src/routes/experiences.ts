@@ -8,31 +8,16 @@ import deleteExperienceValidation from "../validations/deleteExperience";
 import connectToDB from "../db";
 import { GET_EXPERIENCE_USER_ID } from "../constants/queries";
 import updateExperienceValidation from "../validations/updateExperience";
+import ownershipMiddleware from "../middlewares/ownershipMiddleware";
 
 const experiencesRouter = Router();
 
 experiencesRouter.post(
   "/create",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const user = (req as AuthRequest).user;
-    const { userID } = req.body;
-
-    if (!userID || userID === user.id) {
-      req.body.userID = user.id;
-
-      return roleMiddleware([GLOBAL_PERMISSIONS.createOwnExperiences])(
-        req,
-        res,
-        next
-      );
-    }
-
-    return roleMiddleware([GLOBAL_PERMISSIONS.createExperiences])(
-      req,
-      res,
-      next
-    );
-  },
+  ownershipMiddleware(
+    GLOBAL_PERMISSIONS.createOwnExperiences,
+    GLOBAL_PERMISSIONS.createExperiences
+  ),
   createExperienceValidation,
   experiencesController.createExperience
 );

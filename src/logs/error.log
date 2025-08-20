@@ -200,3 +200,16 @@
 [2025-08-19T10:38:52Z] [error]: {}
 [2025-08-19T10:39:51Z] [error]: The following unhandled error has occurred: 
 [2025-08-19T10:39:51Z] [error]: {}
+[2025-08-20T06:14:08Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T06:14:08Z] [error]: {"errorType":"ERROR_TYPE_ADD_USER_SKILL","error":{}}
+[2025-08-20T06:14:33Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T06:14:33Z] [error]: {"errorType":"ERROR_TYPE_ADD_USER_SKILL","error":{}}
+[2025-08-20T06:17:36Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T06:17:36Z] [error]: {"errorType":"ERROR_TYPE_ADD_USER_SKILL","error":{}}
+[2025-08-20T06:38:52Z] [error]: An unhandled not unique contraint violation was thrown "23505"
+[2025-08-20T06:39:40Z] [error]: An unhandled not unique contraint violation was thrown "23505"
+[2025-08-20T06:40:44Z] [error]: An unhandled not unique contraint violation was thrown "23505"
+[2025-08-20T07:08:19Z] [error]: The following unexpected error has occurred: 
+[2025-08-20T07:08:19Z] [error]: {}
+[2025-08-20T07:23:04Z] [error]: An unhandled not unique contraint violation was thrown "users_skills_pkey"
+[2025-08-20T07:26:15Z] [error]: An unhandled not unique contraint violation was thrown "users_skills_pkey"

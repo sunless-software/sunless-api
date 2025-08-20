@@ -10,11 +10,6 @@ import {
   HTTP_STATUS_CODE_NOT_FOUND,
 } from "../constants/httpStatusCodes";
 import { CustomError } from "../interfaces";
-import {
-  ERROR_TYPE_CREATE_EXPERIENCE,
-  ERROR_TYPE_DELETE_EXPERIENCE,
-  ERROR_TYPE_UPDATE_EXPERIENCE,
-} from "../constants/customErrors";
 import { sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
@@ -65,12 +60,7 @@ const experiencesController = {
         res
       );
     } catch (err) {
-      const error: CustomError = {
-        errorType: ERROR_TYPE_CREATE_EXPERIENCE,
-        error: err,
-      };
-
-      return next(error);
+      return next(err);
     }
   },
   updateExperience: async (req: Request, res: Response, next: NextFunction) => {
@@ -112,12 +102,7 @@ const experiencesController = {
         res
       );
     } catch (err) {
-      const error: CustomError = {
-        errorType: ERROR_TYPE_UPDATE_EXPERIENCE,
-        error: err,
-      };
-
-      return next(error);
+      return next(err);
     }
   },
   deleteExperience: async (req: Request, res: Response, next: NextFunction) => {
@@ -140,12 +125,7 @@ const experiencesController = {
         res
       );
     } catch (err) {
-      const error: CustomError = {
-        errorType: ERROR_TYPE_DELETE_EXPERIENCE,
-        error: err,
-      };
-
-      return next(error);
+      return next(err);
     }
   },
 };

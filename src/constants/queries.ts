@@ -55,3 +55,6 @@ export const GET_EDUCATION_USER_ID =
 export const PATCH_EDUCATION = `UPDATE education SET start_date=COALESCE($1, start_date), end_date=COALESCE($2, end_date), institution=COALESCE($3, institution),
 field=COALESCE($4, field), "location"=COALESCE($5, location), description=COALESCE($6, description) WHERE id=$7
 returning id, start_date, end_date, institution, field, location, coalesce(description, '') as description, created_at, updated_at`;
+
+export const ADD_USER_SKILL = `INSERT INTO users_skills (user_id, skill_id, created_at, updated_at) SELECT u.id, s.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+FROM users u JOIN skills s ON s.id = $2 WHERE u.id = $1 AND u.deleted = false;`;

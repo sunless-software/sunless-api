@@ -20,6 +20,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger";
 import experiencesRouter from "./routes/experiences";
 import educationRouter from "./routes/education";
+import skillsRouter from "./routes/skills";
 
 async function start() {
   const app = express();
@@ -52,6 +53,7 @@ async function start() {
   apiRouter.use("/users", authMiddleware, usersRouter);
   apiRouter.use("/experiences", authMiddleware, experiencesRouter);
   apiRouter.use("/educations", authMiddleware, educationRouter);
+  apiRouter.use("/skills", authMiddleware, skillsRouter);
 
   apiRouter.use(errorHandlerMiddleware);
 

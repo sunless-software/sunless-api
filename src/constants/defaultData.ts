@@ -1,0 +1,17 @@
+export const DEFAULT_SKILLS = [
+  { name: "Problem solving" },
+  { name: "Logical thinking" },
+  { name: "Attention to detail" },
+  { name: "Communication" },
+  { name: "Teamwork" },
+  { name: "Adaptability" },
+  { name: "Time management" },
+  { name: "Critical thinking" },
+  { name: "Debugging" },
+  { name: "Code readability" },
+  { name: "Algorithmic thinking" },
+  { name: "Version control discipline" },
+  { name: "Writing technical documentation" },
+  { name: "Testing mindset" },
+  { name: "Continuous learning" },
+];

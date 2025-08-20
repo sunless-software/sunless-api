@@ -7,14 +7,8 @@ export const UNEXPECTED_ERROR_DEFAULT_MESSAGE =
 export const INSUFICIENT_PERMISSIONS_MESSAGE = "You shall not pass!";
 export const INVALID_USER_STATUS_MESSAGE = "You are no longer welcome here.";
 export const USER_SUCCESSFUL_CREATION_MESSAGE = "User successfully created.";
-export const USERNAME_ALREADY_IN_USE_MESSAGE = "username already in use.";
-export const EMAIL_ALREADY_IN_USE_MESSAGE = "email already in use.";
 export const DUPLICATED_PRIMARY_KEY_MESSAGE =
   "A user with the same primary key already exists.";
-export const ROLE_FOREIGN_KEY_VIOLATION_MESSAGE =
-  "The provided 'roleID' does not correspond to a valid role.";
-export const USER_FOREIGN_KEY_VIOLATION_MESSAGE =
-  "The provided 'userID' does not correspond to a valid user.";
 export const USERS_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "Users successfully retrieved.";
 export const USER_SUCCESSFULLY_DELETED_MESSAGE =
@@ -41,9 +35,32 @@ export const EXPERIENCE_SUCCESSFULY_UPDATED =
   "Experience updated successfully.";
 export const EDUCATION_SUCCESSFULLY_CREATED = "Study successfully created.";
 export const EDUCATION_SUCCESSFULLY_DELETED = "Study successfully deleted.";
-export const EDUCATION_NOT_FOUND_MESSAGE =
-  "The education with the given id does not exists.";
 export const EDUCATION_SUCCESSFULY_UPDATED = "Education updated successfully.";
+export const USER_SKILL_SUCCESSFULLY_ADDED =
+  "The skill was successfully added to the user.";
+export const ENTITY_NOT_FOUND_MESSAGE =
+  "The entity with the given id does not exists.";
+export const FOREIGN_KEY_VIOLATION_MESSAGE =
+  "The provided id does not correspond to a valid entity.";
+
+export const USERS_SKILLS_PK_VIOLATION_MESSAGE =
+  "The user already has the skill you are trying to add.";
+export const USERS_USERNAME_VIOLATION_MESSAGE = "'username' already in use.";
+export const USERS_EMAIL_VIOLATION_MESSAGE = "'email' already in use.";
+export const TAGS_NAME_VIOLATION_MESSAGE = "tag 'name' already in use.";
+export const PROJECTS_NAME_VIOLATION_MESSAGE = "project 'name' already in use.";
+export const PROJECTS_KEY_VIOLATION_MESSAGE = "project 'key' already in use.";
+export const GLOBAL_ROLES_ROLENAME_VIOLATION_MESSAGE =
+  "'role_name' already in use.";
+export const SKILLS_NAME_VIOLATION_MESSAGE = "skill 'name' already in use.";
+export const PERMISSIONS_NAME_VIOLATION_MESSAGE =
+  "permission 'name' already in use.";
+export const PROJECT_ROLES_ROLENAME_VIOLATION_MESSAGE =
+  "project 'role_name' already in use";
+export const TECHNOLOGIES_NAME_VIOLATION_MESSAGE =
+  "technology 'name' already in use.";
+export const EXTERNAL_RESOURCES_URL_VIOLATION_MESSAGE =
+  "external resource 'url' already in use.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

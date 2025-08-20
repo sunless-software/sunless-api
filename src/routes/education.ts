@@ -11,31 +11,16 @@ import {
 } from "../constants/queries";
 import deleteEducationValidation from "../validations/deleteEducation";
 import updateEducationValidation from "../validations/updateEducation";
+import ownershipMiddleware from "../middlewares/ownershipMiddleware";
 
 const educationRouter = Router();
 
 educationRouter.post(
   "/",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const user = (req as AuthRequest).user;
-    const { userID } = req.body;
-
-    if (!userID || userID === user.id) {
-      req.body.userID = user.id;
-
-      return roleMiddleware([GLOBAL_PERMISSIONS.createOwnEducations])(
-        req,
-        res,
-        next
-      );
-    }
-
-    return roleMiddleware([GLOBAL_PERMISSIONS.createEducations])(
-      req,
-      res,
-      next
-    );
-  },
+  ownershipMiddleware(
+    GLOBAL_PERMISSIONS.createOwnEducations,
+    GLOBAL_PERMISSIONS.createEducations
+  ),
   createEducationValidation,
   educationController.createEducation
 );

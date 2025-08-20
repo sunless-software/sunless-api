@@ -1,74 +1,71 @@
 import { Request, Response, NextFunction } from "express";
 import { CustomError } from "../interfaces";
+import { isPgError, sendResponse } from "../utils";
 import {
-  ERROR_TYPE_BAN_USER,
-  ERROR_TYPE_CREATE_EDUCATION,
-  ERROR_TYPE_CREATE_EXPERIENCE,
-  ERROR_TYPE_CREATE_USER,
-  ERROR_TYPE_DELETE_EDUCATION,
-  ERROR_TYPE_DELETE_EXPERIENCE,
-  ERROR_TYPE_DELETE_USER,
-  ERROR_TYPE_RECOVER_USER,
-  ERROR_TYPE_UNBAN_USER,
-  ERROR_TYPE_UPDATE_EDUCATION,
-  ERROR_TYPE_UPDATE_EXPERIENCE,
-  ERROR_TYPE_UPDATE_USER,
-  ERROR_TYPE_UPDATE_USER_ROLE,
-} from "../constants/customErrors";
-import { sendResponse } from "../utils";
-import { DEFAULT_ERROR_API_RESPONSE } from "../constants/messages";
+  DEFAULT_ERROR_API_RESPONSE,
+  ENTITY_NOT_FOUND_MESSAGE,
+  FOREIGN_KEY_VIOLATION_MESSAGE,
+} from "../constants/messages";
 import logger from "../logger";
-import createUserErrorHandler from "../errorHandlers/createUsersErrorHandler";
-import deleteUserErrorHandler from "../errorHandlers/deleteUserErrorHandler";
-import banUserErrorHandler from "../errorHandlers/banUserErrorHandler";
-import unbanUserErrorHandler from "../errorHandlers/unbanUserErrorHandler";
-import recoverUserErrorHandler from "../errorHandlers/recoverUserErrorHandler";
-import updateUserRoleHandler from "../errorHandlers/updateUserRoleHandler";
-import updateUserErrorHandler from "../errorHandlers/updateUserErrorHandler";
-import createExperienceErrorHandler from "../errorHandlers/createExperienceErrorHandler";
-import deleteExperienceErrorHandler from "../errorHandlers/deleteExperienceErrorHandler";
-import updateExperienceErrorHandler from "../errorHandlers/updateExperienceErrorHandler";
-import createEducationErrorHandler from "../errorHandlers/createEducationErrorHandler";
-import deleteEducationErrorHandler from "../errorHandlers/deleteEducationErrorHandler";
-import updateEducationErrorHandler from "../errorHandlers/updateEducationErrorHandler";
+import {
+  HTTP_STATUS_CODE_CONFLICT,
+  HTTP_STATUS_CODE_NOT_FOUND,
+} from "../constants/httpStatusCodes";
+import {
+  PG_FOREIGN_KEY_VIOLATION_CODE,
+  PG_UNIQUE_VIOLATION_CODE,
+} from "../constants/pgErrorCodes";
+import { handleDuplicatedKeyViolation } from "../errorHandlers/duplicatedKeysHandler";
 
 export default async function errorHandlerMiddleware(
-  err: CustomError,
+  error: unknown,
   req: Request,
   res: Response,
   _next: NextFunction
 ) {
-  switch (err.errorType) {
-    case ERROR_TYPE_CREATE_USER:
-      return createUserErrorHandler(err, req, res);
-    case ERROR_TYPE_DELETE_USER:
-      return deleteUserErrorHandler(err, req, res);
-    case ERROR_TYPE_BAN_USER:
-      return banUserErrorHandler(err, req, res);
-    case ERROR_TYPE_UNBAN_USER:
-      return unbanUserErrorHandler(err, req, res);
-    case ERROR_TYPE_RECOVER_USER:
-      return recoverUserErrorHandler(err, req, res);
-    case ERROR_TYPE_UPDATE_USER_ROLE:
-      return updateUserRoleHandler(err, req, res);
-    case ERROR_TYPE_UPDATE_USER:
-      return updateUserErrorHandler(err, req, res);
-    case ERROR_TYPE_CREATE_EXPERIENCE:
-      return createExperienceErrorHandler(err, req, res);
-    case ERROR_TYPE_DELETE_EXPERIENCE:
-      return deleteExperienceErrorHandler(err, req, res);
-    case ERROR_TYPE_UPDATE_EXPERIENCE:
-      return updateExperienceErrorHandler(err, req, res);
-    case ERROR_TYPE_CREATE_EDUCATION:
-      return createEducationErrorHandler(err, req, res);
-    case ERROR_TYPE_DELETE_EDUCATION:
-      return deleteEducationErrorHandler(err, req, res);
-    case ERROR_TYPE_UPDATE_EDUCATION:
-      return updateEducationErrorHandler(err, req, res);
+  if (isPgError(error)) {
+    // Postgres error handling
+    switch (error.code) {
+      case PG_FOREIGN_KEY_VIOLATION_CODE:
+        return sendResponse(
+          {
+            ...DEFAULT_ERROR_API_RESPONSE,
+            status: HTTP_STATUS_CODE_CONFLICT,
+            message: FOREIGN_KEY_VIOLATION_MESSAGE,
+          },
+          res
+        );
+      case PG_UNIQUE_VIOLATION_CODE:
+        return sendResponse(
+          handleDuplicatedKeyViolation((error as any).constraint),
+          res
+        );
+      default:
+        logger.error(`The following unexpected postgres error has occurred: `);
+        logger.error(JSON.stringify(error));
+    }
+  } else if (error && typeof error === "object" && "message" in error) {
+    // Handled errors
+    switch (error.message) {
+      case HTTP_STATUS_CODE_NOT_FOUND.toString():
+        sendResponse(
+          {
+            ...DEFAULT_ERROR_API_RESPONSE,
+            status: HTTP_STATUS_CODE_NOT_FOUND,
+            message: ENTITY_NOT_FOUND_MESSAGE,
+          },
+          res
+        );
+        return;
+      default:
+        logger.error(`The following unhandled error has occurred: `);
+        logger.error(JSON.stringify(error));
+    }
+  } else {
+    // Unexpected errors
+    logger.error(`The following unexpected error has occurred: `);
+    logger.error(JSON.stringify(error));
   }
-
-  logger.error("The following unhandled error has occurred: ");
-  logger.error(JSON.stringify(err));
 
   return sendResponse(DEFAULT_ERROR_API_RESPONSE, res);
 }

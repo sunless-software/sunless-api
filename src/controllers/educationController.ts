@@ -11,11 +11,6 @@ import {
 } from "../constants/httpStatusCodes";
 import { CustomError } from "../interfaces";
 import {
-  ERROR_TYPE_CREATE_EDUCATION,
-  ERROR_TYPE_DELETE_EDUCATION,
-  ERROR_TYPE_UPDATE_EDUCATION,
-} from "../constants/customErrors";
-import {
   DEFAULT_SUCCES_API_RESPONSE,
   EDUCATION_SUCCESSFULLY_CREATED,
   EDUCATION_SUCCESSFULLY_DELETED,
@@ -62,12 +57,7 @@ const educationController = {
         res
       );
     } catch (err) {
-      const error: CustomError = {
-        errorType: ERROR_TYPE_CREATE_EDUCATION,
-        error: err,
-      };
-
-      return next(error);
+      return next(err);
     }
   },
   updateEducation: async (req: Request, res: Response, next: NextFunction) => {
@@ -101,12 +91,7 @@ const educationController = {
         res
       );
     } catch (err) {
-      const error: CustomError = {
-        errorType: ERROR_TYPE_UPDATE_EDUCATION,
-        error: err,
-      };
-
-      return next(error);
+      return next(err);
     }
   },
   deleteEducation: async (req: Request, res: Response, next: NextFunction) => {
@@ -129,12 +114,7 @@ const educationController = {
         res
       );
     } catch (err) {
-      const error: CustomError = {
-        errorType: ERROR_TYPE_DELETE_EDUCATION,
-        error: err,
-      };
-
-      return next(error);
+      return next(err);
     }
   },
 };
