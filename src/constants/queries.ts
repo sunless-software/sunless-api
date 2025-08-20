@@ -60,3 +60,7 @@ export const ADD_USER_SKILL = `INSERT INTO users_skills (user_id, skill_id, crea
 FROM users u JOIN skills s ON s.id = $2 WHERE u.id = $1 AND u.deleted = false;`;
 
 export const REMOVE_USER_SKILL = `DELETE FROM users_skills WHERE user_id=$1 AND skill_id=$2;`;
+
+export const GET_SKILLS = `SELECT * FROM skills ORDER BY created_at DESC OFFSET $1 LIMIT $2;`;
+
+export const COUNT_SKILLS = `SELECT COUNT(*) AS total FROM skills`;

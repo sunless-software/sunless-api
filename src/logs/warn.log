@@ -381,3 +381,6 @@
 [2025-08-20T16:51:16Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-20T16:51:18Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-20T16:54:15Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T17:31:06Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-20T18:02:25Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-20T18:02:25Z] [error]: {"length":94,"name":"error","severity":"ERROR","code":"42P02","position":"57","file":"parse_expr.c","line":"864","routine":"transformParamRef"}

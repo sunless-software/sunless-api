@@ -4,8 +4,12 @@ import addUserSkillValidation from "../validations/addUserSkill";
 import ownershipMiddleware from "../middlewares/ownershipMiddleware";
 import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import removeUserSkillValidation from "../validations/removeUserSkill";
+import roleMiddleware from "../middlewares/roleMiddleware";
+import getSkillsValidation from "../validations/getSkills";
 
 const skillsRouter = Router();
+
+skillsRouter.get("/", getSkillsValidation, skillsController.getSkills);
 
 skillsRouter.post(
   "/add",
@@ -18,9 +22,6 @@ skillsRouter.post(
   skillsController.addSkill
 );
 
-// Verificar si el id del usuario es el mismo que se recibe por query userID
-// Si es el mismo o userID es null verificar ownPermissions, inyectar en query
-// Si no es el mismo verificar otherPermissions
 skillsRouter.delete(
   "/remove/:id",
   ownershipMiddleware(

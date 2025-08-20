@@ -65,7 +65,7 @@ const usersController = {
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
           message: USERS_SUCCESSFULLY_RETRIEVED_MESSAGE,
-          data: [users],
+          data: users,
           pagination: {
             offset:
               typeof offset === "string"

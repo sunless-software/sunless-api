@@ -62,6 +62,8 @@ export const TECHNOLOGIES_NAME_VIOLATION_MESSAGE =
   "technology 'name' already in use.";
 export const EXTERNAL_RESOURCES_URL_VIOLATION_MESSAGE =
   "external resource 'url' already in use.";
+export const SKILLS_SUCCESSFULLY_RETRIEVED_MESSAGE =
+  "Skills successfully retrieved.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
