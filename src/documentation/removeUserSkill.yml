@@ -1,0 +1,99 @@
+paths:
+  /api/v1/skills/remove:
+    delete:
+      summary: Remove a skill from a user
+      description: |
+        Removes the association between an existing skill and a user.  
+        The skill itself is not deleted.  
+        If `id` query parameter (userID) is not provided, defaults to the authenticated user.  
+        Requires `REMOVE_OWN_SKILLS` permission if removing from your own skills, otherwise requires `REMOVE_SKILLS`.
+      tags:
+        - Skills
+      parameters:
+        - in: query
+          name: id
+          required: false
+          schema:
+            type: integer
+            example: 3
+          description: Optional. The ID of the user from whom to remove the skill. Defaults to the authenticated user if not provided.
+        - in: path
+          name: skillID
+          required: true
+          schema:
+            type: integer
+            example: 1
+          description: The ID of the skill to remove
+      responses:
+        "200":
+          description: Skill successfully removed from user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The skill has been successfully removed from the user.
+                  data:
+                    type: object
+                    properties:
+                      userID:
+                        type: integer
+                        example: 3
+                      skillID:
+                        type: integer
+                        example: 1
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Entity with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

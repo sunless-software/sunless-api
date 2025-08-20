@@ -1,0 +1,146 @@
+paths:
+  /api/v1/educations/{id}:
+    patch:
+      summary: Update an education record
+      description: |
+        Updates an education record by ID.  
+        All fields in the request body are optional, but will be validated if provided.  
+        Requires `UPDATE_OWN_EDUCATIONS` permission if updating your own record, otherwise requires `UPDATE_EDUCATIONS`.
+      tags:
+        - Educations
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 7
+          description: The ID of the education record to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userID:
+                  type: integer
+                  example: 3
+                  description: Optional. Must be a number. If not provided, defaults to the authenticated user.
+                startDate:
+                  type: string
+                  format: date
+                  example: 2024-03-25
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+                endDate:
+                  type: string
+                  format: date
+                  example: 2024-03-25
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+                institution:
+                  type: string
+                  example: remote dev academy
+                  description: Optional. Must be a non-empty string if provided.
+                field:
+                  type: string
+                  example: dev
+                  description: Optional. Must be a non-empty string if provided.
+                location:
+                  type: string
+                  example: remote
+                  description: Optional. Must be a non-empty string if provided.
+                description:
+                  type: string
+                  example: i studied things here
+                  description: Optional. Must be a non-empty string if provided.
+      responses:
+        "200":
+          description: Education record successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Education updated successfully.
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 7
+                      userID:
+                        type: integer
+                        example: 3
+                      startDate:
+                        type: string
+                        example: 2024-03-25
+                      endDate:
+                        type: string
+                        example: 2024-03-25
+                      institution:
+                        type: string
+                        example: remote dev academy
+                      field:
+                        type: string
+                        example: dev
+                      location:
+                        type: string
+                        example: remote
+                      description:
+                        type: string
+                        example: i studied things here
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Entity with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

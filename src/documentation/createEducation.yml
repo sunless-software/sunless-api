@@ -1,0 +1,139 @@
+paths:
+  /api/v1/educations:
+    post:
+      summary: Create a new education record
+      description: |
+        Creates a new education record for a user.  
+        If `userID` is not provided, the record is created for the authenticated user.  
+        Requires `CREATE_OWN_EDUCATIONS` permission if creating your own record, otherwise requires `CREATE_EDUCATIONS`.  
+        All fields are validated according to their type and requirements.
+      tags:
+        - Educations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userID:
+                  type: integer
+                  example: 3
+                  description: Optional. Must be a number. If not provided, defaults to the authenticated user.
+                startDate:
+                  type: string
+                  format: date
+                  example: 2024-03-25
+                  description: Required. Must be a valid ISO 8601 date string.
+                endDate:
+                  type: string
+                  format: date
+                  example: 2024-03-25
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+                institution:
+                  type: string
+                  example: remote dev academy
+                  description: Required. Must be a non-empty string.
+                field:
+                  type: string
+                  example: dev
+                  description: Required. Must be a non-empty string.
+                location:
+                  type: string
+                  example: remote
+                  description: Required. Must be a non-empty string.
+                description:
+                  type: string
+                  example: i studied things here
+                  description: Optional. Must be a non-empty string if provided.
+      responses:
+        "201":
+          description: Education record successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: Study successfully created.
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 7
+                      userID:
+                        type: integer
+                        example: 3
+                      startDate:
+                        type: string
+                        example: 2024-03-25
+                      endDate:
+                        type: string
+                        example: 2024-03-25
+                      institution:
+                        type: string
+                        example: remote dev academy
+                      field:
+                        type: string
+                        example: dev
+                      location:
+                        type: string
+                        example: remote
+                      description:
+                        type: string
+                        example: i studied things here
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Entity with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

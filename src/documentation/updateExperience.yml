@@ -1,0 +1,154 @@
+paths:
+  /api/v1/experiences/{id}:
+    patch:
+      summary: Update an experience
+      description: |
+        Updates an experience by ID.  
+        All fields in the request body are optional, but will be validated if provided.  
+        Requires `UPDATE_OWN_EXPERIENCES` permission if updating your own experience, otherwise requires `UPDATE_EXPERIENCES`.
+      tags:
+        - Experiences
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 10
+          description: The ID of the experience to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userID:
+                  type: integer
+                  example: 3
+                  description: Optional. Must be a number. If not provided, defaults to the authenticated user.
+                companyName:
+                  type: string
+                  example: Evil Corp
+                  description: Optional. Must be a non-empty string if provided.
+                role:
+                  type: string
+                  example: Developer
+                  description: Optional. Must be a non-empty string if provided.
+                description:
+                  type: string
+                  example: I develop evil software for Evil Corp
+                  description: Optional. Must be a non-empty string if provided.
+                location:
+                  type: string
+                  example: Remote
+                  description: Optional. Must be a non-empty string if provided.
+                startDate:
+                  type: string
+                  format: date
+                  example: 2023-09-26
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+                endDate:
+                  type: string
+                  format: date
+                  example: 2023-09-26
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+                companyLogo:
+                  type: string
+                  format: uri
+                  example: "https://www.image.png"
+                  description: Optional. Must be a valid URL if provided.
+      responses:
+        "200":
+          description: Experience successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The experience has been successfully updated.
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 10
+                      userID:
+                        type: integer
+                        example: 3
+                      companyName:
+                        type: string
+                        example: Evil Corp
+                      role:
+                        type: string
+                        example: Developer
+                      description:
+                        type: string
+                        example: I develop evil software for Evil Corp
+                      location:
+                        type: string
+                        example: Remote
+                      startDate:
+                        type: string
+                        example: 2023-09-26
+                      endDate:
+                        type: string
+                        example: 2023-09-26
+                      companyLogo:
+                        type: string
+                        example: "https://www.image.png"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Experience with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

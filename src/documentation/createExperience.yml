@@ -1,0 +1,115 @@
+paths:
+  /api/v1/experiences:
+    post:
+      summary: Create a new experience
+      description: |
+        Creates a new experience for a user.  
+        If `userID` is not provided, the experience is created for the authenticated user.  
+        Requires `CREATE_OWN_EXPERIENCES` permission if creating your own experience, otherwise requires `CREATE_EXPERIENCES`.  
+        All fields are validated according to their type and requirements.
+      tags:
+        - Experiences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userID:
+                  type: integer
+                  example: 3
+                  description: Optional. Must be a number. If not provided, defaults to the authenticated user.
+                companyName:
+                  type: string
+                  example: Evil Corp
+                  description: Required. Must be a non-empty string.
+                role:
+                  type: string
+                  example: Developer
+                  description: Required. Must be a non-empty string.
+                description:
+                  type: string
+                  example: I develop evil software for Evil Corp
+                  description: Required. Must be a non-empty string.
+                location:
+                  type: string
+                  example: Remote
+                  description: Required. Must be a non-empty string.
+                startDate:
+                  type: string
+                  format: date
+                  example: 2023-09-26
+                  description: Required. Must be a valid ISO 8601 date string.
+                endDate:
+                  type: string
+                  format: date
+                  example: 2023-09-26
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+                companyLogo:
+                  type: string
+                  format: uri
+                  example: "https://www.image.png"
+                  description: Optional. Must be a valid URL if provided.
+      responses:
+        "201":
+          description: Experience successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: The experience has been successfully created.
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 10
+                      userID:
+                        type: integer
+                        example: 3
+                      companyName:
+                        type: string
+                        example: Evil Corp
+                      role:
+                        type: string
+                        example: Developer
+                      description:
+                        type: string
+                        example: I develop evil software for Evil Corp
+                      location:
+                        type: string
+                        example: Remote
+                      startDate:
+                        type: string
+                        example: 2023-09-26
+                      endDate:
+                        type: string
+                        example: 2023-09-26
+                      companyLogo:
+                        type: string
+                        example: "https://www.image.png"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"

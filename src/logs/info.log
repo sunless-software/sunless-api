@@ -7574,3 +7574,26 @@
 [2025-08-20T09:47:41Z] [info]: Non production environment detected!
 [2025-08-20T09:47:41Z] [info]: Wiping DB ...
 [2025-08-20T09:47:41Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-20T16:50:35Z] [info]: The connection to the DB has been successfully established.
+[2025-08-20T16:50:35Z] [info]: Development environment detect. Documentation available at 'http://locahost:3002/documentation'
+[2025-08-20T16:50:35Z] [info]: Non production environment detected!
+[2025-08-20T16:50:35Z] [info]: Wiping DB ...
+[2025-08-20T16:50:35Z] [info]: ✅ Server is running on http://localhost:3002
+[2025-08-20T16:50:36Z] [info]: All data from DB was successfully wiped.
+[2025-08-20T16:50:36Z] [info]: Creating default permissions ...
+[2025-08-20T16:50:36Z] [info]: Creating default skills ...
+[2025-08-20T16:50:36Z] [info]: Default permissions successfully created.
+[2025-08-20T16:50:36Z] [info]: Default skills successfully created.
+[2025-08-20T16:50:36Z] [info]: Creating development roles ...
+[2025-08-20T16:50:36Z] [info]: Development roles successfully created.
+[2025-08-20T16:50:36Z] [info]: Associating development roles and permissions ...
+[2025-08-20T16:50:36Z] [info]: Permissions associations with development roles where successfully created.
+[2025-08-20T16:50:36Z] [info]: Creating development users ...
+[2025-08-20T16:50:36Z] [info]: Development users successfully created.
+[2025-08-20T16:50:46Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T16:51:13Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T16:51:16Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T16:51:18Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T16:54:15Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T16:54:37Z] [info]: New connection from user "sunless_user"
+[2025-08-20T16:54:41Z] [info]: New connection from user "sunless_admin"

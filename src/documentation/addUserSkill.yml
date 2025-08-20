@@ -1,0 +1,131 @@
+paths:
+  /api/v1/skills/add:
+    post:
+      summary: Add a skill to a user
+      description: |
+        Adds an existing skill to a user.  
+        If `userID` is not provided, the skill is added to the authenticated user.  
+        Requires `ADD_OWN_SKILLS` permission if adding to your own skills, otherwise requires `ADD_SKILLS`.  
+        This endpoint does not create new skills, only associates an existing skill with a user.
+      tags:
+        - Skills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userID:
+                  type: integer
+                  example: 3
+                  description: Optional. Must be a number. If not provided, defaults to the authenticated user.
+                skillID:
+                  type: integer
+                  example: 1
+                  description: Required. Must be a number. The ID of the existing skill to associate.
+      responses:
+        "201":
+          description: Skill successfully added to user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: The skill was successfully added to the user.
+                  data:
+                    type: object
+                    properties:
+                      userID:
+                        type: integer
+                        example: 3
+                      skillID:
+                        type: integer
+                        example: 1
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Entity with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "409":
+          description: Skill already associated with user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: The user already has the skill you are trying to add.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

@@ -13,7 +13,7 @@ import ownershipMiddleware from "../middlewares/ownershipMiddleware";
 const experiencesRouter = Router();
 
 experiencesRouter.post(
-  "/create",
+  "/",
   ownershipMiddleware(
     "body",
     GLOBAL_PERMISSIONS.createOwnExperiences,
