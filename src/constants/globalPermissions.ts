@@ -116,4 +116,14 @@ export const GLOBAL_PERMISSIONS = {
     name: "ADD_SKILLS",
     scope: "GLOBAL",
   },
+  removeOwnSkills: {
+    id: 36,
+    name: "REMOVE_OWN_SKILLS",
+    scope: "GLOBAL",
+  },
+  removeSkills: {
+    id: 37,
+    name: "REMOVE_SKILLS",
+    scope: "GLOBAL",
+  },
 } satisfies Record<string, Permission>;

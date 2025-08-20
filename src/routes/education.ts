@@ -18,6 +18,7 @@ const educationRouter = Router();
 educationRouter.post(
   "/",
   ownershipMiddleware(
+    "body",
     GLOBAL_PERMISSIONS.createOwnEducations,
     GLOBAL_PERMISSIONS.createEducations
   ),

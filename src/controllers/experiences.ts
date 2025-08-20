@@ -9,7 +9,7 @@ import {
   HTTP_STATUS_CODE_CREATED,
   HTTP_STATUS_CODE_NOT_FOUND,
 } from "../constants/httpStatusCodes";
-import { CustomError } from "../interfaces";
+import { AuthRequest, CustomError } from "../interfaces";
 import { sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
@@ -20,6 +20,7 @@ import {
 
 const experiencesController = {
   createExperience: async (req: Request, res: Response, next: NextFunction) => {
+    const authID = (req as AuthRequest).user.id;
     const {
       companyName,
       role,
@@ -28,8 +29,8 @@ const experiencesController = {
       startDate,
       endDate = null,
       companyLogo = null,
-      userID,
     } = req.body;
+    const userID = req.body.userID || authID;
     const db = await connectToDB();
 
     try {

@@ -346,3 +346,33 @@
 [2025-08-20T08:41:03Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-20T08:41:06Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-20T08:48:35Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:28:54Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:29:07Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T09:29:07Z] [error]: {}
+[2025-08-20T09:29:37Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T09:29:37Z] [error]: {}
+[2025-08-20T09:29:43Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T09:29:43Z] [error]: {}
+[2025-08-20T09:29:54Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T09:29:54Z] [error]: {}
+[2025-08-20T09:30:08Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T09:30:08Z] [error]: {}
+[2025-08-20T09:30:16Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T09:30:16Z] [error]: {}
+[2025-08-20T09:30:26Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T09:30:26Z] [error]: {}
+[2025-08-20T09:31:06Z] [error]: The following unhandled error has occurred: 
+[2025-08-20T09:31:06Z] [error]: {}
+[2025-08-20T09:31:34Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:33:54Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:34:01Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:34:05Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:34:06Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:34:11Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:34:14Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:34:32Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:34:45Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:35:10Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:36:29Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:43:25Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-20T09:47:25Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

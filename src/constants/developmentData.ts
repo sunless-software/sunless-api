@@ -40,6 +40,8 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.updateEducations,
       GLOBAL_PERMISSIONS.addOwnSkills,
       GLOBAL_PERMISSIONS.addSkills,
+      GLOBAL_PERMISSIONS.removeOwnSkills,
+      GLOBAL_PERMISSIONS.removeSkills,
     ],
   },
   {
@@ -61,6 +63,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.deleteOwnEducation,
       GLOBAL_PERMISSIONS.updateOwnEducations,
       GLOBAL_PERMISSIONS.addOwnSkills,
+      GLOBAL_PERMISSIONS.removeOwnSkills,
     ],
   },
 ];

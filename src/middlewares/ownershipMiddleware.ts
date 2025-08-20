@@ -13,15 +13,21 @@ import roleMiddleware from "./roleMiddleware";
  * @returns - A middleware
  */
 export default function ownershipMiddleware(
+  ownerIdLocation: "body" | "params" | "query",
   ownPermission: Permission,
   otherPermission: Permission
 ) {
   return async (req: Request, res: Response, next: NextFunction) => {
-    const resourceOwnerID = req.body.userID;
+    const resourceOwnerID = Number(
+      ownerIdLocation === "body"
+        ? req.body.userID
+        : ownerIdLocation === "params"
+        ? req.params.id
+        : req.query.id
+    );
     const userID = (req as AuthRequest).user.id;
 
     if (!resourceOwnerID || resourceOwnerID === userID) {
-      req.body.userID = userID;
       return roleMiddleware([ownPermission])(req, res, next);
     }
 

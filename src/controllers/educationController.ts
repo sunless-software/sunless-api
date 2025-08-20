@@ -9,7 +9,7 @@ import {
   HTTP_STATUS_CODE_CREATED,
   HTTP_STATUS_CODE_NOT_FOUND,
 } from "../constants/httpStatusCodes";
-import { CustomError } from "../interfaces";
+import { AuthRequest, CustomError } from "../interfaces";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
   EDUCATION_SUCCESSFULLY_CREATED,
@@ -20,15 +20,10 @@ import { sendResponse } from "../utils";
 
 const educationController = {
   createEducation: async (req: Request, res: Response, next: NextFunction) => {
-    const {
-      startDate,
-      endDate,
-      institution,
-      field,
-      location,
-      description,
-      userID,
-    } = req.body;
+    const authID = (req as AuthRequest).user.id;
+    const { startDate, endDate, institution, field, location, description } =
+      req.body;
+    const userID = req.body.userID || authID;
     const db = await connectToDB();
 
     try {

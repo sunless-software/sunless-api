@@ -15,6 +15,7 @@ const experiencesRouter = Router();
 experiencesRouter.post(
   "/create",
   ownershipMiddleware(
+    "body",
     GLOBAL_PERMISSIONS.createOwnExperiences,
     GLOBAL_PERMISSIONS.createExperiences
   ),

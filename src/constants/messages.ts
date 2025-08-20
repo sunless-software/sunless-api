@@ -42,7 +42,8 @@ export const ENTITY_NOT_FOUND_MESSAGE =
   "The entity with the given id does not exists.";
 export const FOREIGN_KEY_VIOLATION_MESSAGE =
   "The provided id does not correspond to a valid entity.";
-
+export const USER_SKILL_SUCCESSFULLY_REMOVED =
+  "The skill has been successfully removed from the user.";
 export const USERS_SKILLS_PK_VIOLATION_MESSAGE =
   "The user already has the skill you are trying to add.";
 export const USERS_USERNAME_VIOLATION_MESSAGE = "'username' already in use.";

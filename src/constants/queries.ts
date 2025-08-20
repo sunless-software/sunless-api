@@ -58,3 +58,5 @@ returning id, start_date, end_date, institution, field, location, coalesce(descr
 
 export const ADD_USER_SKILL = `INSERT INTO users_skills (user_id, skill_id, created_at, updated_at) SELECT u.id, s.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 FROM users u JOIN skills s ON s.id = $2 WHERE u.id = $1 AND u.deleted = false;`;
+
+export const REMOVE_USER_SKILL = `DELETE FROM users_skills WHERE user_id=$1 AND skill_id=$2;`;
