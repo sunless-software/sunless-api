@@ -46,6 +46,8 @@ export const USER_SKILL_SUCCESSFULLY_REMOVED =
   "The skill has been successfully removed from the user.";
 export const USERS_SKILLS_PK_VIOLATION_MESSAGE =
   "The user already has the skill you are trying to add.";
+export const USERS_TECHNOLOGIES_PK_VIOLATION_MESSAGE =
+  "The user already has the technology you are trying to add.";
 export const USERS_USERNAME_VIOLATION_MESSAGE = "'username' already in use.";
 export const USERS_EMAIL_VIOLATION_MESSAGE = "'email' already in use.";
 export const TAGS_NAME_VIOLATION_MESSAGE = "tag 'name' already in use.";
@@ -64,6 +66,8 @@ export const EXTERNAL_RESOURCES_URL_VIOLATION_MESSAGE =
   "external resource 'url' already in use.";
 export const SKILLS_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "Skills successfully retrieved.";
+export const USER_TECHNOLOGY_SUCCESSFULLY_ADDED =
+  "The technology was successfully added to the user.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

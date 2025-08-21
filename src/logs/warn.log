@@ -384,3 +384,16 @@
 [2025-08-20T17:31:06Z] [warn]: A request was rejected because no authorization headers where provided.
 [2025-08-20T18:02:25Z] [error]: The following unexpected postgres error has occurred: 
 [2025-08-20T18:02:25Z] [error]: {"length":94,"name":"error","severity":"ERROR","code":"42P02","position":"57","file":"parse_expr.c","line":"864","routine":"transformParamRef"}
+[2025-08-21T16:19:47Z] [error]: The following error has occurred while trying to associate the permissions with the development roles: 
+[2025-08-21T16:19:47Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-21T16:21:43Z] [error]: The following unhandled error has occurred: 
+[2025-08-21T16:21:43Z] [error]: {}
+[2025-08-21T16:22:30Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-21T17:38:45Z] [error]: The following error has occurred while trying to create the default technologies: 
+[2025-08-21T17:38:45Z] [error]: duplicate key value violates unique constraint "technologies_name_key"
+[2025-08-21T17:39:21Z] [error]: The following error has occurred while trying to create the default technologies: 
+[2025-08-21T17:39:21Z] [error]: duplicate key value violates unique constraint "technologies_name_key"
+[2025-08-21T17:39:53Z] [error]: The following error has occurred while trying to create the default technologies: 
+[2025-08-21T17:39:53Z] [error]: duplicate key value violates unique constraint "technologies_name_key"
+[2025-08-21T17:42:08Z] [error]: The following unhandled error has occurred: 
+[2025-08-21T17:42:08Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"technologyID\": 2,\n}","type":"entity.parse.failed"}

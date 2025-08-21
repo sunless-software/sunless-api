@@ -12,6 +12,7 @@ import {
   TECHNOLOGIES_NAME_VIOLATION_MESSAGE,
   USERS_EMAIL_VIOLATION_MESSAGE,
   USERS_SKILLS_PK_VIOLATION_MESSAGE,
+  USERS_TECHNOLOGIES_PK_VIOLATION_MESSAGE,
   USERS_USERNAME_VIOLATION_MESSAGE,
 } from "../constants/messages";
 import logger from "../logger";
@@ -23,6 +24,7 @@ export function handleDuplicatedKeyViolation(violation: string) {
   };
 
   const USERS_SKILLS_PK_VIOLATION = "users_skills_pkey";
+  const USERS_TECHNOLOGIES_PK_VIOLATION = "users_technologies_pkey";
   const USERS_USERNAME_VIOLATION = "users_username_key";
   const USERS_EMAIL_VIOLATION = "users_email_key";
   const TAGS_NAME_VIOLATION = "tags_name_key";
@@ -95,6 +97,11 @@ export function handleDuplicatedKeyViolation(violation: string) {
       return {
         ...response,
         message: USERS_SKILLS_PK_VIOLATION_MESSAGE,
+      };
+    case USERS_TECHNOLOGIES_PK_VIOLATION:
+      return {
+        ...response,
+        message: USERS_TECHNOLOGIES_PK_VIOLATION_MESSAGE,
       };
     default:
       logger.error(

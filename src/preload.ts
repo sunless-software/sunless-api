@@ -8,7 +8,7 @@ import {
 import { Entities } from "./constants/entities";
 import { NODE_ENV_DEVELOPMENT } from "./constants/constants";
 import { GLOBAL_PERMISSIONS } from "./constants/globalPermissions";
-import { DEFAULT_SKILLS } from "./constants/defaultData";
+import { DEFAULT_SKILLS, DEFAULT_TECHNOLOGIES } from "./constants/defaultData";
 import logger from "./logger";
 
 export default async function preload() {
@@ -23,6 +23,7 @@ export default async function preload() {
   await Promise.all([
     createPermissions(dbConnection),
     createDefaultSkills(dbConnection),
+    createDefaultTechnologies(dbConnection),
   ]);
 
   if (development) {
@@ -173,6 +174,27 @@ async function createDefaultSkills(db: Pool) {
     .catch((err) => {
       logger.error(
         `The following error has occurred while trying to create the default skills: `
+      );
+      logger.error(err);
+    });
+}
+
+async function createDefaultTechnologies(db: Pool) {
+  logger.info("Creating default technologies ...");
+
+  let query = `INSERT INTO technologies ("name", created_at, updated_at) VALUES `;
+  query += DEFAULT_TECHNOLOGIES.map((tech) => {
+    return `('${tech.name}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`;
+  }).join(",");
+
+  return db
+    .query(query)
+    .then(() => {
+      logger.info("Default technology successfully created.");
+    })
+    .catch((err) => {
+      logger.error(
+        `The following error has occurred while trying to create the default technologies: `
       );
       logger.error(err);
     });
