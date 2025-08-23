@@ -136,4 +136,14 @@ export const GLOBAL_PERMISSIONS = {
     name: "ADD_TECHNOLOGIES",
     scope: "GLOBAL",
   },
+  removeOwnTechnologies: {
+    id: 40,
+    name: "REMOVE_OWN_TECHNOLOGIES",
+    scope: "GLOBAL",
+  },
+  removeTechnologies: {
+    id: 41,
+    name: "REMOVE_TECHNOLOGIES",
+    scope: "GLOBAL",
+  },
 } satisfies Record<string, Permission>;

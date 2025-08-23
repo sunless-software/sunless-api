@@ -59,11 +59,14 @@ returning id, start_date, end_date, institution, field, location, coalesce(descr
 export const ADD_USER_SKILL = `INSERT INTO users_skills (user_id, skill_id, created_at, updated_at) SELECT u.id, s.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 FROM users u JOIN skills s ON s.id = $2 WHERE u.id = $1 AND u.deleted = false;`;
 
-export const REMOVE_USER_SKILL = `DELETE FROM users_skills WHERE user_id=$1 AND skill_id=$2;`;
+export const REMOVE_USER_SKILL = `DELETE from users_skills us USING users u WHERE us.user_id = u.id 
+AND u.deleted = false AND us.skill_id = $2 AND u.id = $1`;
 
-export const GET_SKILLS = `SELECT * FROM skills ORDER BY created_at DESC OFFSET $1 LIMIT $2;`;
+export const GET_SKILLS = `SELECT * FROM skills ORDER BY created_at DESC OFFSET $1 LIMIT $2`;
 
 export const COUNT_SKILLS = `SELECT COUNT(*) AS total FROM skills`;
 
 export const ADD_USER_TECHNOLOGY = `INSERT INTO users_technologies (user_id, technology_id, created_at, updated_at) SELECT u.id, t.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 FROM users u JOIN technologies t ON t.id = $2 WHERE u.id = $1 AND u.deleted = false`;
+
+export const REMOVE_USER_TECHNOLOGY = `DELETE from users_technologies ut USING users u WHERE ut.user_id = u.id AND u.deleted = false AND ut.technology_id = $2 AND u.id = $1`;

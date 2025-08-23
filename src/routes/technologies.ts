@@ -3,6 +3,7 @@ import ownershipMiddleware from "../middlewares/ownershipMiddleware";
 import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import addUserTechnologyValidation from "../validations/addUserTechnology";
 import technologiesController from "../controllers/technologiesController";
+import removeUserTechnologyValidation from "../validations/removeUserTechnology";
 
 const technologiesRouter = Router();
 
@@ -15,6 +16,17 @@ technologiesRouter.post(
   ),
   addUserTechnologyValidation,
   technologiesController.addUserTechnology
+);
+
+technologiesRouter.delete(
+  "/remove/:id",
+  ownershipMiddleware(
+    "query",
+    GLOBAL_PERMISSIONS.removeOwnTechnologies,
+    GLOBAL_PERMISSIONS.removeTechnologies
+  ),
+  removeUserTechnologyValidation,
+  technologiesController.removeUserTechnology
 );
 
 export default technologiesRouter;

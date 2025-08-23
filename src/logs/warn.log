@@ -397,3 +397,5 @@
 [2025-08-21T17:39:53Z] [error]: duplicate key value violates unique constraint "technologies_name_key"
 [2025-08-21T17:42:08Z] [error]: The following unhandled error has occurred: 
 [2025-08-21T17:42:08Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"technologyID\": 2,\n}","type":"entity.parse.failed"}
+[2025-08-23T11:44:15Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU1NzA4ODgxLCJleHAiOjE3NTU3OTUyODF9.79D1OfgH-U-v-taJl66bXE7Qe4GdaQWKLbGPm2jAsBc
+[2025-08-23T12:44:35Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

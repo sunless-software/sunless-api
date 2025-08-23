@@ -1,14 +1,14 @@
 paths:
-  /api/v1/skills/remove:
+  /api/v1/technologies/remove:
     delete:
-      summary: Remove a skill from a user
+      summary: Remove a technology from a user
       description: |
-        Removes the association between an existing skill and a user.  
-        The skill itself is not deleted.  
+        Removes the association between an existing technology and a user.  
+        The technology itself is not deleted.  
         If `id` query parameter (userID) is not provided, defaults to the authenticated user.  
-        Requires `REMOVE_OWN_SKILLS` permission if removing from your own skills, otherwise requires `REMOVE_SKILLS`.
+        Requires `REMOVE_OWN_TECHNOLOGIES` permission if removing from your own technologies, otherwise requires `REMOVE_TECHNOLOGIES`.
       tags:
-        - Skills
+        - Technologies
       parameters:
         - in: query
           name: id
@@ -16,17 +16,17 @@ paths:
           schema:
             type: integer
             example: 3
-          description: Optional. The ID of the user from whom to remove the skill. Defaults to the authenticated user if not provided.
+          description: Optional. The ID of the user from whom to remove the technology. Defaults to the authenticated user if not provided.
         - in: path
-          name: skillID
+          name: technologyID
           required: true
           schema:
             type: integer
-            example: 1
-          description: The ID of the skill to remove
+            example: 2
+          description: The ID of the technology to remove
       responses:
         "200":
-          description: Skill successfully removed from user
+          description: Technology successfully removed from user
           content:
             application/json:
               schema:
@@ -37,16 +37,16 @@ paths:
                     example: 200
                   message:
                     type: string
-                    example: The skill has been successfully removed from the user.
+                    example: The technology has been successfully removed from the user.
                   data:
                     type: object
                     properties:
                       userID:
                         type: integer
                         example: 3
-                      skillID:
+                      technologyID:
                         type: integer
-                        example: 1
+                        example: 2
         "400":
           description: Validation error
           content:
@@ -66,7 +66,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
         "404":
-          description: The skill or the user does not exists.
+          description: The technology or the user does not exist.
           content:
             application/json:
               schema:
@@ -77,7 +77,7 @@ paths:
                     example: 404
                   message:
                     type: string
-                    example: The entity with the given id does not exists.
+                    example: The entity with the given id does not exist.
                   data:
                     type: array
                     items:

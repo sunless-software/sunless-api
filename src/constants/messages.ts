@@ -68,6 +68,8 @@ export const SKILLS_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "Skills successfully retrieved.";
 export const USER_TECHNOLOGY_SUCCESSFULLY_ADDED =
   "The technology was successfully added to the user.";
+export const USER_TECHNOLOGY_SUCCESSFULLY_REMOVED =
+  "The technology has been successfully removed from the user.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
