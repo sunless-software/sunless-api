@@ -399,3 +399,35 @@
 [2025-08-21T17:42:08Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"technologyID\": 2,\n}","type":"entity.parse.failed"}
 [2025-08-23T11:44:15Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU1NzA4ODgxLCJleHAiOjE3NTU3OTUyODF9.79D1OfgH-U-v-taJl66bXE7Qe4GdaQWKLbGPm2jAsBc
 [2025-08-23T12:44:35Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-23T13:54:44Z] [error]: The following error has occurred while trying to load the default data for 'skills': 
+[2025-08-23T13:54:44Z] [error]: duplicate key value violates unique constraint "skills_name_key"
+[2025-08-23T14:09:18Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:09:18Z] [error]: column "role_id" of relation "users" does not exist
+[2025-08-23T14:10:01Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:10:01Z] [error]: INSERT has more target columns than expressions
+[2025-08-23T14:11:02Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:11:02Z] [error]: INSERT has more target columns than expressions
+[2025-08-23T14:11:17Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:11:17Z] [error]: INSERT has more target columns than expressions
+[2025-08-23T14:12:03Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:12:03Z] [error]: null value in column "public" of relation "users" violates not-null constraint
+[2025-08-23T14:12:32Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:12:32Z] [error]: null value in column "banned" of relation "users" violates not-null constraint
+[2025-08-23T14:12:50Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:12:50Z] [error]: null value in column "deleted" of relation "users" violates not-null constraint
+[2025-08-23T14:16:07Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:16:07Z] [error]: insert or update on table "users" violates foreign key constraint "users_rol_id_fkey"
+[2025-08-23T14:16:07Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:16:07Z] [error]: syntax error at or near ")"
+[2025-08-23T14:27:08Z] [error]: The following error has occurred while trying to load the default data for 'global_roles': 
+[2025-08-23T14:27:08Z] [error]: column "name" of relation "global_roles" does not exist
+[2025-08-23T14:27:08Z] [error]: The following error has occurred while trying to associate the permissions with the development roles: 
+[2025-08-23T14:27:08Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_global_role_id"
+[2025-08-23T14:27:08Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:27:08Z] [error]: insert or update on table "users" violates foreign key constraint "users_rol_id_fkey"
+[2025-08-23T14:28:12Z] [error]: The following error has occurred while trying to load the default data for 'global_roles': 
+[2025-08-23T14:28:12Z] [error]: duplicate key value violates unique constraint "global_roles_role_name_key"
+[2025-08-23T14:28:12Z] [error]: The following error has occurred while trying to associate the permissions with the development roles: 
+[2025-08-23T14:28:12Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_global_role_id"
+[2025-08-23T14:28:12Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-23T14:28:12Z] [error]: insert or update on table "users" violates foreign key constraint "users_rol_id_fkey"

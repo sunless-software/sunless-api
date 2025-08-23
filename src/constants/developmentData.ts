@@ -3,7 +3,7 @@ import { GLOBAL_PERMISSIONS } from "./globalPermissions";
 export const DEVELOPMENT_GLOBAL_ROLES = [
   {
     id: 1,
-    name: "admin",
+    role_name: "admin",
     permissions: [
       GLOBAL_PERMISSIONS.createUsers,
       GLOBAL_PERMISSIONS.updateUsers,
@@ -50,12 +50,12 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
   },
   {
     id: 2,
-    name: "client",
+    role_name: "client",
     permissions: [],
   },
   {
     id: 3,
-    name: "user",
+    role_name: "user",
     permissions: [
       GLOBAL_PERMISSIONS.updateOwnUser,
       GLOBAL_PERMISSIONS.createPublicProjects,
@@ -76,21 +76,27 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
 
 export const DEVELOPMENT_USERS = [
   {
-    id: 1,
     username: "sunless_admin",
     password: "Password123!",
-    role_id: 1,
+    rol_id: 1,
+    public: true,
+    banned: false,
+    deleted: false,
   },
   {
-    id: 2,
     username: "sunless_client",
     password: "Password123!",
-    role_id: 2,
+    rol_id: 2,
+    public: true,
+    banned: false,
+    deleted: false,
   },
   {
-    id: 3,
     username: "sunless_user",
     password: "Password123!",
-    role_id: 3,
+    rol_id: 3,
+    public: true,
+    banned: false,
+    deleted: false,
   },
 ];
