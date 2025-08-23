@@ -4,8 +4,15 @@ import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import addUserTechnologyValidation from "../validations/addUserTechnology";
 import technologiesController from "../controllers/technologiesController";
 import removeUserTechnologyValidation from "../validations/removeUserTechnology";
+import getTechnologiesValidation from "../validations/getTechnologies";
 
 const technologiesRouter = Router();
+
+technologiesRouter.get(
+  "/",
+  getTechnologiesValidation,
+  technologiesController.getTechnologies
+);
 
 technologiesRouter.post(
   "/add",

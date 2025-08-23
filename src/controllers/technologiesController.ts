@@ -3,6 +3,8 @@ import { AuthRequest } from "../interfaces";
 import connectToDB from "../db";
 import {
   ADD_USER_TECHNOLOGY,
+  COUNT_TECHNOLOGIES,
+  GET_TECHNOLOGIES,
   REMOVE_USER_TECHNOLOGY,
 } from "../constants/queries";
 import {
@@ -12,11 +14,47 @@ import {
 import { sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
+  TECHNOLOGIES_SUCCESSFULLY_RETRIEVED_MESSAGE,
   USER_TECHNOLOGY_SUCCESSFULLY_ADDED,
   USER_TECHNOLOGY_SUCCESSFULLY_REMOVED,
 } from "../constants/messages";
+import { GET_TECHNOLOGIES_DEFAULT_LIMIT } from "../constants/setup";
 
 const technologiesController = {
+  getTechnologies: async (req: Request, res: Response, next: NextFunction) => {
+    const { offset = 0, limit = GET_TECHNOLOGIES_DEFAULT_LIMIT } = req.query;
+    const db = await connectToDB();
+
+    try {
+      const [countTechnologiesResult, getTechnologiesResult] =
+        await Promise.all([
+          db.query(COUNT_TECHNOLOGIES),
+          db.query(GET_TECHNOLOGIES, [offset, limit]),
+        ]);
+      const technologies = getTechnologiesResult.rows;
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: TECHNOLOGIES_SUCCESSFULLY_RETRIEVED_MESSAGE,
+          data: technologies,
+          pagination: {
+            offset:
+              typeof offset === "string"
+                ? parseInt(offset)
+                : (offset as number),
+            limit:
+              typeof limit === "string" ? parseInt(limit) : (limit as number),
+            count: technologies.length,
+            total: parseInt(countTechnologiesResult.rows[0].total),
+          },
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
   addUserTechnology: async (
     req: Request,
     res: Response,

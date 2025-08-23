@@ -70,3 +70,7 @@ export const ADD_USER_TECHNOLOGY = `INSERT INTO users_technologies (user_id, tec
 FROM users u JOIN technologies t ON t.id = $2 WHERE u.id = $1 AND u.deleted = false`;
 
 export const REMOVE_USER_TECHNOLOGY = `DELETE from users_technologies ut USING users u WHERE ut.user_id = u.id AND u.deleted = false AND ut.technology_id = $2 AND u.id = $1`;
+
+export const GET_TECHNOLOGIES = `SELECT * FROM technologies ORDER BY created_at DESC OFFSET $1 LIMIT $2`;
+
+export const COUNT_TECHNOLOGIES = `SELECT COUNT(*) AS total FROM technologies`;

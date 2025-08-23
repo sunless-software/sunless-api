@@ -4,7 +4,6 @@ import addUserSkillValidation from "../validations/addUserSkill";
 import ownershipMiddleware from "../middlewares/ownershipMiddleware";
 import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import removeUserSkillValidation from "../validations/removeUserSkill";
-import roleMiddleware from "../middlewares/roleMiddleware";
 import getSkillsValidation from "../validations/getSkills";
 
 const skillsRouter = Router();
