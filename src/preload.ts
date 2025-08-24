@@ -4,6 +4,10 @@ import { encryptPassword } from "./utils";
 import {
   DEVELOPMENT_GLOBAL_ROLES,
   DEVELOPMENT_USERS,
+  DEVELOPMENT_USERS_EDUCATIONS,
+  DEVELOPMENT_USERS_EXPERIENCES,
+  DEVELOPMENT_USERS_SKILLS,
+  DEVELOPMENT_USERS_TECHNOLOGIES,
 } from "./constants/developmentData";
 import { Entities } from "./constants/entities";
 import { NODE_ENV_DEVELOPMENT } from "./constants/constants";
@@ -49,6 +53,25 @@ export default async function preload() {
     );
     await associateDevGlobalRolesPermissions(entityPreloader);
     await entityPreloader.PreloadDefaultData("users", usersWithHashedPasswords);
+
+    await Promise.all([
+      entityPreloader.PreloadDefaultData(
+        "experiences",
+        DEVELOPMENT_USERS_EXPERIENCES
+      ),
+      entityPreloader.PreloadDefaultData(
+        "educations",
+        DEVELOPMENT_USERS_EDUCATIONS
+      ),
+      entityPreloader.PreloadDefaultData(
+        "users_technologies",
+        DEVELOPMENT_USERS_TECHNOLOGIES
+      ),
+      entityPreloader.PreloadDefaultData(
+        "users_skills",
+        DEVELOPMENT_USERS_SKILLS
+      ),
+    ]);
   }
 }
 

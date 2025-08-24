@@ -11,30 +11,45 @@ import recoverUserValidation from "../validations/recoverUser";
 import { AuthRequest } from "../interfaces";
 import updateUserRoleValidation from "../validations/updateUserRole";
 import updateUserValidation from "../validations/updateUser";
+import getUserDetailsValidation from "../validations/getUserDetails";
+import conditionalQueryMiddleware from "../middlewares/conditionalQueryMiddleware";
 
 const usersRouter = Router();
 
 usersRouter.get(
   "/list",
+  conditionalQueryMiddleware([
+    {
+      queryKey: "showPrivateUsers",
+      relatedPermission: GLOBAL_PERMISSIONS.viewPrivateUsers,
+      appliesToOwner: true,
+    },
+    {
+      queryKey: "showDeletedUsers",
+      relatedPermission: GLOBAL_PERMISSIONS.viewDeletedUsers,
+      appliesToOwner: true,
+    },
+  ]),
   getUsersValidation,
-  async (req: Request, res: Response, next: NextFunction) => {
-    const {
-      showPrivateUsers = false,
-      showBannedUsers = false,
-      showDeletedUsers = false,
-    } = req.query;
-
-    const requiredPermissions = [
-      ...(showPrivateUsers ? [GLOBAL_PERMISSIONS.viewPrivateUsers] : []),
-      ...(showBannedUsers ? [GLOBAL_PERMISSIONS.viewBannedUsers] : []),
-      ...(showDeletedUsers ? [GLOBAL_PERMISSIONS.viewDeletedUsers] : []),
-    ];
-
-    if (!requiredPermissions.length) return next();
-
-    return roleMiddleware([], requiredPermissions)(req, res, next);
-  },
   usersController.getUsers
+);
+
+usersRouter.get(
+  "/:id",
+  conditionalQueryMiddleware([
+    {
+      queryKey: "showPrivateUsers",
+      relatedPermission: GLOBAL_PERMISSIONS.getPrivateUserDetails,
+      appliesToOwner: false,
+    },
+    {
+      queryKey: "showDeletedUsers",
+      relatedPermission: GLOBAL_PERMISSIONS.getDeletedUserDetails,
+      appliesToOwner: true,
+    },
+  ]),
+  getUserDetailsValidation,
+  usersController.getUserDetails
 );
 
 usersRouter.post(

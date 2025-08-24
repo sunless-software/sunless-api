@@ -8,6 +8,17 @@ where u.id = $1`;
 
 export const GET_USERS = `select id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", coalesce(phone, '') as "phone", coalesce(email, '') as "email", public, banned, deleted, created_at, updated_at FROM users _1 ORDER BY created_at DESC OFFSET $1 LIMIT $2;`;
 
+export const GET_USER_DETAILS = `select u.id, u.rol_id, u.username, '****' as "password", coalesce(u.profile_photo, '') as "profile_photo", coalesce(u.phone, '') as "phone", 
+coalesce(u.email, '') as "email", u.public, u.banned, u.deleted, u.created_at, u.updated_at, coalesce(json_agg(distinct jsonb_build_object('id', s.id, 'name', s.name,
+'created_at', s.created_at, 'updated_at', s.updated_at)) filter (where s.id is not null), '[]') as skills, coalesce(json_agg(distinct jsonb_build_object(
+'id', t.id, 'name', t.name, 'created_at', t.created_at, 'updated_at', t.updated_at)) filter (where t.id is not null), '[]') as technologies, coalesce(json_agg(distinct jsonb_build_object(
+'id', e.id, 'company_name', e.company_name, 'role', e.role, 'description', e.description, 'location', e.location, 'company_logo', coalesce(e.company_logo, ''),
+'start_date', e.start_date, 'end_date', e.end_date, 'created_at', e.created_at, 'updated_at', e.updated_at)) filter (where e.id is not null), '[]') as experiences,
+coalesce(json_agg(distinct jsonb_build_object('id', ed.id, 'start_date', ed.start_date, 'end_date', ed.end_date, 'institution', ed.institution, 'field', ed.field,
+'location', ed.location, 'description', coalesce(ed.description, ''), 'created_at', ed.created_at, 'updated_at', ed.updated_at)) filter (where ed.id is not null), '[]') as educations
+from users u left join users_skills us on us.user_id = u.id left join skills s on us.skill_id = s.id left join users_technologies ut on ut.user_id = u.id
+left join technologies t on t.id = ut.technology_id left join experiences e on e.user_id = u.id left join educations ed on ed.user_id = u.id where u.id = $1 _1 group by u.id`;
+
 export const COUNT_USERS = `SELECT COUNT(*) AS total FROM users _1`;
 
 export const GET_USER_STATUS = `SELECT banned FROM users WHERE id = $1 AND deleted = false LIMIT 1`;
@@ -43,16 +54,16 @@ export const DELETE_EXPERIENCE = `DELETE FROM experiences WHERE id = $1`;
 export const GET_EXPERIENCE_USER_ID =
   "SELECT user_id FROM experiences WHERE id = $1 LIMIT 1";
 
-export const CREATE_EDUCATION = `INSERT INTO education (user_id, start_date, end_date, institution, field, "location", description, created_at, updated_at) 
+export const CREATE_EDUCATION = `INSERT INTO educations (user_id, start_date, end_date, institution, field, "location", description, created_at, updated_at) 
 select u.id, $1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP from users u where u.id = $7 and u.deleted = false returning id, start_date, 
 end_date, institution, field, location, coalesce(description, '') as description, created_at, updated_at`;
 
-export const DELETE_EDUCATION = "DELETE FROM education WHERE id = $1";
+export const DELETE_EDUCATION = "DELETE FROM educations WHERE id = $1";
 
 export const GET_EDUCATION_USER_ID =
-  "SELECT user_id FROM education WHERE id = $1 LIMIT 1";
+  "SELECT user_id FROM educations WHERE id = $1 LIMIT 1";
 
-export const PATCH_EDUCATION = `UPDATE education SET start_date=COALESCE($1, start_date), end_date=COALESCE($2, end_date), institution=COALESCE($3, institution),
+export const PATCH_EDUCATION = `UPDATE educations SET start_date=COALESCE($1, start_date), end_date=COALESCE($2, end_date), institution=COALESCE($3, institution),
 field=COALESCE($4, field), "location"=COALESCE($5, location), description=COALESCE($6, description) WHERE id=$7
 returning id, start_date, end_date, institution, field, location, coalesce(description, '') as description, created_at, updated_at`;
 

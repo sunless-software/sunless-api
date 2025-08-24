@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS education (
+CREATE TABLE IF NOT EXISTS educations (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
     start_date DATE NOT NULL,
@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS education (
     CONSTRAINT FK_education_user_id FOREIGN KEY (user_id) REFERENCES users(id)
 );
 CREATE TRIGGER trg_education_updated_at
-BEFORE UPDATE ON education
+BEFORE UPDATE ON educations
 FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

@@ -5,7 +5,7 @@ export enum Entities {
   PROJECT_TAGS = "project_tags",
   GLOBAL_ROLES = "global_roles",
   USERS = "users",
-  EDUCATION = "education",
+  EDUCATIONS = "educations",
   SKILLS = "skills",
   USERS_SKILLS = "users_skills",
   PERMISSIONS = "permissions",

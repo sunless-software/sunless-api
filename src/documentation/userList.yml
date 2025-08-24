@@ -10,7 +10,7 @@ paths:
       description: >
         Fetch a paginated list of users. Some query parameters require specific permissions.
         To retrieve private users you need VIEW_PRIVATE_USERS, for deleted users VIEW_DELETED_USERS,
-        and for banned users VIEW_BANNED_USERS.
+        and for banned users no extra permissions are needed.
       tags:
         - Users
       parameters:

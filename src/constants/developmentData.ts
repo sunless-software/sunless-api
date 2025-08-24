@@ -13,7 +13,6 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.banUsers,
       GLOBAL_PERMISSIONS.unbanUsers,
       GLOBAL_PERMISSIONS.viewPrivateUsers,
-      GLOBAL_PERMISSIONS.viewBannedUsers,
       GLOBAL_PERMISSIONS.viewDeletedUsers,
       GLOBAL_PERMISSIONS.createPublicProjects,
       GLOBAL_PERMISSIONS.inviteToOwnedProjects,
@@ -46,6 +45,8 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.addOwnTechnologies,
       GLOBAL_PERMISSIONS.removeOwnTechnologies,
       GLOBAL_PERMISSIONS.removeTechnologies,
+      GLOBAL_PERMISSIONS.getPrivateUserDetails,
+      GLOBAL_PERMISSIONS.getDeletedUserDetails,
     ],
   },
   {
@@ -98,5 +99,107 @@ export const DEVELOPMENT_USERS = [
     public: true,
     banned: false,
     deleted: false,
+  },
+];
+
+export const DEVELOPMENT_USERS_EXPERIENCES = [
+  {
+    user_id: 3,
+    company_name: "Random Software company",
+    role: "SSR developer",
+    description: "I developed software for random software commpany",
+    location: "Semi remote",
+    start_date: (() => {
+      const now = new Date();
+      now.setFullYear(now.getFullYear() - 2);
+      return now.toISOString();
+    })(),
+    end_date: (() => {
+      const now = new Date();
+      now.setDate(now.getDate() - 14);
+      return now.toISOString();
+    })(),
+    company_logo: "https://random-software-company-logo.png",
+  },
+  {
+    user_id: 3,
+    company_name: "Sunless Software",
+    role: "SR developer",
+    description: "I developed software for sunless software",
+    location: "Remote",
+    start_date: (() => {
+      const now = new Date();
+      return now.toISOString();
+    })(),
+    end_date: null,
+    company_logo: null,
+  },
+];
+
+export const DEVELOPMENT_USERS_EDUCATIONS = [
+  {
+    user_id: 3,
+    start_date: (() => {
+      const now = new Date();
+      now.setFullYear(now.getFullYear() - 5);
+      return now.toISOString();
+    })(),
+    end_date: (() => {
+      const now = new Date();
+      now.setFullYear(now.getFullYear() - 3);
+      return now.toISOString();
+    })(),
+    institution: "University of software",
+    field: "Software development",
+    location: "Buenos Aires, Argentina",
+    description:
+      "I studied software development in the university of Buenos Aires",
+  },
+  {
+    user_id: 3,
+    start_date: (() => {
+      const now = new Date();
+      now.setFullYear(now.getFullYear() - 2);
+      return now.toISOString();
+    })(),
+    end_date: null,
+    institution: "Remote software academy",
+    field: "Cibersecurity",
+    location: "Remote",
+    description: null,
+  },
+];
+
+export const DEVELOPMENT_USERS_TECHNOLOGIES = [
+  {
+    user_id: 3,
+    technology_id: 1,
+  },
+  {
+    user_id: 3,
+    technology_id: 2,
+  },
+  {
+    user_id: 3,
+    technology_id: 3,
+  },
+  {
+    user_id: 3,
+    technology_id: 4,
+  },
+];
+
+export const DEVELOPMENT_USERS_SKILLS = [
+  {
+    user_id: 3,
+    skill_id: 1,
+  },
+  {
+    user_id: 3,
+    skill_id: 2,
+  },
+  {
+    user_id: 3,
+    skill_id: 3,
   },
 ];

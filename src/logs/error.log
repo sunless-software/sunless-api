@@ -275,3 +275,111 @@
 [2025-08-23T14:28:12Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_global_role_id"
 [2025-08-23T14:28:12Z] [error]: The following error has occurred while trying to load the default data for 'users': 
 [2025-08-23T14:28:12Z] [error]: insert or update on table "users" violates foreign key constraint "users_rol_id_fkey"
+[2025-08-24T15:50:21Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T15:50:21Z] [error]: null value in column "start_date" of relation "experiences" violates not-null constraint
+[2025-08-24T15:56:23Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T15:56:23Z] [error]: date/time field value out of range: "1756050983368"
+[2025-08-24T15:58:18Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T15:58:18Z] [error]: date/time field value out of range: "1756051097843"
+[2025-08-24T15:58:37Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T15:58:37Z] [error]: date/time field value out of range: "1756051117393"
+[2025-08-24T16:03:28Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:03:28Z] [error]: VALUES lists must all be the same length
+[2025-08-24T16:03:46Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:03:46Z] [error]: invalid input syntax for type date: "null"
+[2025-08-24T16:03:54Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:03:54Z] [error]: invalid input syntax for type date: ""
+[2025-08-24T16:04:40Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:04:40Z] [error]: invalid input syntax for type date: "NULL"
+[2025-08-24T16:05:36Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:05:36Z] [error]: invalid input syntax for type date: "NULL"
+[2025-08-24T16:05:59Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:05:59Z] [error]: invalid input syntax for type date: "NULL"
+[2025-08-24T16:06:09Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:06:09Z] [error]: invalid input syntax for type date: "null"
+[2025-08-24T16:06:55Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-24T16:06:55Z] [error]: syntax error at or near ","
+[2025-08-24T16:06:55Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:06:55Z] [error]: syntax error at or near ","
+[2025-08-24T16:07:29Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-24T16:07:29Z] [error]: syntax error at or near ","
+[2025-08-24T16:07:29Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:07:29Z] [error]: syntax error at or near ","
+[2025-08-24T16:07:46Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-24T16:07:46Z] [error]: null value in column "banned" of relation "users" violates not-null constraint
+[2025-08-24T16:07:46Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:07:46Z] [error]: insert or update on table "experiences" violates foreign key constraint "fk_experiences_user_id"
+[2025-08-24T16:08:16Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-24T16:08:16Z] [error]: null value in column "banned" of relation "users" violates not-null constraint
+[2025-08-24T16:08:16Z] [error]: The following error has occurred while trying to load the default data for 'experiences': 
+[2025-08-24T16:08:16Z] [error]: insert or update on table "experiences" violates foreign key constraint "fk_experiences_user_id"
+[2025-08-24T16:14:13Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-24T16:14:13Z] [error]: Connection terminated unexpectedly
+[2025-08-24T16:16:09Z] [error]: The following error has occurred while trying to wipe the DB:
+[2025-08-24T16:16:09Z] [error]: relation "education" does not exist
+[2025-08-24T16:17:04Z] [error]: The following error has occurred while trying to wipe the DB:
+[2025-08-24T16:17:04Z] [error]: relation "education" does not exist
+[2025-08-24T16:17:04Z] [error]: The following error has occurred while trying to load the default data for 'permissions': 
+[2025-08-24T16:17:04Z] [error]: duplicate key value violates unique constraint "permissions_name_key"
+[2025-08-24T16:17:04Z] [error]: The following error has occurred while trying to load the default data for 'skills': 
+[2025-08-24T16:17:04Z] [error]: duplicate key value violates unique constraint "skills_name_key"
+[2025-08-24T16:17:04Z] [error]: The following error has occurred while trying to load the default data for 'technologies': 
+[2025-08-24T16:17:04Z] [error]: duplicate key value violates unique constraint "technologies_name_key"
+[2025-08-24T16:17:04Z] [error]: The following error has occurred while trying to load the default data for 'global_roles': 
+[2025-08-24T16:17:04Z] [error]: duplicate key value violates unique constraint "global_roles_role_name_key"
+[2025-08-24T16:17:04Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-24T16:17:04Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-24T16:17:04Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-24T16:17:04Z] [error]: duplicate key value violates unique constraint "users_username_key"
+[2025-08-24T16:18:05Z] [error]: The following error has occurred while trying to wipe the DB:
+[2025-08-24T16:18:05Z] [error]: relation "education" does not exist
+[2025-08-24T16:18:05Z] [error]: The following error has occurred while trying to load the default data for 'permissions': 
+[2025-08-24T16:18:05Z] [error]: duplicate key value violates unique constraint "permissions_name_key"
+[2025-08-24T16:18:05Z] [error]: The following error has occurred while trying to load the default data for 'technologies': 
+[2025-08-24T16:18:05Z] [error]: duplicate key value violates unique constraint "technologies_name_key"
+[2025-08-24T16:18:05Z] [error]: The following error has occurred while trying to load the default data for 'skills': 
+[2025-08-24T16:18:05Z] [error]: duplicate key value violates unique constraint "skills_name_key"
+[2025-08-24T16:18:05Z] [error]: The following error has occurred while trying to load the default data for 'global_roles': 
+[2025-08-24T16:18:05Z] [error]: duplicate key value violates unique constraint "global_roles_role_name_key"
+[2025-08-24T16:18:05Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-24T16:18:05Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-24T16:18:05Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-24T16:18:05Z] [error]: duplicate key value violates unique constraint "users_username_key"
+[2025-08-24T16:18:40Z] [error]: The following error has occurred while trying to wipe the DB:
+[2025-08-24T16:18:40Z] [error]: relation "education" does not exist
+[2025-08-24T16:18:40Z] [error]: The following error has occurred while trying to load the default data for 'technologies': 
+[2025-08-24T16:18:40Z] [error]: duplicate key value violates unique constraint "technologies_name_key"
+[2025-08-24T16:18:40Z] [error]: The following error has occurred while trying to load the default data for 'permissions': 
+[2025-08-24T16:18:40Z] [error]: duplicate key value violates unique constraint "permissions_name_key"
+[2025-08-24T16:18:40Z] [error]: The following error has occurred while trying to load the default data for 'skills': 
+[2025-08-24T16:18:40Z] [error]: duplicate key value violates unique constraint "skills_name_key"
+[2025-08-24T16:18:40Z] [error]: The following error has occurred while trying to load the default data for 'global_roles': 
+[2025-08-24T16:18:40Z] [error]: duplicate key value violates unique constraint "global_roles_role_name_key"
+[2025-08-24T16:18:40Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-24T16:18:40Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-24T16:18:40Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-24T16:18:40Z] [error]: duplicate key value violates unique constraint "users_username_key"
+[2025-08-24T16:19:14Z] [error]: The following error has occurred while trying to wipe the DB:
+[2025-08-24T16:19:14Z] [error]: relation "education" does not exist
+[2025-08-24T16:19:14Z] [error]: The following error has occurred while trying to load the default data for 'permissions': 
+[2025-08-24T16:19:14Z] [error]: duplicate key value violates unique constraint "permissions_name_key"
+[2025-08-24T16:19:14Z] [error]: The following error has occurred while trying to load the default data for 'technologies': 
+[2025-08-24T16:19:14Z] [error]: duplicate key value violates unique constraint "technologies_name_key"
+[2025-08-24T16:19:14Z] [error]: The following error has occurred while trying to load the default data for 'skills': 
+[2025-08-24T16:19:14Z] [error]: duplicate key value violates unique constraint "skills_name_key"
+[2025-08-24T16:19:14Z] [error]: The following error has occurred while trying to load the default data for 'global_roles': 
+[2025-08-24T16:19:14Z] [error]: duplicate key value violates unique constraint "global_roles_role_name_key"
+[2025-08-24T16:19:14Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-24T16:19:14Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-24T16:19:14Z] [error]: The following error has occurred while trying to load the default data for 'users': 
+[2025-08-24T16:19:14Z] [error]: duplicate key value violates unique constraint "users_username_key"
+[2025-08-24T21:03:18Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-24T21:03:18Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-24T21:05:50Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-24T21:05:50Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-24T21:06:04Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-24T21:06:04Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-24T21:06:21Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-24T21:06:21Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-24T21:34:39Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-24T21:34:39Z] [error]: {"length":96,"name":"error","severity":"ERROR","code":"42601","position":"1633","file":"scan.l","line":"1244","routine":"scanner_yyerror"}

@@ -1,0 +1,250 @@
+/api/v1/users/{id}:
+  get:
+    summary: Retrieve details of a specific user
+    description: >
+      Fetch detailed information of a user by ID. Some query parameters require specific permissions.
+      - To retrieve private user details you need GET_PRIVATE_USER_DETAILS, unless the user is requesting their own data.  
+      - To retrieve deleted users you need GET_DELETED_USER_DETAILS.  
+      - To retrieve banned users no additional permission is required.
+      If the user does not exist, is private without proper access, or is deleted without the required flag, a 404 is returned.
+    tags:
+      - Users
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        description: The ID of the user to retrieve
+      - in: query
+        name: showPrivateUsers
+        schema:
+          type: boolean
+          default: false
+        description: Include private user details (requires permission unless it’s your own user)
+      - in: query
+        name: showDeletedUsers
+        schema:
+          type: boolean
+          default: false
+        description: Include soft-deleted user details (requires permission)
+      - in: query
+        name: showBannedUsers
+        schema:
+          type: boolean
+          default: false
+        description: Include banned user details (no extra permissions required)
+    responses:
+      "200":
+        description: User successfully retrieved
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: integer
+                  example: 200
+                message:
+                  type: string
+                  example: User details successfully retrieved.
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      rol_id:
+                        type: integer
+                        example: 3
+                      username:
+                        type: string
+                        example: sunless_user
+                      password:
+                        type: string
+                        example: "****"
+                      profile_photo:
+                        type: string
+                        nullable: true
+                      phone:
+                        type: string
+                        nullable: true
+                      email:
+                        type: string
+                        nullable: true
+                      public:
+                        type: boolean
+                        example: true
+                      banned:
+                        type: boolean
+                        example: false
+                      deleted:
+                        type: boolean
+                        example: false
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: 2025-08-25T00:35:33.712Z
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: 2025-08-25T00:35:39.798Z
+                      skills:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            created_at:
+                              type: string
+                              format: date-time
+                            updated_at:
+                              type: string
+                              format: date-time
+                      technologies:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            created_at:
+                              type: string
+                              format: date-time
+                            updated_at:
+                              type: string
+                              format: date-time
+                      experiences:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            role:
+                              type: string
+                            company_name:
+                              type: string
+                            company_logo:
+                              type: string
+                            description:
+                              type: string
+                            location:
+                              type: string
+                            start_date:
+                              type: string
+                              format: date
+                            end_date:
+                              type: string
+                              format: date
+                              nullable: true
+                            created_at:
+                              type: string
+                              format: date-time
+                            updated_at:
+                              type: string
+                              format: date-time
+                      educations:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            field:
+                              type: string
+                            institution:
+                              type: string
+                            description:
+                              type: string
+                            location:
+                              type: string
+                            start_date:
+                              type: string
+                              format: date
+                            end_date:
+                              type: string
+                              format: date
+                              nullable: true
+                            created_at:
+                              type: string
+                              format: date-time
+                            updated_at:
+                              type: string
+                              format: date-time
+                pagination:
+                  type: object
+                  properties:
+                    offset:
+                      type: integer
+                      example: 0
+                    limit:
+                      type: integer
+                      example: 0
+                    count:
+                      type: integer
+                      example: 0
+                    total:
+                      type: integer
+                      example: 0
+
+      "400":
+        description: Validation error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidationError"
+
+      "401":
+        description: Missing or invalid token
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnauthorizedError"
+
+      "403":
+        description: Forbidden, insufficient permissions or user is banned/deleted
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ForbiddenPermissionError"
+
+      "404":
+        description: User not found, soft-deleted without permission, or private without permission
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: integer
+                  example: 404
+                message:
+                  type: string
+                  example: The entity with the given id does not exists.
+                data:
+                  type: array
+                  items:
+                    type: object
+                pagination:
+                  type: object
+                  properties:
+                    offset:
+                      type: integer
+                      example: 0
+                    limit:
+                      type: integer
+                      example: 0
+                    count:
+                      type: integer
+                      example: 0
+                    total:
+                      type: integer
+                      example: 0

@@ -4,6 +4,7 @@ import {
   BAN_USER,
   COUNT_USERS,
   CREATE_USER,
+  GET_USER_DETAILS,
   GET_USERS,
   PATCH_USER,
   RECOVER_USER,
@@ -14,6 +15,7 @@ import {
 import { encryptPassword, sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
+  USER_DETAILS_SUCCESSFULLY_RETRIEVED_MESSAGE,
   USER_ROLE_SUCCESSFULY_UPDATED,
   USER_SUCCESSFUL_CREATION_MESSAGE,
   USER_SUCCESSFULLY_BANNED_MESSAGE,
@@ -27,7 +29,7 @@ import {
   HTTP_STATUS_CODE_CREATED,
   HTTP_STATUS_CODE_NOT_FOUND,
 } from "../constants/httpStatusCodes";
-import { CustomError, User } from "../interfaces";
+import { User } from "../interfaces";
 import { GET_USERS_DEFAULT_LIMIT } from "../constants/setup";
 
 const usersController = {
@@ -270,6 +272,44 @@ const usersController = {
           ...DEFAULT_SUCCES_API_RESPONSE,
           message: USER_SUCESSFULLY_UPDATED,
           data: result.rows,
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  getUserDetails: async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const {
+      showPrivateUsers = false,
+      showBannedUsers = false,
+      showDeletedUsers = false,
+    } = req.query;
+    const db = await connectToDB();
+
+    const conditions = [
+      ...(!showPrivateUsers ? ["public = true"] : []),
+      ...(!showBannedUsers ? ["banned = false"] : []),
+      ...(!showDeletedUsers ? ["deleted = false"] : []),
+    ];
+    const whereClause = conditions.length
+      ? `AND ${conditions.join(" AND ")}`
+      : "";
+    const getUserDetailsQuery = GET_USER_DETAILS.replace(`_1`, whereClause);
+
+    try {
+      const result = await db.query(getUserDetailsQuery, [id]);
+
+      if (!result.rowCount) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: USER_DETAILS_SUCCESSFULLY_RETRIEVED_MESSAGE,
+          data: [result.rows[0]],
         },
         res
       );

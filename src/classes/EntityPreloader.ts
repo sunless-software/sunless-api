@@ -21,7 +21,8 @@ export default class EntityPreloader {
       const keys = Object.keys(d);
 
       return `(${keys.map((k) => {
-        return `'${d[k as keyof typeof d]}'`;
+        const columnValue = d[k as keyof typeof d];
+        return columnValue !== null ? `'${columnValue}'` : "NULL";
       })})`;
     });
 
