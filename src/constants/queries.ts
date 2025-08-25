@@ -86,6 +86,9 @@ export const GET_TECHNOLOGIES = `SELECT * FROM technologies ORDER BY created_at 
 
 export const COUNT_TECHNOLOGIES = `SELECT COUNT(*) AS total FROM technologies`;
 
-export const CREATE_PROJECT = `INSERT INTO projects(name, description, status, public, start_date, end_date, estimated_end, key, deleted)
-VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id, name, coalesce(description, '') as description, status, public, start_date, end_date, estimated_end, '****' as key, deleted, 
+export const CREATE_PROJECT = `INSERT INTO projects(name, name_hash, description, status, public, start_date, end_date, estimated_end, key, deleted)
+VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id, name, coalesce(description, '') as description, status, public, start_date, end_date, estimated_end, '****' as key, deleted, 
 created_at, updated_at`;
+
+export const CREATE_COLLABORATOR =
+  "INSERT INTO collaborators(project_id, user_id, role_id) VALUES($1, $2, $3)";

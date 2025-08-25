@@ -6,6 +6,7 @@ import {
   PERMISSIONS_NAME_VIOLATION_MESSAGE,
   PROJECT_ROLES_ROLENAME_VIOLATION_MESSAGE,
   PROJECTS_KEY_VIOLATION_MESSAGE,
+  PROJECTS_NAME_HASH_VIOLATION_MESSAGE,
   PROJECTS_NAME_VIOLATION_MESSAGE,
   SKILLS_NAME_VIOLATION_MESSAGE,
   TAGS_NAME_VIOLATION_MESSAGE,
@@ -36,6 +37,7 @@ export function handleDuplicatedKeyViolation(violation: string) {
   const PROJECT_ROLES_ROLENAME_VIOLATION = "project_roles_role_name_key";
   const TECHNOLOGIES_NAME_VIOLATION = "technologies_name_key";
   const EXTERNAL_RESOURCES_URL_VIOLATION = "external_resources_url_key";
+  const PROJECTS_NAME_HASH_VIOLATION = "projects_name_hash_key";
 
   switch (violation) {
     case USERS_USERNAME_VIOLATION:
@@ -102,6 +104,11 @@ export function handleDuplicatedKeyViolation(violation: string) {
       return {
         ...response,
         message: USERS_TECHNOLOGIES_PK_VIOLATION_MESSAGE,
+      };
+    case PROJECTS_NAME_HASH_VIOLATION:
+      return {
+        ...response,
+        message: PROJECTS_NAME_HASH_VIOLATION_MESSAGE,
       };
     default:
       logger.error(

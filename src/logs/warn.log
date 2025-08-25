@@ -581,3 +581,35 @@
 [2025-08-25T20:10:18Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-25T20:11:20Z] [error]: The following unhandled error has occurred: 
 [2025-08-25T20:11:20Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"name\": \"project 2\",\n    \"description\": \"el pedro description\",\n    \"status\": \"FINISHED\",\n    \"publicProject\": false,\n    \"startDate\": \"2024-03-28\",\n    \"endDate\": \"2024-04-27\",\n\n}","type":"entity.parse.failed"}
+[2025-08-25T20:33:33Z] [error]: The following error has occurred while trying to load the default data for 'permissions': 
+[2025-08-25T20:33:33Z] [error]: duplicate key value violates unique constraint "permissions_name_key"
+[2025-08-25T20:33:33Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-25T20:33:33Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-25T20:33:52Z] [error]: The following error has occurred while trying to load the default data for 'permissions': 
+[2025-08-25T20:33:52Z] [error]: duplicate key value violates unique constraint "permissions_name_key"
+[2025-08-25T20:33:52Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-25T20:33:52Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-25T20:35:07Z] [error]: The following error has occurred while trying to load the default data for 'permissions': 
+[2025-08-25T20:35:07Z] [error]: duplicate key value violates unique constraint "permissions_name_key"
+[2025-08-25T20:35:08Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-25T20:35:08Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-25T20:36:42Z] [error]: The following error has occurred while trying to load the default data for 'permissions': 
+[2025-08-25T20:36:42Z] [error]: duplicate key value violates unique constraint "permissions_name_key"
+[2025-08-25T20:36:42Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-25T20:36:42Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-25T20:38:22Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-25T20:38:22Z] [error]: Connection terminated unexpectedly
+[2025-08-25T20:54:54Z] [error]: The following error has occurred while trying to load the default data for 'project_role_permissions': 
+[2025-08-25T20:54:54Z] [error]: insert or update on table "project_role_permissions" violates foreign key constraint "fk_project_role_permissions_project_role_id"
+[2025-08-25T20:55:35Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-25T20:55:35Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_global_role_id"
+[2025-08-25T20:55:35Z] [error]: The following error has occurred while trying to load the default data for 'project_role_permissions': 
+[2025-08-25T20:55:35Z] [error]: insert or update on table "project_role_permissions" violates foreign key constraint "fk_project_role_permissions_project_role_id"
+[2025-08-25T20:56:19Z] [error]: The following error has occurred while trying to load the default data for 'project_role_permissions': 
+[2025-08-25T20:56:19Z] [error]: insert or update on table "project_role_permissions" violates foreign key constraint "fk_project_role_permissions_project_role_id"
+[2025-08-25T20:56:36Z] [error]: The following error has occurred while trying to load the default data for 'project_role_permissions': 
+[2025-08-25T20:56:36Z] [error]: insert or update on table "project_role_permissions" violates foreign key constraint "fk_project_role_permissions_project_role_id"
+[2025-08-25T21:16:45Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-25T21:17:07Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-25T21:31:26Z] [error]: An unhandled not unique contraint violation was thrown "projects_name_hash_key"
+[2025-08-25T21:31:49Z] [error]: An unhandled not unique contraint violation was thrown "projects_name_hash_key"

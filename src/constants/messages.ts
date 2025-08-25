@@ -76,6 +76,8 @@ export const USER_DETAILS_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "User details successfully retrieved.";
 export const PROJECT_SUCCESSFULLY_CREATED_MESSAGE =
   "The project has been successfully created.";
+export const PROJECTS_NAME_HASH_VIOLATION_MESSAGE =
+  "Project 'name' already in use.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

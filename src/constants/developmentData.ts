@@ -1,4 +1,5 @@
 import { GLOBAL_PERMISSIONS } from "./globalPermissions";
+import { PROJECT_PERMISSIONS } from "./projectPermissions";
 
 export const DEVELOPMENT_GLOBAL_ROLES = [
   {
@@ -73,6 +74,14 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.addOwnTechnologies,
       GLOBAL_PERMISSIONS.removeOwnTechnologies,
     ],
+  },
+];
+
+export const DEVELOPMENT_PROJECT_ROLES = [
+  {
+    id: 1,
+    role_name: "admin",
+    permissions: [PROJECT_PERMISSIONS.updateProjects],
   },
 ];
 

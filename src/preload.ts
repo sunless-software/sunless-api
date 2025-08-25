@@ -3,6 +3,7 @@ import connectToDB from "./db";
 import { encryptPassword } from "./utils";
 import {
   DEVELOPMENT_GLOBAL_ROLES,
+  DEVELOPMENT_PROJECT_ROLES,
   DEVELOPMENT_USERS,
   DEVELOPMENT_USERS_EDUCATIONS,
   DEVELOPMENT_USERS_EXPERIENCES,
@@ -15,6 +16,7 @@ import { GLOBAL_PERMISSIONS } from "./constants/globalPermissions";
 import { DEFAULT_SKILLS, DEFAULT_TECHNOLOGIES } from "./constants/defaultData";
 import logger from "./logger";
 import EntityPreloader from "./classes/EntityPreloader";
+import { PROJECT_PERMISSIONS } from "./constants/projectPermissions";
 
 export default async function preload() {
   const development = process.env.NODE_ENV === NODE_ENV_DEVELOPMENT;
@@ -27,11 +29,21 @@ export default async function preload() {
   }
 
   const globalPermissionsData = Object.values(GLOBAL_PERMISSIONS).map(
-    ({ id, ...rest }) => rest
+    ({ id, ...rest }) => {
+      return { ...rest, scope: "GLOBAL" };
+    }
+  );
+  const projectPermissionsData = Object.values(PROJECT_PERMISSIONS).map(
+    ({ id, ...rest }) => {
+      return { ...rest, scope: "PROJECT" };
+    }
   );
 
   await Promise.all([
-    entityPreloader.PreloadDefaultData("permissions", globalPermissionsData),
+    entityPreloader.PreloadDefaultData("permissions", [
+      ...globalPermissionsData,
+      ...projectPermissionsData,
+    ]),
     entityPreloader.PreloadDefaultData("skills", DEFAULT_SKILLS),
     entityPreloader.PreloadDefaultData("technologies", DEFAULT_TECHNOLOGIES),
   ]);
@@ -46,6 +58,9 @@ export default async function preload() {
     const developmentGlobalRolesData = DEVELOPMENT_GLOBAL_ROLES.map((r) => {
       return { role_name: r.role_name };
     });
+    const developmentProjectRolesData = DEVELOPMENT_PROJECT_ROLES.map((r) => {
+      return { role_name: r.role_name };
+    });
 
     await entityPreloader.PreloadDefaultData(
       "global_roles",
@@ -55,6 +70,10 @@ export default async function preload() {
     await entityPreloader.PreloadDefaultData("users", usersWithHashedPasswords);
 
     await Promise.all([
+      entityPreloader.PreloadDefaultData(
+        "project_roles",
+        developmentProjectRolesData
+      ),
       entityPreloader.PreloadDefaultData(
         "experiences",
         DEVELOPMENT_USERS_EXPERIENCES
@@ -72,6 +91,8 @@ export default async function preload() {
         DEVELOPMENT_USERS_SKILLS
       ),
     ]);
+
+    await associateDevProjectRolesPermissions(entityPreloader);
   }
 }
 
@@ -108,5 +129,20 @@ function associateDevGlobalRolesPermissions(entityPreloader: EntityPreloader) {
   return entityPreloader.PreloadDefaultData(
     "global_role_permissions",
     globalDevRolesPermissionsData
+  );
+}
+
+function associateDevProjectRolesPermissions(entityPreloader: EntityPreloader) {
+  const projectDevRolesPermissionsData = DEVELOPMENT_PROJECT_ROLES.flatMap(
+    (r) =>
+      r.permissions.map((p) => ({
+        project_role_id: r.id,
+        permission_id: p.id,
+      }))
+  );
+
+  return entityPreloader.PreloadDefaultData(
+    "project_role_permissions",
+    projectDevRolesPermissionsData
   );
 }

@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS projects (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL,
+    name_hash CHAR(64) NOT NULL UNIQUE,
     description TEXT,
     status project_status NOT NULL,
     public BOOLEAN NOT NULL,
