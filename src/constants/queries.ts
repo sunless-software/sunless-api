@@ -85,3 +85,7 @@ export const REMOVE_USER_TECHNOLOGY = `DELETE from users_technologies ut USING u
 export const GET_TECHNOLOGIES = `SELECT * FROM technologies ORDER BY created_at DESC OFFSET $1 LIMIT $2`;
 
 export const COUNT_TECHNOLOGIES = `SELECT COUNT(*) AS total FROM technologies`;
+
+export const CREATE_PROJECT = `INSERT INTO projects(name, description, status, public, start_date, end_date, estimated_end, key, deleted)
+VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id, name, coalesce(description, '') as description, status, public, start_date, end_date, estimated_end, '****' as key, deleted, 
+created_at, updated_at`;

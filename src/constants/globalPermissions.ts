@@ -151,4 +151,9 @@ export const GLOBAL_PERMISSIONS = {
     name: "GET_DELETED_USER_DETAILS",
     scope: "GLOBAL",
   },
+  createPrivateProjects: {
+    id: 43,
+    name: "CREATE_PRIVATE_PROJECTS",
+    scope: "GLOBAL",
+  },
 } satisfies Record<string, Permission>;

@@ -563,3 +563,21 @@
 [2025-08-24T21:34:39Z] [error]: The following unexpected postgres error has occurred: 
 [2025-08-24T21:34:39Z] [error]: {"length":96,"name":"error","severity":"ERROR","code":"42601","position":"1633","file":"scan.l","line":"1244","routine":"scanner_yyerror"}
 [2025-08-24T21:40:45Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-25T15:12:22Z] [error]: The following unhandled error has occurred: 
+[2025-08-25T15:12:22Z] [error]: {}
+[2025-08-25T16:04:53Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-25T16:04:53Z] [error]: {"length":151,"name":"error","severity":"ERROR","code":"22021","where":"unnamed portal parameter $8","file":"mbutils.c","line":"1723","routine":"report_invalid_encoding"}
+[2025-08-25T16:27:15Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-25T16:27:15Z] [error]: {"code":"ERR_CRYPTO_INVALID_KEYLEN"}
+[2025-08-25T16:29:10Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU2MTM0Njc0LCJleHAiOjE3NTYyMjEwNzR9.zDl0vyBaWBAEy84ihvhxVJxZVJRwfdHjTj1Xvc7wc8g
+[2025-08-25T16:31:47Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU2MTM0Njc0LCJleHAiOjE3NTYyMjEwNzR9.zDl0vyBaWBAEy84ihvhxVJxZVJRwfdHjTj1Xvc7wc8g
+[2025-08-25T16:55:09Z] [error]: The following unhandled error has occurred: 
+[2025-08-25T16:55:09Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"name\": \"asdasdsd\",\n    \"description\": \"el pedro description\",\n    \"status\": \"FINISHED\",\n    \"publicProject\": false,\n    \"startDate\": \"2024-03-28\",\n    \"endDate\": \"2024-04-27\",\n    \"estimatedEnd\": \"2024-04-23\",\n}","type":"entity.parse.failed"}
+[2025-08-25T17:23:57Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU2MTM5NDk5LCJleHAiOjE3NTYyMjU4OTl9.TtzK4mtLAh2aOqGIbYF4xioCQj4GElFooHGAk2DWqDU
+[2025-08-25T17:23:59Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-25T17:23:59Z] [error]: {"code":"ERR_CRYPTO_INVALID_KEYLEN"}
+[2025-08-25T20:09:02Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU2MTQyNjI5LCJleHAiOjE3NTYyMjkwMjl9.-Fl8nEPQ2M7CIagfe_omDWnNh9C1afU9Y7RMMgXq6QY
+[2025-08-25T20:09:08Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU2MTQyNjI5LCJleHAiOjE3NTYyMjkwMjl9.-Fl8nEPQ2M7CIagfe_omDWnNh9C1afU9Y7RMMgXq6QY
+[2025-08-25T20:10:18Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-25T20:11:20Z] [error]: The following unhandled error has occurred: 
+[2025-08-25T20:11:20Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"name\": \"project 2\",\n    \"description\": \"el pedro description\",\n    \"status\": \"FINISHED\",\n    \"publicProject\": false,\n    \"startDate\": \"2024-03-28\",\n    \"endDate\": \"2024-04-27\",\n\n}","type":"entity.parse.failed"}

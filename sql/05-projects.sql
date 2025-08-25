@@ -2,13 +2,13 @@ CREATE TABLE IF NOT EXISTS projects (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
     description TEXT,
-    status project_status,
-    public BOOLEAN,
-    start_date DATE,
+    status project_status NOT NULL,
+    public BOOLEAN NOT NULL,
+    start_date DATE NOT NULL,
     end_date DATE,
     estimated_end DATE,
     key TEXT NOT NULL UNIQUE,
-    deleted BOOLEAN NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

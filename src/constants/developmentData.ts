@@ -47,6 +47,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.removeTechnologies,
       GLOBAL_PERMISSIONS.getPrivateUserDetails,
       GLOBAL_PERMISSIONS.getDeletedUserDetails,
+      GLOBAL_PERMISSIONS.createPrivateProjects,
     ],
   },
   {
