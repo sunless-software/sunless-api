@@ -81,7 +81,10 @@ export const DEVELOPMENT_PROJECT_ROLES = [
   {
     id: 1,
     role_name: "admin",
-    permissions: [PROJECT_PERMISSIONS.updateProjects],
+    permissions: [
+      PROJECT_PERMISSIONS.updateProjects,
+      PROJECT_PERMISSIONS.deleteProject,
+    ],
   },
 ];
 

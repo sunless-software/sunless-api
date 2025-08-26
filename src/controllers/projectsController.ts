@@ -1,12 +1,20 @@
 import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import connectToDB from "../db";
-import { CREATE_COLLABORATOR, CREATE_PROJECT } from "../constants/queries";
-import { HTTP_STATUS_CODE_CREATED } from "../constants/httpStatusCodes";
+import {
+  CREATE_COLLABORATOR,
+  CREATE_PROJECT,
+  SOFT_DELETE_PROJECT,
+} from "../constants/queries";
+import {
+  HTTP_STATUS_CODE_CREATED,
+  HTTP_STATUS_CODE_NOT_FOUND,
+} from "../constants/httpStatusCodes";
 import { encryptText, sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
+  PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
 } from "../constants/messages";
 import { AuthRequest } from "../interfaces";
 
@@ -67,6 +75,29 @@ const projectsController = {
       );
     } catch (err) {
       await db.query("ROLLBACK");
+      return next(err);
+    }
+  },
+  deleteProject: async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const db = await connectToDB();
+
+    try {
+      const result = await db.query(SOFT_DELETE_PROJECT, [id]);
+      const affectedRows = result.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
+        },
+        res
+      );
+    } catch (err) {
       return next(err);
     }
   },

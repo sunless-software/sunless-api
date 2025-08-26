@@ -1,34 +1,26 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import logger from "../logger";
-import { sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
   INSUFICIENT_PERMISSIONS_MESSAGE,
-  INVALID_USER_STATUS_MESSAGE,
   UNEXPECTED_ERROR_DEFAULT_MESSAGE,
 } from "../constants/messages";
 import {
   HTTP_STATUS_CODE_FORBIDDEN,
   HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR,
 } from "../constants/httpStatusCodes";
+import { sendResponse } from "../utils";
 import { AuthRequest, Permission } from "../interfaces";
 import connectToDB from "../db";
 import {
   GET_USER_GLOBAL_PERMISSIONS,
-  GET_USER_STATUS,
+  GET_USER_PROJECT_PERMISSIONS,
 } from "../constants/queries";
 
-/**
- * This function return a middleware which checks permissions required to reach an endpoint.
- *
- * @param oneOf - A list of permissions. At least one should be owned by the user.
- * @param allOf - A list of permissions. All of them should be owned by the user.
- *
- * @returns - A middleware function.
- */
-export default function roleMiddleware(
-  oneOf: Array<Permission> = [],
-  allOf: Array<Permission> = []
+export default function projectRoleMiddleware(
+  requiredGlobalPermission: Permission,
+  requiredProjectPermission: Permission,
+  projectID: number
 ) {
   return async (req: Request, res: Response, next: NextFunction) => {
     if (!("user" in req)) {
@@ -49,26 +41,27 @@ export default function roleMiddleware(
 
     const jwtPayload = (req as AuthRequest).user;
     const db = await connectToDB();
-    const result = await db.query(GET_USER_GLOBAL_PERMISSIONS, [jwtPayload.id]);
-    const userPermissions = result.rows;
 
-    const oneOfFulfilled = oneOf.length
-      ? oneOf.some((requiredPermission) =>
-          userPermissions.some(
-            (userPermission) => userPermission.id === requiredPermission.id
-          )
-        )
-      : true;
+    const resultGlobalPermissions = await db.query(
+      GET_USER_GLOBAL_PERMISSIONS,
+      [jwtPayload.id]
+    );
+    const resultProjectPermissions = await db.query(
+      GET_USER_PROJECT_PERMISSIONS,
+      [jwtPayload.id, projectID]
+    );
 
-    const allOfFulfilled = allOf.length
-      ? allOf.every((requiredPermissions) =>
-          userPermissions.some(
-            (userPermission) => userPermission.id === requiredPermissions.id
-          )
-        )
-      : true;
+    const globalPermissions = resultGlobalPermissions.rows;
+    const projectPermissions = resultProjectPermissions.rows;
 
-    if (oneOfFulfilled && allOfFulfilled) return next();
+    const globalFulfilled = !!globalPermissions.find(
+      (gp) => gp.id === requiredGlobalPermission.id
+    );
+    const projectFulfilled = !!projectPermissions.find(
+      (pp) => pp.id === requiredProjectPermission.id
+    );
+
+    if (globalFulfilled || projectFulfilled) return next();
 
     logger.warn(
       `The user with id "${jwtPayload.id}" tried to reach a resource but was rejected because insuficient permissions.`

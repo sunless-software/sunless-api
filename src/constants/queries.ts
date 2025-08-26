@@ -1,10 +1,16 @@
 export const GET_USER_CREDENTIALS =
   "SELECT id, username, password from users WHERE username = $1 AND deleted = false AND banned = false LIMIT 1";
 
-export const GET_USER_PERMISSIONS = `select p.id, p.name, p.scope from users u
+export const GET_USER_GLOBAL_PERMISSIONS = `select p.id, p.name, p.scope from users u
 join global_role_permissions grp on u.rol_id = grp.global_role_id 
 join permissions p on grp.permission_id = p.id
-where u.id = $1`;
+where u.id = $1 and u.deleted = false`;
+
+export const GET_USER_PROJECT_PERMISSIONS = `select p.id, p.name from collaborators c
+join project_role_permissions prp on prp.project_role_id = c.role_id
+join permissions p on p.id = prp.permission_id
+join projects pj on pj.id = c.project_id
+where c.user_id = $1 and c.project_id = $2 and pj.deleted = false`;
 
 export const GET_USERS = `select id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", coalesce(phone, '') as "phone", coalesce(email, '') as "email", public, banned, deleted, created_at, updated_at FROM users _1 ORDER BY created_at DESC OFFSET $1 LIMIT $2;`;
 
@@ -92,3 +98,6 @@ created_at, updated_at`;
 
 export const CREATE_COLLABORATOR =
   "INSERT INTO collaborators(project_id, user_id, role_id) VALUES($1, $2, $3)";
+
+export const SOFT_DELETE_PROJECT =
+  "UPDATE projects SET deleted = true WHERE id = $1 AND deleted = false";
