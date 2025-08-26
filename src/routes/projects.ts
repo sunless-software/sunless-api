@@ -6,6 +6,7 @@ import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import deleteProjectValidation from "../validations/deleteProject";
 import projectRoleMiddleware from "../middlewares/projectRoleMiddleware";
 import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
+import updateProjectsValidation from "../validations/updateProject";
 
 const projectsRouter = Router();
 
@@ -26,6 +27,39 @@ projectsRouter.post(
   },
   createProjectsValidation,
   projectsController.createProject
+);
+
+projectsRouter.patch(
+  "/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.id);
+    return projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.updateProjects,
+      PROJECT_PERMISSIONS.updateProjects,
+      projectID
+    )(req, res, next);
+  },
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { publicProject } = req.body;
+    if (publicProject === undefined) return next();
+    const projectID = parseInt(req.params.id);
+
+    if (publicProject) {
+      return projectRoleMiddleware(
+        GLOBAL_PERMISSIONS.createPublicProjects,
+        PROJECT_PERMISSIONS.setPublicProject,
+        projectID
+      )(req, res, next);
+    }
+
+    return projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.createPrivateProjects,
+      PROJECT_PERMISSIONS.setPrivateProject,
+      projectID
+    )(req, res, next);
+  },
+  updateProjectsValidation,
+  projectsController.updateProject
 );
 
 projectsRouter.delete(

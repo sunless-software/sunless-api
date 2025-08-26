@@ -84,6 +84,8 @@ export const DEVELOPMENT_PROJECT_ROLES = [
     permissions: [
       PROJECT_PERMISSIONS.updateProjects,
       PROJECT_PERMISSIONS.deleteProject,
+      PROJECT_PERMISSIONS.setPrivateProject,
+      PROJECT_PERMISSIONS.setPublicProject,
     ],
   },
 ];

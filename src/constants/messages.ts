@@ -80,6 +80,8 @@ export const PROJECTS_NAME_HASH_VIOLATION_MESSAGE =
   "Project 'name' already in use.";
 export const PROJECT_SUCCESSFULLY_DELETED_MESSAGE =
   "The project has been successfully deleted.";
+export const PROJECT_SUCCESSFULLY_UPDATED =
+  "The project has been successfully updated.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

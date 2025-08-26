@@ -432,3 +432,29 @@
 [2025-08-25T23:50:08Z] [error]: An unhandled not unique contraint violation was thrown "projects_name_hash_active_key"
 [2025-08-25T23:54:57Z] [error]: An unhandled not unique contraint violation was thrown "users_username_email_active_key"
 [2025-08-25T23:57:45Z] [error]: An unhandled not unique contraint violation was thrown "users_username_email_active_key"
+[2025-08-26T16:22:06Z] [error]: The following unhandled error has occurred: 
+[2025-08-26T16:22:06Z] [error]: {}
+[2025-08-26T17:36:46Z] [error]: The following unhandled error has occurred: 
+[2025-08-26T17:36:46Z] [error]: {}
+[2025-08-26T17:37:06Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T17:37:06Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:03:45Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:03:45Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:04:22Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:04:22Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:04:41Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:04:41Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:04:56Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:04:56Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:05:09Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:05:09Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:05:33Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:05:33Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:09:59Z] [error]: The following unhandled error has occurred: 
+[2025-08-26T19:09:59Z] [error]: {}
+[2025-08-26T19:14:05Z] [error]: The following unhandled error has occurred: 
+[2025-08-26T19:14:05Z] [error]: {}
+[2025-08-26T20:12:36Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T20:12:36Z] [error]: {"code":"ERR_HTTP_HEADERS_SENT"}
+[2025-08-26T20:13:36Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T20:13:36Z] [error]: {"code":"ERR_HTTP_HEADERS_SENT"}

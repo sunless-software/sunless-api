@@ -3,11 +3,9 @@ import { body } from "express-validator";
 import { validateResult } from "../utils";
 import { PROJECT_STATUS } from "../constants/constants";
 
-const createProjectsValidation = [
+const updateProjectsValidation = [
   body("name")
-    .exists()
-    .withMessage("'name' must be provided")
-    .bail()
+    .optional()
     .isString()
     .withMessage("'name' must be an string")
     .bail()
@@ -21,21 +19,15 @@ const createProjectsValidation = [
     .isLength({ min: 1 })
     .withMessage("'description' cannot be empty"),
   body("status")
-    .exists()
-    .withMessage("'status must be provided'")
-    .bail()
+    .optional()
     .isIn(PROJECT_STATUS)
     .withMessage(`'status' must be one of: ${PROJECT_STATUS.join(", ")}`),
   body("publicProject")
-    .exists()
-    .withMessage("'publicProject' must be provided")
-    .bail()
+    .optional()
     .isBoolean()
     .withMessage("'publicProject' must be a boolean"),
   body("startDate")
-    .exists()
-    .withMessage("'startDate' must be provided")
-    .bail()
+    .optional()
     .isISO8601()
     .withMessage("'startDate' must be a valid date in format ISO 8601"),
   body("endDate")
@@ -51,4 +43,4 @@ const createProjectsValidation = [
   },
 ];
 
-export default createProjectsValidation;
+export default updateProjectsValidation;

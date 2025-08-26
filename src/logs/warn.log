@@ -631,3 +631,50 @@
 [2025-08-26T01:34:30Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-26T01:34:32Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-26T01:34:34Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T16:22:06Z] [error]: The following unhandled error has occurred: 
+[2025-08-26T16:22:06Z] [error]: {}
+[2025-08-26T17:36:46Z] [error]: The following unhandled error has occurred: 
+[2025-08-26T17:36:46Z] [error]: {}
+[2025-08-26T17:37:06Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T17:37:06Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T17:48:51Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T19:03:45Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:03:45Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:04:22Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:04:22Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:04:41Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:04:41Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:04:56Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:04:56Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:05:09Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:05:09Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:05:33Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T19:05:33Z] [error]: {"code":"ERR_INVALID_ARG_TYPE"}
+[2025-08-26T19:09:59Z] [error]: The following unhandled error has occurred: 
+[2025-08-26T19:09:59Z] [error]: {}
+[2025-08-26T19:14:05Z] [error]: The following unhandled error has occurred: 
+[2025-08-26T19:14:05Z] [error]: {}
+[2025-08-26T19:44:38Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:12:14Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU2MjM5MTI1LCJleHAiOjE3NTYzMjU1MjV9._0W0nZxI1-wDQglaY24TYAd_anityXIyDalEw2pVpKw"
+[2025-08-26T20:12:36Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:12:36Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:12:36Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T20:12:36Z] [error]: {"code":"ERR_HTTP_HEADERS_SENT"}
+[2025-08-26T20:13:15Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:13:15Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:13:36Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:13:36Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:13:36Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-26T20:13:36Z] [error]: {"code":"ERR_HTTP_HEADERS_SENT"}
+[2025-08-26T20:16:30Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:18:13Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:18:33Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:18:34Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:18:59Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:19:00Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:19:01Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:19:14Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:21:15Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:21:20Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:22:01Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-26T20:23:06Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
