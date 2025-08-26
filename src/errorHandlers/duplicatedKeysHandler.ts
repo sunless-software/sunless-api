@@ -26,8 +26,8 @@ export function handleDuplicatedKeyViolation(violation: string) {
 
   const USERS_SKILLS_PK_VIOLATION = "users_skills_pkey";
   const USERS_TECHNOLOGIES_PK_VIOLATION = "users_technologies_pkey";
-  const USERS_USERNAME_VIOLATION = "users_username_key";
-  const USERS_EMAIL_VIOLATION = "users_email_key";
+  const USERS_USERNAME_VIOLATION = "users_username_active_key";
+  const USERS_EMAIL_VIOLATION = "users_email_active_key";
   const TAGS_NAME_VIOLATION = "tags_name_key";
   const PROJECTS_NAME_VIOLATION = "projects_name_key";
   const PROJECTS_KEY_VIOLATION = "projects_key_key";
@@ -37,7 +37,7 @@ export function handleDuplicatedKeyViolation(violation: string) {
   const PROJECT_ROLES_ROLENAME_VIOLATION = "project_roles_role_name_key";
   const TECHNOLOGIES_NAME_VIOLATION = "technologies_name_key";
   const EXTERNAL_RESOURCES_URL_VIOLATION = "external_resources_url_key";
-  const PROJECTS_NAME_HASH_VIOLATION = "projects_name_hash_key";
+  const PROJECTS_NAME_HASH_ACTIVE_VIOLATION = "projects_name_hash_active_key";
 
   switch (violation) {
     case USERS_USERNAME_VIOLATION:
@@ -105,7 +105,7 @@ export function handleDuplicatedKeyViolation(violation: string) {
         ...response,
         message: USERS_TECHNOLOGIES_PK_VIOLATION_MESSAGE,
       };
-    case PROJECTS_NAME_HASH_VIOLATION:
+    case PROJECTS_NAME_HASH_ACTIVE_VIOLATION:
       return {
         ...response,
         message: PROJECTS_NAME_HASH_VIOLATION_MESSAGE,

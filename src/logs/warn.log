@@ -613,3 +613,10 @@
 [2025-08-25T21:17:07Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-25T21:31:26Z] [error]: An unhandled not unique contraint violation was thrown "projects_name_hash_key"
 [2025-08-25T21:31:49Z] [error]: An unhandled not unique contraint violation was thrown "projects_name_hash_key"
+[2025-08-25T23:44:35Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-25T23:44:35Z] [error]: Connection terminated unexpectedly
+[2025-08-25T23:49:31Z] [error]: The following error has occurred while trying to establish a connection to the DB: 
+[2025-08-25T23:49:31Z] [error]: the database system is starting up
+[2025-08-25T23:50:08Z] [error]: An unhandled not unique contraint violation was thrown "projects_name_hash_active_key"
+[2025-08-25T23:54:57Z] [error]: An unhandled not unique contraint violation was thrown "users_username_email_active_key"
+[2025-08-25T23:57:45Z] [error]: An unhandled not unique contraint violation was thrown "users_username_email_active_key"
