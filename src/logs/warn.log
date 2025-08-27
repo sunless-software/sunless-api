@@ -699,3 +699,38 @@
 [2025-08-27T01:45:22Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-27T01:45:27Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-27T01:46:04Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T04:16:29Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-27T04:16:40Z] [warn]: A request was rejected because the authorization token was invalid. Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwivdXNlcm5hbWUiOiJzdW5sZXNzX2FkbWluIiwiaWF0IjoxNzU2MjU5MTk3LCJleHAiOjE3NTYzNDU1OTd9.uQRXcckBjl3w0FaqHR01h6e3cuCcq0d8DYygTUF3jkY
+[2025-08-27T04:17:13Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T04:17:23Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T04:17:50Z] [warn]: The user with id "2" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T16:13:29Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:13:29Z] [error]: {}
+[2025-08-27T16:13:46Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:13:46Z] [error]: {}
+[2025-08-27T16:14:22Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:14:22Z] [error]: {}
+[2025-08-27T16:14:56Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:14:56Z] [error]: {}
+[2025-08-27T16:16:01Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:16:01Z] [error]: {}
+[2025-08-27T16:16:23Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:16:23Z] [error]: {}
+[2025-08-27T16:17:12Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:17:12Z] [error]: {}
+[2025-08-27T16:17:30Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:17:30Z] [error]: {}
+[2025-08-27T16:17:38Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:17:38Z] [error]: {}
+[2025-08-27T16:17:45Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:17:45Z] [error]: {}
+[2025-08-27T16:19:55Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:19:55Z] [error]: {}
+[2025-08-27T16:27:34Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T16:28:09Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T16:28:10Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T16:28:11Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T16:28:29Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T16:30:30Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T16:33:38Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T16:33:53Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

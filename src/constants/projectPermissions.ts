@@ -26,4 +26,8 @@ export const PROJECT_PERMISSIONS = {
     id: Object.keys(GLOBAL_PERMISSIONS).length + 6,
     name: "REMOVE_TECHNOLOGIES_PROJECT",
   },
+  inviteProject: {
+    id: Object.keys(GLOBAL_PERMISSIONS).length + 7,
+    name: "INVITE_PROJECT",
+  },
 } satisfies Record<string, Permission>;

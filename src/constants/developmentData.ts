@@ -88,6 +88,7 @@ export const DEVELOPMENT_PROJECT_ROLES = [
       PROJECT_PERMISSIONS.setPublicProject,
       PROJECT_PERMISSIONS.addTechnologiesProject,
       PROJECT_PERMISSIONS.removeTechnologiesProject,
+      PROJECT_PERMISSIONS.inviteProject,
     ],
   },
 ];

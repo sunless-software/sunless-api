@@ -2,6 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import connectToDB from "../db";
 import {
+  CHECK_PROJECT_EXISTS,
+  CHECK_PROJECT_ROLE_EXISTS,
+  CHECK_VALID_USER_EXISTS,
   CREATE_COLLABORATOR,
   CREATE_PROJECT,
   GET_PROJECT_ENCRYPTED_FIELDS,
@@ -12,14 +15,16 @@ import {
   HTTP_STATUS_CODE_CREATED,
   HTTP_STATUS_CODE_NOT_FOUND,
 } from "../constants/httpStatusCodes";
-import { decryptText, encryptText, sendResponse } from "../utils";
+import { decryptText, encryptText, sendResponse, signJWT } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
+  INVITATION_SUCCESSFULLY_CREATED,
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
 } from "../constants/messages";
 import { AuthRequest } from "../interfaces";
+import { PROJECT_INVITATION_LIFE_TIME } from "../constants/setup";
 
 const projectsController = {
   createProject: async (req: Request, res: Response, next: NextFunction) => {
@@ -189,6 +194,54 @@ const projectsController = {
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
           message: PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  // TODO: When implement AWS SAS send a mail to the invited user with the jwt
+  createProjectInvitation: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const projectID = req.params.id;
+    const { userID, projectRoleID } = req.body;
+    const secret = process.env.SECRET;
+    const db = await connectToDB();
+
+    try {
+      const result = await Promise.all([
+        db.query(CHECK_VALID_USER_EXISTS, [userID]),
+        db.query(CHECK_PROJECT_EXISTS, [projectID]),
+        db.query(CHECK_PROJECT_ROLE_EXISTS, [projectRoleID]),
+      ]);
+      const allEntitiesExists = result.every((r) => r.rows[0].count === "1");
+
+      if (!allEntitiesExists) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      const payload = {
+        userID: userID,
+        projectID: projectID,
+        projectRoleID: projectRoleID,
+      };
+
+      const token = signJWT(
+        payload,
+        secret as string,
+        PROJECT_INVITATION_LIFE_TIME
+      );
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          status: HTTP_STATUS_CODE_CREATED,
+          message: INVITATION_SUCCESSFULLY_CREATED,
+          data: [token],
         },
         res
       );

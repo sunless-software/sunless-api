@@ -114,3 +114,7 @@ FROM projects p JOIN technologies t ON t.id = $2 WHERE p.id = $1 AND p.deleted =
 
 export const REMOVE_PROJECT_TECHNOLOGY = `DELETE FROM projects_technologies pt USING projects p WHERE pt.project_id = p.id AND p.deleted = false
 AND pt.technology_id = $2 AND p.id = $1`;
+
+export const CHECK_VALID_USER_EXISTS = `SELECT count(*) FROM users WHERE id = $1 AND deleted = FALSE and banned = false LIMIT 1`;
+export const CHECK_PROJECT_EXISTS = `SELECT count(*) FROM projects WHERE id = $1 AND deleted = FALSE LIMIT 1`;
+export const CHECK_PROJECT_ROLE_EXISTS = `SELECT count(*) FROM project_roles WHERE id = $1 LIMIT 1`;

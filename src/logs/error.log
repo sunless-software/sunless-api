@@ -465,3 +465,25 @@
 [2025-08-27T01:01:36Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"projectID\": 1,\n    \"technologyID\": a\n}","type":"entity.parse.failed"}
 [2025-08-27T01:01:50Z] [error]: The following unhandled error has occurred: 
 [2025-08-27T01:01:50Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"projectID\": 1,\n    \"technologyID\": 'a'\n}","type":"entity.parse.failed"}
+[2025-08-27T16:13:29Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:13:29Z] [error]: {}
+[2025-08-27T16:13:46Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:13:46Z] [error]: {}
+[2025-08-27T16:14:22Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:14:22Z] [error]: {}
+[2025-08-27T16:14:56Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:14:56Z] [error]: {}
+[2025-08-27T16:16:01Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:16:01Z] [error]: {}
+[2025-08-27T16:16:23Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:16:23Z] [error]: {}
+[2025-08-27T16:17:12Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:17:12Z] [error]: {}
+[2025-08-27T16:17:30Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:17:30Z] [error]: {}
+[2025-08-27T16:17:38Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:17:38Z] [error]: {}
+[2025-08-27T16:17:45Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:17:45Z] [error]: {}
+[2025-08-27T16:19:55Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T16:19:55Z] [error]: {}

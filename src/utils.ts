@@ -29,7 +29,7 @@ export async function checkPassword(password: string, hash: string) {
 export function signJWT(
   payload: object,
   secret: string,
-  expiresIn: "1h" | "4h" | "8h" | "1d"
+  expiresIn: "1h" | "4h" | "8h" | "1d" | "1w"
 ) {
   return jwt.sign(payload, secret, { expiresIn: expiresIn });
 }

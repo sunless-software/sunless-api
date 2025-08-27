@@ -88,7 +88,8 @@ export const PROJECT_TECHNOLOGY_SUCCESSFULLY_ADDED =
   "The technology was successfully added to the project.";
 export const PROJECT_TECHNOLOGY_SUCCESSFULLY_REMOVED =
   "The technology has been successfully removed from the project.";
-
+export const INVITATION_SUCCESSFULLY_CREATED =
+  "The invitation to the project has been successfully created.";
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
   message: "Sucessful request",

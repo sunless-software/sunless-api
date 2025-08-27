@@ -7,6 +7,7 @@ import deleteProjectValidation from "../validations/deleteProject";
 import projectRoleMiddleware from "../middlewares/projectRoleMiddleware";
 import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
 import updateProjectsValidation from "../validations/updateProject";
+import createProjectInvitationValidation from "../validations/createProjectInvitation";
 
 const projectsRouter = Router();
 
@@ -74,6 +75,20 @@ projectsRouter.delete(
   },
   deleteProjectValidation,
   projectsController.deleteProject
+);
+
+projectsRouter.post(
+  "/invite/:id",
+  (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.id);
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.inviteProjects,
+      PROJECT_PERMISSIONS.inviteProject,
+      projectID
+    )(req, res, next);
+  },
+  createProjectInvitationValidation,
+  projectsController.createProjectInvitation
 );
 
 export default projectsRouter;
