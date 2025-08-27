@@ -48,6 +48,8 @@ export const USERS_SKILLS_PK_VIOLATION_MESSAGE =
   "The user already has the skill you are trying to add.";
 export const USERS_TECHNOLOGIES_PK_VIOLATION_MESSAGE =
   "The user already has the technology you are trying to add.";
+export const PROJECTS_TECHNOLOGIES_PK_VIOLATION_MESSAGE =
+  "The project already has the technology you are trying to add.";
 export const USERS_USERNAME_VIOLATION_MESSAGE = "'username' already in use.";
 export const USERS_EMAIL_VIOLATION_MESSAGE = "'email' already in use.";
 export const TAGS_NAME_VIOLATION_MESSAGE = "tag 'name' already in use.";
@@ -82,6 +84,8 @@ export const PROJECT_SUCCESSFULLY_DELETED_MESSAGE =
   "The project has been successfully deleted.";
 export const PROJECT_SUCCESSFULLY_UPDATED =
   "The project has been successfully updated.";
+export const PROJECT_TECHNOLOGY_SUCCESSFULLY_ADDED =
+  "The technology was successfully added to the project.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

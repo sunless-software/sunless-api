@@ -678,3 +678,18 @@
 [2025-08-26T20:21:20Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-26T20:22:01Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-26T20:23:06Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T00:54:29Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T00:54:38Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T00:55:14Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T00:55:24Z] [error]: An unhandled not unique contraint violation was thrown "projects_technologies_pkey"
+[2025-08-27T00:57:59Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T01:01:13Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T01:01:15Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T01:01:15Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"projectID\": 1,\n    \"technologyID\": a\n}","type":"entity.parse.failed"}
+[2025-08-27T01:01:36Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T01:01:36Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"projectID\": 1,\n    \"technologyID\": a\n}","type":"entity.parse.failed"}
+[2025-08-27T01:01:50Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T01:01:50Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"projectID\": 1,\n    \"technologyID\": 'a'\n}","type":"entity.parse.failed"}
+[2025-08-27T01:01:59Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T01:02:02Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T01:02:23Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

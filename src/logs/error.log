@@ -458,3 +458,10 @@
 [2025-08-26T20:12:36Z] [error]: {"code":"ERR_HTTP_HEADERS_SENT"}
 [2025-08-26T20:13:36Z] [error]: The following unexpected postgres error has occurred: 
 [2025-08-26T20:13:36Z] [error]: {"code":"ERR_HTTP_HEADERS_SENT"}
+[2025-08-27T00:55:24Z] [error]: An unhandled not unique contraint violation was thrown "projects_technologies_pkey"
+[2025-08-27T01:01:15Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T01:01:15Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"projectID\": 1,\n    \"technologyID\": a\n}","type":"entity.parse.failed"}
+[2025-08-27T01:01:36Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T01:01:36Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"projectID\": 1,\n    \"technologyID\": a\n}","type":"entity.parse.failed"}
+[2025-08-27T01:01:50Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T01:01:50Z] [error]: {"expose":true,"statusCode":400,"status":400,"body":"{\n    \"projectID\": 1,\n    \"technologyID\": 'a'\n}","type":"entity.parse.failed"}

@@ -108,3 +108,6 @@ estimated_end = COALESCE($8, estimated_end), updated_at = CURRENT_TIMESTAMP WHER
 public, start_date, end_date, estimated_end, '****' as key, deleted, created_at, updated_at`;
 
 export const GET_PROJECT_ENCRYPTED_FIELDS = `SELECT name, description, public, key FROM projects WHERE id = $1 FOR UPDATE`;
+
+export const ADD_PROJECT_TECHNOLOGY = `INSERT INTO projects_technologies (project_id, technology_id, created_at, updated_at) SELECT p.id, t.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+FROM projects p JOIN technologies t ON t.id = $2 WHERE p.id = $1 AND p.deleted = false`;

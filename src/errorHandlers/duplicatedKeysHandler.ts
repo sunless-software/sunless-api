@@ -8,6 +8,7 @@ import {
   PROJECTS_KEY_VIOLATION_MESSAGE,
   PROJECTS_NAME_HASH_VIOLATION_MESSAGE,
   PROJECTS_NAME_VIOLATION_MESSAGE,
+  PROJECTS_TECHNOLOGIES_PK_VIOLATION_MESSAGE,
   SKILLS_NAME_VIOLATION_MESSAGE,
   TAGS_NAME_VIOLATION_MESSAGE,
   TECHNOLOGIES_NAME_VIOLATION_MESSAGE,
@@ -26,6 +27,7 @@ export function handleDuplicatedKeyViolation(violation: string) {
 
   const USERS_SKILLS_PK_VIOLATION = "users_skills_pkey";
   const USERS_TECHNOLOGIES_PK_VIOLATION = "users_technologies_pkey";
+  const PROJECTS_TECHNOLOGIES_PK_VIOLATION = "projects_technologies_pkey";
   const USERS_USERNAME_VIOLATION = "users_username_active_key";
   const USERS_EMAIL_VIOLATION = "users_email_active_key";
   const TAGS_NAME_VIOLATION = "tags_name_key";
@@ -104,6 +106,11 @@ export function handleDuplicatedKeyViolation(violation: string) {
       return {
         ...response,
         message: USERS_TECHNOLOGIES_PK_VIOLATION_MESSAGE,
+      };
+    case PROJECTS_TECHNOLOGIES_PK_VIOLATION:
+      return {
+        ...response,
+        message: PROJECTS_TECHNOLOGIES_PK_VIOLATION_MESSAGE,
       };
     case PROJECTS_NAME_HASH_ACTIVE_VIOLATION:
       return {
