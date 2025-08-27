@@ -17,14 +17,17 @@ import {
 } from "../constants/httpStatusCodes";
 import { decryptText, encryptText, sendResponse, signJWT } from "../utils";
 import {
+  COLLABORATOR_SUCCESSFULLY_ADDED,
   DEFAULT_SUCCES_API_RESPONSE,
   INVITATION_SUCCESSFULLY_CREATED,
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
 } from "../constants/messages";
-import { AuthRequest } from "../interfaces";
+import { AuthRequest, ProjectInvitation, UserCredentials } from "../interfaces";
 import { PROJECT_INVITATION_LIFE_TIME } from "../constants/setup";
+import jwt from "jsonwebtoken";
+import { INCORRECT_USER_INVITATION } from "../constants/managedErrors";
 
 const projectsController = {
   createProject: async (req: Request, res: Response, next: NextFunction) => {
@@ -226,7 +229,7 @@ const projectsController = {
 
       const payload = {
         userID: userID,
-        projectID: projectID,
+        projectID: parseInt(projectID),
         projectRoleID: projectRoleID,
       };
 
@@ -242,6 +245,49 @@ const projectsController = {
           status: HTTP_STATUS_CODE_CREATED,
           message: INVITATION_SUCCESSFULLY_CREATED,
           data: [token],
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  acceptProjectInvitation: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const secret = process.env.SECRET;
+    const authID = (req as AuthRequest).user.id;
+    const invitationJwt = req.body.code;
+    const db = await connectToDB();
+
+    try {
+      const decodedPayload = jwt.verify(
+        invitationJwt,
+        secret as string
+      ) as ProjectInvitation;
+
+      if (authID !== decodedPayload.userID) {
+        throw new Error(INCORRECT_USER_INVITATION);
+      }
+
+      const result = await db.query(CREATE_COLLABORATOR, [
+        decodedPayload.projectID,
+        decodedPayload.userID,
+        decodedPayload.projectRoleID,
+      ]);
+      const affectedRows = result.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          status: HTTP_STATUS_CODE_CREATED,
+          message: COLLABORATOR_SUCCESSFULLY_ADDED,
         },
         res
       );

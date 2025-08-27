@@ -734,3 +734,19 @@
 [2025-08-27T16:30:30Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-27T16:33:38Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-27T16:33:53Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T17:00:34Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-27T17:00:44Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T17:00:44Z] [error]: {"name":"JsonWebTokenError","message":"jwt malformed"}
+[2025-08-27T17:03:21Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T17:03:21Z] [error]: {"name":"JsonWebTokenError","message":"jwt malformed"}
+[2025-08-27T17:24:54Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T17:24:54Z] [error]: {"name":"JsonWebTokenError","message":"invalid signature"}
+[2025-08-27T17:43:51Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T17:44:00Z] [error]: An unhandled not unique contraint violation was thrown "collaborators_pkey"
+[2025-08-27T17:44:30Z] [error]: An unhandled not unique contraint violation was thrown "collaborators_pkey"
+[2025-08-27T17:58:08Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T18:02:39Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T18:02:39Z] [error]: {"name":"TokenExpiredError","message":"jwt expired","expiredAt":"2025-08-27T18:02:14.000Z"}
+[2025-08-27T18:35:55Z] [error]: The following unhandled error has occurred: 
+[2025-08-27T18:35:55Z] [error]: {"name":"JsonWebTokenError","message":"invalid token"}
+[2025-08-27T18:41:28Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

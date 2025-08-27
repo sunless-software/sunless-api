@@ -43,3 +43,11 @@ export interface User {
   created_at: string;
   updated_at: string;
 }
+
+export interface ProjectInvitation {
+  userID: number;
+  projectID: number;
+  projectRoleID: number;
+  iat: number;
+  exp: number;
+}

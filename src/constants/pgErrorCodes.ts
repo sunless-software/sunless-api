@@ -1,2 +1,0 @@
-export const PG_UNIQUE_VIOLATION_CODE = "23505";
-export const PG_FOREIGN_KEY_VIOLATION_CODE = "23503";

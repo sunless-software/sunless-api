@@ -96,8 +96,8 @@ export const CREATE_PROJECT = `INSERT INTO projects(name, name_hash, description
 VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id, name, coalesce(description, '') as description, status, public, start_date, end_date, estimated_end, '****' as key, deleted, 
 created_at, updated_at`;
 
-export const CREATE_COLLABORATOR =
-  "INSERT INTO collaborators(project_id, user_id, role_id) VALUES($1, $2, $3)";
+export const CREATE_COLLABORATOR = `INSERT INTO collaborators(project_id, user_id, role_id) SELECT p.id, u.id, $3 as role_id FROM users u, projects p
+WHERE u.id = $2 AND u.deleted = FALSE and p.id = $1 and p.deleted = FALSE`;
 
 export const SOFT_DELETE_PROJECT =
   "UPDATE projects SET deleted = true WHERE id = $1 AND deleted = false";

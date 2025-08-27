@@ -8,6 +8,7 @@ import projectRoleMiddleware from "../middlewares/projectRoleMiddleware";
 import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
 import updateProjectsValidation from "../validations/updateProject";
 import createProjectInvitationValidation from "../validations/createProjectInvitation";
+import acceptInvitationValidation from "../validations/acceptInvitation";
 
 const projectsRouter = Router();
 
@@ -89,6 +90,12 @@ projectsRouter.post(
   },
   createProjectInvitationValidation,
   projectsController.createProjectInvitation
+);
+
+projectsRouter.post(
+  "/join",
+  acceptInvitationValidation,
+  projectsController.acceptProjectInvitation
 );
 
 export default projectsRouter;

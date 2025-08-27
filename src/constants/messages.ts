@@ -90,6 +90,17 @@ export const PROJECT_TECHNOLOGY_SUCCESSFULLY_REMOVED =
   "The technology has been successfully removed from the project.";
 export const INVITATION_SUCCESSFULLY_CREATED =
   "The invitation to the project has been successfully created.";
+export const MALFORMED_JWT_MESSAGE = "The JWT is not malformed.";
+export const INVALID_JWT_SIGNATURE_MESSAGE =
+  "The signature of the JWT is invalid.";
+export const EXPIRED_JWT_MESSAGE = "The JWT is expired.";
+export const INCORRECT_USER_INVITATION_MESSAGE =
+  "This invitation is not for you.";
+export const COLLABORATORS_PK_VIOLATION_MESSAGE =
+  "The user already is a collaborator of the project.";
+export const COLLABORATOR_SUCCESSFULLY_ADDED =
+  "The user has been successfully added as a collaborator of the project.";
+export const INVALID_JWT_MESSAGE = "The JWT is not valid.";
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
   message: "Sucessful request",
