@@ -8,6 +8,7 @@ import getTechnologiesValidation from "../validations/getTechnologies";
 import projectRoleMiddleware from "../middlewares/projectRoleMiddleware";
 import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
 import addProjectTechnologyValidation from "../validations/addProjectTechnology";
+import removeProjectTechnologyValidation from "../validations/removeProjectTechnology";
 
 const technologiesRouter = Router();
 
@@ -51,6 +52,21 @@ technologiesRouter.delete(
   ),
   removeUserTechnologyValidation,
   technologiesController.removeUserTechnology
+);
+
+technologiesRouter.delete(
+  "/remove/project/:id",
+  (req: Request, res: Response, next: NextFunction) => {
+    let projectID = parseInt(req.params.id);
+
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.updateProjects,
+      PROJECT_PERMISSIONS.removeTechnologiesProject,
+      projectID || 0
+    )(req, res, next);
+  },
+  removeProjectTechnologyValidation,
+  technologiesController.removeProjectTechnology
 );
 
 export default technologiesRouter;

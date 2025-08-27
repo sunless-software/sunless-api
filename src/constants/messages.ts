@@ -86,6 +86,8 @@ export const PROJECT_SUCCESSFULLY_UPDATED =
   "The project has been successfully updated.";
 export const PROJECT_TECHNOLOGY_SUCCESSFULLY_ADDED =
   "The technology was successfully added to the project.";
+export const PROJECT_TECHNOLOGY_SUCCESSFULLY_REMOVED =
+  "The technology has been successfully removed from the project.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

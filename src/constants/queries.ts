@@ -111,3 +111,6 @@ export const GET_PROJECT_ENCRYPTED_FIELDS = `SELECT name, description, public, k
 
 export const ADD_PROJECT_TECHNOLOGY = `INSERT INTO projects_technologies (project_id, technology_id, created_at, updated_at) SELECT p.id, t.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 FROM projects p JOIN technologies t ON t.id = $2 WHERE p.id = $1 AND p.deleted = false`;
+
+export const REMOVE_PROJECT_TECHNOLOGY = `DELETE FROM projects_technologies pt USING projects p WHERE pt.project_id = p.id AND p.deleted = false
+AND pt.technology_id = $2 AND p.id = $1`;

@@ -693,3 +693,9 @@
 [2025-08-27T01:01:59Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-27T01:02:02Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-27T01:02:23Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T01:33:05Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-27T01:45:16Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T01:45:21Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T01:45:22Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T01:45:27Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-27T01:46:04Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
