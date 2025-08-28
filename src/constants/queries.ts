@@ -129,3 +129,5 @@ select $1, p.id, $3, $4, false from projects p where p.id = $2 and p.deleted = f
 export const SOFT_DELETE_BLOG = `UPDATE blogs SET deleted = TRUE WHERE id = $1 and deleted = FALSE`;
 
 export const GET_PROJECT_ID_FROM_BLOG = `SELECT project_id FROM blogs WHERE id = $1 LIMIT 1`;
+
+export const UPDATE_BLOGS = `UPDATE blogs SET title = COALESCE($1, title), body = COALESCE($2, body) WHERE id = $3 and deleted = false RETURNING *`;

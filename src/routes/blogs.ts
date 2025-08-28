@@ -7,6 +7,7 @@ import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
 import deleteBlogValidation from "../validations/deleteBlog";
 import connectToDB from "../db";
 import { GET_PROJECT_ID_FROM_BLOG } from "../constants/queries";
+import updateBlogValidation from "../validations/updateBlog";
 
 const blogsRouter = Router();
 
@@ -22,6 +23,23 @@ blogsRouter.post(
   },
   createBlogValidation,
   blogsController.createBlog
+);
+
+blogsRouter.patch(
+  "/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const db = await connectToDB();
+    const result = await db.query(GET_PROJECT_ID_FROM_BLOG, [req.params.id]);
+    const projectID = result.rows.length ? result.rows[0].project_id : 0;
+    req.body.projectID = projectID;
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.updateBlogs,
+      PROJECT_PERMISSIONS.updateBlogs,
+      projectID
+    )(req, res, next);
+  },
+  updateBlogValidation,
+  blogsController.updateBlogs
 );
 
 blogsRouter.delete(

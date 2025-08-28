@@ -107,8 +107,6 @@ const projectsController = {
     const db = await connectToDB();
 
     try {
-      await db.query("BEGIN");
-
       const getProjectEncryptedResult = await db.query(
         GET_PROJECT_ENCRYPTED_FIELDS,
         [id]
@@ -160,8 +158,6 @@ const projectsController = {
         id,
       ]);
 
-      await db.query("COMMIT");
-
       return sendResponse(
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
@@ -177,7 +173,6 @@ const projectsController = {
         res
       );
     } catch (err) {
-      await db.query("ROLLBACK");
       return next(err);
     }
   },

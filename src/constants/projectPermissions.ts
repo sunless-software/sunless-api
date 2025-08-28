@@ -38,4 +38,8 @@ export const PROJECT_PERMISSIONS = {
     id: Object.keys(GLOBAL_PERMISSIONS).length + 9,
     name: "DELETE_BLOGS",
   },
+  updateBlogs: {
+    id: Object.keys(GLOBAL_PERMISSIONS).length + 10,
+    name: "UPDATE_BLOGS",
+  },
 } satisfies Record<string, Permission>;

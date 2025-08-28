@@ -105,6 +105,7 @@ export const BLOG_SUCCESSFULLY_CREATED_MESSAGE =
   "The blog has been successfully created.";
 export const BLOG_SUCCESSFULLY_DELETED_MESSAGE =
   "The blog has been successfully deleted.";
+export const BLOG_SUCCESSFULY_UPDATED = "Blog successfully updated.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
