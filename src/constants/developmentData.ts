@@ -86,9 +86,10 @@ export const DEVELOPMENT_PROJECT_ROLES = [
       PROJECT_PERMISSIONS.deleteProject,
       PROJECT_PERMISSIONS.setPrivateProject,
       PROJECT_PERMISSIONS.setPublicProject,
-      PROJECT_PERMISSIONS.addTechnologiesProject,
-      PROJECT_PERMISSIONS.removeTechnologiesProject,
+      PROJECT_PERMISSIONS.addTechnologies,
+      PROJECT_PERMISSIONS.removeTechnologies,
       PROJECT_PERMISSIONS.inviteProject,
+      PROJECT_PERMISSIONS.createBlogs,
     ],
   },
 ];

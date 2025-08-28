@@ -35,7 +35,7 @@ technologiesRouter.post(
     const { projectID } = req.body;
     projectRoleMiddleware(
       GLOBAL_PERMISSIONS.updateProjects,
-      PROJECT_PERMISSIONS.addTechnologiesProject,
+      PROJECT_PERMISSIONS.addTechnologies,
       projectID
     )(req, res, next);
   },
@@ -61,7 +61,7 @@ technologiesRouter.delete(
 
     projectRoleMiddleware(
       GLOBAL_PERMISSIONS.updateProjects,
-      PROJECT_PERMISSIONS.removeTechnologiesProject,
+      PROJECT_PERMISSIONS.removeTechnologies,
       projectID || 0
     )(req, res, next);
   },

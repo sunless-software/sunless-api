@@ -18,16 +18,20 @@ export const PROJECT_PERMISSIONS = {
     id: Object.keys(GLOBAL_PERMISSIONS).length + 4,
     name: "SET_PRIVATE_PROJECT",
   },
-  addTechnologiesProject: {
+  addTechnologies: {
     id: Object.keys(GLOBAL_PERMISSIONS).length + 5,
     name: "ADD_TECHNOLOGIES_PROJECT",
   },
-  removeTechnologiesProject: {
+  removeTechnologies: {
     id: Object.keys(GLOBAL_PERMISSIONS).length + 6,
     name: "REMOVE_TECHNOLOGIES_PROJECT",
   },
   inviteProject: {
     id: Object.keys(GLOBAL_PERMISSIONS).length + 7,
     name: "INVITE_PROJECT",
+  },
+  createBlogs: {
+    id: Object.keys(GLOBAL_PERMISSIONS).length + 8,
+    name: "CREATE_BLOGS",
   },
 } satisfies Record<string, Permission>;

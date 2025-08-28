@@ -101,6 +101,8 @@ export const COLLABORATORS_PK_VIOLATION_MESSAGE =
 export const COLLABORATOR_SUCCESSFULLY_ADDED =
   "The user has been successfully added as a collaborator of the project.";
 export const INVALID_JWT_MESSAGE = "The JWT is not valid.";
+export const BLOG_SUCCESSFULLY_CREATED_MESSAGE =
+  "The blog has been successfully created.";
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
   message: "Sucessful request",

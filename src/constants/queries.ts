@@ -109,6 +109,8 @@ public, start_date, end_date, estimated_end, '****' as key, deleted, created_at,
 
 export const GET_PROJECT_ENCRYPTED_FIELDS = `SELECT name, description, public, key FROM projects WHERE id = $1 FOR UPDATE`;
 
+export const GET_PROJECT_KEY = `SELECT key FROM projects WHERE id = $1 AND deleted = FALSE`;
+
 export const ADD_PROJECT_TECHNOLOGY = `INSERT INTO projects_technologies (project_id, technology_id, created_at, updated_at) SELECT p.id, t.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 FROM projects p JOIN technologies t ON t.id = $2 WHERE p.id = $1 AND p.deleted = false`;
 
@@ -116,5 +118,10 @@ export const REMOVE_PROJECT_TECHNOLOGY = `DELETE FROM projects_technologies pt U
 AND pt.technology_id = $2 AND p.id = $1`;
 
 export const CHECK_VALID_USER_EXISTS = `SELECT count(*) FROM users WHERE id = $1 AND deleted = FALSE and banned = false LIMIT 1`;
+
 export const CHECK_PROJECT_EXISTS = `SELECT count(*) FROM projects WHERE id = $1 AND deleted = FALSE LIMIT 1`;
+
 export const CHECK_PROJECT_ROLE_EXISTS = `SELECT count(*) FROM project_roles WHERE id = $1 LIMIT 1`;
+
+export const CREATE_BLOG = `INSERT INTO blogs (user_id, project_id, title, body, deleted)
+select $1, p.id, $3, $4, false from projects p where p.id = $2 and p.deleted = false RETURNING *`;

@@ -499,3 +499,19 @@
 [2025-08-27T18:02:39Z] [error]: {"name":"TokenExpiredError","message":"jwt expired","expiredAt":"2025-08-27T18:02:14.000Z"}
 [2025-08-27T18:35:55Z] [error]: The following unhandled error has occurred: 
 [2025-08-27T18:35:55Z] [error]: {"name":"JsonWebTokenError","message":"invalid token"}
+[2025-08-28T02:21:39Z] [error]: The following unhandled error has occurred: 
+[2025-08-28T02:21:39Z] [error]: {}
+[2025-08-28T02:21:59Z] [error]: The following unhandled error has occurred: 
+[2025-08-28T02:21:59Z] [error]: {}
+[2025-08-28T02:34:56Z] [error]: The following error has occurred while trying to load the default data for 'permissions': 
+[2025-08-28T02:34:56Z] [error]: duplicate key value violates unique constraint "permissions_name_scope_key"
+[2025-08-28T02:34:56Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-28T02:34:56Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-28T02:34:56Z] [error]: The following error has occurred while trying to load the default data for 'project_role_permissions': 
+[2025-08-28T02:34:56Z] [error]: insert or update on table "project_role_permissions" violates foreign key constraint "fk_project_role_permissions_permission_id"
+[2025-08-28T02:35:03Z] [error]: The following error has occurred while trying to load the default data for 'permissions': 
+[2025-08-28T02:35:03Z] [error]: duplicate key value violates unique constraint "permissions_name_scope_key"
+[2025-08-28T02:35:03Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-28T02:35:03Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
+[2025-08-28T02:35:03Z] [error]: The following error has occurred while trying to load the default data for 'project_role_permissions': 
+[2025-08-28T02:35:03Z] [error]: insert or update on table "project_role_permissions" violates foreign key constraint "fk_project_role_permissions_permission_id"
