@@ -125,3 +125,7 @@ export const CHECK_PROJECT_ROLE_EXISTS = `SELECT count(*) FROM project_roles WHE
 
 export const CREATE_BLOG = `INSERT INTO blogs (user_id, project_id, title, body, deleted)
 select $1, p.id, $3, $4, false from projects p where p.id = $2 and p.deleted = false RETURNING *`;
+
+export const SOFT_DELETE_BLOG = `UPDATE blogs SET deleted = TRUE WHERE id = $1 and deleted = FALSE`;
+
+export const GET_PROJECT_ID_FROM_BLOG = `SELECT project_id FROM blogs WHERE id = $1 LIMIT 1`;

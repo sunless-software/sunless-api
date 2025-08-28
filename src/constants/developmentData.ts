@@ -90,6 +90,7 @@ export const DEVELOPMENT_PROJECT_ROLES = [
       PROJECT_PERMISSIONS.removeTechnologies,
       PROJECT_PERMISSIONS.inviteProject,
       PROJECT_PERMISSIONS.createBlogs,
+      PROJECT_PERMISSIONS.deleteBlogs,
     ],
   },
 ];

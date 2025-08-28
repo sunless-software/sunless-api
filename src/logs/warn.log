@@ -772,3 +772,15 @@
 [2025-08-28T02:36:28Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-28T02:38:56Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-28T02:43:46Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-28T16:37:30Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-28T16:47:21Z] [warn]: A request was rejected because no authorization headers where provided.
+[2025-08-28T16:47:29Z] [error]: The following unhandled error has occurred: 
+[2025-08-28T16:47:29Z] [error]: {}
+[2025-08-28T16:47:55Z] [error]: The following unhandled error has occurred: 
+[2025-08-28T16:47:55Z] [error]: {}
+[2025-08-28T16:48:17Z] [error]: The following unhandled error has occurred: 
+[2025-08-28T16:48:17Z] [error]: {}
+[2025-08-28T16:48:40Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-28T16:49:02Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-28T16:49:26Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-28T16:50:56Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

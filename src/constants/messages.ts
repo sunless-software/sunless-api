@@ -103,6 +103,9 @@ export const COLLABORATOR_SUCCESSFULLY_ADDED =
 export const INVALID_JWT_MESSAGE = "The JWT is not valid.";
 export const BLOG_SUCCESSFULLY_CREATED_MESSAGE =
   "The blog has been successfully created.";
+export const BLOG_SUCCESSFULLY_DELETED_MESSAGE =
+  "The blog has been successfully deleted.";
+
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
   message: "Sucessful request",

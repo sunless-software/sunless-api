@@ -1,0 +1,94 @@
+paths:
+  /api/v1/blogs/{id}:
+    delete:
+      summary: Soft delete a blog
+      description: |
+        Applies a soft delete to a blog by its ID.  
+        Requires a global role with the `DELETE_BLOGS` permission, or a project role with the `DELETE_BLOGS` permission.  
+        The blog is marked as deleted but not permanently removed.
+      tags:
+        - Blogs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the blog to delete
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: Blog successfully soft deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The blog has been successfully deleted.
+                  data:
+                    type: array
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Blog with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

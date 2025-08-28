@@ -515,3 +515,9 @@
 [2025-08-28T02:35:03Z] [error]: insert or update on table "global_role_permissions" violates foreign key constraint "fk_global_role_permissions_permission_id"
 [2025-08-28T02:35:03Z] [error]: The following error has occurred while trying to load the default data for 'project_role_permissions': 
 [2025-08-28T02:35:03Z] [error]: insert or update on table "project_role_permissions" violates foreign key constraint "fk_project_role_permissions_permission_id"
+[2025-08-28T16:47:29Z] [error]: The following unhandled error has occurred: 
+[2025-08-28T16:47:29Z] [error]: {}
+[2025-08-28T16:47:55Z] [error]: The following unhandled error has occurred: 
+[2025-08-28T16:47:55Z] [error]: {}
+[2025-08-28T16:48:17Z] [error]: The following unhandled error has occurred: 
+[2025-08-28T16:48:17Z] [error]: {}
