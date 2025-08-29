@@ -536,3 +536,8 @@
 [2025-08-29T03:24:24Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
 [2025-08-29T03:25:28Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
 [2025-08-29T03:25:28Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-29T18:11:16Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-29T18:11:16Z] [error]: {"length":137,"name":"error","severity":"ERROR","code":"08P01","file":"postgres.c","line":"1731","routine":"exec_bind_message"}
+[2025-08-29T18:12:44Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-29T18:12:44Z] [error]: {"length":137,"name":"error","severity":"ERROR","code":"08P01","file":"postgres.c","line":"1731","routine":"exec_bind_message"}
+[2025-08-29T18:15:52Z] [error]: An unhandled not unique contraint violation was thrown "external_resources_url_hash_key"

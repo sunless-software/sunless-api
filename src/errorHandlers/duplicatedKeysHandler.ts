@@ -2,6 +2,7 @@ import { HTTP_STATUS_CODE_CONFLICT } from "../constants/httpStatusCodes";
 import {
   COLLABORATORS_PK_VIOLATION_MESSAGE,
   DEFAULT_ERROR_API_RESPONSE,
+  EXTERNAL_RESOURCES_URL_HASH_VIOLATION_MESSAGE,
   EXTERNAL_RESOURCES_URL_VIOLATION_MESSAGE,
   GLOBAL_ROLES_ROLENAME_VIOLATION_MESSAGE,
   PERMISSIONS_NAME_VIOLATION_MESSAGE,
@@ -44,6 +45,8 @@ export function handleDuplicatedKeyViolation(violation: string) {
   const PROJECTS_NAME_HASH_ACTIVE_VIOLATION = "projects_name_hash_active_key";
   const COLLABORATORS_PK_VIOLATION = "collaborators_pkey";
   const PROJECTS_TAGS_PK_VIOLATION = "project_tags_pkey";
+  const EXTERNAL_RESOURCES_URL_HASH_VIOLATION =
+    "external_resources_url_hash_key";
 
   switch (violation) {
     case USERS_USERNAME_VIOLATION:
@@ -130,6 +133,11 @@ export function handleDuplicatedKeyViolation(violation: string) {
       return {
         ...response,
         message: PROJECT_TAGS_PK_VIOLATION_MESSAGE,
+      };
+    case EXTERNAL_RESOURCES_URL_HASH_VIOLATION:
+      return {
+        ...response,
+        message: EXTERNAL_RESOURCES_URL_HASH_VIOLATION_MESSAGE,
       };
     default:
       logger.error(

@@ -826,3 +826,16 @@
 [2025-08-29T03:25:28Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
 [2025-08-29T03:26:37Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-29T03:28:05Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:33:50Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T18:11:16Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-29T18:11:16Z] [error]: {"length":137,"name":"error","severity":"ERROR","code":"08P01","file":"postgres.c","line":"1731","routine":"exec_bind_message"}
+[2025-08-29T18:12:44Z] [error]: The following unexpected postgres error has occurred: 
+[2025-08-29T18:12:44Z] [error]: {"length":137,"name":"error","severity":"ERROR","code":"08P01","file":"postgres.c","line":"1731","routine":"exec_bind_message"}
+[2025-08-29T18:15:52Z] [error]: An unhandled not unique contraint violation was thrown "external_resources_url_hash_key"
+[2025-08-29T18:19:54Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T18:20:15Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T18:33:39Z] [warn]: The user with id "1" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T18:35:02Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T18:36:40Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T18:36:42Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T18:40:13Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

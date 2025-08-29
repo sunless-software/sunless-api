@@ -8,3 +8,13 @@ export const PROJECT_STATUS = [
   "DISCARDED",
   "CANCELED",
 ];
+export const EXTERNAL_RESOURCE_TYPES = [
+  "GITHUB",
+  "BITBUCKET",
+  "OTHER_REPO",
+  "JIRA",
+  "TRELLO",
+  "CONFLUENCE",
+  "DRIVE",
+  "OTHER",
+];

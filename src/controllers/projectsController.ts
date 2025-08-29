@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import connectToDB from "../db";
 import {
+  ADD_PROJECT_EXTERNAL_RESOURCE,
   ADD_PROJECT_TAG,
   CHECK_PROJECT_EXISTS,
   CHECK_PROJECT_ROLE_EXISTS,
@@ -9,6 +10,7 @@ import {
   CREATE_COLLABORATOR,
   CREATE_PROJECT,
   GET_PROJECT_ENCRYPTED_FIELDS,
+  GET_PROJECT_KEY,
   REMOVE_PROJECT_TAG,
   SOFT_DELETE_PROJECT,
   UPDATE_PROJECT,
@@ -22,6 +24,7 @@ import {
   COLLABORATOR_SUCCESSFULLY_ADDED,
   DEFAULT_SUCCES_API_RESPONSE,
   INVITATION_SUCCESSFULLY_CREATED,
+  PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_ADDED,
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
@@ -336,6 +339,53 @@ const projectsController = {
 
       return sendResponse(
         { ...DEFAULT_SUCCES_API_RESPONSE, message: TAG_SUCCESSFULLY_REMOVED },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  addExternalResource: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { projectID } = req.params;
+    const { name, url, type } = req.body;
+    const urlHash = crypto.createHash("sha256").update(url).digest("hex");
+    const db = await connectToDB();
+
+    try {
+      const resultProjectKey = await db.query(GET_PROJECT_KEY, [projectID]);
+
+      if (!resultProjectKey.rowCount) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      const projectKey = resultProjectKey.rows[0].key;
+      const decryptedProjectKey = decryptText(projectKey);
+      const encryptedUrl = encryptText(url, decryptedProjectKey);
+
+      const result = await db.query(ADD_PROJECT_EXTERNAL_RESOURCE, [
+        projectID,
+        name,
+        encryptedUrl,
+        urlHash,
+        type,
+      ]);
+      const affectedRows = result.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          status: HTTP_STATUS_CODE_CREATED,
+          message: PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_ADDED,
+          data: [{ ...result.rows[0], url: url }],
+        },
         res
       );
     } catch (err) {

@@ -136,4 +136,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 45,
     name: "REMOVE_PROJECT_TAGS",
   },
+  addProjectExternalResources: {
+    id: 46,
+    name: "ADD_PROJECT_EXTERNAL_RESOURCES",
+  },
 } satisfies Record<string, Permission>;

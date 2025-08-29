@@ -9,3 +9,20 @@ DO $$ BEGIN
         CREATE TYPE permission_scope AS ENUM ('GLOBAL', 'PROJECT');
     END IF;
 END $$;
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'external_resource_type') THEN
+        CREATE TYPE external_resource_type AS ENUM (
+            'GITHUB',
+            'BITBUCKET',
+            'OTHER_REPO',
+            'JIRA',
+            'TRELLO',
+            'CONFLUENCE',
+            'DRIVE',
+            'OTHER'
+        );
+    END IF;
+END
+$$;

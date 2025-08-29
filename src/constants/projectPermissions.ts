@@ -50,4 +50,8 @@ export const PROJECT_PERMISSIONS = {
     id: Object.keys(GLOBAL_PERMISSIONS).length + 12,
     name: "REMOVE_PROJECT_TAGS",
   },
+  addProjectExternalResources: {
+    id: Object.keys(GLOBAL_PERMISSIONS).length + 13,
+    name: "ADD_PROJECT_EXTERNAL_RESOURCES",
+  },
 } satisfies Record<string, Permission>;
