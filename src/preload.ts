@@ -13,7 +13,11 @@ import {
 import { Entities } from "./constants/entities";
 import { NODE_ENV_DEVELOPMENT } from "./constants/constants";
 import { GLOBAL_PERMISSIONS } from "./constants/globalPermissions";
-import { DEFAULT_SKILLS, DEFAULT_TECHNOLOGIES } from "./constants/defaultData";
+import {
+  DEFAULT_SKILLS,
+  DEFAULT_TAGS,
+  DEFAULT_TECHNOLOGIES,
+} from "./constants/defaultData";
 import logger from "./logger";
 import EntityPreloader from "./classes/EntityPreloader";
 import { PROJECT_PERMISSIONS } from "./constants/projectPermissions";
@@ -90,6 +94,7 @@ export default async function preload() {
         "users_skills",
         DEVELOPMENT_USERS_SKILLS
       ),
+      entityPreloader.PreloadDefaultData("tags", DEFAULT_TAGS),
     ]);
 
     await associateDevProjectRolesPermissions(entityPreloader);

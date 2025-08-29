@@ -131,3 +131,6 @@ export const SOFT_DELETE_BLOG = `UPDATE blogs SET deleted = TRUE WHERE id = $1 a
 export const GET_PROJECT_ID_FROM_BLOG = `SELECT project_id FROM blogs WHERE id = $1 LIMIT 1`;
 
 export const UPDATE_BLOGS = `UPDATE blogs SET title = COALESCE($1, title), body = COALESCE($2, body) WHERE id = $3 and deleted = false RETURNING *`;
+
+export const ADD_PROJECT_TAG = `INSERT INTO project_tags (tag_id, project_id) SELECT t.id, p.id FROM tags t
+JOIN projects p ON p.id = $1 AND p.deleted = FALSE AND t.id = $2 RETURNING *`;

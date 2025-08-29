@@ -128,4 +128,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 43,
     name: "CREATE_PRIVATE_PROJECTS",
   },
+  addProjectTags: {
+    id: 44,
+    name: "ADD_PROJECT_TAGS",
+  },
 } satisfies Record<string, Permission>;

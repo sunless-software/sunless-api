@@ -47,3 +47,21 @@ export const DEFAULT_TECHNOLOGIES = [
   { name: "Sass" },
   { name: "Next.js" },
 ];
+
+export const DEFAULT_TAGS = [
+  { name: "2D" },
+  { name: "3D" },
+  { name: "Game" },
+  { name: "Mobile" },
+  { name: "Web" },
+  { name: "VR" },
+  { name: "Application" },
+  { name: "Cloud" },
+  { name: "Desktop" },
+  { name: "API" },
+  { name: "Client interface" },
+  { name: "Backend" },
+  { name: "Frontend" },
+  { name: "Monolith" },
+  { name: "Microservices" },
+];

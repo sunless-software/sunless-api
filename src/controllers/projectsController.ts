@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import connectToDB from "../db";
 import {
+  ADD_PROJECT_TAG,
   CHECK_PROJECT_EXISTS,
   CHECK_PROJECT_ROLE_EXISTS,
   CHECK_VALID_USER_EXISTS,
@@ -23,6 +24,7 @@ import {
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
+  TAG_SUCCESSFULLY_ADDED,
 } from "../constants/messages";
 import { AuthRequest, ProjectInvitation, UserCredentials } from "../interfaces";
 import { PROJECT_INVITATION_LIFE_TIME } from "../constants/setup";
@@ -283,6 +285,33 @@ const projectsController = {
           ...DEFAULT_SUCCES_API_RESPONSE,
           status: HTTP_STATUS_CODE_CREATED,
           message: COLLABORATOR_SUCCESSFULLY_ADDED,
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  addProjectTag: async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = req.params.id;
+    const { tagID } = req.body;
+
+    const db = await connectToDB();
+
+    try {
+      const result = await db.query(ADD_PROJECT_TAG, [projectID, tagID]);
+      const affectedRows = result.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          status: HTTP_STATUS_CODE_CREATED,
+          message: TAG_SUCCESSFULLY_ADDED,
+          data: result.rows,
         },
         res
       );

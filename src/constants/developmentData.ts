@@ -49,6 +49,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.getPrivateUserDetails,
       GLOBAL_PERMISSIONS.getDeletedUserDetails,
       GLOBAL_PERMISSIONS.createPrivateProjects,
+      GLOBAL_PERMISSIONS.addProjectTags,
     ],
   },
   {
@@ -92,6 +93,7 @@ export const DEVELOPMENT_PROJECT_ROLES = [
       PROJECT_PERMISSIONS.createBlogs,
       PROJECT_PERMISSIONS.deleteBlogs,
       PROJECT_PERMISSIONS.updateBlogs,
+      PROJECT_PERMISSIONS.addProjectTags,
     ],
   },
 ];

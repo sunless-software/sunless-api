@@ -106,6 +106,10 @@ export const BLOG_SUCCESSFULLY_CREATED_MESSAGE =
 export const BLOG_SUCCESSFULLY_DELETED_MESSAGE =
   "The blog has been successfully deleted.";
 export const BLOG_SUCCESSFULY_UPDATED = "Blog successfully updated.";
+export const TAG_SUCCESSFULLY_ADDED =
+  "The tag has been successfully added to the project.";
+export const PROJECT_TAGS_PK_VIOLATION_MESSAGE =
+  "The project already has the tag you are trying to add.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

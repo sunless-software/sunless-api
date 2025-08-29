@@ -1,0 +1,159 @@
+paths:
+  /api/v1/projects/{id}/tags:
+    post:
+      summary: Add a tag to a project
+      description: |
+        Associates an existing tag with a project.  
+        Requires the `ADD_PROJECT_TAGS` global permission or a project role with the `ADD_PROJECT_TAGS` permission.  
+        This endpoint does not create new tags, only links an existing one to a project.
+      tags:
+        - Projects
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the project where the tag will be added.
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tagID:
+                  type: integer
+                  example: 1
+                  description: Required. Must be a number. The ID of the existing tag to associate.
+      responses:
+        "201":
+          description: Tag successfully added to project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: The tag has been successfully added to the project.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        tag_id:
+                          type: integer
+                          example: 1
+                        project_id:
+                          type: integer
+                          example: 1
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: "2025-08-29T04:53:57.802Z"
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: "2025-08-29T04:53:57.802Z"
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Entity with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "409":
+          description: Tag already associated with project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: The project already has the tag you are trying to add.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

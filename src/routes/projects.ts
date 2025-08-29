@@ -9,6 +9,7 @@ import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
 import updateProjectsValidation from "../validations/updateProject";
 import createProjectInvitationValidation from "../validations/createProjectInvitation";
 import acceptInvitationValidation from "../validations/acceptInvitation";
+import addProjectTagValidation from "../validations/addProjectTag";
 
 const projectsRouter = Router();
 
@@ -96,6 +97,20 @@ projectsRouter.post(
   "/join",
   acceptInvitationValidation,
   projectsController.acceptProjectInvitation
+);
+
+projectsRouter.post(
+  "/:id/tags",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.id) || 0;
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.addProjectTags,
+      PROJECT_PERMISSIONS.addProjectTags,
+      projectID
+    )(req, res, next);
+  },
+  addProjectTagValidation,
+  projectsController.addProjectTag
 );
 
 export default projectsRouter;

@@ -797,3 +797,15 @@
 [2025-08-28T18:20:10Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-28T18:25:44Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-28T18:26:00Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T01:31:16Z] [error]: The following unhandled error has occurred: 
+[2025-08-29T01:31:16Z] [error]: {}
+[2025-08-29T01:32:49Z] [error]: An unhandled not unique contraint violation was thrown "project_tags_pkey"
+[2025-08-29T01:42:01Z] [warn]: The user with id "1" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T01:42:22Z] [warn]: The user with id "1" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T01:43:13Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T01:43:14Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T01:43:19Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T01:43:21Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T01:44:17Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T01:44:18Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T01:46:24Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
