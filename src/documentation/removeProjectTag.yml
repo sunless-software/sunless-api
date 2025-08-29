@@ -1,0 +1,108 @@
+paths:
+  /api/v1/projects/{projectID}/tags/{tagID}:
+    delete:
+      summary: Remove a tag from a project
+      description: |
+        Removes the association of a tag from a project.  
+        Requires the `REMOVE_PROJECT_TAGS` global permission or a project role with the `REMOVE_PROJECT_TAGS` permission.  
+        This endpoint does not delete the tag itself, only its link with the specified project.
+      tags:
+        - Projects
+      parameters:
+        - name: projectID
+          in: path
+          required: true
+          description: The ID of the project from which the tag will be removed.
+          schema:
+            type: integer
+            example: 1
+        - name: tagID
+          in: path
+          required: true
+          description: The ID of the tag to remove from the project.
+          schema:
+            type: integer
+            example: 5
+      responses:
+        "200":
+          description: Tag successfully removed from project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The tag has been successfully removed from the project.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error (invalid projectID or tagID)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Entity with given ID does not exist (either project or tag not found, or association not found)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

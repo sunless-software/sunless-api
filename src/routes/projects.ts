@@ -10,6 +10,7 @@ import updateProjectsValidation from "../validations/updateProject";
 import createProjectInvitationValidation from "../validations/createProjectInvitation";
 import acceptInvitationValidation from "../validations/acceptInvitation";
 import addProjectTagValidation from "../validations/addProjectTag";
+import removeProjectTagValidation from "../validations/removeProjectTag";
 
 const projectsRouter = Router();
 
@@ -111,6 +112,20 @@ projectsRouter.post(
   },
   addProjectTagValidation,
   projectsController.addProjectTag
+);
+
+projectsRouter.delete(
+  "/:projectID/tags/:tagID",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.projectID) || 0;
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.removeProjectTags,
+      PROJECT_PERMISSIONS.removeProjectTags,
+      projectID
+    )(req, res, next);
+  },
+  removeProjectTagValidation,
+  projectsController.removeProjectTag
 );
 
 export default projectsRouter;

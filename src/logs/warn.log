@@ -809,3 +809,20 @@
 [2025-08-29T01:44:17Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-29T01:44:18Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
 [2025-08-29T01:46:24Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:24:07Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:24:24Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-29T03:24:24Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-29T03:24:27Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:24:29Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:24:30Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:24:32Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:24:50Z] [warn]: The user with id "1" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:24:52Z] [warn]: The user with id "1" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:24:54Z] [warn]: The user with id "1" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:24:55Z] [warn]: The user with id "1" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:25:09Z] [warn]: The user with id "1" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:25:14Z] [warn]: The user with id "1" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:25:28Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-29T03:25:28Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-29T03:26:37Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.
+[2025-08-29T03:28:05Z] [warn]: The user with id "3" tried to reach a resource but was rejected because insuficient permissions.

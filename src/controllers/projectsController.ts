@@ -9,6 +9,7 @@ import {
   CREATE_COLLABORATOR,
   CREATE_PROJECT,
   GET_PROJECT_ENCRYPTED_FIELDS,
+  REMOVE_PROJECT_TAG,
   SOFT_DELETE_PROJECT,
   UPDATE_PROJECT,
 } from "../constants/queries";
@@ -25,6 +26,7 @@ import {
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
   TAG_SUCCESSFULLY_ADDED,
+  TAG_SUCCESSFULLY_REMOVED,
 } from "../constants/messages";
 import { AuthRequest, ProjectInvitation, UserCredentials } from "../interfaces";
 import { PROJECT_INVITATION_LIFE_TIME } from "../constants/setup";
@@ -313,6 +315,27 @@ const projectsController = {
           message: TAG_SUCCESSFULLY_ADDED,
           data: result.rows,
         },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  removeProjectTag: async (req: Request, res: Response, next: NextFunction) => {
+    const { projectID, tagID } = req.params;
+
+    const db = await connectToDB();
+
+    try {
+      const result = await db.query(REMOVE_PROJECT_TAG, [projectID, tagID]);
+      const affectedRows = result.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        { ...DEFAULT_SUCCES_API_RESPONSE, message: TAG_SUCCESSFULLY_REMOVED },
         res
       );
     } catch (err) {

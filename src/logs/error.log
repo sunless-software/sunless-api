@@ -532,3 +532,7 @@
 [2025-08-29T01:31:16Z] [error]: The following unhandled error has occurred: 
 [2025-08-29T01:31:16Z] [error]: {}
 [2025-08-29T01:32:49Z] [error]: An unhandled not unique contraint violation was thrown "project_tags_pkey"
+[2025-08-29T03:24:24Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-29T03:24:24Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"
+[2025-08-29T03:25:28Z] [error]: The following error has occurred while trying to load the default data for 'global_role_permissions': 
+[2025-08-29T03:25:28Z] [error]: duplicate key value violates unique constraint "global_role_permissions_pkey"

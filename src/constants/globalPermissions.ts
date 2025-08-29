@@ -132,4 +132,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 44,
     name: "ADD_PROJECT_TAGS",
   },
+  removeProjectTags: {
+    id: 45,
+    name: "REMOVE_PROJECT_TAGS",
+  },
 } satisfies Record<string, Permission>;

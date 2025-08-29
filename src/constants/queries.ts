@@ -134,3 +134,6 @@ export const UPDATE_BLOGS = `UPDATE blogs SET title = COALESCE($1, title), body 
 
 export const ADD_PROJECT_TAG = `INSERT INTO project_tags (tag_id, project_id) SELECT t.id, p.id FROM tags t
 JOIN projects p ON p.id = $1 AND p.deleted = FALSE AND t.id = $2 RETURNING *`;
+
+export const REMOVE_PROJECT_TAG = `DELETE FROM project_tags pt USING projects p
+WHERE p.deleted = FALSE AND p.id = $1 AND pt.tag_id = $2`;
