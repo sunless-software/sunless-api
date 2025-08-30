@@ -52,6 +52,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.addProjectTags,
       GLOBAL_PERMISSIONS.removeProjectTags,
       GLOBAL_PERMISSIONS.addProjectExternalResources,
+      GLOBAL_PERMISSIONS.deleteProjectExternalResources,
     ],
   },
   {
@@ -98,6 +99,7 @@ export const DEVELOPMENT_PROJECT_ROLES = [
       PROJECT_PERMISSIONS.addProjectTags,
       PROJECT_PERMISSIONS.removeProjectTags,
       PROJECT_PERMISSIONS.addProjectExternalResources,
+      PROJECT_PERMISSIONS.deleteProjectExternalResources,
     ],
   },
 ];

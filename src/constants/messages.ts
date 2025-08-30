@@ -114,6 +114,8 @@ export const PROJECT_TAGS_PK_VIOLATION_MESSAGE =
   "The project already has the tag you are trying to add.";
 export const PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_ADDED =
   "The external resource was successfully added to the project.";
+export const PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_DELETED =
+  "The external resource was successfully deleted.";
 export const EXTERNAL_RESOURCES_URL_HASH_VIOLATION_MESSAGE =
   "There already is another external resource with the same url.";
 

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import connectToDB from "../db";
 import {
-  ADD_PROJECT_EXTERNAL_RESOURCE,
+  CREATE_PROJECT_EXTERNAL_RESOURCE,
   ADD_PROJECT_TAG,
   CHECK_PROJECT_EXISTS,
   CHECK_PROJECT_ROLE_EXISTS,
@@ -14,6 +14,7 @@ import {
   REMOVE_PROJECT_TAG,
   SOFT_DELETE_PROJECT,
   UPDATE_PROJECT,
+  DELETE_PROJECT_EXTERNAL_RESOURCE,
 } from "../constants/queries";
 import {
   HTTP_STATUS_CODE_CREATED,
@@ -25,6 +26,7 @@ import {
   DEFAULT_SUCCES_API_RESPONSE,
   INVITATION_SUCCESSFULLY_CREATED,
   PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_ADDED,
+  PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_DELETED,
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
@@ -366,7 +368,7 @@ const projectsController = {
       const decryptedProjectKey = decryptText(projectKey);
       const encryptedUrl = encryptText(url, decryptedProjectKey);
 
-      const result = await db.query(ADD_PROJECT_EXTERNAL_RESOURCE, [
+      const result = await db.query(CREATE_PROJECT_EXTERNAL_RESOURCE, [
         projectID,
         name,
         encryptedUrl,
@@ -385,6 +387,36 @@ const projectsController = {
           status: HTTP_STATUS_CODE_CREATED,
           message: PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_ADDED,
           data: [{ ...result.rows[0], url: url }],
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  deleteProjectExternalResource: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { projectID, resourceID } = req.params;
+    const db = await connectToDB();
+
+    try {
+      const result = await db.query(DELETE_PROJECT_EXTERNAL_RESOURCE, [
+        projectID,
+        resourceID,
+      ]);
+      const affectedRows = result.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_DELETED,
         },
         res
       );

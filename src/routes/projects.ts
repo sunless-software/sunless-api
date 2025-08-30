@@ -12,6 +12,7 @@ import acceptInvitationValidation from "../validations/acceptInvitation";
 import addProjectTagValidation from "../validations/addProjectTag";
 import removeProjectTagValidation from "../validations/removeProjectTag";
 import addExternalResourceValidation from "../validations/addExternalResource";
+import deleteExternalResourceValidation from "../validations/deleteExternalResource";
 
 const projectsRouter = Router();
 
@@ -141,6 +142,20 @@ projectsRouter.post(
   },
   addExternalResourceValidation,
   projectsController.addExternalResource
+);
+
+projectsRouter.delete(
+  "/:projectID/external-resources/:resourceID",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.projectID) || 0;
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.deleteProjectExternalResources,
+      PROJECT_PERMISSIONS.deleteProjectExternalResources,
+      projectID
+    )(req, res, next);
+  },
+  deleteExternalResourceValidation,
+  projectsController.deleteProjectExternalResource
 );
 
 export default projectsRouter;

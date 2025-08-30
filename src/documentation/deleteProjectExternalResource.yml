@@ -1,0 +1,133 @@
+paths:
+  /api/v1/projects/{projectID}/external-resources/{resourceID}:
+    delete:
+      summary: Delete an external resource from a project
+      description: |
+        Deletes an external resource by its ID within a specific project.  
+        Requires a global role with the `DELETE_PROJECT_EXTERNAL_RESOURCES` permission, or a project role with the `DELETE_PROJECT_EXTERNAL_RESOURCES` permission.  
+        Both `projectID` and `resourceID` must be numeric values.
+      tags:
+        - Projects
+      parameters:
+        - name: projectID
+          in: path
+          required: true
+          description: ID of the project
+          schema:
+            type: integer
+            example: 42
+        - name: resourceID
+          in: path
+          required: true
+          description: ID of the external resource to delete
+          schema:
+            type: integer
+            example: 7
+      responses:
+        "200":
+          description: External resource successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The external resource was successfully deleted.
+                  data:
+                    type: array
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error on path parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: external resource 'id' must be a number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Project or external resource with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

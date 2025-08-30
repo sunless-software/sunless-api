@@ -140,4 +140,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 46,
     name: "ADD_PROJECT_EXTERNAL_RESOURCES",
   },
+  deleteProjectExternalResources: {
+    id: 47,
+    name: "DELETE_PROJECT_EXTERNAL_RESOURCES",
+  },
 } satisfies Record<string, Permission>;
