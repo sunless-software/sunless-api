@@ -141,5 +141,8 @@ WHERE p.deleted = FALSE AND p.id = $1 AND pt.tag_id = $2`;
 export const CREATE_PROJECT_EXTERNAL_RESOURCE = `INSERT INTO external_resources (project_id, name, url, url_hash, type)
 SELECT p.id, $2, $3, $4, $5 from projects p where p.id = $1 and p.deleted = false RETURNING *`;
 
+export const UPDATE_PROJECT_EXTERNAL_RESOURCE = `UPDATE external_resources SET name=COALESCE($3, name), url=COALESCE($4, url), url_hash=COALESCE($5, url_hash),
+type=COALESCE($6, type) WHERE id = $2 and EXISTS (SELECT 1 FROM projects p WHERE p.id = $1 AND p.deleted = false) RETURNING *`;
+
 export const DELETE_PROJECT_EXTERNAL_RESOURCE = `DELETE FROM external_resources er USING projects p
 where p.id = $1 AND p.deleted = FALSE AND er.id = $2`;

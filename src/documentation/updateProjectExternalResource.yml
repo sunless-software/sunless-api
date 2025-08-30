@@ -1,21 +1,29 @@
 paths:
-  /api/v1/projects/{projectID}/external-resources:
-    post:
-      summary: Add an external resource to a project
+  /api/v1/projects/{projectID}/external-resources/{resourceID}:
+    patch:
+      summary: Update an external resource in a project
       description: |
-        Associates a new external resource with a project.  
-        Requires the `ADD_PROJECT_EXTERNAL_RESOURCES` global permission or a project role with the `ADD_PROJECT_EXTERNAL_RESOURCES` permission.  
-        The `type` must be one of: GITHUB, BITBUCKET, OTHER_REPO, JIRA, TRELLO, CONFLUENCE, DRIVE, OTHER.
+        Updates an existing external resource of a project.  
+        Requires the `UPDATE_PROJECT_EXTERNAL_RESOURCES` global permission or a project role with the `UPDATE_PROJECT_EXTERNAL_RESOURCES` permission.  
+        The `type` must be one of: GITHUB, BITBUCKET, OTHER_REPO, JIRA, TRELLO, CONFLUENCE, DRIVE, OTHER.  
+        All fields are optional, but at least one must be provided.
       tags:
         - Projects
       parameters:
         - name: projectID
           in: path
           required: true
-          description: The ID of the project where the external resource will be added.
+          description: The ID of the project where the external resource belongs.
           schema:
             type: integer
             example: 1
+        - name: resourceID
+          in: path
+          required: true
+          description: The ID of the external resource to update.
+          schema:
+            type: integer
+            example: 10
       requestBody:
         required: true
         content:
@@ -26,12 +34,12 @@ paths:
                 name:
                   type: string
                   example: My repo
-                  description: Required. The name of the external resource.
+                  description: Optional. The name of the external resource.
                 url:
                   type: string
                   format: uri
-                  example: https://www.github.com/mfranco289
-                  description: Required. Must be a valid URL.
+                  example: https://www.github.com/my-repo
+                  description: Optional. Must be a valid URL.
                 type:
                   type: string
                   enum:
@@ -44,10 +52,10 @@ paths:
                     - DRIVE
                     - OTHER
                   example: GITHUB
-                  description: Required. Must be one of the allowed external resource types.
+                  description: Optional. Must be one of the allowed external resource types.
       responses:
-        "201":
-          description: External resource successfully added to project
+        "200":
+          description: External resource successfully updated
           content:
             application/json:
               schema:
@@ -55,10 +63,10 @@ paths:
                 properties:
                   status:
                     type: integer
-                    example: 201
+                    example: 200
                   message:
                     type: string
-                    example: The external resource was successfully added to the project.
+                    example: The external resource was successfully updated.
                   data:
                     type: array
                     items:
@@ -75,21 +83,21 @@ paths:
                           example: My repo
                         url:
                           type: string
-                          example: https://www.github.com/mfranco289
+                          example: https://www.github.com/my-repo
                         url_hash:
                           type: string
-                          example: 3e07e5471f5595409040e589654fa49eb00ad331d7dd7138169768a1a6786652
+                          example: f826a0b482b66ba244b471328e5cc0cac03eabba77abc18c72531b1acb9e4e3c
                         type:
                           type: string
                           example: GITHUB
                         created_at:
                           type: string
                           format: date-time
-                          example: "2025-08-29T21:39:37.449Z"
+                          example: "2025-08-30T06:41:54.545Z"
                         updated_at:
                           type: string
                           format: date-time
-                          example: "2025-08-29T21:39:37.449Z"
+                          example: "2025-08-30T06:43:10.127Z"
                   pagination:
                     type: object
                     properties:
@@ -124,7 +132,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
         "404":
-          description: Project with given ID does not exist
+          description: Project or resource with given ID does not exist
           content:
             application/json:
               schema:

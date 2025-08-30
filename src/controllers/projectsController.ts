@@ -15,6 +15,7 @@ import {
   SOFT_DELETE_PROJECT,
   UPDATE_PROJECT,
   DELETE_PROJECT_EXTERNAL_RESOURCE,
+  UPDATE_PROJECT_EXTERNAL_RESOURCE,
 } from "../constants/queries";
 import {
   HTTP_STATUS_CODE_CREATED,
@@ -27,6 +28,7 @@ import {
   INVITATION_SUCCESSFULLY_CREATED,
   PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_ADDED,
   PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_DELETED,
+  PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_PATCHED,
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
@@ -387,6 +389,60 @@ const projectsController = {
           status: HTTP_STATUS_CODE_CREATED,
           message: PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_ADDED,
           data: [{ ...result.rows[0], url: url }],
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  updateExternalResource: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { projectID, resourceID } = req.params;
+    let { name, url, type } = req.body;
+    const db = await connectToDB();
+
+    try {
+      const resultGetProjectKey = await db.query(GET_PROJECT_KEY, [projectID]);
+
+      if (!resultGetProjectKey.rowCount) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      const encryptedProjectKey = resultGetProjectKey.rows[0].key;
+      const decryptedProjectKey = decryptText(encryptedProjectKey);
+
+      const encryptedUrl = url && encryptText(url, decryptedProjectKey);
+      const urlHash =
+        url && crypto.createHash("sha256").update(url).digest("hex");
+
+      const result = await db.query(UPDATE_PROJECT_EXTERNAL_RESOURCE, [
+        projectID,
+        resourceID,
+        name,
+        encryptedUrl,
+        urlHash,
+        type,
+      ]);
+
+      const affectedRows = result.rowCount;
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_PATCHED,
+          data: [
+            {
+              ...result.rows[0],
+              url: url || decryptText(result.rows[0].url, decryptedProjectKey),
+            },
+          ],
         },
         res
       );

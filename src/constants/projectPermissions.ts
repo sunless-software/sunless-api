@@ -58,4 +58,8 @@ export const PROJECT_PERMISSIONS = {
     id: Object.keys(GLOBAL_PERMISSIONS).length + 14,
     name: "DELETE_PROJECT_EXTERNAL_RESOURCES",
   },
+  updateProjectExternalResources: {
+    id: Object.keys(GLOBAL_PERMISSIONS).length + 15,
+    name: "UPDATE_PROJECT_EXTERNAL_RESOURCES",
+  },
 } satisfies Record<string, Permission>;
