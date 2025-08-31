@@ -150,5 +150,8 @@ where p.id = $1 AND p.deleted = FALSE AND er.id = $2`;
 export const CREATE_PROJECT_MEDIA = `INSERT INTO projects_media (url, type, project_id, deleted) 
 SELECT $2, $3, p.id, FALSE FROM projects p WHERE p.id = $1 AND p.deleted = FALSE RETURNING *`;
 
+export const UPDATE_PROJECT_MEDIA = `UPDATE projects_media SET url = COALESCE($1, url), type = COALESCE($2, type) WHERE id = $3
+AND EXISTS (SELECT 1 FROM projects p WHERE p.id = $4 AND p.deleted = FALSE) RETURNING *`;
+
 export const DELETE_PROJECT_MEDIA = `DELETE from projects_media pm USING projects p
 WHERE p.id = $1 AND p.deleted = false AND pm.id = $2`;

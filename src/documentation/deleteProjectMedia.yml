@@ -4,7 +4,7 @@ paths:
       summary: Delete a project media
       description: |
         Deletes a media associated with a project by its ID.  
-        Requires a global role with the `DELETE_PROJECT_MEDIA` permission, or a project role with the `DELETE_PROJECT_MEDIA` permission.  
+        Requires a global role with the `DELETE_PROJECTS_MEDIA` permission, or a project role with the `DELETE_PROJECT_MEDIA` permission.  
         The media is permanently removed.
       tags:
         - Projects

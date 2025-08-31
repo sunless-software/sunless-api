@@ -152,8 +152,12 @@ export const GLOBAL_PERMISSIONS = {
     id: 49,
     name: "CREATE_PROJECT_MEDIA",
   },
-  deleteProjectMedia: {
+  deleteProjectsMedia: {
     id: 50,
-    name: "DELETE_PROJECT_MEDIA",
+    name: "DELETE_PROJECTS_MEDIA",
+  },
+  updateProjectsMedia: {
+    id: 51,
+    name: "UPDATE_PROJECTS_MEDIA",
   },
 } satisfies Record<string, Permission>;

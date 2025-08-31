@@ -3,6 +3,7 @@ import connectToDB from "../db";
 import {
   CREATE_PROJECT_MEDIA,
   DELETE_PROJECT_MEDIA,
+  UPDATE_PROJECT_MEDIA,
 } from "../constants/queries";
 import {
   HTTP_STATUS_CODE_CREATED,
@@ -13,6 +14,7 @@ import {
   DEFAULT_SUCCES_API_RESPONSE,
   PROJECT_MEDIA_SUCCESSFULLY_CREATED,
   PROJECT_MEDIA_SUCCESSFULLY_DELETED,
+  PROJECT_MEDIA_SUCCESSFULLY_UPDATED,
 } from "../constants/messages";
 
 const projectsMediaController = {
@@ -47,6 +49,41 @@ const projectsMediaController = {
         res
       );
     } catch (err) {
+      return next(err);
+    }
+  },
+  updateProjectMedia: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { projectID, mediaID } = req.params;
+    const { url, type } = req.body;
+    const db = await connectToDB();
+
+    try {
+      const result = await db.query(UPDATE_PROJECT_MEDIA, [
+        url,
+        type,
+        mediaID,
+        projectID,
+      ]);
+      const affectedRows = result.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: PROJECT_MEDIA_SUCCESSFULLY_UPDATED,
+          data: result.rows,
+        },
+        res
+      );
+    } catch (err) {
+      console.log(err);
       return next(err);
     }
   },

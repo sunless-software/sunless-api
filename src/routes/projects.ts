@@ -19,6 +19,7 @@ import tagsController from "../controllers/tagsController";
 import projectsMediaController from "../controllers/projectsMediaController";
 import createProjectMediaValidation from "../validations/createProjectMedia";
 import deleteProjectMediaValidation from "../validations/deleteProjectMedia";
+import updateProjectMediaValidation from "../validations/updateProjectMedia";
 
 const projectsRouter = Router();
 
@@ -192,12 +193,26 @@ projectsRouter.post(
   projectsMediaController.createProjectMedia
 );
 
+projectsRouter.patch(
+  "/:projectID/media/:mediaID",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.projectID) || 0;
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.updateProjectsMedia,
+      PROJECT_PERMISSIONS.updateProjectMedia,
+      projectID
+    )(req, res, next);
+  },
+  updateProjectMediaValidation,
+  projectsMediaController.updateProjectMedia
+);
+
 projectsRouter.delete(
   "/:projectID/media/:mediaID",
   async (req: Request, res: Response, next: NextFunction) => {
     const projectID = parseInt(req.params.projectID) || 0;
     projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.deleteProjectMedia,
+      GLOBAL_PERMISSIONS.deleteProjectsMedia,
       PROJECT_PERMISSIONS.deleteProjectMedia,
       projectID
     )(req, res, next);
