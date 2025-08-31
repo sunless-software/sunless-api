@@ -18,6 +18,7 @@ import externalResourcesController from "../controllers/externalResourcesControl
 import tagsController from "../controllers/tagsController";
 import projectsMediaController from "../controllers/projectsMediaController";
 import createProjectMediaValidation from "../validations/createProjectMedia";
+import deleteProjectMediaValidation from "../validations/deleteProjectMedia";
 
 const projectsRouter = Router();
 
@@ -189,6 +190,20 @@ projectsRouter.post(
   },
   createProjectMediaValidation,
   projectsMediaController.createProjectMedia
+);
+
+projectsRouter.delete(
+  "/:projectID/media/:mediaID",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.projectID) || 0;
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.deleteProjectMedia,
+      PROJECT_PERMISSIONS.deleteProjectMedia,
+      projectID
+    )(req, res, next);
+  },
+  deleteProjectMediaValidation,
+  projectsMediaController.deleteProjectMedia
 );
 
 export default projectsRouter;

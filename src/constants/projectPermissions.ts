@@ -66,4 +66,8 @@ export const PROJECT_PERMISSIONS = {
     id: Object.keys(GLOBAL_PERMISSIONS).length + 16,
     name: "CREATE_PROJECT_MEDIA",
   },
+  deleteProjectMedia: {
+    id: Object.keys(GLOBAL_PERMISSIONS).length + 17,
+    name: "DELETE_PROJECT_MEDIA",
+  },
 } satisfies Record<string, Permission>;
