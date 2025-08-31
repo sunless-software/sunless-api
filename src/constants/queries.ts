@@ -146,3 +146,6 @@ type=COALESCE($6, type) WHERE id = $2 and EXISTS (SELECT 1 FROM projects p WHERE
 
 export const DELETE_PROJECT_EXTERNAL_RESOURCE = `DELETE FROM external_resources er USING projects p
 where p.id = $1 AND p.deleted = FALSE AND er.id = $2`;
+
+export const CREATE_PROJECT_MEDIA = `INSERT INTO projects_media (url, type, project_id, deleted) 
+SELECT $2, $3, p.id, FALSE FROM projects p WHERE p.id = $1 AND p.deleted = FALSE RETURNING *`;

@@ -6,6 +6,7 @@ import {
   EXTERNAL_RESOURCES_URL_VIOLATION_MESSAGE,
   GLOBAL_ROLES_ROLENAME_VIOLATION_MESSAGE,
   PERMISSIONS_NAME_VIOLATION_MESSAGE,
+  PROJECT_MEDIA_URL_PROJECT_VIOLATION_MESSAGE,
   PROJECT_ROLES_ROLENAME_VIOLATION_MESSAGE,
   PROJECT_TAGS_PK_VIOLATION_MESSAGE,
   PROJECTS_KEY_VIOLATION_MESSAGE,
@@ -47,6 +48,7 @@ export function handleDuplicatedKeyViolation(violation: string) {
   const PROJECTS_TAGS_PK_VIOLATION = "project_tags_pkey";
   const EXTERNAL_RESOURCES_URL_HASH_VIOLATION =
     "external_resources_url_hash_key";
+  const PROJECTS_MEDIA_URL_PROJECT_VIOLATION = "projects_media_url_project_key";
 
   switch (violation) {
     case USERS_USERNAME_VIOLATION:
@@ -138,6 +140,11 @@ export function handleDuplicatedKeyViolation(violation: string) {
       return {
         ...response,
         message: EXTERNAL_RESOURCES_URL_HASH_VIOLATION_MESSAGE,
+      };
+    case PROJECTS_MEDIA_URL_PROJECT_VIOLATION:
+      return {
+        ...response,
+        message: PROJECT_MEDIA_URL_PROJECT_VIOLATION_MESSAGE,
       };
     default:
       logger.error(

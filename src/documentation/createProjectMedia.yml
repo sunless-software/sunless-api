@@ -1,0 +1,173 @@
+paths:
+  /api/v1/projects/{projectID}/media:
+    post:
+      summary: Add media to a project
+      description: |
+        Creates a new media entry for a project.  
+        Requires a role with the global `CREATE_PROJECT_MEDIA` permission or a project role with `CREATE_PROJECT_MEDIA`.  
+        Validates `projectID` and media fields (`url` and `type`).
+      tags:
+        - Projects
+      parameters:
+        - name: projectID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+          description: Must be a numeric project ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  example: "https://image.png"
+                  description: Required. Must be a valid URL.
+                type:
+                  type: string
+                  example: IMAGE
+                  description: Required. Must be one of the allowed media types (IMAGE, VIDEOS, GIF)
+      responses:
+        "201":
+          description: Media successfully added to project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: The project media has been successfully created.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        url:
+                          type: string
+                          example: "https://image.png"
+                        type:
+                          type: string
+                          example: IMAGE
+                        project_id:
+                          type: integer
+                          example: 1
+                        deleted:
+                          type: boolean
+                          example: false
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: "2025-08-31T22:51:20.747Z"
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: "2025-08-31T22:51:20.747Z"
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "409":
+          description: Media URL already exists for project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: The project already have a media with the same url.
+                  data:
+                    type: array
+                    items: {}
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "404":
+          description: The project with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

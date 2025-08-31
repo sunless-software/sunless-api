@@ -120,6 +120,10 @@ export const PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_DELETED =
   "The external resource was successfully deleted.";
 export const EXTERNAL_RESOURCES_URL_HASH_VIOLATION_MESSAGE =
   "There already is another external resource with the same url.";
+export const PROJECT_MEDIA_SUCCESSFULLY_CREATED =
+  "The project media has been successfully created.";
+export const PROJECT_MEDIA_URL_PROJECT_VIOLATION_MESSAGE =
+  "The project already have a media with the same url.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

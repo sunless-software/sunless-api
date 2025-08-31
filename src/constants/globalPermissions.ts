@@ -148,4 +148,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 48,
     name: "UPDATE_PROJECT_EXTERNAL_RESOURCES",
   },
+  createProjectMedia: {
+    id: 49,
+    name: "CREATE_PROJECT_MEDIA",
+  },
 } satisfies Record<string, Permission>;
