@@ -1,21 +1,28 @@
 paths:
-  /api/v1/blogs/{id}:
+  /api/v1/projects/{projectID}/blogs/{blogID}:
     patch:
       summary: Update an existing blog
       description: |
-        Updates the title and/or content of an existing blog.  
+        Updates the title and/or content of an existing blog within a specific project.  
         Requires a global role with the `UPDATE_BLOGS` permission, or a project role with the `UPDATE_BLOGS` permission.  
         Only the fields provided in the request body will be updated. All fields are validated according to their type and requirements.
       tags:
         - Blogs
       parameters:
-        - name: id
+        - name: projectID
           in: path
           required: true
           schema:
             type: integer
             example: 1
-          description: Required. The ID of the blog to update. Must be a number.
+          description: Must be a number referencing an existing project.
+        - name: blogID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+          description: Must be a number referencing an existing blog.
       requestBody:
         required: true
         content:
@@ -108,7 +115,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
         "404":
-          description: Blog with given ID or related project does not exist
+          description: Blog or project with given ID does not exist
           content:
             application/json:
               schema:
@@ -119,7 +126,7 @@ paths:
                     example: 404
                   message:
                     type: string
-                    example: The entity with the given id does not exists.
+                    example: The entity with the given id does not exist.
                   data:
                     type: array
                     items:

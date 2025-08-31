@@ -23,7 +23,6 @@ import educationRouter from "./routes/education";
 import skillsRouter from "./routes/skills";
 import technologiesRouter from "./routes/technologies";
 import projectsRouter from "./routes/projects";
-import blogsRouter from "./routes/blogs";
 
 async function start() {
   const app = express();
@@ -59,7 +58,6 @@ async function start() {
   apiRouter.use("/skills", authMiddleware, skillsRouter);
   apiRouter.use("/technologies", authMiddleware, technologiesRouter);
   apiRouter.use("/projects", authMiddleware, projectsRouter);
-  apiRouter.use("/blogs", authMiddleware, blogsRouter);
 
   apiRouter.use(errorHandlerMiddleware);
 

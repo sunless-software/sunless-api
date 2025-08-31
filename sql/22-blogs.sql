@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS blogs (
     project_id INT,
     title TEXT NOT NULL,
     body TEXT NOT NULL,
-    deleted BOOLEAN NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT FK_blogs_user_id FOREIGN KEY (user_id) REFERENCES users(id),

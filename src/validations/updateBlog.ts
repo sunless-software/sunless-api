@@ -3,14 +3,15 @@ import { body, param } from "express-validator";
 import { validateResult } from "../utils";
 
 const updateBlogValidation = [
-  param("id").isNumeric().withMessage("blog 'id' must be a number"),
-  body("name")
+  param("projectID").isNumeric().withMessage("project 'id' must be a number"),
+  param("blogID").isNumeric().withMessage("blog 'id' must be a number"),
+  body("title")
     .optional()
     .isString()
-    .withMessage("'name' must be an string")
+    .withMessage("'title' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'name' cannot be empty"),
+    .withMessage("'title' cannot be empty"),
   body("content")
     .optional()
     .isString()

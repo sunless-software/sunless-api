@@ -1,13 +1,21 @@
 paths:
-  /api/v1/blogs:
+  /api/v1/projects/{projectID}/blogs:
     post:
-      summary: Create a new blog
+      summary: Create a new blog in a project
       description: |
-        Creates a new blog inside a project.  
+        Creates a new blog inside a specific project.  
         Requires a global role with the `CREATE_BLOGS` permission, or a project role with the `CREATE_BLOGS` permission.  
         All fields are validated according to their type and requirements.
       tags:
         - Blogs
+      parameters:
+        - name: projectID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+          description: Must be a number referencing an existing project.
       requestBody:
         required: true
         content:
@@ -15,18 +23,14 @@ paths:
             schema:
               type: object
               properties:
-                projectID:
-                  type: integer
-                  example: 1
-                  description: Required. Must be a number and reference an existing project.
                 title:
                   type: string
                   example: Mi blog
-                  description: Required. Must be a non-empty string.
+                  description: Must be provided, must be a string, and cannot be empty.
                 content:
                   type: string
-                  example: Este es mi blog creado
-                  description: Required. Must be a non-empty string.
+                  example: This is my new blog
+                  description: Must be provided, must be a string, and cannot be empty.
       responses:
         "201":
           description: Blog successfully created
@@ -60,7 +64,7 @@ paths:
                           example: Mi blog
                         body:
                           type: string
-                          example: Este es mi blog creado
+                          example: This is my new blog
                         deleted:
                           type: boolean
                           example: false

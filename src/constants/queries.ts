@@ -123,14 +123,16 @@ export const CHECK_PROJECT_EXISTS = `SELECT count(*) FROM projects WHERE id = $1
 
 export const CHECK_PROJECT_ROLE_EXISTS = `SELECT count(*) FROM project_roles WHERE id = $1 LIMIT 1`;
 
-export const CREATE_BLOG = `INSERT INTO blogs (user_id, project_id, title, body, deleted)
-select $1, p.id, $3, $4, false from projects p where p.id = $2 and p.deleted = false RETURNING *`;
+export const CREATE_BLOG = `INSERT INTO blogs (user_id, project_id, title, body)
+select $1, p.id, $3, $4 from projects p where p.id = $2 and p.deleted = false RETURNING *`;
 
-export const SOFT_DELETE_BLOG = `UPDATE blogs SET deleted = TRUE WHERE id = $1 and deleted = FALSE`;
+export const DELETE_BLOG = `DELETE FROM blogs b USING projects p
+WHERE p.deleted = FALSE AND p.id = $2 AND b.id = $1`;
 
 export const GET_PROJECT_ID_FROM_BLOG = `SELECT project_id FROM blogs WHERE id = $1 LIMIT 1`;
 
-export const UPDATE_BLOGS = `UPDATE blogs SET title = COALESCE($1, title), body = COALESCE($2, body) WHERE id = $3 and deleted = false RETURNING *`;
+export const UPDATE_BLOGS = `UPDATE blogs SET title = COALESCE($1, title), body = COALESCE($2, body) WHERE id = $3 
+AND EXISTS(SELECT 1 FROM projects p WHERE p.id = $4 AND p.deleted = FALSE) RETURNING *`;
 
 export const ADD_PROJECT_TAG = `INSERT INTO project_tags (tag_id, project_id) SELECT t.id, p.id FROM tags t
 JOIN projects p ON p.id = $1 AND p.deleted = FALSE AND t.id = $2 RETURNING *`;

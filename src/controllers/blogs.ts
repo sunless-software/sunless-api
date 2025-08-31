@@ -4,7 +4,7 @@ import { AuthRequest } from "../interfaces";
 import {
   CREATE_BLOG,
   GET_PROJECT_KEY,
-  SOFT_DELETE_BLOG,
+  DELETE_BLOG,
   UPDATE_BLOGS,
 } from "../constants/queries";
 import {
@@ -21,7 +21,8 @@ import {
 
 const blogsController = {
   createBlog: async (req: Request, res: Response, next: NextFunction) => {
-    const { projectID, title, content } = req.body;
+    const { projectID } = req.params;
+    const { title, content } = req.body;
     const authID = (req as AuthRequest).user.id;
     const db = await connectToDB();
 
@@ -65,8 +66,8 @@ const blogsController = {
     }
   },
   updateBlogs: async (req: Request, res: Response, next: NextFunction) => {
-    const blogID = req.params.id;
-    const { title, content, projectID } = req.body;
+    const { projectID, blogID } = req.params;
+    const { title, content } = req.body;
     const db = await connectToDB();
 
     try {
@@ -90,6 +91,7 @@ const blogsController = {
         encryptedTitle,
         encryptedContent,
         blogID,
+        projectID,
       ]);
 
       if (!result.rows.length) {
@@ -115,11 +117,11 @@ const blogsController = {
     }
   },
   deleteBlogs: async (req: Request, res: Response, next: NextFunction) => {
-    const blogID = req.params.id;
+    const { projectID, blogID } = req.params;
     const db = await connectToDB();
 
     try {
-      const result = await db.query(SOFT_DELETE_BLOG, [blogID]);
+      const result = await db.query(DELETE_BLOG, [blogID, projectID]);
       const affectedRows = result.rowCount;
 
       if (!affectedRows) {

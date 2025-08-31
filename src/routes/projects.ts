@@ -20,6 +20,10 @@ import projectsMediaController from "../controllers/projectsMediaController";
 import createProjectMediaValidation from "../validations/createProjectMedia";
 import deleteProjectMediaValidation from "../validations/deleteProjectMedia";
 import updateProjectMediaValidation from "../validations/updateProjectMedia";
+import createBlogValidation from "../validations/createBlog";
+import blogsController from "../controllers/blogs";
+import updateBlogValidation from "../validations/updateBlog";
+import deleteBlogValidation from "../validations/deleteBlog";
 
 const projectsRouter = Router();
 
@@ -219,6 +223,49 @@ projectsRouter.delete(
   },
   deleteProjectMediaValidation,
   projectsMediaController.deleteProjectMedia
+);
+
+projectsRouter.post(
+  "/:projectID/blogs",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.projectID) || 0;
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.createBlogs,
+      PROJECT_PERMISSIONS.createBlogs,
+      projectID
+    )(req, res, next);
+  },
+  createBlogValidation,
+  blogsController.createBlog
+);
+
+projectsRouter.patch(
+  "/:projectID/blogs/:blogID",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.projectID) || 0;
+    req.body.projectID = projectID;
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.updateBlogs,
+      PROJECT_PERMISSIONS.updateBlogs,
+      projectID
+    )(req, res, next);
+  },
+  updateBlogValidation,
+  blogsController.updateBlogs
+);
+
+projectsRouter.delete(
+  "/:projectID/blogs/:blogID",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.projectID) || 0;
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.deleteBlogs,
+      PROJECT_PERMISSIONS.deleteBlogs,
+      projectID
+    )(req, res, next);
+  },
+  deleteBlogValidation,
+  blogsController.deleteBlogs
 );
 
 export default projectsRouter;
