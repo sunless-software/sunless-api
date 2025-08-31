@@ -129,8 +129,6 @@ select $1, p.id, $3, $4 from projects p where p.id = $2 and p.deleted = false RE
 export const DELETE_BLOG = `DELETE FROM blogs b USING projects p
 WHERE p.deleted = FALSE AND p.id = $2 AND b.id = $1`;
 
-export const GET_PROJECT_ID_FROM_BLOG = `SELECT project_id FROM blogs WHERE id = $1 LIMIT 1`;
-
 export const UPDATE_BLOGS = `UPDATE blogs SET title = COALESCE($1, title), body = COALESCE($2, body) WHERE id = $3 
 AND EXISTS(SELECT 1 FROM projects p WHERE p.id = $4 AND p.deleted = FALSE) RETURNING *`;
 
