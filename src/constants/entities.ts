@@ -1,5 +1,4 @@
 export enum Entities {
-  MEDIA_TYPES = "media_tpyes",
   TAGS = "tags",
   PROJECTS = "projects",
   PROJECT_TAGS = "project_tags",
@@ -20,5 +19,4 @@ export enum Entities {
   USERS_TECHNOLOGIES = "users_technologies",
   PROJECTS_MEDIA = "projects_media",
   BLOGS = "blogs",
-  BLOGS_MEDIA = "blogs_media",
 }

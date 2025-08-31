@@ -8,6 +8,7 @@ export const PROJECT_STATUS = [
   "DISCARDED",
   "CANCELED",
 ];
+
 export const EXTERNAL_RESOURCE_TYPES = [
   "GITHUB",
   "BITBUCKET",
@@ -18,3 +19,5 @@ export const EXTERNAL_RESOURCE_TYPES = [
   "DRIVE",
   "OTHER",
 ];
+
+export const MEDIA_TPYES = ["IMAGE", "VIDEO", "GIF"];

@@ -26,3 +26,9 @@ BEGIN
     END IF;
 END
 $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'media_type') THEN
+        CREATE TYPE media_type AS ENUM ('IMAGE', 'VIDEO', 'GIF');
+    END IF;
+END $$;
