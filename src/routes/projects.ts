@@ -14,6 +14,8 @@ import removeProjectTagValidation from "../validations/removeProjectTag";
 import addExternalResourceValidation from "../validations/addExternalResource";
 import deleteExternalResourceValidation from "../validations/deleteExternalResource";
 import updateExternalResourceValidation from "../validations/updateExternalResource";
+import externalResourcesController from "../controllers/externalResourcesController";
+import tagsController from "../controllers/tagsController";
 
 const projectsRouter = Router();
 
@@ -114,7 +116,7 @@ projectsRouter.post(
     )(req, res, next);
   },
   addProjectTagValidation,
-  projectsController.addProjectTag
+  tagsController.addProjectTag
 );
 
 projectsRouter.delete(
@@ -128,7 +130,7 @@ projectsRouter.delete(
     )(req, res, next);
   },
   removeProjectTagValidation,
-  projectsController.removeProjectTag
+  tagsController.removeProjectTag
 );
 
 projectsRouter.post(
@@ -142,7 +144,7 @@ projectsRouter.post(
     )(req, res, next);
   },
   addExternalResourceValidation,
-  projectsController.addExternalResource
+  externalResourcesController.createExternalResource
 );
 
 projectsRouter.patch(
@@ -156,7 +158,7 @@ projectsRouter.patch(
     )(req, res, next);
   },
   updateExternalResourceValidation,
-  projectsController.updateExternalResource
+  externalResourcesController.updateExternalResource
 );
 
 projectsRouter.delete(
@@ -170,7 +172,7 @@ projectsRouter.delete(
     )(req, res, next);
   },
   deleteExternalResourceValidation,
-  projectsController.deleteProjectExternalResource
+  externalResourcesController.deleteProjectExternalResource
 );
 
 export default projectsRouter;
