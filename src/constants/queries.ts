@@ -104,10 +104,8 @@ export const SOFT_DELETE_PROJECT =
 
 export const UPDATE_PROJECT = `UPDATE projects set name = COALESCE($1, name), name_hash = COALESCE($2, name_hash), description = COALESCE($3, description),
 status = COALESCE($4, status), public = COALESCE($5, public), start_date = COALESCE($6, start_date), end_date = COALESCE($7, end_date),
-estimated_end = COALESCE($8, estimated_end), updated_at = CURRENT_TIMESTAMP WHERE id=$9 RETURNING id, name, coalesce(description, '') as description, status, 
+estimated_end = COALESCE($8, estimated_end), updated_at = CURRENT_TIMESTAMP WHERE id=$9 AND deleted = FALSE RETURNING id, name, coalesce(description, '') as description, status, 
 public, start_date, end_date, estimated_end, '****' as key, deleted, created_at, updated_at`;
-
-export const GET_PROJECT_ENCRYPTED_FIELDS = `SELECT name, description, public, key FROM projects WHERE id = $1 FOR UPDATE`;
 
 export const GET_PROJECT_KEY = `SELECT key FROM projects WHERE id = $1 AND deleted = FALSE`;
 

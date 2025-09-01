@@ -8,8 +8,7 @@ import {
   CHECK_VALID_USER_EXISTS,
   CREATE_COLLABORATOR,
   CREATE_PROJECT,
-  GET_PROJECT_ENCRYPTED_FIELDS,
-  REMOVE_PROJECT_TAG,
+  GET_PROJECT_KEY,
   SOFT_DELETE_PROJECT,
   UPDATE_PROJECT,
 } from "../constants/queries";
@@ -25,10 +24,8 @@ import {
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
-  TAG_SUCCESSFULLY_ADDED,
-  TAG_SUCCESSFULLY_REMOVED,
 } from "../constants/messages";
-import { AuthRequest, ProjectInvitation, UserCredentials } from "../interfaces";
+import { AuthRequest, ProjectInvitation } from "../interfaces";
 import { PROJECT_INVITATION_LIFE_TIME } from "../constants/setup";
 import jwt from "jsonwebtoken";
 import { INCORRECT_USER_INVITATION } from "../constants/managedErrors";
@@ -45,21 +42,15 @@ const projectsController = {
       endDate,
       estimatedEnd,
     } = req.body;
-    let encryptedProjectName: string = name;
-    let encryptedProjectDescription: string | null = description;
-
     const db = await connectToDB();
 
     const nameHash = crypto.createHash("sha256").update(name).digest("hex");
     const projectKey = crypto.randomBytes(32).toString("base64");
     const encryptedProjectKey = encryptText(projectKey);
 
-    if (!publicProject) {
-      encryptedProjectName = encryptText(name, projectKey);
-      encryptedProjectDescription = description
-        ? encryptText(description, projectKey)
-        : null;
-    }
+    const encryptedProjectName = encryptText(name, projectKey);
+    const encryptedProjectDescription =
+      description && encryptText(description, projectKey);
 
     try {
       await db.query("BEGIN");
@@ -111,44 +102,23 @@ const projectsController = {
     const db = await connectToDB();
 
     try {
-      const getProjectEncryptedResult = await db.query(
-        GET_PROJECT_ENCRYPTED_FIELDS,
-        [id]
-      );
+      const getProjectEncryptedKeyResult = await db.query(GET_PROJECT_KEY, [
+        id,
+      ]);
 
-      if (!getProjectEncryptedResult.rowCount) {
+      if (!getProjectEncryptedKeyResult.rowCount) {
         throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
       }
 
-      const encryptedProjectKey = getProjectEncryptedResult.rows[0].key;
+      const encryptedProjectKey = getProjectEncryptedKeyResult.rows[0].key;
       const decryptedProjectKey = decryptText(encryptedProjectKey);
-      const previousPublicProject = getProjectEncryptedResult.rows[0].public;
-      let plainNameFromDB: string = getProjectEncryptedResult.rows[0].name;
-      let plainDescriptionFromDB: string =
-        getProjectEncryptedResult.rows[0].description;
 
-      if (!previousPublicProject) {
-        plainNameFromDB = decryptText(plainNameFromDB, decryptedProjectKey);
-        plainDescriptionFromDB = decryptText(
-          plainDescriptionFromDB,
-          decryptedProjectKey
-        );
-      }
-
-      name = name ?? plainNameFromDB;
-      description = description ?? plainDescriptionFromDB;
-
-      const originalName = name;
-      const originalDescription = description;
-      const nameHash = crypto.createHash("sha256").update(name).digest("hex");
-
-      if (
-        publicProject === false ||
-        (publicProject === undefined && previousPublicProject === false)
-      ) {
-        name = encryptText(name, decryptedProjectKey);
-        description = encryptText(description, decryptedProjectKey);
-      }
+      const nameHash =
+        name && crypto.createHash("sha256").update(name).digest("hex");
+      name = name ? encryptText(name, decryptedProjectKey) : name;
+      description = description
+        ? encryptText(description, decryptedProjectKey)
+        : description;
 
       const result = await db.query(UPDATE_PROJECT, [
         name,
@@ -162,15 +132,24 @@ const projectsController = {
         id,
       ]);
 
+      const resultProjectData = result.rows[0];
+
       return sendResponse(
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
           message: PROJECT_SUCCESSFULLY_UPDATED,
           data: [
             {
-              ...result.rows[0],
-              name: originalName,
-              description: originalDescription,
+              ...resultProjectData,
+              name: resultProjectData.name
+                ? decryptText(resultProjectData.name, decryptedProjectKey)
+                : resultProjectData.name,
+              description: resultProjectData.description
+                ? decryptText(
+                    resultProjectData.description,
+                    decryptedProjectKey
+                  )
+                : resultProjectData.description,
             },
           ],
         },
