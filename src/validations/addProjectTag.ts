@@ -3,7 +3,7 @@ import { param, body } from "express-validator";
 import { validateResult } from "../utils";
 
 const addProjectTagValidation = [
-  param("id").isNumeric().withMessage("project 'id' must be a number"),
+  param("projectID").isNumeric().withMessage("project 'id' must be a number"),
   body("tagID")
     .exists()
     .withMessage("'tagID' must be provided")

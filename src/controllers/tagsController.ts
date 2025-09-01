@@ -14,7 +14,7 @@ import {
 
 const tagsController = {
   addProjectTag: async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = req.params.id;
+    const { projectID } = req.params;
     const { tagID } = req.body;
 
     const db = await connectToDB();

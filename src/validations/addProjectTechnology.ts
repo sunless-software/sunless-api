@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { validateResult } from "../utils";
 
 const addProjectTechnologyValidation = [
-  body("projectID")
+  param("projectID")
     .exists()
     .withMessage("'projectID' must be provided")
     .bail()

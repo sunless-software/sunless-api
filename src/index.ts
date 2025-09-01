@@ -23,6 +23,11 @@ import educationRouter from "./routes/education";
 import skillsRouter from "./routes/skills";
 import technologiesRouter from "./routes/technologies";
 import projectsRouter from "./routes/projects";
+import blogsRouter from "./routes/blogs";
+import tagsRouter from "./routes/tags";
+import externalResourceRouter from "./routes/externalResources";
+import projectsMediaRouter from "./routes/projectsMedia";
+import projectsTechnologiesRouter from "./routes/projectsTechnologies";
 
 async function start() {
   const app = express();
@@ -57,7 +62,21 @@ async function start() {
   apiRouter.use("/educations", authMiddleware, educationRouter);
   apiRouter.use("/skills", authMiddleware, skillsRouter);
   apiRouter.use("/technologies", authMiddleware, technologiesRouter);
+
   apiRouter.use("/projects", authMiddleware, projectsRouter);
+  apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter);
+  apiRouter.use("/projects/:projectID/tags", authMiddleware, tagsRouter);
+  apiRouter.use(
+    "/projects/:projectID/external-resources",
+    authMiddleware,
+    externalResourceRouter
+  );
+  apiRouter.use(
+    "/projects/:projectID/media",
+    authMiddleware,
+    projectsMediaRouter
+  );
+  apiRouter.use("projects/:projectID/technologies", projectsTechnologiesRouter);
 
   apiRouter.use(errorHandlerMiddleware);
 

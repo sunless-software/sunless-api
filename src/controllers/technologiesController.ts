@@ -130,7 +130,8 @@ const technologiesController = {
     res: Response,
     next: NextFunction
   ) => {
-    const { technologyID, projectID } = req.body;
+    const { projectID } = req.params;
+    const { technologyID } = req.body;
     const db = await connectToDB();
 
     try {
@@ -162,7 +163,7 @@ const technologiesController = {
     res: Response,
     next: NextFunction
   ) => {
-    const projectID = req.params.id;
+    const { projectID } = req.params;
     const { technologyID } = req.query;
 
     const db = await connectToDB();

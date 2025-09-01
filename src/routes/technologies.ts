@@ -1,14 +1,10 @@
-import { Request, Response, NextFunction, Router } from "express";
+import { Router } from "express";
 import ownershipMiddleware from "../middlewares/ownershipMiddleware";
 import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import addUserTechnologyValidation from "../validations/addUserTechnology";
 import technologiesController from "../controllers/technologiesController";
 import removeUserTechnologyValidation from "../validations/removeUserTechnology";
 import getTechnologiesValidation from "../validations/getTechnologies";
-import projectRoleMiddleware from "../middlewares/projectRoleMiddleware";
-import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
-import addProjectTechnologyValidation from "../validations/addProjectTechnology";
-import removeProjectTechnologyValidation from "../validations/removeProjectTechnology";
 
 const technologiesRouter = Router();
 
@@ -29,20 +25,6 @@ technologiesRouter.post(
   technologiesController.addUserTechnology
 );
 
-technologiesRouter.post(
-  "/add/project",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { projectID } = req.body;
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.updateProjects,
-      PROJECT_PERMISSIONS.addTechnologies,
-      projectID
-    )(req, res, next);
-  },
-  addProjectTechnologyValidation,
-  technologiesController.addProjectTechnology
-);
-
 technologiesRouter.delete(
   "/remove/user/:id",
   ownershipMiddleware(
@@ -52,21 +34,6 @@ technologiesRouter.delete(
   ),
   removeUserTechnologyValidation,
   technologiesController.removeUserTechnology
-);
-
-technologiesRouter.delete(
-  "/remove/project/:id",
-  (req: Request, res: Response, next: NextFunction) => {
-    let projectID = parseInt(req.params.id);
-
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.updateProjects,
-      PROJECT_PERMISSIONS.removeTechnologies,
-      projectID || 0
-    )(req, res, next);
-  },
-  removeProjectTechnologyValidation,
-  technologiesController.removeProjectTechnology
 );
 
 export default technologiesRouter;
