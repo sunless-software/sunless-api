@@ -29,9 +29,17 @@ paths:
                   type: string
                   example: Project Phoenix Updated
                   description: Optional. Must be a non-empty string if provided.
-                description:
+                short_description:
                   type: string
-                  example: Updated description of the project
+                  example: Updated short description of the project
+                  description: Optional. Must be a non-empty string if provided.
+                long_description:
+                  type: string
+                  example: Updated long description of the project
+                  description: Optional. Must be a non-empty string if provided.
+                logo:
+                  type: string
+                  example: Updated logo description of the project
                   description: Optional. Must be a non-empty string if provided.
                 status:
                   type: string
@@ -81,9 +89,15 @@ paths:
                         name:
                           type: string
                           example: Project Phoenix Updated
-                        description:
+                        short_description:
                           type: string
-                          example: Updated description
+                          example: Updated short description
+                        long_description:
+                          type: string
+                          example: Updated long description
+                        logo:
+                          type: string
+                          example: Updated logo
                         status:
                           type: string
                           example: IN_PROGRESS
@@ -102,9 +116,6 @@ paths:
                         key:
                           type: string
                           example: "****"
-                        deleted:
-                          type: boolean
-                          example: false
                         created_at:
                           type: string
                           example: 2025-08-26T00:11:49.326Z

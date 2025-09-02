@@ -21,9 +21,17 @@ paths:
                   type: string
                   example: Project Phoenix
                   description: Required. Must be a non-empty string.
-                description:
+                shortDescription:
                   type: string
-                  example: Revamp of the legacy system
+                  example: Short description of the project
+                  description: Optional. Must be a non-empty string if provided.
+                longDescription:
+                  type: string
+                  example: Long description of the project.
+                  description: Optional. Must be a non-empty string if provided.
+                logo:
+                  type: string
+                  example: https://www.my-project-logo.png
                   description: Optional. Must be a non-empty string if provided.
                 status:
                   type: string
@@ -77,9 +85,15 @@ paths:
                         name:
                           type: string
                           example: project 2
-                        description:
+                        short_description:
                           type: string
-                          example: project 2 description
+                          example: Short description of the project
+                        long_description:
+                          type: string
+                          example: Long description of the project
+                        logo:
+                          type: string
+                          example: https://www.my-project-logo.png
                         status:
                           type: string
                           example: FINISHED
@@ -98,9 +112,6 @@ paths:
                         key:
                           type: string
                           example: "****"
-                        deleted:
-                          type: boolean
-                          example: false
                         created_at:
                           type: string
                           example: 2025-08-26T00:11:49.326Z

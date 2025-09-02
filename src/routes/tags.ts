@@ -11,7 +11,7 @@ const tagsRouter = Router({ mergeParams: true });
 tagsRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.id) || 0;
+    const projectID = parseInt(req.params.projectID) || 0;
     projectRoleMiddleware(
       GLOBAL_PERMISSIONS.addProjectTags,
       PROJECT_PERMISSIONS.addProjectTags,

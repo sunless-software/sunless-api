@@ -23,7 +23,6 @@ import {
   COLLABORATOR_SUCCESSFULLY_ADDED,
   DEFAULT_SUCCES_API_RESPONSE,
   INVITATION_SUCCESSFULLY_CREATED,
-  PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_ADDED,
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
@@ -39,7 +38,9 @@ const projectsController = {
     const authID = (req as AuthRequest).user.id;
     let {
       name,
-      description,
+      shortDescription,
+      longDescription,
+      logo,
       status,
       publicProject,
       startDate,
@@ -53,8 +54,10 @@ const projectsController = {
     const encryptedProjectKey = encryptText(projectKey);
 
     const encryptedProjectName = encryptText(name, projectKey);
-    const encryptedProjectDescription =
-      description && encryptText(description, projectKey);
+    const encryptedProjectShortDescription =
+      shortDescription && encryptText(shortDescription, projectKey);
+    const encryptedProjectLongDescription =
+      longDescription && encryptText(longDescription, projectKey);
 
     try {
       await db.query("BEGIN");
@@ -62,7 +65,9 @@ const projectsController = {
       const createProject = await db.query(CREATE_PROJECT, [
         encryptedProjectName,
         nameHash,
-        encryptedProjectDescription,
+        encryptedProjectShortDescription,
+        encryptedProjectLongDescription,
+        logo,
         status,
         publicProject,
         startDate,
@@ -82,7 +87,12 @@ const projectsController = {
           status: HTTP_STATUS_CODE_CREATED,
           message: PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
           data: [
-            { ...createdProject, name: name, description: description || "" },
+            {
+              ...createdProject,
+              name: name,
+              short_description: shortDescription || "",
+              long_description: longDescription || "",
+            },
           ],
         },
         res
@@ -96,7 +106,9 @@ const projectsController = {
     const { id } = req.params;
     let {
       name,
-      description,
+      shortDescription,
+      longDescription,
+      logo,
       status,
       publicProject,
       startDate,
@@ -120,14 +132,19 @@ const projectsController = {
       const nameHash =
         name && crypto.createHash("sha256").update(name).digest("hex");
       name = name ? encryptText(name, decryptedProjectKey) : name;
-      description = description
-        ? encryptText(description, decryptedProjectKey)
-        : description;
+      shortDescription = shortDescription
+        ? encryptText(shortDescription, decryptedProjectKey)
+        : shortDescription;
+      longDescription = longDescription
+        ? encryptText(longDescription, decryptedProjectKey)
+        : longDescription;
 
       const result = await db.query(UPDATE_PROJECT, [
         name,
         nameHash,
-        description,
+        shortDescription,
+        longDescription,
+        logo,
         status,
         publicProject,
         startDate,
@@ -148,12 +165,18 @@ const projectsController = {
               name: resultProjectData.name
                 ? decryptText(resultProjectData.name, decryptedProjectKey)
                 : resultProjectData.name,
-              description: resultProjectData.description
+              short_description: resultProjectData.short_description
                 ? decryptText(
-                    resultProjectData.description,
+                    resultProjectData.short_description,
                     decryptedProjectKey
                   )
-                : resultProjectData.description,
+                : resultProjectData.short_description,
+              long_description: resultProjectData.long_description
+                ? decryptText(
+                    resultProjectData.long_description,
+                    decryptedProjectKey
+                  )
+                : resultProjectData.long_description,
             },
           ],
         },
@@ -277,7 +300,7 @@ const projectsController = {
       return next(err);
     }
   },
-  getProjectFromUser: async (
+  getProjectsFromUser: async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -315,7 +338,14 @@ const projectsController = {
           return {
             ...cleanProject,
             name: decryptText(project.name, decryptedProjectKey),
-            description: decryptText(project.description, decryptedProjectKey),
+            short_description: decryptText(
+              project.short_description,
+              decryptedProjectKey
+            ),
+            long_description: decryptText(
+              project.long_description,
+              decryptedProjectKey
+            ),
             key: "****",
           };
         }

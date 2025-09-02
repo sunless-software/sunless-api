@@ -13,13 +13,21 @@ const createProjectsValidation = [
     .bail()
     .isLength({ min: 1 })
     .withMessage("'name' cannot be empty"),
-  body("description")
+  body("shortDescription")
     .optional()
     .isString()
-    .withMessage("'description' must be an string")
+    .withMessage("'shortDescription' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'description' cannot be empty"),
+    .withMessage("'shortDescription' cannot be empty"),
+  body("longDescription")
+    .optional()
+    .isString()
+    .withMessage("'longDescription' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'longDescription' cannot be empty"),
+  body("logo").optional().isURL().withMessage("'logo' must be a valid url"),
   body("status")
     .exists()
     .withMessage("'status must be provided'")

@@ -81,6 +81,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.removeOwnSkills,
       GLOBAL_PERMISSIONS.addOwnTechnologies,
       GLOBAL_PERMISSIONS.removeOwnTechnologies,
+      GLOBAL_PERMISSIONS.readProjects,
     ],
   },
 ];
