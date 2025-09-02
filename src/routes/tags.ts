@@ -6,7 +6,7 @@ import addProjectTagValidation from "../validations/addProjectTag";
 import tagsController from "../controllers/tagsController";
 import removeProjectTagValidation from "../validations/removeProjectTag";
 
-const tagsRouter = Router();
+const tagsRouter = Router({ mergeParams: true });
 
 tagsRouter.post(
   "/",

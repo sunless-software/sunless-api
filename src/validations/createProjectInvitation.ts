@@ -15,7 +15,14 @@ const createProjectInvitationValidation = [
     .withMessage("'projectRoleID' must be provided")
     .bail()
     .isNumeric()
-    .withMessage("'projectRoleID' must be a number"),
+    .withMessage("'projectRoleID' must be a number")
+    .custom((value) => {
+      if (Number(value) === 1) {
+        throw new Error("'projectRoleID' cannot be 1");
+      }
+
+      return true;
+    }),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

@@ -27,9 +27,9 @@ export const GLOBAL_PERMISSIONS = {
   inviteProjects: { id: 12, name: "INVITE_PROJECTS" },
   updateProjects: { id: 13, name: "UPDATE_PROJECTS" },
   deleteProjects: { id: 14, name: "DELETE_PROJECTS" },
-  viewPrivateProjects: {
+  readProjects: {
     id: 15,
-    name: "VIEW_PRIVATE_PROJECTS",
+    name: "READ_PROJECTS",
   },
   viewPrivateBlogs: {
     id: 16,

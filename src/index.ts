@@ -28,6 +28,7 @@ import tagsRouter from "./routes/tags";
 import externalResourceRouter from "./routes/externalResources";
 import projectsMediaRouter from "./routes/projectsMedia";
 import projectsTechnologiesRouter from "./routes/projectsTechnologies";
+import usersProjectsRouter from "./routes/usersProjects";
 
 async function start() {
   const app = express();
@@ -62,6 +63,8 @@ async function start() {
   apiRouter.use("/educations", authMiddleware, educationRouter);
   apiRouter.use("/skills", authMiddleware, skillsRouter);
   apiRouter.use("/technologies", authMiddleware, technologiesRouter);
+
+  apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter);
 
   apiRouter.use("/projects", authMiddleware, projectsRouter);
   apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter);

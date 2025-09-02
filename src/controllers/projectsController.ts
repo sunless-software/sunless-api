@@ -6,9 +6,11 @@ import {
   CHECK_PROJECT_EXISTS,
   CHECK_PROJECT_ROLE_EXISTS,
   CHECK_VALID_USER_EXISTS,
+  COUNT_PROJECTS_FROM_USER,
   CREATE_COLLABORATOR,
   CREATE_PROJECT,
   GET_PROJECT_KEY,
+  GET_PROJECTS_BY_USER,
   SOFT_DELETE_PROJECT,
   UPDATE_PROJECT,
 } from "../constants/queries";
@@ -21,9 +23,11 @@ import {
   COLLABORATOR_SUCCESSFULLY_ADDED,
   DEFAULT_SUCCES_API_RESPONSE,
   INVITATION_SUCCESSFULLY_CREATED,
+  PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_ADDED,
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
+  PROJECTS_SUCCESSFULLY_RETRIVED,
 } from "../constants/messages";
 import { AuthRequest, ProjectInvitation } from "../interfaces";
 import { PROJECT_INVITATION_LIFE_TIME } from "../constants/setup";
@@ -266,6 +270,77 @@ const projectsController = {
           ...DEFAULT_SUCCES_API_RESPONSE,
           status: HTTP_STATUS_CODE_CREATED,
           message: COLLABORATOR_SUCCESSFULLY_ADDED,
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  getProjectFromUser: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { userID } = req.params;
+    const {
+      offset = 0,
+      limit = 20,
+      showPrivateProjects = false,
+      tags,
+    } = req.query;
+
+    const authID = (req as AuthRequest).user.id;
+    const db = await connectToDB();
+
+    try {
+      const [resultProjects, resultCount] = await Promise.all([
+        db.query(GET_PROJECTS_BY_USER, [
+          userID,
+          authID,
+          showPrivateProjects,
+          offset,
+          limit,
+          tags ? (tags as string).split(",") : tags,
+        ]),
+        db.query(COUNT_PROJECTS_FROM_USER, [userID]),
+      ]);
+
+      const projects = resultProjects.rows.map((project) => {
+        const { is_collaborator, deleted, ...cleanProject } = project;
+
+        if (project.public || project.is_collaborator) {
+          const decryptedProjectKey = decryptText(project.key);
+
+          return {
+            ...cleanProject,
+            name: decryptText(project.name, decryptedProjectKey),
+            description: decryptText(project.description, decryptedProjectKey),
+            key: "****",
+          };
+        }
+
+        return {
+          ...cleanProject,
+          key: "****",
+        };
+      });
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: PROJECTS_SUCCESSFULLY_RETRIVED,
+          data: projects,
+          pagination: {
+            offset:
+              typeof offset === "string"
+                ? parseInt(offset)
+                : (offset as number),
+            limit:
+              typeof limit === "string" ? parseInt(limit) : (limit as number),
+            count: projects.length,
+            total: parseInt(resultCount.rows[0].total),
+          },
         },
         res
       );

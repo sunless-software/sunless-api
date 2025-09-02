@@ -153,3 +153,14 @@ AND EXISTS (SELECT 1 FROM projects p WHERE p.id = $4 AND p.deleted = FALSE) RETU
 
 export const DELETE_PROJECT_MEDIA = `DELETE from projects_media pm USING projects p
 WHERE p.id = $1 AND p.deleted = false AND pm.id = $2`;
+
+export const GET_PROJECTS_BY_USER = `SELECT p.*, coalesce(json_agg(distinct jsonb_build_object('id', t.id, 'name', t.name, 'created_at',
+t.created_at, 'updated_at', t.updated_at)) filter (where t.id is not null), '[]') as tags, CASE WHEN c2.user_id IS NOT NULL 
+THEN true ELSE false END AS is_collaborator FROM projects p JOIN collaborators c ON c.project_id = p.id JOIN users u ON u.id = c.user_id JOIN 
+project_roles pr ON pr.id = c.role_id LEFT JOIN collaborators c2 ON c2.project_id = p.id AND c2.user_id = $2 LEFT JOIN project_tags pt ON 
+pt.project_id = p.id LEFT JOIN tags t ON t.id = pt.tag_id WHERE p.deleted = false AND c.user_id = $1 AND pr.id = 1 AND u.deleted = FALSE AND 
+($3::boolean IS TRUE OR p.public = TRUE) GROUP BY p.id, c2.user_id HAVING (array_length($6::int[], 1) IS NULL OR $6::int[] <@ array_agg(t.id)
+) ORDER BY p.created_at DESC OFFSET $4 LIMIT $5`;
+
+export const COUNT_PROJECTS_FROM_USER = `SELECT count(*) AS total FROM projects p JOIN collaborators c on c.user_id = p.id
+WHERE c.role_id = 1 AND c.user_id = $1`;
