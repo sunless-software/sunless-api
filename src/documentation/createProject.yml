@@ -24,7 +24,7 @@ paths:
                 shortDescription:
                   type: string
                   example: Short description of the project
-                  description: Optional. Must be a non-empty string if provided.
+                  description: Optional. Must be a non-empty string, max 64 characters long if provided.
                 longDescription:
                   type: string
                   example: Long description of the project.

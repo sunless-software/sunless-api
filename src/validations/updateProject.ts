@@ -17,7 +17,9 @@ const updateProjectsValidation = [
     .withMessage("'shortDescription' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'shortDescription' cannot be empty"),
+    .withMessage("'shortDescription' cannot be empty")
+    .isLength({ max: 64 })
+    .withMessage("'shortDescription' cannot have more than 64 characters"),
   body("longDescription")
     .optional()
     .isString()

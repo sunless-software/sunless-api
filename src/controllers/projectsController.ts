@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import connectToDB from "../db";
 import {
-  ADD_PROJECT_TAG,
   CHECK_PROJECT_EXISTS,
   CHECK_PROJECT_ROLE_EXISTS,
   CHECK_VALID_USER_EXISTS,

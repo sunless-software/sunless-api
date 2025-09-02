@@ -9,6 +9,7 @@ import {
   INVALID_JWT_MESSAGE,
   INVALID_JWT_SIGNATURE_MESSAGE,
   MALFORMED_JWT_MESSAGE,
+  MAX_CHAR_EXCEED_MESSAGE,
 } from "../constants/messages";
 import logger from "../logger";
 import {
@@ -25,6 +26,7 @@ import {
   JWT_INVALID_SIGNATURE,
   JWT_MALFORMED,
   PG_FOREIGN_KEY_VIOLATION_CODE,
+  PG_MAX_LENGTH_EXCEED_VIOLATION_CODE,
   PG_UNIQUE_VIOLATION_CODE,
 } from "../constants/managedErrors";
 import { handleDuplicatedKeyViolation } from "../errorHandlers/duplicatedKeysHandler";
@@ -50,6 +52,15 @@ export default async function errorHandlerMiddleware(
       case PG_UNIQUE_VIOLATION_CODE:
         return sendResponse(
           handleDuplicatedKeyViolation((error as any).constraint),
+          res
+        );
+      case PG_MAX_LENGTH_EXCEED_VIOLATION_CODE:
+        return sendResponse(
+          {
+            ...DEFAULT_ERROR_API_RESPONSE,
+            status: HTTP_STATUS_CODE_BAD_REQUEST,
+            message: MAX_CHAR_EXCEED_MESSAGE,
+          },
           res
         );
       default:
