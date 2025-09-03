@@ -10,7 +10,7 @@ usersProjectsRouter.get(
   "/",
   roleMiddleware([GLOBAL_PERMISSIONS.readProjects]),
   getProjectsFromUserValidation,
-  projectsController.getProjectsFromUser
+  projectsController.getProjects
 );
 
 export default usersProjectsRouter;

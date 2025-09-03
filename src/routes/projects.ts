@@ -9,8 +9,16 @@ import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
 import updateProjectsValidation from "../validations/updateProject";
 import createProjectInvitationValidation from "../validations/createProjectInvitation";
 import acceptInvitationValidation from "../validations/acceptInvitation";
+import getProjectsValidation from "../validations/getProjects";
 
 const projectsRouter = Router();
+
+projectsRouter.get(
+  "/",
+  roleMiddleware([GLOBAL_PERMISSIONS.readProjects]),
+  getProjectsValidation,
+  projectsController.getProjects
+);
 
 projectsRouter.post(
   "/",

@@ -5,9 +5,11 @@ import {
   CHECK_PROJECT_EXISTS,
   CHECK_PROJECT_ROLE_EXISTS,
   CHECK_VALID_USER_EXISTS,
+  COUNT_ALL_PROJECTS,
   COUNT_PROJECTS_FROM_USER,
   CREATE_COLLABORATOR,
   CREATE_PROJECT,
+  GET_ALL_PROJECTS,
   GET_PROJECT_KEY,
   GET_PROJECTS_BY_USER,
   SOFT_DELETE_PROJECT,
@@ -299,11 +301,7 @@ const projectsController = {
       return next(err);
     }
   },
-  getProjectsFromUser: async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  getProjects: async (req: Request, res: Response, next: NextFunction) => {
     const { userID } = req.params;
     const {
       offset = 0,
@@ -314,18 +312,22 @@ const projectsController = {
 
     const authID = (req as AuthRequest).user.id;
     const db = await connectToDB();
+    const projectsQuery = userID ? GET_PROJECTS_BY_USER : GET_ALL_PROJECTS;
+    const countQuery = userID ? COUNT_PROJECTS_FROM_USER : COUNT_ALL_PROJECTS;
+    let queryParams = [
+      userID,
+      authID,
+      showPrivateProjects,
+      offset,
+      limit,
+      tags ? (tags as string).split(",") : tags,
+    ];
+    queryParams = userID ? queryParams : queryParams.slice(1);
 
     try {
       const [resultProjects, resultCount] = await Promise.all([
-        db.query(GET_PROJECTS_BY_USER, [
-          userID,
-          authID,
-          showPrivateProjects,
-          offset,
-          limit,
-          tags ? (tags as string).split(",") : tags,
-        ]),
-        db.query(COUNT_PROJECTS_FROM_USER, [userID]),
+        db.query(projectsQuery, queryParams),
+        db.query(countQuery, userID ? [userID] : []),
       ]);
 
       const projects = resultProjects.rows.map((project) => {

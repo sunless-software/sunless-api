@@ -4,25 +4,19 @@ info:
   version: 1.0.0
 
 paths:
-  /api/v1/users/{userID}/projects:
+  /api/v1/projects/:
     get:
-      summary: Retrieve projects for a specific user
+      summary: Retrieve all projects
       description: >
-        Fetch a paginated list of projects related to the given user.  
+        Fetch a paginated list of projects.
         Requires the global `READ_PROJECTS` permission.  
         By default, only public projects are returned.  
         If `showPrivateProjects` is set to `true`, private projects will be included, 
         but only in their encrypted form unless the requester is the project creator 
         or a collaborator, in which case the decrypted version is returned.
       tags:
-        - Users
+        - Projects
       parameters:
-        - in: path
-          name: userID
-          required: true
-          schema:
-            type: integer
-          description: ID of the user whose projects to fetch
         - in: query
           name: offset
           schema:
