@@ -10,6 +10,7 @@ import updateProjectsValidation from "../validations/updateProject";
 import createProjectInvitationValidation from "../validations/createProjectInvitation";
 import acceptInvitationValidation from "../validations/acceptInvitation";
 import getProjectsValidation from "../validations/getProjects";
+import getProjectDetailsValidation from "../validations/getProjectDetails";
 
 const projectsRouter = Router();
 
@@ -18,6 +19,20 @@ projectsRouter.get(
   roleMiddleware([GLOBAL_PERMISSIONS.readProjects]),
   getProjectsValidation,
   projectsController.getProjects
+);
+
+projectsRouter.get(
+  "/:projectID",
+  (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.projectID) || 0;
+    projectRoleMiddleware(
+      GLOBAL_PERMISSIONS.getProjectDetails,
+      PROJECT_PERMISSIONS.getProjectDetails,
+      projectID
+    )(req, res, next);
+  },
+  getProjectDetailsValidation,
+  projectsController.getProjectDetails
 );
 
 projectsRouter.post(

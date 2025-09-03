@@ -7,7 +7,7 @@ import externalResourcesController from "../controllers/externalResourcesControl
 import updateExternalResourceValidation from "../validations/updateExternalResource";
 import deleteExternalResourceValidation from "../validations/deleteExternalResource";
 
-const externalResourceRouter = Router();
+const externalResourceRouter = Router({ mergeParams: true });
 
 externalResourceRouter.post(
   "/",

@@ -147,11 +147,11 @@ type=COALESCE($6, type) WHERE id = $2 and EXISTS (SELECT 1 FROM projects p WHERE
 export const DELETE_PROJECT_EXTERNAL_RESOURCE = `DELETE FROM external_resources er USING projects p
 where p.id = $1 AND p.deleted = FALSE AND er.id = $2`;
 
-export const CREATE_PROJECT_MEDIA = `INSERT INTO projects_media (url, type, project_id, deleted) 
-SELECT $2, $3, p.id, FALSE FROM projects p WHERE p.id = $1 AND p.deleted = FALSE RETURNING *`;
+export const CREATE_PROJECT_MEDIA = `INSERT INTO projects_media (url, url_hash, type, project_id)
+SELECT $2, $3, $4, p.id FROM projects p WHERE p.id = $1 AND p.deleted = FALSE RETURNING *`;
 
-export const UPDATE_PROJECT_MEDIA = `UPDATE projects_media SET url = COALESCE($1, url), type = COALESCE($2, type) WHERE id = $3
-AND EXISTS (SELECT 1 FROM projects p WHERE p.id = $4 AND p.deleted = FALSE) RETURNING *`;
+export const UPDATE_PROJECT_MEDIA = `UPDATE projects_media SET url = COALESCE($1, url), url_hash = COALESCE($2, url_hash), type = COALESCE($3, type) WHERE id = $4
+AND EXISTS (SELECT 1 FROM projects p WHERE p.id = $5 AND p.deleted = FALSE) RETURNING *`;
 
 export const DELETE_PROJECT_MEDIA = `DELETE from projects_media pm USING projects p
 WHERE p.id = $1 AND p.deleted = false AND pm.id = $2`;
@@ -175,3 +175,14 @@ ON t.id = pt.tag_id WHERE p.deleted = false AND ($2::boolean IS TRUE OR p.public
 IS NULL OR $5::int[] <@ array_agg(t.id)) ORDER BY p.created_at DESC OFFSET $3 LIMIT $4`;
 
 export const COUNT_ALL_PROJECTS = `SELECT count(*) AS total FROM projects p WHERE p.deleted = FALSE`;
+
+export const GET_PROJECT_DETAILS = `select p.*, json_agg(jsonb_build_object('id', c.user_id,'project_role_id', c.role_id, 'project_role_name', pr.role_name, 
+'username', u.username,'profile_photo', coalesce(u.profile_photo, ''))) as collaborators, coalesce(json_agg(distinct jsonb_build_object('id', t.id,
+'name', t.name)) filter (where t.id is not null), '[]') as tags,coalesce(json_agg(distinct jsonb_build_object('id', tc.id,'name', tc.name)) filter 
+(where tc.id is not null), '[]') as technologies, coalesce(json_agg(distinct jsonb_build_object('id', pm.id,'url', pm.url,
+'type', pm.type)) filter (where pm.id is not null), '[]') as media,coalesce(json_agg(distinct jsonb_build_object('id', er.id,'name', er.name,'url', er.url,
+'type', er.type)) filter (where er.id is not null), '[]') as external_resources from projects p join collaborators c on c.project_id = p.id
+join project_roles pr on pr.id = c.role_id join users u on u.id = c.user_id left join project_tags pt on pt.project_id = p.id left join tags t on t.id = pt.tag_id
+left join projects_technologies ptc on ptc.project_id = p.id left join technologies tc on tc.id = ptc.technology_id left join projects_media pm on 
+pm.project_id = p.id left join external_resources er on er.project_id  = p.id left join collaborators c2 on c2.project_id = p.id and c2.role_id = 1
+join users u2 on u2.id = c2.user_id and u2.deleted = false where p.id = $1 and p.deleted = false group by p.id`;

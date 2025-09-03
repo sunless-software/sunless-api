@@ -57,6 +57,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.createProjectMedia,
       GLOBAL_PERMISSIONS.deleteProjectsMedia,
       GLOBAL_PERMISSIONS.updateProjectsMedia,
+      GLOBAL_PERMISSIONS.getProjectDetails,
     ],
   },
   {
@@ -109,6 +110,7 @@ export const DEVELOPMENT_PROJECT_ROLES = [
       PROJECT_PERMISSIONS.createProjectMedia,
       PROJECT_PERMISSIONS.deleteProjectMedia,
       PROJECT_PERMISSIONS.updateProjectMedia,
+      PROJECT_PERMISSIONS.getProjectDetails,
     ],
   },
   {
@@ -133,6 +135,7 @@ export const DEVELOPMENT_PROJECT_ROLES = [
       PROJECT_PERMISSIONS.createProjectMedia,
       PROJECT_PERMISSIONS.deleteProjectMedia,
       PROJECT_PERMISSIONS.updateProjectMedia,
+      PROJECT_PERMISSIONS.getProjectDetails,
     ],
   },
 ];

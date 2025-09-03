@@ -7,7 +7,7 @@ import projectsMediaController from "../controllers/projectsMediaController";
 import updateProjectMediaValidation from "../validations/updateProjectMedia";
 import deleteProjectMediaValidation from "../validations/deleteProjectMedia";
 
-const projectsMediaRouter = Router();
+const projectsMediaRouter = Router({ mergeParams: true });
 
 projectsMediaRouter.post(
   "/",

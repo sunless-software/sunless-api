@@ -51,3 +51,24 @@ export interface ProjectInvitation {
   iat: number;
   exp: number;
 }
+
+export interface ProjectCollaborator {
+  id: number;
+  username: string;
+  profile_photo: string;
+  project_role_id: number;
+  project_role_name: string;
+}
+
+export interface ProjectExternalResource {
+  id: number;
+  url: string;
+  name: string;
+  type: string;
+}
+
+export interface ProjectMedia {
+  id: number;
+  url: string;
+  type: string;
+}

@@ -74,4 +74,8 @@ export const PROJECT_PERMISSIONS = {
     id: Object.keys(GLOBAL_PERMISSIONS).length + 18,
     name: "UPDATE_PROJECT_MEDIA",
   },
+  getProjectDetails: {
+    id: Object.keys(GLOBAL_PERMISSIONS).length + 19,
+    name: "GET_PROJECT_DETAILS",
+  },
 } satisfies Record<string, Permission>;

@@ -10,6 +10,7 @@ import {
   CREATE_COLLABORATOR,
   CREATE_PROJECT,
   GET_ALL_PROJECTS,
+  GET_PROJECT_DETAILS,
   GET_PROJECT_KEY,
   GET_PROJECTS_BY_USER,
   SOFT_DELETE_PROJECT,
@@ -24,12 +25,19 @@ import {
   COLLABORATOR_SUCCESSFULLY_ADDED,
   DEFAULT_SUCCES_API_RESPONSE,
   INVITATION_SUCCESSFULLY_CREATED,
+  PROJECT_DETAILS_SUCCESSFULLY_RETRIEVED,
   PROJECT_SUCCESSFULLY_CREATED_MESSAGE,
   PROJECT_SUCCESSFULLY_DELETED_MESSAGE,
   PROJECT_SUCCESSFULLY_UPDATED,
-  PROJECTS_SUCCESSFULLY_RETRIVED,
+  PROJECTS_SUCCESSFULLY_RETRIEVED,
 } from "../constants/messages";
-import { AuthRequest, ProjectInvitation } from "../interfaces";
+import {
+  AuthRequest,
+  ProjectCollaborator,
+  ProjectExternalResource,
+  ProjectInvitation,
+  ProjectMedia,
+} from "../interfaces";
 import { PROJECT_INVITATION_LIFE_TIME } from "../constants/setup";
 import jwt from "jsonwebtoken";
 import { INCORRECT_USER_INVITATION } from "../constants/managedErrors";
@@ -360,7 +368,7 @@ const projectsController = {
       return sendResponse(
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
-          message: PROJECTS_SUCCESSFULLY_RETRIVED,
+          message: PROJECTS_SUCCESSFULLY_RETRIEVED,
           data: projects,
           pagination: {
             offset:
@@ -372,6 +380,72 @@ const projectsController = {
             count: projects.length,
             total: parseInt(resultCount.rows[0].total),
           },
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  getProjectDetails: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { projectID } = req.params;
+    const authID = (req as AuthRequest).user.id;
+    const db = await connectToDB();
+
+    try {
+      const result = await db.query(GET_PROJECT_DETAILS, [projectID]);
+      const affectedRows = result.rowCount;
+
+      if (!affectedRows) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      const projectData = result.rows[0];
+      const collaborators: Array<ProjectCollaborator> =
+        projectData.collaborators;
+      const isCollaborator = collaborators.some(
+        (collaborator) => collaborator.id === authID
+      );
+
+      if (isCollaborator || projectData.public) {
+        const encryptedProjectKey = projectData.key;
+        const decryptedProjectKey = decryptText(encryptedProjectKey);
+
+        projectData.name = decryptText(projectData.name, decryptedProjectKey);
+        projectData.short_description = decryptText(
+          projectData.short_description,
+          decryptedProjectKey
+        );
+        projectData.long_description = decryptText(
+          projectData.long_description,
+          decryptedProjectKey
+        );
+
+        projectData.external_resources = projectData.external_resources.map(
+          (externalResource: ProjectExternalResource) => {
+            return {
+              ...externalResource,
+              url: decryptText(externalResource.url, decryptedProjectKey),
+            };
+          }
+        );
+
+        projectData.media = projectData.media.map((media: ProjectMedia) => {
+          return { ...media, url: decryptText(media.url, decryptedProjectKey) };
+        });
+      }
+
+      const { name_hash, key, deleted, ...cleanProject } = projectData;
+
+      sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: PROJECT_DETAILS_SUCCESSFULLY_RETRIEVED,
+          data: [cleanProject],
         },
         res
       );

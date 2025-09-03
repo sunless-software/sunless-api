@@ -6,7 +6,7 @@ import addProjectTechnologyValidation from "../validations/addProjectTechnology"
 import technologiesController from "../controllers/technologiesController";
 import removeProjectTechnologyValidation from "../validations/removeProjectTechnology";
 
-const projectsTechnologiesRouter = Router();
+const projectsTechnologiesRouter = Router({ mergeParams: true });
 
 projectsTechnologiesRouter.post(
   "/",

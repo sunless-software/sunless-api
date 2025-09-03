@@ -79,7 +79,10 @@ async function start() {
     authMiddleware,
     projectsMediaRouter
   );
-  apiRouter.use("projects/:projectID/technologies", projectsTechnologiesRouter);
+  apiRouter.use(
+    "/projects/:projectID/technologies",
+    projectsTechnologiesRouter
+  );
 
   apiRouter.use(errorHandlerMiddleware);
 

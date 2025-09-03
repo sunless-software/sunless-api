@@ -130,7 +130,10 @@ export const PROJECT_MEDIA_SUCCESSFULLY_DELETED =
   "The project media has been successfully deleted.";
 export const PROJECT_MEDIA_URL_PROJECT_VIOLATION_MESSAGE =
   "The project already have a media with the same url.";
-export const PROJECTS_SUCCESSFULLY_RETRIVED = "Projects successfully retrived";
+export const PROJECTS_SUCCESSFULLY_RETRIEVED =
+  "Projects successfully retrieved";
+export const PROJECT_DETAILS_SUCCESSFULLY_RETRIEVED =
+  "Project details successfully retrieved";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
