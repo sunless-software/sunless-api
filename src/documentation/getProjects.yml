@@ -71,9 +71,6 @@ paths:
                         name:
                           type: string
                           example: my project
-                        name_hash:
-                          type: string
-                          example: 1ec4ed037766aa181d8840ad04b9fc6e195fd37dedc04c98a5767a67d3758ece
                         description:
                           type: string
                           example: project short description

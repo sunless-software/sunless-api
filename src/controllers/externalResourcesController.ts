@@ -54,12 +54,15 @@ const externalResourcesController = {
         throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
       }
 
+      const externalResourceData = result.rows[0];
+      const { url_hash, ...cleanExternalResource } = externalResourceData;
+
       return sendResponse(
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
           status: HTTP_STATUS_CODE_CREATED,
           message: PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_ADDED,
-          data: [{ ...result.rows[0], url: url }],
+          data: [{ ...cleanExternalResource, url: url }],
         },
         res
       );
@@ -104,13 +107,16 @@ const externalResourcesController = {
         throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
       }
 
+      const externalResourceData = result.rows[0];
+      const { url_hash, ...cleanExternalResource } = externalResourceData;
+
       return sendResponse(
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
           message: PROJECT_EXTERNAL_RESOURCE_SUCCESSFULLY_PATCHED,
           data: [
             {
-              ...result.rows[0],
+              ...cleanExternalResource,
               url: url || decryptText(result.rows[0].url, decryptedProjectKey),
             },
           ],

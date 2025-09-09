@@ -84,9 +84,6 @@ paths:
                         url:
                           type: string
                           example: https://www.github.com/my-repo
-                        url_hash:
-                          type: string
-                          example: f826a0b482b66ba244b471328e5cc0cac03eabba77abc18c72531b1acb9e4e3c
                         type:
                           type: string
                           example: GITHUB

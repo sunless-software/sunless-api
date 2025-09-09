@@ -76,9 +76,6 @@ paths:
                         url:
                           type: string
                           example: https://www.github.com/mfranco289
-                        url_hash:
-                          type: string
-                          example: 3e07e5471f5595409040e589654fa49eb00ad331d7dd7138169768a1a6786652
                         type:
                           type: string
                           example: GITHUB

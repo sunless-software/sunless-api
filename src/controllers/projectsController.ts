@@ -339,7 +339,8 @@ const projectsController = {
       ]);
 
       const projects = resultProjects.rows.map((project) => {
-        const { is_collaborator, deleted, ...cleanProject } = project;
+        const { name_hash, key, is_collaborator, deleted, ...cleanProject } =
+          project;
 
         if (project.public || project.is_collaborator) {
           const decryptedProjectKey = decryptText(project.key);
@@ -445,7 +446,7 @@ const projectsController = {
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
           message: PROJECT_DETAILS_SUCCESSFULLY_RETRIEVED,
-          data: [cleanProject],
+          data: [{ ...cleanProject, key: "****" }],
         },
         res
       );

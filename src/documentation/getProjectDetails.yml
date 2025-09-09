@@ -54,6 +54,9 @@
                       status:
                         type: string
                         example: FINISHED
+                      key:
+                        type: string
+                        example: "****"
                       public:
                         type: boolean
                         example: false
