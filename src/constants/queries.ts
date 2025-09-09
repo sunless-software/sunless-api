@@ -192,5 +192,12 @@ and u.deleted = false join projects p on p.id = b.project_id and p.deleted = fal
 u2.id = c.user_id and u2.deleted = false where u.id = $1 and ($2::boolean IS TRUE OR p.public = TRUE) group by b.id, p.public, p.key
 order by b.created_at desc offset $3 limit $4`;
 
+export const GET_BLOGS_FROM_PROJECT = `select b.*, p.public, p."key", array_agg(c.user_id ) as collaborators from blogs b join users u on u.id = b.user_id 
+and u.deleted = false join projects p on p.id = b.project_id and p.deleted = false join collaborators c on c.project_id = p.id join users u2 on 
+u2.id = c.user_id and u2.deleted = false where p.id = $1 group by b.id, p.public, p.key order by b.created_at desc offset $2 limit $3`;
+
 export const COUNT_BLOGS_FROM_USER = `select count (*) as total from blogs b join users u on u.id = b.user_id and u.deleted = false join projects p on
 p.id = b.project_id and p.deleted = false where u.id = $1`;
+
+export const COUNT_BLOGS_FROM_PROJECT = `select count (*) as total from blogs b join users u on u.id = b.user_id and u.deleted = false join projects p on
+p.id = b.project_id and p.deleted = false where p.id = $1`;

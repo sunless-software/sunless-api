@@ -8,6 +8,8 @@ import {
   UPDATE_BLOGS,
   GET_BLOGS_FROM_USER,
   COUNT_BLOGS_FROM_USER,
+  GET_BLOGS_FROM_PROJECT,
+  COUNT_BLOGS_FROM_PROJECT,
 } from "../constants/queries";
 import {
   HTTP_STATUS_CODE_CREATED,
@@ -144,19 +146,23 @@ const blogsController = {
   },
   getBlogs: async (req: Request, res: Response, next: NextFunction) => {
     const authID = (req as AuthRequest).user.id;
-    const { userID } = req.params;
+    const { userID, projectID } = req.params;
     const { offset = 0, limit = 20, showPrivateBlogs = false } = req.query;
+
+    const blogsQuery = userID ? GET_BLOGS_FROM_USER : GET_BLOGS_FROM_PROJECT;
+    const countQuery = userID
+      ? COUNT_BLOGS_FROM_USER
+      : COUNT_BLOGS_FROM_PROJECT;
+    const queryParams = userID
+      ? [userID, showPrivateBlogs, offset, limit]
+      : [projectID, offset, limit];
+
     const db = await connectToDB();
 
     try {
       const [resultBlogs, resultCount] = await Promise.all([
-        db.query(GET_BLOGS_FROM_USER, [
-          userID,
-          showPrivateBlogs,
-          offset,
-          limit,
-        ]),
-        db.query(COUNT_BLOGS_FROM_USER, [userID]),
+        db.query(blogsQuery, queryParams),
+        db.query(countQuery, [userID ? userID : projectID]),
       ]);
 
       const blogs = resultBlogs.rows.map((blog) => {

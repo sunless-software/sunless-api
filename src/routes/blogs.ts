@@ -6,8 +6,17 @@ import createBlogValidation from "../validations/createBlog";
 import blogsController from "../controllers/blogsController";
 import updateBlogValidation from "../validations/updateBlog";
 import deleteBlogValidation from "../validations/deleteBlog";
+import getBlogsFromProjectValidation from "../validations/getBlogsFromProject";
+import roleMiddleware from "../middlewares/roleMiddleware";
 
 const blogsRouter = Router({ mergeParams: true });
+
+blogsRouter.get(
+  "/",
+  roleMiddleware([GLOBAL_PERMISSIONS.readBlogs]),
+  getBlogsFromProjectValidation,
+  blogsController.getBlogs
+);
 
 blogsRouter.post(
   "/",
