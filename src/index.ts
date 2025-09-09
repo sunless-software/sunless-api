@@ -29,6 +29,7 @@ import externalResourceRouter from "./routes/externalResources";
 import projectsMediaRouter from "./routes/projectsMedia";
 import projectsTechnologiesRouter from "./routes/projectsTechnologies";
 import usersProjectsRouter from "./routes/usersProjects";
+import usersBlogsRouter from "./routes/usersBlogs";
 
 async function start() {
   const app = express();
@@ -65,6 +66,7 @@ async function start() {
   apiRouter.use("/technologies", authMiddleware, technologiesRouter);
 
   apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter);
+  apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter);
 
   apiRouter.use("/projects", authMiddleware, projectsRouter);
   apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter);

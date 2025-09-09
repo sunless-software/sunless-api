@@ -1,19 +1,20 @@
 openapi: 3.0.3
 info:
-  title: Users Projects API
+  title: Users Blogs API
   version: 1.0.0
 
 paths:
-  /api/v1/users/{userID}/projects:
+  /api/v1/users/{userID}/blogs:
     get:
-      summary: Retrieve projects for a specific user
+      summary: Retrieve blogs for a specific user
       description: >
-        Fetch a paginated list of projects related to the given user.  
-        Requires the global `READ_PROJECTS` permission.  
-        By default, only public projects are returned.  
-        If `showPrivateProjects` is set to `true`, private projects will be included, 
-        but only in their encrypted form unless the requester is the project creator 
-        or a collaborator, in which case the decrypted version is returned.
+        Fetch a paginated list of blogs related to the given user.  
+        Requires the global `READ_BLOGS` permission.  
+        Only blogs belonging to non-deleted users and non-deleted projects are returned.  
+        By default, only public blogs are returned.  
+        If `showPrivateBlogs` is set to `true`, private blogs will be included, 
+        but only in their encrypted form unless the requester is the blog creator 
+        or a collaborator of the project, in which case the decrypted version is returned.
       tags:
         - Users
       parameters:
@@ -22,39 +23,31 @@ paths:
           required: true
           schema:
             type: integer
-          description: ID of the user whose projects to fetch
+          description: ID of the user whose blogs to fetch
         - in: query
           name: offset
           schema:
             type: integer
             default: 0
-          description: Number of projects to skip
+          description: Number of blogs to skip
         - in: query
           name: limit
           schema:
             type: integer
             default: 20
-          description: Maximum number of projects to return
+          description: Maximum number of blogs to return
         - in: query
-          name: showPrivateProjects
+          name: showPrivateBlogs
           schema:
             type: boolean
             default: false
           description: >
-            Include private projects.  
-            Requires `READ_PROJECTS`.  
+            Include private blogs.  
+            Requires `READ_BLOGS`.  
             If requester is not creator or collaborator, only encrypted data is shown.
-        - in: query
-          name: tags
-          schema:
-            type: string
-            example: "1,2,3"
-          description: >
-            Comma-separated list of tag IDs to filter projects by.  
-            Must be integers.
       responses:
         "200":
-          description: Projects successfully retrieved
+          description: Blogs successfully retrieved
           content:
             application/json:
               schema:
@@ -65,7 +58,7 @@ paths:
                     example: 200
                   message:
                     type: string
-                    example: Projects successfully retrived
+                    example: Blogs successfully retrieved
                   data:
                     type: array
                     items:
@@ -74,39 +67,18 @@ paths:
                         id:
                           type: integer
                           example: 1
-                        name:
+                        title:
                           type: string
-                          example: my project
-                        description:
+                          example: My first blog
+                        body:
                           type: string
-                          example: project short description
-                        long_description:
-                          type: string
-                          example: long project description
-                        status:
-                          type: string
-                          example: FINISHED
-                        public:
-                          type: boolean
-                          example: true
-                        start_date:
-                          type: string
-                          format: date-time
-                          example: 2024-03-28T03:00:00.000Z
-                        end_date:
-                          type: string
-                          format: date-time
-                          example: 2024-04-27T03:00:00.000Z
-                        estimated_end:
-                          type: string
-                          format: date-time
-                          example: 2024-04-23T03:00:00.000Z
-                        key:
-                          type: string
-                          example: "****"
-                        deleted:
-                          type: boolean
-                          example: false
+                          example: This is the blog content
+                        project_id:
+                          type: integer
+                          example: 3
+                        user_id:
+                          type: integer
+                          example: 1
                         created_at:
                           type: string
                           format: date-time
@@ -115,28 +87,6 @@ paths:
                           type: string
                           format: date-time
                           example: 2025-09-02T05:42:58.515Z
-                        tags:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: integer
-                                example: 2
-                              name:
-                                type: string
-                                example: Web
-                              created_at:
-                                type: string
-                                format: date-time
-                                example: 2025-09-02T02:37:58.303Z
-                              updated_at:
-                                type: string
-                                format: date-time
-                                example: 2025-09-02T02:37:58.303Z
-                        creator_id:
-                          type: number
-                          example: 1
                   pagination:
                     type: object
                     properties:
@@ -168,7 +118,7 @@ paths:
                 $ref: "#/components/schemas/UnauthorizedError"
 
         "403":
-          description: Forbidden or insufficient permissions
+          description: Forbidden, insufficient permissions
           content:
             application/json:
               schema:

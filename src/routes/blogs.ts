@@ -3,11 +3,11 @@ import projectRoleMiddleware from "../middlewares/projectRoleMiddleware";
 import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
 import createBlogValidation from "../validations/createBlog";
-import blogsController from "../controllers/blogs";
+import blogsController from "../controllers/blogsController";
 import updateBlogValidation from "../validations/updateBlog";
 import deleteBlogValidation from "../validations/deleteBlog";
 
-const blogsRouter = Router();
+const blogsRouter = Router({ mergeParams: true });
 
 blogsRouter.post(
   "/",

@@ -21,7 +21,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.updateProjects,
       GLOBAL_PERMISSIONS.deleteProjects,
       GLOBAL_PERMISSIONS.readProjects,
-      GLOBAL_PERMISSIONS.viewPrivateBlogs,
+      GLOBAL_PERMISSIONS.readBlogs,
       GLOBAL_PERMISSIONS.createBlogs,
       GLOBAL_PERMISSIONS.updateBlogs,
       GLOBAL_PERMISSIONS.deleteBlogs,
@@ -83,6 +83,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.addOwnTechnologies,
       GLOBAL_PERMISSIONS.removeOwnTechnologies,
       GLOBAL_PERMISSIONS.readProjects,
+      GLOBAL_PERMISSIONS.readBlogs,
     ],
   },
 ];

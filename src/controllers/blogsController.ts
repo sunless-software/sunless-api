@@ -6,6 +6,8 @@ import {
   GET_PROJECT_KEY,
   DELETE_BLOG,
   UPDATE_BLOGS,
+  GET_BLOGS_FROM_USER,
+  COUNT_BLOGS_FROM_USER,
 } from "../constants/queries";
 import {
   HTTP_STATUS_CODE_CREATED,
@@ -16,6 +18,7 @@ import {
   BLOG_SUCCESSFULLY_CREATED_MESSAGE,
   BLOG_SUCCESSFULLY_DELETED_MESSAGE,
   BLOG_SUCCESSFULY_UPDATED,
+  BLOGS_SUCCESSFULLY_RETRIEVED,
   DEFAULT_SUCCES_API_RESPONSE,
 } from "../constants/messages";
 
@@ -132,6 +135,64 @@ const blogsController = {
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
           message: BLOG_SUCCESSFULLY_DELETED_MESSAGE,
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  getBlogs: async (req: Request, res: Response, next: NextFunction) => {
+    const authID = (req as AuthRequest).user.id;
+    const { userID } = req.params;
+    const { offset = 0, limit = 20, showPrivateBlogs = false } = req.query;
+    const db = await connectToDB();
+
+    try {
+      const [resultBlogs, resultCount] = await Promise.all([
+        db.query(GET_BLOGS_FROM_USER, [
+          userID,
+          showPrivateBlogs,
+          offset,
+          limit,
+        ]),
+        db.query(COUNT_BLOGS_FROM_USER, [userID]),
+      ]);
+
+      const blogs = resultBlogs.rows.map((blog) => {
+        const { key, collaborators, ["public"]: isPublic, ...cleanBlog } = blog;
+        const isCollaborator = collaborators.some(
+          (collaboratorID: number) => collaboratorID === authID
+        );
+
+        if (isPublic || isCollaborator) {
+          const decryptedProjectKey = decryptText(key);
+
+          return {
+            ...cleanBlog,
+            title: decryptText(blog.title, decryptedProjectKey),
+            body: decryptText(blog.body, decryptedProjectKey),
+          };
+        }
+
+        return cleanBlog;
+      });
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: BLOGS_SUCCESSFULLY_RETRIEVED,
+          data: blogs,
+          pagination: {
+            offset:
+              typeof offset === "string"
+                ? parseInt(offset)
+                : (offset as number),
+            limit:
+              typeof limit === "string" ? parseInt(limit) : (limit as number),
+            count: blogs.length,
+            total: parseInt(resultCount.rows[0].total),
+          },
         },
         res
       );

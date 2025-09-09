@@ -31,9 +31,9 @@ export const GLOBAL_PERMISSIONS = {
     id: 15,
     name: "READ_PROJECTS",
   },
-  viewPrivateBlogs: {
+  readBlogs: {
     id: 16,
-    name: "VIEW_PRIVATE_BLOGS",
+    name: "READ_BLOGS",
   },
   createBlogs: { id: 17, name: "CREATE_BLOGS" },
   updateBlogs: { id: 18, name: "UPDATE_BLOGS" },

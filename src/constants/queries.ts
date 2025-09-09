@@ -186,3 +186,11 @@ join project_roles pr on pr.id = c.role_id join users u on u.id = c.user_id left
 left join projects_technologies ptc on ptc.project_id = p.id left join technologies tc on tc.id = ptc.technology_id left join projects_media pm on 
 pm.project_id = p.id left join external_resources er on er.project_id  = p.id left join collaborators c2 on c2.project_id = p.id and c2.role_id = 1
 join users u2 on u2.id = c2.user_id and u2.deleted = false where p.id = $1 and p.deleted = false group by p.id`;
+
+export const GET_BLOGS_FROM_USER = `select b.*, p.public, p."key", array_agg(c.user_id ) as collaborators from blogs b join users u on u.id = b.user_id 
+and u.deleted = false join projects p on p.id = b.project_id and p.deleted = false join collaborators c on c.project_id = p.id join users u2 on 
+u2.id = c.user_id and u2.deleted = false where u.id = $1 and ($2::boolean IS TRUE OR p.public = TRUE) group by b.id, p.public, p.key
+order by b.created_at desc offset $3 limit $4`;
+
+export const COUNT_BLOGS_FROM_USER = `select count (*) as total from blogs b join users u on u.id = b.user_id and u.deleted = false join projects p on
+p.id = b.project_id and p.deleted = false where u.id = $1`;
