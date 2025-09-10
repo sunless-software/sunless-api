@@ -20,7 +20,7 @@ import {
 
 const experiencesController = {
   createExperience: async (req: Request, res: Response, next: NextFunction) => {
-    const authID = (req as AuthRequest).user.id;
+    const { userID } = req.params;
     const {
       companyName,
       role,
@@ -30,7 +30,6 @@ const experiencesController = {
       endDate = null,
       companyLogo = null,
     } = req.body;
-    const userID = req.body.userID || authID;
     const db = await connectToDB();
 
     try {
@@ -65,7 +64,7 @@ const experiencesController = {
     }
   },
   updateExperience: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID, experienceID } = req.params;
     const {
       companyName,
       role,
@@ -86,7 +85,8 @@ const experiencesController = {
         startDate,
         endDate,
         companyLogo,
-        id,
+        experienceID,
+        userID,
       ]);
       const affectedRows = result.rowCount;
 
@@ -107,11 +107,11 @@ const experiencesController = {
     }
   },
   deleteExperience: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID, experienceID } = req.params;
     const db = await connectToDB();
 
     try {
-      const result = await db.query(DELETE_EXPERIENCE, [id]);
+      const result = await db.query(DELETE_EXPERIENCE, [experienceID, userID]);
       const affectedRows = result.rowCount;
 
       if (!affectedRows) {

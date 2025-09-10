@@ -63,8 +63,12 @@ async function start() {
   apiRouter.use("/auth", authRouter);
 
   apiRouter.use("/users", authMiddleware, usersRouter);
-  apiRouter.use("/experiences", authMiddleware, experiencesRouter);
 
+  apiRouter.use(
+    "/users/:userID/experiences",
+    authMiddleware,
+    experiencesRouter
+  );
   apiRouter.use("/users/:userID/educations", authMiddleware, educationRouter);
   apiRouter.use("/users/:userID/skills", userSkillsRouter);
   apiRouter.use(

@@ -1,14 +1,21 @@
 paths:
-  /api/v1/experiences:
+  /api/v1/users/{userID}/experiences:
     post:
-      summary: Create a new experience
+      summary: Create a new experience for a specific user
       description: |
-        Creates a new experience for a user.  
-        If `userID` is not provided, the experience is created for the authenticated user.  
-        Requires `CREATE_OWN_EXPERIENCES` permission if creating your own experience, otherwise requires `CREATE_EXPERIENCES`.  
+        Creates a new experience for the user identified by `userID`.  
+        Requires `CREATE_OWN_EXPERIENCES` permission if creating an experience for yourself, otherwise requires `CREATE_EXPERIENCES`.  
         All fields are validated according to their type and requirements.
       tags:
         - Experiences
+      parameters:
+        - in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: ID of the user to create the experience for. Must be numeric.
       requestBody:
         required: true
         content:
@@ -16,13 +23,9 @@ paths:
             schema:
               type: object
               properties:
-                userID:
-                  type: integer
-                  example: 3
-                  description: Optional. Must be a number. If not provided, defaults to the authenticated user.
                 companyName:
                   type: string
-                  example: Evil Corp
+                  example: Software Corp
                   description: Required. Must be a non-empty string.
                 role:
                   type: string
@@ -30,7 +33,7 @@ paths:
                   description: Required. Must be a non-empty string.
                 description:
                   type: string
-                  example: I develop evil software for Evil Corp
+                  example: I develop software for Software Corp
                   description: Required. Must be a non-empty string.
                 location:
                   type: string
@@ -71,30 +74,53 @@ paths:
                       id:
                         type: integer
                         example: 10
-                      userID:
+                      user_id:
                         type: integer
                         example: 3
-                      companyName:
+                      company_name:
                         type: string
-                        example: Evil Corp
+                        example: Software Corp
                       role:
                         type: string
                         example: Developer
                       description:
                         type: string
-                        example: I develop evil software for Evil Corp
+                        example: I develop software for Software Corp
                       location:
                         type: string
                         example: Remote
-                      startDate:
+                      start_date:
                         type: string
                         example: 2023-09-26
-                      endDate:
+                      end_date:
                         type: string
                         example: 2023-09-26
-                      companyLogo:
+                      company_logo:
                         type: string
                         example: "https://www.image.png"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: 2025-09-02T05:42:58.515Z
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: 2025-09-02T05:42:58.515Z
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
         "400":
           description: Validation error
           content:
@@ -113,3 +139,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: User with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

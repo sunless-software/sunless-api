@@ -1,12 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { validateResult } from "../utils";
 
 const createExperienceValidation = [
-  body("userID")
-    .optional()
-    .isNumeric()
-    .withMessage("'userID' must be a number"),
+  param("userID").isNumeric().withMessage("user 'id' must be a number"),
   body("companyName")
     .exists()
     .withMessage("'companyName' must be provided")

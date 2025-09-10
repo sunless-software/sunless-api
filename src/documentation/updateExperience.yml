@@ -1,21 +1,28 @@
 paths:
-  /api/v1/experiences/{id}:
+  /api/v1/users/{userID}/experiences/{experienceID}:
     patch:
-      summary: Update an experience
+      summary: Update an experience for a specific user
       description: |
-        Updates an experience by ID.  
+        Updates an experience identified by `experienceID` for the user `userID`.  
         All fields in the request body are optional, but will be validated if provided.  
         Requires `UPDATE_OWN_EXPERIENCES` permission if updating your own experience, otherwise requires `UPDATE_EXPERIENCES`.
       tags:
         - Experiences
       parameters:
         - in: path
-          name: id
+          name: userID
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: ID of the user the experience belongs to. Must be numeric.
+        - in: path
+          name: experienceID
           required: true
           schema:
             type: integer
             example: 10
-          description: The ID of the experience to update
+          description: ID of the experience to update. Must be numeric.
       requestBody:
         required: true
         content:
@@ -23,13 +30,9 @@ paths:
             schema:
               type: object
               properties:
-                userID:
-                  type: integer
-                  example: 3
-                  description: Optional. Must be a number. If not provided, defaults to the authenticated user.
                 companyName:
                   type: string
-                  example: Evil Corp
+                  example: Software Corp
                   description: Optional. Must be a non-empty string if provided.
                 role:
                   type: string
@@ -37,7 +40,7 @@ paths:
                   description: Optional. Must be a non-empty string if provided.
                 description:
                   type: string
-                  example: I develop evil software for Evil Corp
+                  example: I develop software for Software Corp
                   description: Optional. Must be a non-empty string if provided.
                 location:
                   type: string
@@ -71,37 +74,45 @@ paths:
                     example: 200
                   message:
                     type: string
-                    example: The experience has been successfully updated.
+                    example: Experience updated successfully.
                   data:
                     type: object
                     properties:
                       id:
                         type: integer
                         example: 10
-                      userID:
+                      user_id:
                         type: integer
                         example: 3
-                      companyName:
+                      company_name:
                         type: string
-                        example: Evil Corp
+                        example: Software Corp
                       role:
                         type: string
                         example: Developer
                       description:
                         type: string
-                        example: I develop evil software for Evil Corp
+                        example: I develop software for Software Corp
                       location:
                         type: string
                         example: Remote
-                      startDate:
+                      start_date:
                         type: string
                         example: 2023-09-26
-                      endDate:
+                      end_date:
                         type: string
                         example: 2023-09-26
-                      companyLogo:
+                      company_logo:
                         type: string
                         example: "https://www.image.png"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: 2025-09-02T05:42:58.515Z
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: 2025-09-02T05:42:58.515Z
         "400":
           description: Validation error
           content:
@@ -121,7 +132,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
         "404":
-          description: Experience with given ID does not exist
+          description: Experience or user with given ID does not exist
           content:
             application/json:
               schema:
@@ -132,11 +143,12 @@ paths:
                     example: 404
                   message:
                     type: string
-                    example: The entity with the given id does not exists.
+                    example: The entity with the given id does not exist.
                   data:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
