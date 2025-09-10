@@ -1,29 +1,28 @@
 paths:
-  /api/v1/technologies/remove/user/{id}:
+  /api/v1/users/{userID}/technologies/{technologyID}:
     delete:
       summary: Remove a technology from a user
       description: |
         Removes the association between an existing technology and a user.  
         The technology itself is not deleted.  
-        If `id` query parameter (userID) is not provided, defaults to the authenticated user.  
         Requires `REMOVE_OWN_TECHNOLOGIES` permission if removing from your own technologies, otherwise requires `REMOVE_TECHNOLOGIES`.
       tags:
         - Technologies
       parameters:
-        - in: query
-          name: id
-          required: false
+        - name: userID
+          in: path
+          required: true
           schema:
             type: integer
             example: 3
-          description: Optional. The ID of the user from whom to remove the technology. Defaults to the authenticated user if not provided.
-        - in: path
-          name: technologyID
+          description: Must be a number. The ID of the user from whom to remove the technology.
+        - name: technologyID
+          in: path
           required: true
           schema:
             type: integer
             example: 2
-          description: The ID of the technology to remove
+          description: Must be a number. The ID of the technology to remove.
       responses:
         "200":
           description: Technology successfully removed from user
@@ -39,14 +38,26 @@ paths:
                     type: string
                     example: The technology has been successfully removed from the user.
                   data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
                     type: object
                     properties:
-                      userID:
+                      offset:
                         type: integer
-                        example: 3
-                      technologyID:
+                        example: 0
+                      limit:
                         type: integer
-                        example: 2
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+
         "400":
           description: Validation error
           content:
@@ -82,6 +93,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

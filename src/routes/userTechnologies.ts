@@ -6,18 +6,17 @@ import technologiesController from "../controllers/technologiesController";
 import removeUserTechnologyValidation from "../validations/removeUserTechnology";
 import getTechnologiesValidation from "../validations/getTechnologies";
 
-const technologiesRouter = Router();
+const userTechnologiesRouter = Router({ mergeParams: true });
 
-technologiesRouter.get(
+/* userTechnologiesRouter.get(
   "/",
   getTechnologiesValidation,
   technologiesController.getTechnologies
 );
-
-technologiesRouter.post(
-  "/add/user",
+ */
+userTechnologiesRouter.post(
+  "/",
   ownershipMiddleware(
-    "body",
     GLOBAL_PERMISSIONS.addOwnTechnologies,
     GLOBAL_PERMISSIONS.addTechnologies
   ),
@@ -25,10 +24,9 @@ technologiesRouter.post(
   technologiesController.addUserTechnology
 );
 
-technologiesRouter.delete(
-  "/remove/user/:id",
+userTechnologiesRouter.delete(
+  "/:technologyID",
   ownershipMiddleware(
-    "query",
     GLOBAL_PERMISSIONS.removeOwnTechnologies,
     GLOBAL_PERMISSIONS.removeTechnologies
   ),
@@ -36,4 +34,4 @@ technologiesRouter.delete(
   technologiesController.removeUserTechnology
 );
 
-export default technologiesRouter;
+export default userTechnologiesRouter;

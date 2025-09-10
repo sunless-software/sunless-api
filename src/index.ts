@@ -21,7 +21,7 @@ import swaggerSpec from "./swagger";
 import experiencesRouter from "./routes/experiences";
 import educationRouter from "./routes/education";
 import skillsRouter from "./routes/skills";
-import technologiesRouter from "./routes/technologies";
+import userTechnologiesRouter from "./routes/userTechnologies";
 import projectsRouter from "./routes/projects";
 import blogsRouter from "./routes/blogs";
 import tagsRouter from "./routes/tags";
@@ -59,11 +59,17 @@ async function start() {
   });
 
   apiRouter.use("/auth", authRouter);
+
   apiRouter.use("/users", authMiddleware, usersRouter);
   apiRouter.use("/experiences", authMiddleware, experiencesRouter);
   apiRouter.use("/educations", authMiddleware, educationRouter);
   apiRouter.use("/skills", authMiddleware, skillsRouter);
-  apiRouter.use("/technologies", authMiddleware, technologiesRouter);
+
+  apiRouter.use(
+    "/users/:userID/technologies",
+    authMiddleware,
+    userTechnologiesRouter
+  );
 
   apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter);
   apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter);

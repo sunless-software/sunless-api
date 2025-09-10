@@ -1,14 +1,20 @@
 paths:
-  /api/v1/technologies/add/user:
+  /api/v1/users/{userID}/technologies:
     post:
       summary: Add a technology to a user
       description: |
         Adds an existing technology to a user.  
-        If `userID` is not provided, the technology is added to the authenticated user.  
         Requires `ADD_OWN_TECHNOLOGIES` permission if adding to your own technologies, otherwise requires `ADD_TECHNOLOGIES`.  
         This endpoint does not create new technologies, only associates an existing technology with a user.
       tags:
         - Technologies
+      parameters:
+        - name: userID
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Must be a number. The ID of the user to associate the technology with.
       requestBody:
         required: true
         content:
@@ -16,10 +22,6 @@ paths:
             schema:
               type: object
               properties:
-                userID:
-                  type: integer
-                  example: 3
-                  description: Optional. Must be a number. If not provided, defaults to the authenticated user.
                 technologyID:
                   type: integer
                   example: 5
@@ -39,14 +41,25 @@ paths:
                     type: string
                     example: The technology was successfully added to the user.
                   data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
                     type: object
                     properties:
-                      userID:
+                      offset:
                         type: integer
-                        example: 3
-                      technologyID:
+                        example: 0
+                      limit:
                         type: integer
-                        example: 5
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
         "400":
           description: Validation error
           content:
@@ -82,6 +95,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
@@ -114,6 +128,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

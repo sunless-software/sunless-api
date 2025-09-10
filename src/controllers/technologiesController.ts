@@ -64,9 +64,8 @@ const technologiesController = {
     res: Response,
     next: NextFunction
   ) => {
-    const authID = (req as AuthRequest).user.id;
+    const { userID } = req.params;
     const { technologyID } = req.body;
-    const userID = req.body.userID || authID;
     const db = await connectToDB();
 
     try {
@@ -98,9 +97,7 @@ const technologiesController = {
     res: Response,
     next: NextFunction
   ) => {
-    const authID = (req as AuthRequest).user.id;
-    const technologyID = req.params.id;
-    const userID = req.query.id || authID;
+    const { userID, technologyID } = req.params;
     const db = await connectToDB();
 
     try {

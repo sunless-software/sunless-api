@@ -3,31 +3,26 @@ import { AuthRequest, Permission } from "../interfaces";
 import roleMiddleware from "./roleMiddleware";
 
 /**
- * This middleware gets the id of the owner of a resource from the body request and checks if
- * matches the id of the user which is doing the request. If the resource belong to
- * the user checks for 'ownPermission' if the resource does not belongs to the user
- * checks for 'otherPermission'.
+ * This midlewares gets the userID from the request params.
  *
- * @param ownPermission - The permissions which will be required if the resource belong to the user.
- * @param otherPermission - The permission which will be required if the resource does not belongs to the user.
- * @returns - A middleware
+ * If the userID from params is the same as the user who is making the request
+ * it assumes the resource is from your ownership so it requires 'ownPermission',
+ * otherwise it requires otherPermission
+ *
+ * @param ownPermission - The required global permissions if the resources is from your ownership.
+ * @param otherPermission - The required global permission if the resources is not from your ownership.
+ * @returns - A middleware function.
  */
 export default function ownershipMiddleware(
-  ownerIdLocation: "body" | "params" | "query",
   ownPermission: Permission,
   otherPermission: Permission
 ) {
   return async (req: Request, res: Response, next: NextFunction) => {
-    const resourceOwnerID = Number(
-      ownerIdLocation === "body"
-        ? req.body.userID
-        : ownerIdLocation === "params"
-        ? req.params.id
-        : req.query.id
-    );
+    const resourceOwnerID = parseInt(req.params.userID) || 0;
     const userID = (req as AuthRequest).user.id;
+    const isOwner = resourceOwnerID === userID;
 
-    if (!resourceOwnerID || resourceOwnerID === userID) {
+    if (isOwner) {
       return roleMiddleware([ownPermission])(req, res, next);
     }
 
