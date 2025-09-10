@@ -20,10 +20,9 @@ import { sendResponse } from "../utils";
 
 const educationController = {
   createEducation: async (req: Request, res: Response, next: NextFunction) => {
-    const authID = (req as AuthRequest).user.id;
+    const { userID } = req.params;
     const { startDate, endDate, institution, field, location, description } =
       req.body;
-    const userID = req.body.userID || authID;
     const db = await connectToDB();
 
     try {
@@ -56,7 +55,7 @@ const educationController = {
     }
   },
   updateEducation: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID, educationID } = req.params;
     const { startDate, endDate, institution, field, location, description } =
       req.body;
     const db = await connectToDB();
@@ -69,7 +68,8 @@ const educationController = {
         field,
         location,
         description,
-        id,
+        educationID,
+        userID,
       ]);
       const affectedRows = result.rowCount;
 
@@ -90,11 +90,11 @@ const educationController = {
     }
   },
   deleteEducation: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID, educationID } = req.params;
     const db = await connectToDB();
 
     try {
-      const result = await db.query(DELETE_EDUCATION, [id]);
+      const result = await db.query(DELETE_EDUCATION, [educationID, userID]);
       const affectedRows = result.rowCount;
 
       if (!affectedRows) {

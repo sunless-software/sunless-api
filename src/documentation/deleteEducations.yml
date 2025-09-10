@@ -1,24 +1,31 @@
 paths:
-  /api/v1/educations/{id}:
+  /api/v1/users/{userID}/educations/{educationID}:
     delete:
-      summary: Delete an education record
+      summary: Delete an education record for a specific user
       description: |
-        Deletes an education record by ID.  
+        Deletes an education record identified by `educationID` for the user identified by `userID`.  
         Requires `DELETE_OWN_EDUCATIONS` permission if deleting your own record, otherwise requires `DELETE_EDUCATIONS`.  
-        The `id` parameter must be numeric.
+        Both `userID` and `educationID` must be numeric.
       tags:
         - Educations
       parameters:
-        - in: path
-          name: id
+        - name: userID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: Must be a number. Identifies the user who owns the education record.
+        - name: educationID
+          in: path
           required: true
           schema:
             type: integer
             example: 7
-          description: The ID of the education record to delete
+          description: Must be a number. Identifies the education record to delete.
       responses:
         "200":
-          description: Study successfully deleted.
+          description: Education record successfully deleted
           content:
             application/json:
               schema:
@@ -29,11 +36,12 @@ paths:
                     example: 200
                   message:
                     type: string
-                    example: The education record has been successfully deleted.
+                    example: Study successfully deleted.
                   data:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
@@ -68,7 +76,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
         "404":
-          description: Entity with given ID does not exist
+          description: User or education record with given ID does not exist
           content:
             application/json:
               schema:
@@ -84,6 +92,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

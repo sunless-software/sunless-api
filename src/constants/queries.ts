@@ -64,14 +64,16 @@ export const CREATE_EDUCATION = `INSERT INTO educations (user_id, start_date, en
 select u.id, $1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP from users u where u.id = $7 and u.deleted = false returning id, start_date, 
 end_date, institution, field, location, coalesce(description, '') as description, created_at, updated_at`;
 
-export const DELETE_EDUCATION = "DELETE FROM educations WHERE id = $1";
+export const DELETE_EDUCATION =
+  "DELETE FROM educations e USING users u WHERE e.id = $1 AND u.id = $2 AND u.deleted = FALSE";
 
 export const GET_EDUCATION_USER_ID =
   "SELECT user_id FROM educations WHERE id = $1 LIMIT 1";
 
 export const PATCH_EDUCATION = `UPDATE educations SET start_date=COALESCE($1, start_date), end_date=COALESCE($2, end_date), institution=COALESCE($3, institution),
-field=COALESCE($4, field), "location"=COALESCE($5, location), description=COALESCE($6, description) WHERE id=$7
-returning id, start_date, end_date, institution, field, location, coalesce(description, '') as description, created_at, updated_at`;
+field=COALESCE($4, field), "location"=COALESCE($5, location), description=COALESCE($6, description) WHERE id=$7 and exists (select 1 from users u where
+u.id = $8 and u.deleted = false) returning id, start_date, end_date, institution, field, location, coalesce(description, '') as description, 
+created_at, updated_at`;
 
 export const ADD_USER_SKILL = `INSERT INTO users_skills (user_id, skill_id, created_at, updated_at) SELECT u.id, s.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 FROM users u JOIN skills s ON s.id = $2 WHERE u.id = $1 AND u.deleted = false`;

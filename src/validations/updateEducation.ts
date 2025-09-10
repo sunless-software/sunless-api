@@ -1,8 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { validateResult } from "../utils";
 
 const updateEducationValidation = [
+  param("userID").isNumeric().withMessage("user 'id' must be a number"),
+  param("educationID")
+    .isNumeric()
+    .withMessage("education 'id' must be a number"),
   body("startDate")
     .optional()
     .isString()
