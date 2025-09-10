@@ -2,18 +2,11 @@ import { Router } from "express";
 import ownershipMiddleware from "../middlewares/ownershipMiddleware";
 import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import addUserTechnologyValidation from "../validations/addUserTechnology";
-import technologiesController from "../controllers/technologiesController";
+import userTechnologiesController from "../controllers/userTechnologiesController";
 import removeUserTechnologyValidation from "../validations/removeUserTechnology";
-import getTechnologiesValidation from "../validations/getTechnologies";
 
 const userTechnologiesRouter = Router({ mergeParams: true });
 
-/* userTechnologiesRouter.get(
-  "/",
-  getTechnologiesValidation,
-  technologiesController.getTechnologies
-);
- */
 userTechnologiesRouter.post(
   "/",
   ownershipMiddleware(
@@ -21,7 +14,7 @@ userTechnologiesRouter.post(
     GLOBAL_PERMISSIONS.addTechnologies
   ),
   addUserTechnologyValidation,
-  technologiesController.addUserTechnology
+  userTechnologiesController.addUserTechnology
 );
 
 userTechnologiesRouter.delete(
@@ -31,7 +24,7 @@ userTechnologiesRouter.delete(
     GLOBAL_PERMISSIONS.removeTechnologies
   ),
   removeUserTechnologyValidation,
-  technologiesController.removeUserTechnology
+  userTechnologiesController.removeUserTechnology
 );
 
 export default userTechnologiesRouter;
