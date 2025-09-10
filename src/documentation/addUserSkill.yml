@@ -1,14 +1,22 @@
 paths:
-  /api/v1/skills/add:
+  /api/v1/users/{userID}/skills:
     post:
       summary: Add a skill to a user
       description: |
-        Adds an existing skill to a user.  
-        If `userID` is not provided, the skill is added to the authenticated user.  
-        Requires `ADD_OWN_SKILLS` permission if adding to your own skills, otherwise requires `ADD_SKILLS`.  
-        This endpoint does not create new skills, only associates an existing skill with a user.
+        Associates an existing skill with a specific user.  
+        The `userID` path parameter must be a numeric value.  
+        The `skillID` in the request body is required and must be numeric.  
+        This endpoint does not create new skills; it only associates an existing skill with the user.
       tags:
         - Skills
+      parameters:
+        - name: userID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: The ID of the user to whom the skill will be added. Must be a number.
       requestBody:
         required: true
         content:
@@ -16,10 +24,6 @@ paths:
             schema:
               type: object
               properties:
-                userID:
-                  type: integer
-                  example: 3
-                  description: Optional. Must be a number. If not provided, defaults to the authenticated user.
                 skillID:
                   type: integer
                   example: 1
@@ -39,14 +43,25 @@ paths:
                     type: string
                     example: The skill was successfully added to the user.
                   data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
                     type: object
                     properties:
-                      userID:
+                      offset:
                         type: integer
-                        example: 3
-                      skillID:
+                        example: 0
+                      limit:
                         type: integer
-                        example: 1
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
         "400":
           description: Validation error
           content:
@@ -77,11 +92,12 @@ paths:
                     example: 404
                   message:
                     type: string
-                    example: The entity with the given id does not exists.
+                    example: The entity with the given id does not exist.
                   data:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
@@ -114,6 +130,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

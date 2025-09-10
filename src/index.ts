@@ -20,7 +20,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger";
 import experiencesRouter from "./routes/experiences";
 import educationRouter from "./routes/education";
-import skillsRouter from "./routes/skills";
+import userSkillsRouter from "./routes/userSkills";
 import userTechnologiesRouter from "./routes/userTechnologies";
 import projectsRouter from "./routes/projects";
 import blogsRouter from "./routes/blogs";
@@ -31,6 +31,7 @@ import projectsTechnologiesRouter from "./routes/projectsTechnologies";
 import usersProjectsRouter from "./routes/usersProjects";
 import usersBlogsRouter from "./routes/usersBlogs";
 import technologiesRouter from "./routes/technologiesRouter";
+import skillsRouter from "./routes/skills";
 
 async function start() {
   const app = express();
@@ -64,14 +65,15 @@ async function start() {
   apiRouter.use("/users", authMiddleware, usersRouter);
   apiRouter.use("/experiences", authMiddleware, experiencesRouter);
   apiRouter.use("/educations", authMiddleware, educationRouter);
-  apiRouter.use("/skills", authMiddleware, skillsRouter);
 
+  apiRouter.use("/users/:userID/skills", userSkillsRouter);
   apiRouter.use(
     "/users/:userID/technologies",
     authMiddleware,
     userTechnologiesRouter
   );
   apiRouter.use("/technologies", authMiddleware, technologiesRouter);
+  apiRouter.use("/skills", authMiddleware, skillsRouter);
 
   apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter);
   apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter);

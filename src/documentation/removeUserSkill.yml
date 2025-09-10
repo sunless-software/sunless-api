@@ -1,29 +1,29 @@
 paths:
-  /api/v1/skills/remove:
+  /api/v1/users/{userID}/skills/{skillID}:
     delete:
       summary: Remove a skill from a user
       description: |
-        Removes the association between an existing skill and a user.  
+        Removes the association between an existing skill and a specific user.  
         The skill itself is not deleted.  
-        If `id` query parameter (userID) is not provided, defaults to the authenticated user.  
+        Both `userID` and `skillID` path parameters must be numeric.  
         Requires `REMOVE_OWN_SKILLS` permission if removing from your own skills, otherwise requires `REMOVE_SKILLS`.
       tags:
         - Skills
       parameters:
-        - in: query
-          name: id
-          required: false
+        - name: userID
+          in: path
+          required: true
           schema:
             type: integer
             example: 3
-          description: Optional. The ID of the user from whom to remove the skill. Defaults to the authenticated user if not provided.
-        - in: path
-          name: skillID
+          description: The ID of the user from whom to remove the skill. Must be a number.
+        - name: skillID
+          in: path
           required: true
           schema:
             type: integer
             example: 1
-          description: The ID of the skill to remove
+          description: The ID of the skill to remove. Must be a number.
       responses:
         "200":
           description: Skill successfully removed from user
@@ -39,14 +39,25 @@ paths:
                     type: string
                     example: The skill has been successfully removed from the user.
                   data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
                     type: object
                     properties:
-                      userID:
+                      offset:
                         type: integer
-                        example: 3
-                      skillID:
+                        example: 0
+                      limit:
                         type: integer
-                        example: 1
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
         "400":
           description: Validation error
           content:
@@ -66,7 +77,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
         "404":
-          description: The skill or the user does not exists.
+          description: The user or the skill does not exist
           content:
             application/json:
               schema:
@@ -82,6 +93,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

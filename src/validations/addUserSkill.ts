@@ -1,12 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { validateResult } from "../utils";
 
 const addUserSkillValidation = [
-  body("userID")
-    .optional()
-    .isNumeric()
-    .withMessage("'userID' must be a number"),
+  param("userID").isNumeric().withMessage("user 'id' must be a number"),
   body("skillID")
     .exists()
     .withMessage("'skillID' must be provided")
