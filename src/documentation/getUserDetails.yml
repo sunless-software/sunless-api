@@ -11,7 +11,7 @@
       - Users
     parameters:
       - in: path
-        name: id
+        name: userID
         required: true
         schema:
           type: integer
@@ -233,6 +233,7 @@
                   type: array
                   items:
                     type: object
+                  example: []
                 pagination:
                   type: object
                   properties:

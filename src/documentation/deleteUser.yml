@@ -12,7 +12,7 @@ paths:
         - Users
       parameters:
         - in: path
-          name: id
+          name: userID
           schema:
             type: integer
             example: 5
@@ -67,7 +67,7 @@ paths:
                 $ref: "#/components/schemas/UnauthorizedError"
 
         "403":
-          description: Forbidden, insufficient permissions or user is banned/deleted
+          description: Forbidden, insufficient permissions
           content:
             application/json:
               schema:

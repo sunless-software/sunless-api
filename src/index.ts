@@ -78,7 +78,6 @@ async function start() {
   );
   apiRouter.use("/technologies", authMiddleware, technologiesRouter);
   apiRouter.use("/skills", authMiddleware, skillsRouter);
-
   apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter);
   apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter);
 

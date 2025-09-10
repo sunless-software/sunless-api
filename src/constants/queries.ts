@@ -12,7 +12,10 @@ join permissions p on p.id = prp.permission_id
 join projects pj on pj.id = c.project_id
 where c.user_id = $1 and c.project_id = $2 and pj.deleted = false`;
 
-export const GET_USERS = `select id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", coalesce(phone, '') as "phone", coalesce(email, '') as "email", public, banned, deleted, created_at, updated_at FROM users _1 ORDER BY created_at DESC OFFSET $1 LIMIT $2;`;
+export const GET_USERS = `select id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", 
+coalesce(phone, '') as "phone", coalesce(email, '') as "email", public, deleted, banned, created_at, updated_at FROM users u where 
+($1::boolean IS TRUE OR u.public = TRUE) and ($2::boolean IS TRUE OR u.banned = FALSE) and ($3::boolean IS TRUE OR u.deleted = FALSE)
+ORDER BY created_at DESC OFFSET $4 LIMIT $5`;
 
 export const GET_USER_DETAILS = `select u.id, u.rol_id, u.username, '****' as "password", coalesce(u.profile_photo, '') as "profile_photo", coalesce(u.phone, '') as "phone", 
 coalesce(u.email, '') as "email", u.public, u.banned, u.deleted, u.created_at, u.updated_at, coalesce(json_agg(distinct jsonb_build_object('id', s.id, 'name', s.name,
@@ -23,14 +26,16 @@ coalesce(u.email, '') as "email", u.public, u.banned, u.deleted, u.created_at, u
 coalesce(json_agg(distinct jsonb_build_object('id', ed.id, 'start_date', ed.start_date, 'end_date', ed.end_date, 'institution', ed.institution, 'field', ed.field,
 'location', ed.location, 'description', coalesce(ed.description, ''), 'created_at', ed.created_at, 'updated_at', ed.updated_at)) filter (where ed.id is not null), '[]') as educations
 from users u left join users_skills us on us.user_id = u.id left join skills s on us.skill_id = s.id left join users_technologies ut on ut.user_id = u.id
-left join technologies t on t.id = ut.technology_id left join experiences e on e.user_id = u.id left join educations ed on ed.user_id = u.id where u.id = $1 _1 group by u.id`;
+left join technologies t on t.id = ut.technology_id left join experiences e on e.user_id = u.id left join educations ed on ed.user_id = u.id where u.id = $1
+and ($2::boolean IS TRUE OR u.public = TRUE) and ($3::boolean IS TRUE OR u.banned = FALSE) and ($4::boolean IS TRUE OR u.deleted = FALSE) group by u.id`;
 
-export const COUNT_USERS = `SELECT COUNT(*) AS total FROM users _1`;
+export const COUNT_USERS = `SELECT COUNT(*) AS total FROM users u where ($1::boolean IS TRUE OR u.public = TRUE) and
+($2::boolean IS TRUE OR u.banned = FALSE) and ($3::boolean IS TRUE OR u.deleted = FALSE)`;
 
 export const GET_USER_STATUS = `SELECT banned FROM users WHERE id = $1 AND deleted = false LIMIT 1`;
 
 export const CREATE_USER = `INSERT INTO users (rol_id, username, "password", profile_photo, phone, email, public, banned, deleted, created_at, updated_at)
-VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", coalesce(phone, '') as "phone", coalesce(email, '') as "email", public, banned, deleted, created_at, updated_at`;
+VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", coalesce(phone, '') as "phone", coalesce(email, '') as "email", public, banned, created_at, updated_at`;
 
 export const SOFT_DELETE_USER = `UPDATE users SET deleted = true WHERE id = $1 AND deleted = false`;
 
@@ -43,8 +48,8 @@ export const UNBAN_USER = `UPDATE users SET banned = false WHERE id = $1 AND del
 export const UPDATE_USER_ROLE = `UPDATE users SET rol_id = $1 WHERE id = $2 AND deleted = false`;
 
 export const PATCH_USER = `UPDATE users SET username = COALESCE($1, username), profile_photo = COALESCE($2, profile_photo), phone = COALESCE($3, phone),
-email = COALESCE($4, email), public = COALESCE($5, public) WHERE id = $6 RETURNING id, rol_id, username, '****' as "password",
-coalesce(profile_photo, '') as "profile_photo", coalesce(phone, '') as "phone", coalesce(email, '') as "email", public, banned, deleted, 
+email = COALESCE($4, email), public = COALESCE($5, public) WHERE id = $6 and deleted = false RETURNING id, rol_id, username, '****' as "password",
+coalesce(profile_photo, '') as "profile_photo", coalesce(phone, '') as "phone", coalesce(email, '') as "email", public, deleted, banned, 
 created_at, updated_at`;
 
 export const CREATE_EXPERIENCE = `INSERT INTO experiences (user_id, company_name, "role", description, "location", start_date, end_date, 

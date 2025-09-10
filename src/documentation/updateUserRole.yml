@@ -4,7 +4,7 @@ info:
   version: 1.0.0
 
 paths:
-  /api/v1/users/role/{id}:
+  /api/v1/users/{id}/role:
     patch:
       summary: Update user role
       description: Update the role of a user by their ID. Requires a role with MANAGE_USER_ROLES permission.
@@ -12,7 +12,7 @@ paths:
         - Users
       parameters:
         - in: path
-          name: id
+          name: userID
           schema:
             type: integer
             example: 5
@@ -47,6 +47,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
@@ -78,7 +79,7 @@ paths:
                 $ref: "#/components/schemas/UnauthorizedError"
 
         "403":
-          description: Forbidden, insufficient permissions or user is banned/deleted
+          description: Forbidden, insufficient permissions
           content:
             application/json:
               schema:
@@ -108,6 +109,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

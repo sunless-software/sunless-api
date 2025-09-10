@@ -58,6 +58,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.deleteProjectsMedia,
       GLOBAL_PERMISSIONS.updateProjectsMedia,
       GLOBAL_PERMISSIONS.getProjectDetails,
+      GLOBAL_PERMISSIONS.unbanOwnUser,
     ],
   },
   {

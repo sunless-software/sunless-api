@@ -14,18 +14,20 @@ import roleMiddleware from "./roleMiddleware";
  * @returns - A middleware function.
  */
 export default function ownershipMiddleware(
-  ownPermission: Permission,
-  otherPermission: Permission
+  ownPermission: Permission | null,
+  otherPermission: Permission | null
 ) {
   return async (req: Request, res: Response, next: NextFunction) => {
     const resourceOwnerID = parseInt(req.params.userID) || 0;
     const userID = (req as AuthRequest).user.id;
     const isOwner = resourceOwnerID === userID;
 
-    if (isOwner) {
+    if (isOwner && ownPermission) {
       return roleMiddleware([ownPermission])(req, res, next);
+    } else if (!isOwner && otherPermission) {
+      return roleMiddleware([otherPermission])(req, res, next);
     }
 
-    return roleMiddleware([otherPermission])(req, res, next);
+    return next();
   };
 }

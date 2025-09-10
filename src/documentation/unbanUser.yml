@@ -7,12 +7,12 @@ paths:
   /api/v1/users/unban/{id}:
     patch:
       summary: Unban a user
-      description: Unban a user by their ID. Requires a role with UNBAN_USERS permission.
+      description: Unban a user by their ID. Requires a role with UNBAN_USERS permission. You need a role with UNBAN_OWN_USER if you are trying to unban yourself
       tags:
         - Users
       parameters:
         - in: path
-          name: id
+          name: userID
           schema:
             type: integer
             example: 5
@@ -36,6 +36,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
@@ -67,7 +68,7 @@ paths:
                 $ref: "#/components/schemas/UnauthorizedError"
 
         "403":
-          description: Forbidden, insufficient permissions or user is banned/deleted
+          description: Forbidden, insufficient permissions
           content:
             application/json:
               schema:

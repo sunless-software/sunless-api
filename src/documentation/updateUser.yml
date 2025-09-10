@@ -15,7 +15,7 @@ paths:
         - Users
       parameters:
         - in: path
-          name: id
+          name: userID
           schema:
             type: integer
             example: 5
@@ -62,35 +62,44 @@ paths:
               schema:
                 type: object
                 properties:
-                  status:
+                  id:
                     type: integer
-                    example: 200
-                  message:
+                    example: 4
+                  rol_id:
+                    type: integer
+                    example: 2
+                  username:
                     type: string
-                    example: The user has been successfully updated.
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                          example: 5
-                        username:
-                          type: string
-                          example: johndoe
-                        email:
-                          type: string
-                          example: johndoe@example.com
-                        phone:
-                          type: string
-                          example: "1234567890"
-                        profilePhoto:
-                          type: string
-                          example: "https://example.com/photo.jpg"
-                        publicProfile:
-                          type: boolean
-                          example: true
+                    example: johndoe
+                  password:
+                    type: string
+                    example: "****"
+                  profile_photo:
+                    type: string
+                    example: https://example.com/photo.jpg
+                  phone:
+                    type: string
+                    example: "1234567890"
+                  email:
+                    type: string
+                    example: johndoe@example.com
+                  public:
+                    type: boolean
+                    example: true
+                  deleted:
+                    type: boolean
+                    example: false
+                  banned:
+                    type: boolean
+                    example: false
+                  created_at:
+                    type: string
+                    format: date-time
+                    example: 2025-08-16T11:26:24.513Z
+                  updated_at:
+                    type: string
+                    format: date-time
+                    example: 2025-08-16T11:26:24.513Z
                   pagination:
                     type: object
                     properties:
@@ -122,7 +131,7 @@ paths:
                 $ref: "#/components/schemas/UnauthorizedError"
 
         "403":
-          description: Forbidden, insufficient permissions or user is banned/deleted
+          description: Forbidden, insufficient permissions
           content:
             application/json:
               schema:

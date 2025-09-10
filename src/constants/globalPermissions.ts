@@ -164,4 +164,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 52,
     name: "GET_PROJECT_DETAILS",
   },
+  unbanOwnUser: {
+    id: 53,
+    name: "UNBAN_OWN_USER",
+  },
 } satisfies Record<string, Permission>;

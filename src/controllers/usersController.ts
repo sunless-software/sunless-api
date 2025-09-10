@@ -44,22 +44,20 @@ const usersController = {
 
     const db = await connectToDB();
 
-    const conditions = [
-      ...(!showPrivateUsers ? ["public = true"] : []),
-      ...(!showBannedUsers ? ["banned = false"] : []),
-      ...(!showDeletedUsers ? ["deleted = false"] : []),
-    ];
-    const whereClause = conditions.length
-      ? `WHERE ${conditions.join(" AND ")}`
-      : "";
-
-    const countUsersQuery = COUNT_USERS.replace(`_1`, whereClause);
-    const getUsersQuery = GET_USERS.replace(`_1`, whereClause);
-
     try {
       const [countUsersResult, getUsersResult] = await Promise.all([
-        db.query(countUsersQuery),
-        db.query(getUsersQuery, [offset, limit]),
+        db.query(COUNT_USERS, [
+          showPrivateUsers,
+          showBannedUsers,
+          showDeletedUsers,
+        ]),
+        db.query(GET_USERS, [
+          showPrivateUsers,
+          showBannedUsers,
+          showDeletedUsers,
+          offset,
+          limit,
+        ]),
       ]);
       const users: Array<User> = getUsersResult.rows;
 
@@ -127,11 +125,11 @@ const usersController = {
     }
   },
   deleteUser: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID } = req.params;
     const db = await connectToDB();
 
     try {
-      const response = await db.query(SOFT_DELETE_USER, [id]);
+      const response = await db.query(SOFT_DELETE_USER, [userID]);
       const affectedRows = response.rowCount;
 
       if (!affectedRows) {
@@ -150,11 +148,11 @@ const usersController = {
     }
   },
   recoverUser: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID } = req.params;
     const db = await connectToDB();
 
     try {
-      const response = await db.query(RECOVER_USER, [id]);
+      const response = await db.query(RECOVER_USER, [userID]);
       const affectedRows = response.rowCount;
 
       if (!affectedRows) {
@@ -173,11 +171,11 @@ const usersController = {
     }
   },
   banUser: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID } = req.params;
     const db = await connectToDB();
 
     try {
-      const response = await db.query(BAN_USER, [id]);
+      const response = await db.query(BAN_USER, [userID]);
       const affectedRows = response.rowCount;
 
       if (!affectedRows) {
@@ -196,11 +194,11 @@ const usersController = {
     }
   },
   unbanUser: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID } = req.params;
     const db = await connectToDB();
 
     try {
-      const response = await db.query(UNBAN_USER, [id]);
+      const response = await db.query(UNBAN_USER, [userID]);
       const affectedRows = response.rowCount;
 
       if (!affectedRows) {
@@ -219,12 +217,12 @@ const usersController = {
     }
   },
   updateRole: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID } = req.params;
     const { roleID } = req.body;
     const db = await connectToDB();
 
     try {
-      const result = await db.query(UPDATE_USER_ROLE, [roleID, id]);
+      const result = await db.query(UPDATE_USER_ROLE, [roleID, userID]);
       const affectedRows = result.rowCount;
 
       if (!affectedRows) {
@@ -248,7 +246,7 @@ const usersController = {
     next: NextFunction
   ) => {},
   updateUser: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID } = req.params;
     const { username, profilePhoto, phone, email, publicProfile } = req.body;
     const db = await connectToDB();
 
@@ -259,7 +257,7 @@ const usersController = {
         phone,
         email,
         publicProfile,
-        id,
+        userID,
       ]);
       const affectedRows = result.rowCount;
 
@@ -280,7 +278,7 @@ const usersController = {
     }
   },
   getUserDetails: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { userID } = req.params;
     const {
       showPrivateUsers = false,
       showBannedUsers = false,
@@ -288,18 +286,13 @@ const usersController = {
     } = req.query;
     const db = await connectToDB();
 
-    const conditions = [
-      ...(!showPrivateUsers ? ["public = true"] : []),
-      ...(!showBannedUsers ? ["banned = false"] : []),
-      ...(!showDeletedUsers ? ["deleted = false"] : []),
-    ];
-    const whereClause = conditions.length
-      ? `AND ${conditions.join(" AND ")}`
-      : "";
-    const getUserDetailsQuery = GET_USER_DETAILS.replace(`_1`, whereClause);
-
     try {
-      const result = await db.query(getUserDetailsQuery, [id]);
+      const result = await db.query(GET_USER_DETAILS, [
+        userID,
+        showPrivateUsers,
+        showBannedUsers,
+        showDeletedUsers,
+      ]);
 
       if (!result.rowCount) {
         throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());

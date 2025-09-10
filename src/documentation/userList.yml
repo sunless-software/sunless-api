@@ -4,7 +4,7 @@ info:
   version: 1.0.0
 
 paths:
-  /api/v1/users/list:
+  /api/v1/users:
     get:
       summary: Retrieve a list of users
       description: >

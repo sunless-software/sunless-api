@@ -3,7 +3,7 @@ import { body, param } from "express-validator";
 import { validateResult } from "../utils";
 
 const updateUserValidation = [
-  param("id").isNumeric().withMessage("user 'id' must be a number"),
+  param("userID").isNumeric().withMessage("user 'id' must be a number"),
   body("username")
     .optional()
     .isString()

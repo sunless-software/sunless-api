@@ -20,8 +20,8 @@ export default function conditionalQueryMiddleware(
 ) {
   return async (req: Request, res: Response, next: NextFunction) => {
     const authID = (req as AuthRequest).user.id;
-    const resourceID = req.params.id;
-    const isOwnResource = authID === parseInt(resourceID);
+    const { userID } = req.params;
+    const isOwnResource = authID === parseInt(userID);
 
     const requiredPermissions = queryPermissions
       .map((q) => {
