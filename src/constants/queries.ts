@@ -15,7 +15,7 @@ where c.user_id = $1 and c.project_id = $2 and pj.deleted = false`;
 export const GET_USERS = `select id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", 
 coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description, '') as "short_description", job_title, public, deleted, 
 banned, created_at, updated_at FROM users u where ($1::boolean IS TRUE OR u.public = TRUE) and ($2::boolean IS TRUE OR u.banned = FALSE) and 
-($3::boolean IS TRUE OR u.deleted = FALSE) ORDER BY created_at DESC OFFSET $4 LIMIT $5`;
+($3::boolean IS TRUE OR u.deleted = FALSE) and ($4::text IS NULL OR username ILIKE '%' || $4 || '%') ORDER BY created_at DESC OFFSET $5 LIMIT $6`;
 
 export const GET_USER_DETAILS = `select u.id, u.rol_id, u.username, '****' as "password", coalesce(u.profile_photo, '') as "profile_photo",
 coalesce(u.phone, '') as "phone", coalesce(u.email, '') as "email", coalesce(u.short_description, '') as "short_description", job_title, u.public, 
@@ -34,7 +34,7 @@ e.user_id = u.id left join educations ed on ed.user_id = u.id where u.id = $1 an
 ($3::boolean IS TRUE OR u.banned = FALSE) and ($4::boolean IS TRUE OR u.deleted = FALSE) group by u.id, up.user_id`;
 
 export const COUNT_USERS = `SELECT COUNT(*) AS total FROM users u where ($1::boolean IS TRUE OR u.public = TRUE) and
-($2::boolean IS TRUE OR u.banned = FALSE) and ($3::boolean IS TRUE OR u.deleted = FALSE)`;
+($2::boolean IS TRUE OR u.banned = FALSE) and ($3::boolean IS TRUE OR u.deleted = FALSE) and ($4::text IS NULL OR username ILIKE '%' || $4 || '%')`;
 
 export const GET_USER_STATUS = `SELECT banned FROM users WHERE id = $1 AND deleted = false LIMIT 1`;
 

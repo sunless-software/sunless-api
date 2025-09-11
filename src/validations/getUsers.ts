@@ -20,6 +20,11 @@ const getUsersValidation = [
     .optional()
     .isBoolean()
     .withMessage("'showDeletedUsers' must be a boolean"),
+  query("username")
+    .optional()
+    .isString()
+    .trim()
+    .withMessage("'username' must be an string"),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

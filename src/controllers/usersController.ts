@@ -41,6 +41,7 @@ const usersController = {
       showPrivateUsers = false,
       showBannedUsers = false,
       showDeletedUsers = false,
+      username = null,
     } = req.query;
 
     const db = await connectToDB();
@@ -51,11 +52,13 @@ const usersController = {
           showPrivateUsers,
           showBannedUsers,
           showDeletedUsers,
+          username,
         ]),
         db.query(GET_USERS, [
           showPrivateUsers,
           showBannedUsers,
           showDeletedUsers,
+          username,
           offset,
           limit,
         ]),
@@ -81,6 +84,7 @@ const usersController = {
         res
       );
     } catch (err) {
+      console.log(err);
       return next(err);
     }
   },

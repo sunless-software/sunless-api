@@ -44,6 +44,12 @@ paths:
             type: boolean
             default: false
           description: Include banned users (requires permission)
+        - in: query
+          name: username
+          schema:
+            type: string
+            default: null
+          description: Allow to filter users by their usernames
       responses:
         "200":
           description: Users successfully retrieved
