@@ -4,6 +4,7 @@ import { encryptPassword } from "./utils";
 import {
   DEVELOPMENT_GLOBAL_ROLES,
   DEVELOPMENT_PROJECT_ROLES,
+  DEVELOPMENT_USER_PROFILES,
   DEVELOPMENT_USERS,
   DEVELOPMENT_USERS_EDUCATIONS,
   DEVELOPMENT_USERS_EXPERIENCES,
@@ -95,6 +96,10 @@ export default async function preload() {
         DEVELOPMENT_USERS_SKILLS
       ),
       entityPreloader.PreloadDefaultData("tags", DEFAULT_TAGS),
+      entityPreloader.PreloadDefaultData(
+        "user_profiles",
+        DEVELOPMENT_USER_PROFILES
+      ),
     ]);
 
     await associateDevProjectRolesPermissions(entityPreloader);

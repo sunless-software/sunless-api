@@ -5,7 +5,7 @@ paths:
       description: |
         Updates an existing external resource of a project.  
         Requires the `UPDATE_PROJECT_EXTERNAL_RESOURCES` global permission or a project role with the `UPDATE_PROJECT_EXTERNAL_RESOURCES` permission.  
-        The `type` must be one of: GITHUB, BITBUCKET, OTHER_REPO, JIRA, TRELLO, CONFLUENCE, DRIVE, OTHER.  
+        The `type` must be one of: GITHUB, BITBUCKET, OTHER_REPO, JIRA, TRELLO, CONFLUENCE, DRIVE, OTHER, WEB.
         All fields are optional, but at least one must be provided.
       tags:
         - Projects
@@ -51,6 +51,7 @@ paths:
                     - CONFLUENCE
                     - DRIVE
                     - OTHER
+                    - WEB
                   example: GITHUB
                   description: Optional. Must be one of the allowed external resource types.
       responses:

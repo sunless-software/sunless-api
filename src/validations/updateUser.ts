@@ -13,6 +13,14 @@ const updateUserValidation = [
     .trim()
     .escape(),
   body("roleID").optional().isNumeric().withMessage("roleID must be a number"),
+  body("jobTitle")
+    .optional()
+    .isString()
+    .withMessage("'jobTitle' must be an string")
+    .isLength({ min: 1 })
+    .withMessage("'jobTitle' cannot be empty")
+    .isLength({ max: 60 })
+    .withMessage("'jobTitle' cannot be longer than 60 characters"),
   body("profilePhoto")
     .optional()
     .isURL()
@@ -34,6 +42,14 @@ const updateUserValidation = [
     .withMessage("email must be a valid email")
     .trim()
     .normalizeEmail(),
+  body("shortDescription")
+    .optional()
+    .isString()
+    .withMessage("'shortDescription' must be an string")
+    .isLength({ min: 1 })
+    .withMessage("'shortDescription' cannot be empty")
+    .isLength({ max: 80 })
+    .withMessage("'shortDescription' cannot be longer than 80 characters"),
   body("publicProfile")
     .optional()
     .isBoolean()

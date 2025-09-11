@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS users (
     profile_photo TEXT,
     phone text,
     email VARCHAR(50),
+    short_description VARCHAR(80),
+    job_title VARCHAR(60) NOT NULL,
     public BOOLEAN NOT NULL,
     banned BOOLEAN NOT NULL,
     deleted BOOLEAN NOT NULL,

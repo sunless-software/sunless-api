@@ -78,6 +78,7 @@ components:
         - roleID
         - username
         - password
+        - job_title
       properties:
         roleID:
           type: integer
@@ -100,6 +101,13 @@ components:
           type: string
           format: email
           example: fakemail@gmail.com
+        shortDescription:
+          type: string
+          example: "There is always another secret"
+          nullable: true
+        jobTitle:
+          type: string
+          example: "Software developer"
         publicProfile:
           type: boolean
           example: true
@@ -128,6 +136,12 @@ components:
         email:
           type: string
           example: fakemail@gmail.com
+        short_description:
+          type: string
+          example: "There is always another secret"
+        job_title:
+          type: string
+          example: "Software developer"
         public:
           type: boolean
           example: true

@@ -50,6 +50,14 @@ paths:
                   format: email
                   example: "johndoe@example.com"
                   description: Must be a valid email
+                shortDescription:
+                  type: string
+                  example: "There is always another secret"
+                  description: Must be a non-empty string and max 80 characters
+                jobTitle:
+                  type: string
+                  example: "Software developer"
+                  description: Must be a non-empty string and max 60 characters
                 publicProfile:
                   type: boolean
                   example: true
@@ -83,6 +91,13 @@ paths:
                   email:
                     type: string
                     example: johndoe@example.com
+                  short_description:
+                    type: string
+                    example: There is always another secret
+                    nullable: true
+                  job_title:
+                    type: string
+                    example: Software developer
                   public:
                     type: boolean
                     example: true

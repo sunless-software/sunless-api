@@ -5,7 +5,7 @@ paths:
       description: |
         Associates a new external resource with a project.  
         Requires the `ADD_PROJECT_EXTERNAL_RESOURCES` global permission or a project role with the `ADD_PROJECT_EXTERNAL_RESOURCES` permission.  
-        The `type` must be one of: GITHUB, BITBUCKET, OTHER_REPO, JIRA, TRELLO, CONFLUENCE, DRIVE, OTHER.
+        The `type` must be one of: GITHUB, BITBUCKET, OTHER_REPO, JIRA, TRELLO, CONFLUENCE, DRIVE, OTHER, WEB.
       tags:
         - Projects
       parameters:
@@ -43,6 +43,7 @@ paths:
                     - CONFLUENCE
                     - DRIVE
                     - OTHER
+                    - WEB
                   example: GITHUB
                   description: Required. Must be one of the allowed external resource types.
       responses:

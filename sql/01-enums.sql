@@ -21,6 +21,7 @@ BEGIN
             'TRELLO',
             'CONFLUENCE',
             'DRIVE',
+            'WEB',
             'OTHER'
         );
     END IF;

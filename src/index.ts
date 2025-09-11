@@ -63,7 +63,6 @@ async function start() {
   apiRouter.use("/auth", authRouter);
 
   apiRouter.use("/users", authMiddleware, usersRouter);
-
   apiRouter.use(
     "/users/:userID/experiences",
     authMiddleware,
@@ -76,11 +75,13 @@ async function start() {
     authMiddleware,
     userTechnologiesRouter
   );
+  apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter); // TODO: Revisar
+  apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter); // TODO: Revisar
+
   apiRouter.use("/technologies", authMiddleware, technologiesRouter);
   apiRouter.use("/skills", authMiddleware, skillsRouter);
-  apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter);
-  apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter);
 
+  // TODO: Revisar todos de aca para abajo
   apiRouter.use("/projects", authMiddleware, projectsRouter);
   apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter);
   apiRouter.use("/projects/:projectID/tags", authMiddleware, tagsRouter);

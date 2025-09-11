@@ -4,6 +4,7 @@ import {
   BAN_USER,
   COUNT_USERS,
   CREATE_USER,
+  CREATE_USER_PROFILE,
   GET_USER_DETAILS,
   GET_USERS,
   PATCH_USER,
@@ -91,6 +92,8 @@ const usersController = {
       profilePhoto,
       phone,
       email,
+      jobTitle,
+      shortDescription,
       publicProfile,
     } = req.body;
 
@@ -98,6 +101,8 @@ const usersController = {
     const hashedPassword = await encryptPassword(password);
 
     try {
+      await db.query("BEGIN");
+
       const result = await db.query(CREATE_USER, [
         roleID,
         username,
@@ -105,11 +110,17 @@ const usersController = {
         profilePhoto,
         phone,
         email,
+        shortDescription,
+        jobTitle,
         publicProfile,
         false,
         false,
       ]);
+
       const createdUserData = result.rows[0];
+
+      await db.query(CREATE_USER_PROFILE, [createdUserData.id]);
+      await db.query("COMMIT");
 
       return sendResponse(
         {
@@ -121,6 +132,8 @@ const usersController = {
         res
       );
     } catch (err) {
+      console.log(err);
+      await db.query("ROLLBACK");
       return next(err);
     }
   },
@@ -247,7 +260,15 @@ const usersController = {
   ) => {},
   updateUser: async (req: Request, res: Response, next: NextFunction) => {
     const { userID } = req.params;
-    const { username, profilePhoto, phone, email, publicProfile } = req.body;
+    const {
+      username,
+      profilePhoto,
+      phone,
+      email,
+      publicProfile,
+      shortDescription,
+      jobTitle,
+    } = req.body;
     const db = await connectToDB();
 
     try {
@@ -256,6 +277,8 @@ const usersController = {
         profilePhoto,
         phone,
         email,
+        shortDescription,
+        jobTitle,
         publicProfile,
         userID,
       ]);

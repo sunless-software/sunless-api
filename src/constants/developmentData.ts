@@ -146,6 +146,7 @@ export const DEVELOPMENT_USERS = [
   {
     username: "sunless_admin",
     password: "Password123!",
+    job_title: "Fullstack software developer",
     rol_id: 1,
     public: true,
     banned: false,
@@ -154,6 +155,7 @@ export const DEVELOPMENT_USERS = [
   {
     username: "sunless_client",
     password: "Password123!",
+    job_title: "Client",
     rol_id: 2,
     public: true,
     banned: false,
@@ -162,10 +164,23 @@ export const DEVELOPMENT_USERS = [
   {
     username: "sunless_user",
     password: "Password123!",
+    job_title: "SSR Sofware developer",
     rol_id: 3,
     public: true,
     banned: false,
     deleted: false,
+  },
+];
+
+export const DEVELOPMENT_USER_PROFILES = [
+  {
+    user_id: 1,
+  },
+  {
+    user_id: 2,
+  },
+  {
+    user_id: 3,
   },
 ];
 

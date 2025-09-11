@@ -77,13 +77,23 @@ paths:
                           example: "****"
                         profile_photo:
                           type: string
+                          example: ""
                           nullable: true
                         phone:
                           type: string
+                          examle: ""
                           nullable: true
                         email:
                           type: string
+                          example: ""
                           nullable: true
+                        short_description:
+                          type: string
+                          example: ""
+                          nullable: true
+                        job_title:
+                          type: string
+                          example: "Software developer"
                         public:
                           type: boolean
                           example: true

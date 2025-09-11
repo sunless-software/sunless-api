@@ -18,6 +18,7 @@ export const EXTERNAL_RESOURCE_TYPES = [
   "CONFLUENCE",
   "DRIVE",
   "OTHER",
+  "WEB",
 ];
 
 export const MEDIA_TPYES = ["IMAGE", "VIDEO", "GIF"];
