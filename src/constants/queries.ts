@@ -17,8 +17,10 @@ coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_d
 banned, created_at, updated_at FROM users u where ($1::boolean IS TRUE OR u.public = TRUE) and ($2::boolean IS TRUE OR u.banned = FALSE) and 
 ($3::boolean IS TRUE OR u.deleted = FALSE) ORDER BY created_at DESC OFFSET $4 LIMIT $5`;
 
-export const GET_USER_DETAILS = `select u.id, u.rol_id, u.username, '****' as "password", coalesce(u.profile_photo, '') as "profile_photo", coalesce(u.phone, '') as "phone", 
-coalesce(u.email, '') as "email", coalesce(u.short_description, '') as "short_description", job_title, u.public, u.banned, u.deleted, u.created_at, u.updated_at, 
+export const GET_USER_DETAILS = `select u.id, u.rol_id, u.username, '****' as "password", coalesce(u.profile_photo, '') as "profile_photo",
+coalesce(u.phone, '') as "phone", coalesce(u.email, '') as "email", coalesce(u.short_description, '') as "short_description", job_title, u.public, 
+u.banned, u.deleted, u.created_at, u.updated_at, coalesce(up.long_description, '') as long_description, coalesce(up.repo_url, '') as repo_url,
+coalesce(up.website_url, '') as website_url, coalesce(up.linkedin_url, '') as linkedin_url, coalesce(up.location, '') as location,
 coalesce(json_agg(distinct jsonb_build_object('id', s.id, 'name', s.name, 'created_at', s.created_at, 'updated_at', s.updated_at)) filter (where s.id is not null), '[]') 
 as skills, coalesce(json_agg(distinct jsonb_build_object( 'id', t.id, 'name', t.name, 'created_at', t.created_at, 'updated_at', t.updated_at)) filter 
 (where t.id is not null), '[]') as technologies, coalesce(json_agg(distinct jsonb_build_object('id', e.id, 'company_name', e.company_name, 'role', e.role, 
@@ -27,9 +29,9 @@ as skills, coalesce(json_agg(distinct jsonb_build_object( 'id', t.id, 'name', t.
 jsonb_build_object('id', ed.id, 'start_date', ed.start_date, 'end_date', ed.end_date, 'institution', ed.institution, 'field', ed.field, 'location', ed.location, 
 'description', coalesce(ed.description, ''), 'created_at', ed.created_at, 'updated_at', ed.updated_at)) filter (where ed.id is not null), '[]') as 
 educations from users u left join users_skills us on us.user_id = u.id left join skills s on us.skill_id = s.id left join users_technologies ut on 
-ut.user_id = u.id left join technologies t on t.id = ut.technology_id left join experiences e on e.user_id = u.id left join educations ed on 
-ed.user_id = u.id where u.id = $1 and ($2::boolean IS TRUE OR u.public = TRUE) and ($3::boolean IS TRUE OR u.banned = FALSE) and 
-($4::boolean IS TRUE OR u.deleted = FALSE) group by u.id`;
+ut.user_id = u.id left join user_profiles up on up.user_id = u.id left join technologies t on t.id = ut.technology_id left join experiences e on
+e.user_id = u.id left join educations ed on ed.user_id = u.id where u.id = $1 and ($2::boolean IS TRUE OR u.public = TRUE) and 
+($3::boolean IS TRUE OR u.banned = FALSE) and ($4::boolean IS TRUE OR u.deleted = FALSE) group by u.id, up.user_id`;
 
 export const COUNT_USERS = `SELECT COUNT(*) AS total FROM users u where ($1::boolean IS TRUE OR u.public = TRUE) and
 ($2::boolean IS TRUE OR u.banned = FALSE) and ($3::boolean IS TRUE OR u.deleted = FALSE)`;

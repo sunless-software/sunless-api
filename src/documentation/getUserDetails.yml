@@ -101,6 +101,29 @@
                         type: string
                         format: date-time
                         example: 2025-08-25T00:35:39.798Z
+                      long_description:
+                        type: string
+                        example: "user profile long description"
+                        nullable: true
+                      repo_url:
+                        type: string
+                        format: uri
+                        nullable: true
+                        example: "https://www.github.com/my-repo"
+                      website_url:
+                        type: string
+                        format: uri
+                        nullable: true
+                        example: "https://www.my-portfolio.com"
+                      linkedin_url:
+                        type: string
+                        format: uri
+                        nullable: true
+                        example: "https://www.linkedin.com/my-linkedin"
+                      location:
+                        type: string
+                        nullable: true
+                        example: "Buenos Aires, Argentina"
                       skills:
                         type: array
                         items:
