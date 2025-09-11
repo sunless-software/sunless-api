@@ -60,7 +60,7 @@ usersRouter.post(
 );
 
 usersRouter.delete(
-  "/delete/:userID",
+  "/:userID",
   ownershipMiddleware(null, GLOBAL_PERMISSIONS.deleteUsers),
   deleteUserValidation,
   usersController.deleteUser

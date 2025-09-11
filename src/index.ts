@@ -32,6 +32,7 @@ import usersProjectsRouter from "./routes/usersProjects";
 import usersBlogsRouter from "./routes/usersBlogs";
 import technologiesRouter from "./routes/technologiesRouter";
 import skillsRouter from "./routes/skills";
+import userProfilesRouter from "./routes/userProfiles";
 
 async function start() {
   const app = express();
@@ -75,6 +76,7 @@ async function start() {
     authMiddleware,
     userTechnologiesRouter
   );
+  apiRouter.use("/users/:userID/profile", authMiddleware, userProfilesRouter);
   apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter); // TODO: Revisar
   apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter); // TODO: Revisar
 

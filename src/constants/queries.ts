@@ -216,3 +216,9 @@ export const COUNT_BLOGS_FROM_PROJECT = `select count (*) as total from blogs b 
 p.id = b.project_id and p.deleted = false where p.id = $1`;
 
 export const CREATE_USER_PROFILE = `INSERT INTO user_profiles (user_id) SELECT u.id FROM users u WHERE u.id = $1 AND u.deleted = FALSE`;
+
+export const UPDATE_USER_PROFILE = `UPDATE user_profiles up SET long_description=COALESCE($1, long_description), repo_url=COALESCE($2, repo_url), 
+website_url=COALESCE($3, website_url), linkedin_url=COALESCE($4, linkedin_url), location=COALESCE($5, location) WHERE up.user_id = $6 AND EXISTS 
+(SELECT 1 FROM users u WHERE u.deleted = FALSE AND u.id = up.user_id) RETURNING user_id, COALESCE(long_description, '') as long_description, 
+COALESCE(repo_url, '') as repo_url, COALESCE(website_url, '') as website_url, COALESCE(linkedin_url, '') as linkedin_url, 
+COALESCE(location, '') as location, created_at, updated_at`;

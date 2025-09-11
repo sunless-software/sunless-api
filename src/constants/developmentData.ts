@@ -59,6 +59,8 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.updateProjectsMedia,
       GLOBAL_PERMISSIONS.getProjectDetails,
       GLOBAL_PERMISSIONS.unbanOwnUser,
+      GLOBAL_PERMISSIONS.updateOwnProfile,
+      GLOBAL_PERMISSIONS.updateProfiles,
     ],
   },
   {
@@ -85,6 +87,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.removeOwnTechnologies,
       GLOBAL_PERMISSIONS.readProjects,
       GLOBAL_PERMISSIONS.readBlogs,
+      GLOBAL_PERMISSIONS.updateOwnProfile,
     ],
   },
 ];

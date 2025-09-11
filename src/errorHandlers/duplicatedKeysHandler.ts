@@ -16,6 +16,9 @@ import {
   SKILLS_NAME_VIOLATION_MESSAGE,
   TAGS_NAME_VIOLATION_MESSAGE,
   TECHNOLOGIES_NAME_VIOLATION_MESSAGE,
+  USER_PROFILES_LINKEDIN_URL_VIOLATION_MESSAGE,
+  USER_PROFILES_REPO_URL_VIOLATION_MESSAGE,
+  USER_PROFILES_WEBSITE_URL_VIOLATION_MESSAGE,
   USERS_EMAIL_VIOLATION_MESSAGE,
   USERS_SKILLS_PK_VIOLATION_MESSAGE,
   USERS_TECHNOLOGIES_PK_VIOLATION_MESSAGE,
@@ -49,6 +52,9 @@ export function handleDuplicatedKeyViolation(violation: string) {
   const EXTERNAL_RESOURCES_URL_HASH_VIOLATION =
     "external_resources_url_hash_key";
   const PROJECTS_MEDIA_URL_PROJECT_VIOLATION = "projects_media_url_project_key";
+  const USER_PROFILES_REPO_URL_VIOLATION = "user_profiles_repo_url_key";
+  const USER_PROFILES_WEBSITE_URL_VIOLATION = "user_profiles_website_url_key";
+  const USER_PROFILES_LINKEDIN_URL_VIOLATION = "user_profiles_linkedin_url_key";
 
   switch (violation) {
     case USERS_USERNAME_VIOLATION:
@@ -145,6 +151,21 @@ export function handleDuplicatedKeyViolation(violation: string) {
       return {
         ...response,
         message: PROJECT_MEDIA_URL_PROJECT_VIOLATION_MESSAGE,
+      };
+    case USER_PROFILES_REPO_URL_VIOLATION:
+      return {
+        ...response,
+        message: USER_PROFILES_REPO_URL_VIOLATION_MESSAGE,
+      };
+    case USER_PROFILES_WEBSITE_URL_VIOLATION:
+      return {
+        ...response,
+        message: USER_PROFILES_WEBSITE_URL_VIOLATION_MESSAGE,
+      };
+    case USER_PROFILES_LINKEDIN_URL_VIOLATION:
+      return {
+        ...response,
+        message: USER_PROFILES_LINKEDIN_URL_VIOLATION_MESSAGE,
       };
     default:
       logger.error(

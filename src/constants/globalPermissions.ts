@@ -168,4 +168,12 @@ export const GLOBAL_PERMISSIONS = {
     id: 53,
     name: "UNBAN_OWN_USER",
   },
+  updateOwnProfile: {
+    id: 54,
+    name: "UPDATE_OWN_PROFILE",
+  },
+  updateProfiles: {
+    id: 55,
+    name: "UPDATE_PROFILES",
+  },
 } satisfies Record<string, Permission>;

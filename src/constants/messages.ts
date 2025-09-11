@@ -135,6 +135,14 @@ export const PROJECTS_SUCCESSFULLY_RETRIEVED =
 export const PROJECT_DETAILS_SUCCESSFULLY_RETRIEVED =
   "Project details successfully retrieved.";
 export const BLOGS_SUCCESSFULLY_RETRIEVED = "Blogs successfully retrieved.";
+export const USER_PROFILE_SUCCESSFULLY_UPDATED =
+  "The user profile has been successfully updated.";
+export const USER_PROFILES_REPO_URL_VIOLATION_MESSAGE =
+  "There already is another user profile with the same repo url.";
+export const USER_PROFILES_WEBSITE_URL_VIOLATION_MESSAGE =
+  "There already is another user profile with the same website url.";
+export const USER_PROFILES_LINKEDIN_URL_VIOLATION_MESSAGE =
+  "There already is another user profile with the same linkedin url.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,
