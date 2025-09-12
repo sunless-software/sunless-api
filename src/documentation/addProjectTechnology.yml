@@ -1,5 +1,5 @@
 paths:
-  /api/v1/technologies/add/project:
+  /api/v1/projects/{projectID}/technologies:
     post:
       summary: Add a technology to a project
       description: |
@@ -7,7 +7,14 @@ paths:
         Requires the `UPDATE_PROJECTS` global permission or a project role with the `ADD_TECHNOLOGIES_PROJECT` permission.  
         This endpoint does not create new technologies, only links an existing one to a project.
       tags:
-        - Technologies
+        - Projects
+      parameters:
+        - in: path
+          name: projectID
+          required: true
+          schema:
+            type: integer
+          description: ID of the project to which the technology will be associated
       requestBody:
         required: true
         content:
@@ -15,10 +22,6 @@ paths:
             schema:
               type: object
               properties:
-                projectID:
-                  type: integer
-                  example: 10
-                  description: Required. Must be a number. The ID of the project where the technology will be added.
                 technologyID:
                   type: integer
                   example: 5
@@ -38,14 +41,10 @@ paths:
                     type: string
                     example: The technology was successfully added to the project.
                   data:
-                    type: object
-                    properties:
-                      projectID:
-                        type: integer
-                        example: 10
-                      technologyID:
-                        type: integer
-                        example: 5
+                    type: array
+                    items:
+                      type: object
+                    example: []
         "400":
           description: Validation error
           content:
@@ -81,6 +80,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
@@ -113,6 +113,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

@@ -79,7 +79,6 @@ async function start() {
   apiRouter.use("/users/:userID/profile", authMiddleware, userProfilesRouter);
   apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter);
   apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter);
-
   apiRouter.use("/technologies", authMiddleware, technologiesRouter);
   apiRouter.use("/skills", authMiddleware, skillsRouter);
 
@@ -99,7 +98,6 @@ async function start() {
     projectsMediaRouter
   );
   apiRouter.use(
-    // TODO: Revisar
     "/projects/:projectID/technologies",
     projectsTechnologiesRouter
   );

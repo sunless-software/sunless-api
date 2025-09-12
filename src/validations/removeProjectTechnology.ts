@@ -3,13 +3,10 @@ import { param, query } from "express-validator";
 import { validateResult } from "../utils";
 
 const removeProjectTechnologyValidation = [
-  param("id").isNumeric().withMessage("project 'id' must be a number"),
-  query("technologyID")
-    .exists()
-    .withMessage("'technologyID' must be provided")
-    .bail()
+  param("projectID").isNumeric().withMessage("project 'id' must be a number"),
+  param("technologyID")
     .isNumeric()
-    .withMessage("'technologyID' must be a number"),
+    .withMessage("technology 'id' must be a number"),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

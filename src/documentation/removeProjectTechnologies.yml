@@ -1,5 +1,5 @@
 paths:
-  /api/v1/technologies/remove/project/{id}:
+  /api/v1/projects/{projectID}/technologies/{technologyID}:
     delete:
       summary: Remove a technology from a project
       description: |
@@ -7,16 +7,16 @@ paths:
         The technology itself is not deleted.  
         Requires either a global role with the `UPDATE_PROJECTS` permission or a role within the project with the `REMOVE_TECHNOLOGIES_PROJECT` permission.
       tags:
-        - Technologies
+        - Projects
       parameters:
         - in: path
-          name: id
+          name: projectID
           required: true
           schema:
             type: integer
             example: 12
           description: The ID of the project from which the technology will be removed.
-        - in: query
+        - in: path
           name: technologyID
           required: true
           schema:
@@ -38,14 +38,10 @@ paths:
                     type: string
                     example: The technology has been successfully removed from the project.
                   data:
-                    type: object
-                    properties:
-                      projectID:
-                        type: integer
-                        example: 12
-                      technologyID:
-                        type: integer
-                        example: 4
+                    type: array
+                    items:
+                      type: object
+                    example: []
         "400":
           description: Validation error (e.g., project id not numeric or technologyID missing/invalid)
           content:
@@ -81,6 +77,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

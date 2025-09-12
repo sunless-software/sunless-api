@@ -19,10 +19,11 @@ import {
 
 export default function projectRoleMiddleware(
   requiredGlobalPermission: Permission,
-  requiredProjectPermission: Permission,
-  projectID: number
+  requiredProjectPermission: Permission
 ) {
   return async (req: Request, res: Response, next: NextFunction) => {
+    const projectID = parseInt(req.params.projectID) || 0;
+
     if (!("user" in req)) {
       logger.error(
         `"user" key was not found in the request object.

@@ -121,9 +121,7 @@ const userTechnologiesController = {
     res: Response,
     next: NextFunction
   ) => {
-    const { projectID } = req.params;
-    const { technologyID } = req.query;
-
+    const { projectID, technologyID } = req.params;
     const db = await connectToDB();
 
     try {
