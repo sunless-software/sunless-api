@@ -70,9 +70,6 @@ paths:
                         project_id:
                           type: integer
                           example: 1
-                        deleted:
-                          type: boolean
-                          example: false
                         created_at:
                           type: string
                           format: date-time
@@ -131,6 +128,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

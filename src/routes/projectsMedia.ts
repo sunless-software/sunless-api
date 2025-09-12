@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, Router } from "express";
+import { Router } from "express";
 import projectRoleMiddleware from "../middlewares/projectRoleMiddleware";
 import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
@@ -11,42 +11,30 @@ const projectsMediaRouter = Router({ mergeParams: true });
 
 projectsMediaRouter.post(
   "/",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.projectID) || 0;
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.createProjectMedia,
-      PROJECT_PERMISSIONS.createProjectMedia,
-      projectID
-    )(req, res, next);
-  },
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.createProjectMedia,
+    PROJECT_PERMISSIONS.createProjectMedia
+  ),
   createProjectMediaValidation,
   projectsMediaController.createProjectMedia
 );
 
 projectsMediaRouter.patch(
   "/:mediaID",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.projectID) || 0;
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.updateProjectsMedia,
-      PROJECT_PERMISSIONS.updateProjectMedia,
-      projectID
-    )(req, res, next);
-  },
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.updateProjectsMedia,
+    PROJECT_PERMISSIONS.updateProjectMedia
+  ),
   updateProjectMediaValidation,
   projectsMediaController.updateProjectMedia
 );
 
 projectsMediaRouter.delete(
   "/:mediaID",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.projectID) || 0;
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.deleteProjectsMedia,
-      PROJECT_PERMISSIONS.deleteProjectMedia,
-      projectID
-    )(req, res, next);
-  },
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.deleteProjectsMedia,
+    PROJECT_PERMISSIONS.deleteProjectMedia
+  ),
   deleteProjectMediaValidation,
   projectsMediaController.deleteProjectMedia
 );

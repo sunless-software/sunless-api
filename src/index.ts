@@ -83,8 +83,8 @@ async function start() {
   apiRouter.use("/skills", authMiddleware, skillsRouter);
 
   apiRouter.use("/projects", authMiddleware, projectsRouter); // TODO: Revisar
-  apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter);
-  apiRouter.use("/projects/:projectID/tags", authMiddleware, tagsRouter); // TODO: Revisar
+  apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter); // TODO: Revisar
+  apiRouter.use("/projects/:projectID/tags", authMiddleware, tagsRouter);
   apiRouter.use(
     // TODO: Revisar
     "/projects/:projectID/external-resources",
