@@ -84,6 +84,7 @@ const projectsController = {
         estimatedEnd,
         encryptedProjectKey,
         false,
+        authID,
       ]);
       const createdProject = createProject.rows[0];
 
@@ -356,7 +357,6 @@ const projectsController = {
               project.long_description,
               decryptedProjectKey
             ),
-            key: "****",
           };
         }
 
@@ -385,6 +385,7 @@ const projectsController = {
         res
       );
     } catch (err) {
+      console.log(err);
       return next(err);
     }
   },

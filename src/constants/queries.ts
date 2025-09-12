@@ -19,7 +19,7 @@ banned, created_at, updated_at FROM users u where ($1::boolean IS TRUE OR u.publ
 
 export const GET_USER_DETAILS = `select u.id, u.rol_id, u.username, '****' as "password", coalesce(u.profile_photo, '') as "profile_photo",
 coalesce(u.phone, '') as "phone", coalesce(u.email, '') as "email", coalesce(u.short_description, '') as "short_description", job_title, u.public, 
-u.banned, u.deleted, u.created_at, u.updated_at, coalesce(up.long_description, '') as long_description, coalesce(up.repo_url, '') as repo_url,
+u.deleted, u.banned, u.created_at, u.updated_at, coalesce(up.long_description, '') as long_description, coalesce(up.repo_url, '') as repo_url,
 coalesce(up.website_url, '') as website_url, coalesce(up.linkedin_url, '') as linkedin_url, coalesce(up.location, '') as location,
 coalesce(json_agg(distinct jsonb_build_object('id', s.id, 'name', s.name, 'created_at', s.created_at, 'updated_at', s.updated_at)) filter (where s.id is not null), '[]') 
 as skills, coalesce(json_agg(distinct jsonb_build_object( 'id', t.id, 'name', t.name, 'created_at', t.created_at, 'updated_at', t.updated_at)) filter 
@@ -40,7 +40,7 @@ export const GET_USER_STATUS = `SELECT banned FROM users WHERE id = $1 AND delet
 
 export const CREATE_USER = `INSERT INTO users (rol_id, username, password, profile_photo, phone, email, short_description, job_title, public, banned, deleted) 
 VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", 
-coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description, '') as "short_description", job_title, public, banned, 
+coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description, '') as "short_description", job_title, public, deleted, banned, 
 created_at, updated_at`;
 
 export const SOFT_DELETE_USER = `UPDATE users SET deleted = true WHERE id = $1 AND deleted = false`;
@@ -109,8 +109,8 @@ export const COUNT_TECHNOLOGIES = `SELECT COUNT(*) AS total FROM technologies`;
 
 export const CREATE_PROJECT = `INSERT INTO projects(name, name_hash, short_description, long_description, logo, status, public, start_date, end_date, 
 estimated_end, key, deleted) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id, name, coalesce(short_description, '') as short_description, 
-coalesce(long_description, '') as long_description, coalesce(logo, '') as logo, status, public, start_date, end_date, estimated_end, '****' as key, 
-created_at, updated_at`;
+coalesce(long_description, '') as long_description, coalesce(logo, '') as logo, status, public, start_date, end_date, estimated_end, '[]'::jsonb as tags,
+$13::integer as creator_id, created_at, updated_at`;
 
 export const CREATE_COLLABORATOR = `INSERT INTO collaborators(project_id, user_id, role_id) SELECT p.id, u.id, $3 as role_id FROM users u, projects p
 WHERE u.id = $2 AND u.deleted = FALSE and p.id = $1 and p.deleted = FALSE`;
@@ -171,9 +171,11 @@ AND EXISTS (SELECT 1 FROM projects p WHERE p.id = $5 AND p.deleted = FALSE) RETU
 export const DELETE_PROJECT_MEDIA = `DELETE from projects_media pm USING projects p
 WHERE p.id = $1 AND p.deleted = false AND pm.id = $2`;
 
-export const GET_PROJECTS_BY_USER = `SELECT p.*, coalesce(json_agg(distinct jsonb_build_object('id', t.id, 'name', t.name, 'created_at',
+export const GET_PROJECTS_BY_USER = `SELECT p.id, p.name, p.short_description, p.long_description, p.logo, p.status, p.public, p.start_date,
+p.end_date, p.estimated_end, p.key, coalesce(json_agg(distinct jsonb_build_object('id', t.id, 'name', t.name, 'created_at',
 t.created_at, 'updated_at', t.updated_at)) filter (where t.id is not null), '[]') as tags, CASE WHEN c2.user_id IS NOT NULL 
-THEN true ELSE false END AS is_collaborator, $1::int as creator_id FROM projects p JOIN collaborators c ON c.project_id = p.id JOIN users u ON u.id = c.user_id JOIN 
+THEN true ELSE false END AS is_collaborator, $1::int as creator_id, p.created_at, p.updated_at
+FROM projects p JOIN collaborators c ON c.project_id = p.id JOIN users u ON u.id = c.user_id JOIN 
 project_roles pr ON pr.id = c.role_id LEFT JOIN collaborators c2 ON c2.project_id = p.id AND c2.user_id = $2 LEFT JOIN project_tags pt ON 
 pt.project_id = p.id LEFT JOIN tags t ON t.id = pt.tag_id WHERE p.deleted = false AND c.user_id = $1 AND pr.id = 1 AND u.deleted = FALSE AND 
 ($3::boolean IS TRUE OR p.public = TRUE) GROUP BY p.id, c2.user_id HAVING (array_length($6::int[], 1) IS NULL OR $6::int[] <@ array_agg(t.id)

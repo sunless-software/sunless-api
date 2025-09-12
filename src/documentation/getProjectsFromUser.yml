@@ -77,12 +77,16 @@ paths:
                         name:
                           type: string
                           example: my project
-                        description:
+                        short_description:
                           type: string
                           example: project short description
                         long_description:
                           type: string
                           example: long project description
+                        logo:
+                          type: string
+                          format: uri
+                          example: www.project-logo.png
                         status:
                           type: string
                           example: FINISHED
@@ -101,20 +105,6 @@ paths:
                           type: string
                           format: date-time
                           example: 2024-04-23T03:00:00.000Z
-                        key:
-                          type: string
-                          example: "****"
-                        deleted:
-                          type: boolean
-                          example: false
-                        created_at:
-                          type: string
-                          format: date-time
-                          example: 2025-09-02T05:42:58.515Z
-                        updated_at:
-                          type: string
-                          format: date-time
-                          example: 2025-09-02T05:42:58.515Z
                         tags:
                           type: array
                           items:
@@ -137,6 +127,14 @@ paths:
                         creator_id:
                           type: number
                           example: 1
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: 2025-09-02T05:42:58.515Z
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: 2025-09-02T05:42:58.515Z
                   pagination:
                     type: object
                     properties:

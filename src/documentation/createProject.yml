@@ -19,7 +19,7 @@ paths:
               properties:
                 name:
                   type: string
-                  example: Project Phoenix
+                  example: Project 1
                   description: Required. Must be a non-empty string.
                 shortDescription:
                   type: string
@@ -109,9 +109,14 @@ paths:
                         estimated_end:
                           type: string
                           example: 2024-04-23T03:00:00.000Z
-                        key:
-                          type: string
-                          example: "****"
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                          example: []
+                        creator_id:
+                          type: number
+                          example: 1
                         created_at:
                           type: string
                           example: 2025-08-26T00:11:49.326Z

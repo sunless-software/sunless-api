@@ -77,27 +77,29 @@ async function start() {
     userTechnologiesRouter
   );
   apiRouter.use("/users/:userID/profile", authMiddleware, userProfilesRouter);
-  apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter); // TODO: Revisar
-  apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter); // TODO: Revisar
+  apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter);
+  apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter);
 
   apiRouter.use("/technologies", authMiddleware, technologiesRouter);
   apiRouter.use("/skills", authMiddleware, skillsRouter);
 
-  // TODO: Revisar todos de aca para abajo
-  apiRouter.use("/projects", authMiddleware, projectsRouter);
-  apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter);
-  apiRouter.use("/projects/:projectID/tags", authMiddleware, tagsRouter);
+  apiRouter.use("/projects", authMiddleware, projectsRouter); // TODO: Revisar
+  apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter); // TODO: Revisar
+  apiRouter.use("/projects/:projectID/tags", authMiddleware, tagsRouter); // TODO: Revisar
   apiRouter.use(
+    // TODO: Revisar
     "/projects/:projectID/external-resources",
     authMiddleware,
     externalResourceRouter
   );
   apiRouter.use(
+    // TODO: Revisar
     "/projects/:projectID/media",
     authMiddleware,
     projectsMediaRouter
   );
   apiRouter.use(
+    // TODO: Revisar
     "/projects/:projectID/technologies",
     projectsTechnologiesRouter
   );

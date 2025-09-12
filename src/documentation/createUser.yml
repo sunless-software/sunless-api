@@ -145,6 +145,9 @@ components:
         public:
           type: boolean
           example: true
+        deleted:
+          type: boolean
+          example: false
         banned:
           type: boolean
           example: false
