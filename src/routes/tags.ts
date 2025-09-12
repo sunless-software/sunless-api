@@ -10,28 +10,20 @@ const tagsRouter = Router({ mergeParams: true });
 
 tagsRouter.post(
   "/",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.projectID) || 0;
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.addProjectTags,
-      PROJECT_PERMISSIONS.addProjectTags,
-      projectID
-    )(req, res, next);
-  },
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.addProjectTags,
+    PROJECT_PERMISSIONS.addProjectTags
+  ),
   addProjectTagValidation,
   tagsController.addProjectTag
 );
 
 tagsRouter.delete(
   "/:tagID",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.projectID) || 0;
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.removeProjectTags,
-      PROJECT_PERMISSIONS.removeProjectTags,
-      projectID
-    )(req, res, next);
-  },
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.removeProjectTags,
+    PROJECT_PERMISSIONS.removeProjectTags
+  ),
   removeProjectTagValidation,
   tagsController.removeProjectTag
 );

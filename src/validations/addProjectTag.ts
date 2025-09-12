@@ -6,10 +6,10 @@ const addProjectTagValidation = [
   param("projectID").isNumeric().withMessage("project 'id' must be a number"),
   body("tagID")
     .exists()
-    .withMessage("'tagID' must be provided")
+    .withMessage("tag 'id' must be provided")
     .bail()
     .isNumeric()
-    .withMessage("'tagID' must be a number"),
+    .withMessage("tag 'id' must be a number"),
   async (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },
