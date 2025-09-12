@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, Router } from "express";
+import { Router } from "express";
 import projectRoleMiddleware from "../middlewares/projectRoleMiddleware";
 import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import { PROJECT_PERMISSIONS } from "../constants/projectPermissions";
@@ -11,42 +11,30 @@ const externalResourceRouter = Router({ mergeParams: true });
 
 externalResourceRouter.post(
   "/",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.projectID) || 0;
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.addProjectExternalResources,
-      PROJECT_PERMISSIONS.addProjectExternalResources,
-      projectID
-    )(req, res, next);
-  },
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.addProjectExternalResources,
+    PROJECT_PERMISSIONS.addProjectExternalResources
+  ),
   addExternalResourceValidation,
   externalResourcesController.createExternalResource
 );
 
 externalResourceRouter.patch(
   "/:resourceID",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.projectID) || 0;
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.updateProjectExternalResources,
-      PROJECT_PERMISSIONS.updateProjectExternalResources,
-      projectID
-    )(req, res, next);
-  },
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.updateProjectExternalResources,
+    PROJECT_PERMISSIONS.updateProjectExternalResources
+  ),
   updateExternalResourceValidation,
   externalResourcesController.updateExternalResource
 );
 
 externalResourceRouter.delete(
   "/:resourceID",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.projectID) || 0;
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.deleteProjectExternalResources,
-      PROJECT_PERMISSIONS.deleteProjectExternalResources,
-      projectID
-    )(req, res, next);
-  },
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.deleteProjectExternalResources,
+    PROJECT_PERMISSIONS.deleteProjectExternalResources
+  ),
   deleteExternalResourceValidation,
   externalResourcesController.deleteProjectExternalResource
 );

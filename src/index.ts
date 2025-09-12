@@ -86,13 +86,11 @@ async function start() {
   apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter); // TODO: Revisar
   apiRouter.use("/projects/:projectID/tags", authMiddleware, tagsRouter);
   apiRouter.use(
-    // TODO: Revisar
     "/projects/:projectID/external-resources",
     authMiddleware,
     externalResourceRouter
   );
   apiRouter.use(
-    // TODO: Revisar
     "/projects/:projectID/media",
     authMiddleware,
     projectsMediaRouter

@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from "express";
 import { validateResult } from "../utils";
 
 const addExternalResourceValidation = [
-  param("projectID").isNumeric().withMessage("'projectID' must be a number"),
+  param("projectID").isNumeric().withMessage("project 'id' must be a number"),
   body("name")
     .exists()
     .withMessage("external resource 'name' must be provided")
