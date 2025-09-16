@@ -146,6 +146,8 @@ WHERE p.deleted = FALSE AND p.id = $2 AND b.id = $1`;
 export const UPDATE_BLOGS = `UPDATE blogs SET title = COALESCE($1, title), body = COALESCE($2, body) WHERE id = $3 
 AND EXISTS(SELECT 1 FROM projects p WHERE p.id = $4 AND p.deleted = FALSE) RETURNING *`;
 
+export const CREATE_TAG = `INSERT INTO tags (name) VALUES($1) RETURNING *`;
+
 export const ADD_PROJECT_TAG = `INSERT INTO project_tags (tag_id, project_id) SELECT t.id, p.id FROM tags t
 JOIN projects p ON p.id = $1 AND p.deleted = FALSE AND t.id = $2 RETURNING *`;
 

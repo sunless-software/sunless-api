@@ -112,6 +112,7 @@ export const BLOG_SUCCESSFULLY_DELETED_MESSAGE =
 export const BLOG_SUCCESSFULY_UPDATED = "Blog successfully updated.";
 export const TAG_SUCCESSFULLY_ADDED =
   "The tag has been successfully added to the project.";
+export const TAG_SUCCESSFULLY_CREATED = "tag successfully created.";
 export const TAG_SUCCESSFULLY_REMOVED =
   "The tag has been successfully removed from the project.";
 export const PROJECT_TAGS_PK_VIOLATION_MESSAGE =

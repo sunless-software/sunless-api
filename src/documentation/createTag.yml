@@ -1,13 +1,13 @@
 paths:
-  /api/v1/technologies:
+  /api/v1/tags:
     post:
-      summary: Create a new technology
+      summary: Create a new tag
       description: |
-        Creates a new technology.  
-        Requires a global role with the `CREATE_TECHNOLOGIES` permission.  
-        The `technologyName` field is validated according to its type and requirements.
+        Creates a new tag.  
+        Requires a global role with the `CREATE_TAGS` permission.  
+        The `tagName` field is validated according to its type and requirements.
       tags:
-        - Technologies
+        - Tags
       requestBody:
         required: true
         content:
@@ -15,14 +15,14 @@ paths:
             schema:
               type: object
               properties:
-                technologyName:
+                tagName:
                   type: string
-                  example: React
+                  example: Web interface
                   description: |
                     Must be provided, must be a string, and cannot be empty.
       responses:
         "201":
-          description: Technology successfully created
+          description: Tag successfully created
           content:
             application/json:
               schema:
@@ -33,7 +33,7 @@ paths:
                     example: 201
                   message:
                     type: string
-                    example: Technology successfully created.
+                    example: tag successfully created.
                   data:
                     type: array
                     items:
@@ -41,10 +41,10 @@ paths:
                       properties:
                         id:
                           type: integer
-                          example: 33
+                          example: 18
                         name:
                           type: string
-                          example: React
+                          example: Web interface
                         created_at:
                           type: string
                           format: date-time
@@ -87,7 +87,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
         "409":
-          description: Technology already exists
+          description: Tag already exists
           content:
             application/json:
               schema:
@@ -98,7 +98,7 @@ paths:
                     example: 409
                   message:
                     type: string
-                    example: technology 'name' already in use.
+                    example: tag 'name' already in use.
                   data:
                     type: array
                     items:

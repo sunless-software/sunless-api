@@ -180,4 +180,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 56,
     name: "CREATE_TECHNOLOGIES",
   },
+  createTags: {
+    id: 57,
+    name: "CREATE_TAGS",
+  },
 } satisfies Record<string, Permission>;
