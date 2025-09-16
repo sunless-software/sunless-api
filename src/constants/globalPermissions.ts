@@ -176,4 +176,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 55,
     name: "UPDATE_PROFILES",
   },
+  createTechnologies: {
+    id: 56,
+    name: "CREATE_TECHNOLOGIES",
+  },
 } satisfies Record<string, Permission>;

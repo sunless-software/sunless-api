@@ -61,6 +61,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.unbanOwnUser,
       GLOBAL_PERMISSIONS.updateOwnProfile,
       GLOBAL_PERMISSIONS.updateProfiles,
+      GLOBAL_PERMISSIONS.createTechnologies,
     ],
   },
   {

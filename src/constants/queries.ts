@@ -107,6 +107,8 @@ export const GET_TECHNOLOGIES = `SELECT * FROM technologies ORDER BY created_at 
 
 export const COUNT_TECHNOLOGIES = `SELECT COUNT(*) AS total FROM technologies`;
 
+export const CREATE_TECHNOLOGY = `INSERT INTO technologies (name) VALUES($1) RETURNING *`;
+
 export const CREATE_PROJECT = `INSERT INTO projects(name, name_hash, short_description, long_description, logo, status, public, start_date, end_date, 
 estimated_end, key, deleted) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id, name, coalesce(short_description, '') as short_description, 
 coalesce(long_description, '') as long_description, coalesce(logo, '') as logo, status, public, start_date, end_date, estimated_end, '[]'::jsonb as tags,

@@ -76,6 +76,8 @@ export const USER_TECHNOLOGY_SUCCESSFULLY_REMOVED =
   "The technology has been successfully removed from the user.";
 export const TECHNOLOGIES_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "Technologies successfully retrieved.";
+export const TECHNOLOGY_SUCCESSFULLY_CREATED_MESSAGE =
+  "Technology successfully created.";
 export const USER_DETAILS_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "User details successfully retrieved.";
 export const PROJECT_SUCCESSFULLY_CREATED_MESSAGE =

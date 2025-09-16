@@ -1,11 +1,17 @@
 import { NextFunction, Request, Response } from "express";
 import connectToDB from "../db";
-import { COUNT_TECHNOLOGIES, GET_TECHNOLOGIES } from "../constants/queries";
+import {
+  COUNT_TECHNOLOGIES,
+  CREATE_TECHNOLOGY,
+  GET_TECHNOLOGIES,
+} from "../constants/queries";
 import { sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
   TECHNOLOGIES_SUCCESSFULLY_RETRIEVED_MESSAGE,
+  TECHNOLOGY_SUCCESSFULLY_CREATED_MESSAGE,
 } from "../constants/messages";
+import { HTTP_STATUS_CODE_CREATED } from "../constants/httpStatusCodes";
 
 const technologiesController = {
   getTechnologies: async (req: Request, res: Response, next: NextFunction) => {
@@ -35,6 +41,26 @@ const technologiesController = {
             count: technologies.length,
             total: parseInt(countTechnologiesResult.rows[0].total),
           },
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
+  createTechnology: async (req: Request, res: Response, next: NextFunction) => {
+    const { technologyName } = req.body;
+    const db = await connectToDB();
+
+    try {
+      const result = await db.query(CREATE_TECHNOLOGY, [technologyName]);
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          status: HTTP_STATUS_CODE_CREATED,
+          message: TECHNOLOGY_SUCCESSFULLY_CREATED_MESSAGE,
+          data: result.rows,
         },
         res
       );
