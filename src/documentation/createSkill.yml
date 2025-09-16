@@ -1,13 +1,13 @@
 paths:
-  /api/v1/tags:
+  /api/v1/skills:
     post:
-      summary: Create a new tag
+      summary: Create a new skill
       description: |
-        Creates a new tag.  
-        Requires a global role with the `CREATE_TAGS` permission.  
-        The `tagName` field is validated according to its type and requirements.
+        Creates a new skill.  
+        Requires a global role with the `CREATE_SKILLS` permission.  
+        The `skillName` field is validated according to its type and requirements.
       tags:
-        - Tags
+        - Skills
       requestBody:
         required: true
         content:
@@ -15,14 +15,14 @@ paths:
             schema:
               type: object
               properties:
-                tagName:
+                skillName:
                   type: string
-                  example: Web interface
+                  example: Problem solving
                   description: |
                     Must be provided, must be a string, and cannot be empty.
       responses:
         "201":
-          description: Tag successfully created
+          description: Skill successfully created
           content:
             application/json:
               schema:
@@ -33,7 +33,7 @@ paths:
                     example: 201
                   message:
                     type: string
-                    example: Tag successfully created.
+                    example: Skill successfully created.
                   data:
                     type: array
                     items:
@@ -44,7 +44,7 @@ paths:
                           example: 18
                         name:
                           type: string
-                          example: Web interface
+                          example: Problem solving
                         created_at:
                           type: string
                           format: date-time
@@ -87,7 +87,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
         "409":
-          description: Tag already exists
+          description: Skill already exists
           content:
             application/json:
               schema:
@@ -98,7 +98,7 @@ paths:
                     example: 409
                   message:
                     type: string
-                    example: tag 'name' already in use.
+                    example: skill 'name' already in use.
                   data:
                     type: array
                     items:

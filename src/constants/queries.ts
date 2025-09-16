@@ -96,6 +96,8 @@ AND u.deleted = false AND us.skill_id = $2 AND u.id = $1`;
 
 export const GET_SKILLS = `SELECT * FROM skills ORDER BY created_at DESC OFFSET $1 LIMIT $2`;
 
+export const CREATE_SKILL = `INSERT INTO skills (name) VALUES($1) RETURNING *`;
+
 export const COUNT_SKILLS = `SELECT COUNT(*) AS total FROM skills`;
 
 export const ADD_USER_TECHNOLOGY = `INSERT INTO users_technologies (user_id, technology_id, created_at, updated_at) SELECT u.id, t.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
