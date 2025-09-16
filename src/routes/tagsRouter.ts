@@ -4,6 +4,7 @@ import createTagValidations from "../validations/createTag";
 import roleMiddleware from "../middlewares/roleMiddleware";
 import { GLOBAL_PERMISSIONS } from "../constants/globalPermissions";
 import getTagsValidations from "../validations/getTags";
+import updateTagValidations from "../validations/updateTag";
 
 const tagsRouter = Router();
 
@@ -14,6 +15,13 @@ tagsRouter.post(
   roleMiddleware([GLOBAL_PERMISSIONS.createTags]),
   createTagValidations,
   tagsController.createTag
+);
+
+tagsRouter.patch(
+  "/:tagID",
+  roleMiddleware([GLOBAL_PERMISSIONS.updateTags]),
+  updateTagValidations,
+  tagsController.updateTag
 );
 
 export default tagsRouter;

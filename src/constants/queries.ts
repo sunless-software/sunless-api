@@ -150,6 +150,8 @@ AND EXISTS(SELECT 1 FROM projects p WHERE p.id = $4 AND p.deleted = FALSE) RETUR
 
 export const CREATE_TAG = `INSERT INTO tags (name) VALUES($1) RETURNING *`;
 
+export const UPDATE_TAG = `UPDATE tags SET name=$1 WHERE id=$2 RETURNING *`;
+
 export const GET_TAGS = `SELECT * FROM tags ORDER BY created_at DESC OFFSET $1 LIMIT $2`;
 
 export const COUNT_TAGS = `SELECT COUNT(*) as total FROM tags`;
