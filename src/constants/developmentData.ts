@@ -65,6 +65,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.createTags,
       GLOBAL_PERMISSIONS.createSkills,
       GLOBAL_PERMISSIONS.updateTags,
+      GLOBAL_PERMISSIONS.updateTechnologies,
     ],
   },
   {
