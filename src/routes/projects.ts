@@ -87,7 +87,7 @@ projectsRouter.delete(
 );
 
 projectsRouter.post(
-  "/invite/:projectID",
+  "/:projectID/invite",
   projectRoleMiddleware(
     GLOBAL_PERMISSIONS.inviteProjects,
     PROJECT_PERMISSIONS.inviteProject

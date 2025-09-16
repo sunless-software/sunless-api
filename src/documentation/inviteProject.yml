@@ -1,5 +1,5 @@
 paths:
-  /api/v1/projects/invite/{projectID}:
+  /api/v1/projects/{projectID}/invite:
     post:
       summary: Invite a user to a project
       description: |
