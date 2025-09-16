@@ -7,7 +7,7 @@ paths:
         Requires a role with the global `UPDATE_PROJECTS_MEDIA` permission or a project role with `UPDATE_PROJECT_MEDIA`.  
         Validates `projectID`, `mediaID`, and optionally media fields (`url` and `type`).
       tags:
-        - Projects
+        - Media
       parameters:
         - name: projectID
           in: path

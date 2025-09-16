@@ -7,7 +7,7 @@ paths:
         Requires the `REMOVE_PROJECT_TAGS` global permission or a project role with the `REMOVE_PROJECT_TAGS` permission.  
         This endpoint does not delete the tag itself, only its link with the specified project.
       tags:
-        - Projects
+        - Tags
       parameters:
         - name: projectID
           in: path

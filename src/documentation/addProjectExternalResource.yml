@@ -7,7 +7,7 @@ paths:
         Requires the `ADD_PROJECT_EXTERNAL_RESOURCES` global permission or a project role with the `ADD_PROJECT_EXTERNAL_RESOURCES` permission.  
         The `type` must be one of: GITHUB, BITBUCKET, OTHER_REPO, JIRA, TRELLO, CONFLUENCE, DRIVE, OTHER, WEB.
       tags:
-        - Projects
+        - External resources
       parameters:
         - name: projectID
           in: path

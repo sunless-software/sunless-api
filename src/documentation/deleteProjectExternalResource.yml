@@ -7,7 +7,7 @@ paths:
         Requires a global role with the `DELETE_PROJECT_EXTERNAL_RESOURCES` permission, or a project role with the `DELETE_PROJECT_EXTERNAL_RESOURCES` permission.  
         Both `projectID` and `resourceID` must be numeric values.
       tags:
-        - Projects
+        - External resources
       parameters:
         - name: projectID
           in: path

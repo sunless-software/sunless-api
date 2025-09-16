@@ -7,7 +7,7 @@ paths:
         The technology itself is not deleted.  
         Requires either a global role with the `UPDATE_PROJECTS` permission or a role within the project with the `REMOVE_TECHNOLOGIES_PROJECT` permission.
       tags:
-        - Projects
+        - Technologies
       parameters:
         - in: path
           name: projectID

@@ -7,7 +7,7 @@ paths:
         Requires the `UPDATE_PROJECTS` global permission or a project role with the `ADD_TECHNOLOGIES_PROJECT` permission.  
         This endpoint does not create new technologies, only links an existing one to a project.
       tags:
-        - Projects
+        - Technologies
       parameters:
         - in: path
           name: projectID

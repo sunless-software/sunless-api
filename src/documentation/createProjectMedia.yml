@@ -7,7 +7,7 @@ paths:
         Requires a role with the global `CREATE_PROJECT_MEDIA` permission or a project role with `CREATE_PROJECT_MEDIA`.  
         Validates `projectID` and media fields (`url` and `type`).
       tags:
-        - Projects
+        - Media
       parameters:
         - name: projectID
           in: path

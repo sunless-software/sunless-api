@@ -16,7 +16,7 @@ paths:
         but only in their encrypted form unless the requester is the blog creator 
         or a collaborator of the project, in which case the decrypted version is returned.
       tags:
-        - Users
+        - Blogs
       parameters:
         - in: path
           name: userID

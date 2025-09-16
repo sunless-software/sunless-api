@@ -7,7 +7,7 @@ paths:
         Requires the `ADD_PROJECT_TAGS` global permission or a project role with the `ADD_PROJECT_TAGS` permission.  
         This endpoint does not create new tags, only links an existing one to a project.
       tags:
-        - Projects
+        - Tags
       parameters:
         - name: id
           in: path
