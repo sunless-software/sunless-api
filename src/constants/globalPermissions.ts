@@ -196,4 +196,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 60,
     name: "UPDATE_TECHNOLOGIES",
   },
+  updateSkills: {
+    id: 61,
+    name: "UPDATE_SKILLS",
+  },
 } satisfies Record<string, Permission>;

@@ -98,6 +98,8 @@ export const GET_SKILLS = `SELECT * FROM skills ORDER BY created_at DESC OFFSET 
 
 export const CREATE_SKILL = `INSERT INTO skills (name) VALUES($1) RETURNING *`;
 
+export const UPDATE_SKILL = `UPDATE skills SET name=$1 WHERE id=$2 RETURNING *`;
+
 export const COUNT_SKILLS = `SELECT COUNT(*) AS total FROM skills`;
 
 export const ADD_USER_TECHNOLOGY = `INSERT INTO users_technologies (user_id, technology_id, created_at, updated_at) SELECT u.id, t.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP

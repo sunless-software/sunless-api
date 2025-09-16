@@ -1,0 +1,163 @@
+paths:
+  /api/v1/skills/{skillID}:
+    patch:
+      summary: Update a skill
+      description: |
+        Updates a skill entry.  
+        Requires a role with the global `UPDATE_SKILLS` permission.  
+        Validates `skillID` in the path and `skillName` in the request body.
+      tags:
+        - Skills
+      parameters:
+        - name: skillID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+          description: Must be a numeric skill ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - skillName
+              properties:
+                skillName:
+                  type: string
+                  example: "Critical thinking"
+                  description: |
+                    Required. Must be a non-empty string.  
+                    Cannot be duplicated across skills.
+      responses:
+        "200":
+          description: Skill successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Skill successfully updated.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "Critical thinking"
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: "2025-09-16T20:58:40.843Z"
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: "2025-09-16T20:59:08.890Z"
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error (e.g. missing or invalid `skillName`)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Skill with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "409":
+          description: Skill name already in use
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: skill 'name' already in use.
+                  data:
+                    type: array
+                    items: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

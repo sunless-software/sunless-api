@@ -37,6 +37,7 @@ export const EDUCATION_SUCCESSFULLY_CREATED = "Study successfully created.";
 export const EDUCATION_SUCCESSFULLY_DELETED = "Study successfully deleted.";
 export const EDUCATION_SUCCESSFULY_UPDATED = "Study updated successfully.";
 export const SKILL_SUCCESSFULLY_CREATED = "Skill successfully created.";
+export const SKILL_SUCCESSFULLY_UPDATED = "Skill successfully updated.";
 export const USER_SKILL_SUCCESSFULLY_ADDED =
   "The skill was successfully added to the user.";
 export const ENTITY_NOT_FOUND_MESSAGE =
