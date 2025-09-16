@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: Skills API
+  version: 1.0.0
+
+paths:
+  /api/v1/tags:
+    get:
+      summary: Retrieve a list of tags
+      description: >
+        Fetch a paginated list of tags.  
+        No special permissions are required beyond authentication.
+      tags:
+        - Tags
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 20
+          description: Maximum number of tags to return. Must be numeric.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Number of tags to skip. Must be numeric.
+      responses:
+        "200":
+          description: Tags successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Tags successfully retrieved.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: Web interface
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: 2025-08-14T19:55:11.121Z
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: 2025-08-14T19:55:11.121Z
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 20
+                      count:
+                        type: integer
+                        example: 20
+                      total:
+                        type: integer
+                        example: 145
+
+        "400":
+          description: Validation error (invalid offset or limit)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+
+components:
+  schemas:
+    ValidationError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: Invalid request
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: field
+              value:
+                type: string
+                example: "abc"
+              msg:
+                type: string
+                example: "'offset' must be a number"
+              path:
+                type: string
+                example: offset
+              location:
+                type: string
+                example: query
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
+
+    UnauthorizedError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: You must provide a token
+        data:
+          type: array
+          items:
+            type: object
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0

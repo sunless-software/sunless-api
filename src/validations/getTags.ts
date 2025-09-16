@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from "express";
 import { query } from "express-validator";
 import { validateResult } from "../utils";
+import { Request, Response, NextFunction } from "express";
 
-const getTechnologiesValidation = [
+const getTagsValidations = [
   query("offset")
     .optional()
     .isInt({ min: 0 })
@@ -16,4 +16,4 @@ const getTechnologiesValidation = [
   },
 ];
 
-export default getTechnologiesValidation;
+export default getTagsValidations;

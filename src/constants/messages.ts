@@ -76,6 +76,8 @@ export const USER_TECHNOLOGY_SUCCESSFULLY_REMOVED =
   "The technology has been successfully removed from the user.";
 export const TECHNOLOGIES_SUCCESSFULLY_RETRIEVED_MESSAGE =
   "Technologies successfully retrieved.";
+export const TAGS_SUCCESSFULLY_RETRIEVED_MESSAGE =
+  "Tags successfully retrieved.";
 export const TECHNOLOGY_SUCCESSFULLY_CREATED_MESSAGE =
   "Technology successfully created.";
 export const USER_DETAILS_SUCCESSFULLY_RETRIEVED_MESSAGE =
@@ -112,7 +114,7 @@ export const BLOG_SUCCESSFULLY_DELETED_MESSAGE =
 export const BLOG_SUCCESSFULY_UPDATED = "Blog successfully updated.";
 export const TAG_SUCCESSFULLY_ADDED =
   "The tag has been successfully added to the project.";
-export const TAG_SUCCESSFULLY_CREATED = "tag successfully created.";
+export const TAG_SUCCESSFULLY_CREATED = "Tag successfully created.";
 export const TAG_SUCCESSFULLY_REMOVED =
   "The tag has been successfully removed from the project.";
 export const PROJECT_TAGS_PK_VIOLATION_MESSAGE =

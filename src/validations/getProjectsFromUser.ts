@@ -6,9 +6,12 @@ const getProjectsFromUserValidation = [
   param("userID").isNumeric().withMessage("user 'id' must be a number"),
   query("offset")
     .optional()
-    .isNumeric()
-    .withMessage("'offset' must be a number"),
-  query("limit").optional().isNumeric().withMessage("'limit' must be a number"),
+    .isInt({ min: 0 })
+    .withMessage("'offset' must be a non-negative integer"),
+  query("limit")
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage("'limit' must be a non-negative integer"),
   query("showPrivateProjects")
     .optional()
     .isBoolean()

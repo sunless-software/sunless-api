@@ -148,6 +148,10 @@ AND EXISTS(SELECT 1 FROM projects p WHERE p.id = $4 AND p.deleted = FALSE) RETUR
 
 export const CREATE_TAG = `INSERT INTO tags (name) VALUES($1) RETURNING *`;
 
+export const GET_TAGS = `SELECT * FROM tags ORDER BY created_at DESC OFFSET $1 LIMIT $2`;
+
+export const COUNT_TAGS = `SELECT COUNT(*) as total FROM tags`;
+
 export const ADD_PROJECT_TAG = `INSERT INTO project_tags (tag_id, project_id) SELECT t.id, p.id FROM tags t
 JOIN projects p ON p.id = $1 AND p.deleted = FALSE AND t.id = $2 RETURNING *`;
 
