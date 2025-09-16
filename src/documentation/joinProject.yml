@@ -36,6 +36,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
@@ -56,35 +57,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: integer
-                    example: 400
-                  message:
-                    type: string
-                    example: "'code' must be provided and cannot be empty"
-                  data:
-                    type: array
-                    items:
-                      type: object
-                  pagination:
-                    type: object
-                    properties:
-                      offset:
-                        type: integer
-                        example: 0
-                      limit:
-                        type: integer
-                        example: 0
-                      count:
-                        type: integer
-                        example: 0
-                      total:
-                        type: integer
-                        example: 0
-        "401":
-          description: Invalid or expired token, or user mismatch
+                $ref: "#/components/schemas/ValidationError"
+        "403":
+          description: User mismatch
           content:
             application/json:
               schema:
@@ -92,14 +67,15 @@ paths:
                 properties:
                   status:
                     type: integer
-                    example: 401
+                    example: 403
                   message:
                     type: string
-                    example: "Invalid or expired invitation code, or the authenticated user does not match the invited user."
+                    example: "This invitation is not for you."
                   data:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
@@ -132,6 +108,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
@@ -164,6 +141,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

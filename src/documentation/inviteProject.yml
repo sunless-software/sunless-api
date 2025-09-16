@@ -1,5 +1,5 @@
 paths:
-  /api/v1/projects/invite/{id}:
+  /api/v1/projects/invite/{projectID}:
     post:
       summary: Invite a user to a project
       description: |
@@ -8,7 +8,7 @@ paths:
       tags:
         - Projects
       parameters:
-        - name: id
+        - name: projectID
           in: path
           required: true
           schema:
@@ -82,7 +82,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ForbiddenPermissionError"
         "404":
-          description: Entity with given ID does not exist
+          description: Either the user, project or project role does not exists
           content:
             application/json:
               schema:
@@ -98,6 +98,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:

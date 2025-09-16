@@ -36,6 +36,7 @@ paths:
                     type: array
                     items:
                       type: object
+                    example: []
                   pagination:
                     type: object
                     properties:
@@ -198,6 +199,7 @@ components:
           type: array
           items:
             type: object
+          example: []
         pagination:
           type: object
           properties:

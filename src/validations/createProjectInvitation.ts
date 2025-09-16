@@ -3,7 +3,7 @@ import { body, param } from "express-validator";
 import { validateResult } from "../utils";
 
 const createProjectInvitationValidation = [
-  param("id").isNumeric().withMessage("project 'id' must be a number"),
+  param("projectID").isNumeric().withMessage("project 'id' must be a number"),
   body("userID")
     .exists()
     .withMessage("'userID' must be provided")

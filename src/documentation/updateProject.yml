@@ -113,9 +113,6 @@ paths:
                         estimated_end:
                           type: string
                           example: 2024-04-23T03:00:00.000Z
-                        key:
-                          type: string
-                          example: "****"
                         created_at:
                           type: string
                           example: 2025-08-26T00:11:49.326Z

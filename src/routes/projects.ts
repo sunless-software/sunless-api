@@ -23,14 +23,10 @@ projectsRouter.get(
 
 projectsRouter.get(
   "/:projectID",
-  (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.projectID) || 0;
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.getProjectDetails,
-      PROJECT_PERMISSIONS.getProjectDetails,
-      projectID
-    )(req, res, next);
-  },
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.getProjectDetails,
+    PROJECT_PERMISSIONS.getProjectDetails
+  ),
   getProjectDetailsValidation,
   projectsController.getProjectDetails
 );
@@ -39,12 +35,12 @@ projectsRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
     if (req.body.publicProject)
-      return roleMiddleware([GLOBAL_PERMISSIONS.createPrivateProjects])(
+      return roleMiddleware([GLOBAL_PERMISSIONS.createPublicProjects])(
         req,
         res,
         next
       );
-    return roleMiddleware([GLOBAL_PERMISSIONS.createPublicProjects])(
+    return roleMiddleware([GLOBAL_PERMISSIONS.createPrivateProjects])(
       req,
       res,
       next
@@ -55,32 +51,25 @@ projectsRouter.post(
 );
 
 projectsRouter.patch(
-  "/:id",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.id);
-    return projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.updateProjects,
-      PROJECT_PERMISSIONS.updateProjects,
-      projectID
-    )(req, res, next);
-  },
+  "/:projectID",
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.updateProjects,
+    PROJECT_PERMISSIONS.updateProjects
+  ),
   async (req: Request, res: Response, next: NextFunction) => {
     const { publicProject } = req.body;
     if (publicProject === undefined) return next();
-    const projectID = parseInt(req.params.id);
 
     if (publicProject) {
       return projectRoleMiddleware(
         GLOBAL_PERMISSIONS.createPublicProjects,
-        PROJECT_PERMISSIONS.setPublicProject,
-        projectID
+        PROJECT_PERMISSIONS.setPublicProject
       )(req, res, next);
     }
 
     return projectRoleMiddleware(
       GLOBAL_PERMISSIONS.createPrivateProjects,
-      PROJECT_PERMISSIONS.setPrivateProject,
-      projectID
+      PROJECT_PERMISSIONS.setPrivateProject
     )(req, res, next);
   },
   updateProjectsValidation,
@@ -88,29 +77,21 @@ projectsRouter.patch(
 );
 
 projectsRouter.delete(
-  "/:id",
-  (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.id);
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.deleteProjects,
-      PROJECT_PERMISSIONS.deleteProject,
-      projectID
-    )(req, res, next);
-  },
+  "/:projectID",
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.deleteProjects,
+    PROJECT_PERMISSIONS.deleteProject
+  ),
   deleteProjectValidation,
   projectsController.deleteProject
 );
 
 projectsRouter.post(
-  "/invite/:id",
-  (req: Request, res: Response, next: NextFunction) => {
-    const projectID = parseInt(req.params.id);
-    projectRoleMiddleware(
-      GLOBAL_PERMISSIONS.inviteProjects,
-      PROJECT_PERMISSIONS.inviteProject,
-      projectID
-    )(req, res, next);
-  },
+  "/invite/:projectID",
+  projectRoleMiddleware(
+    GLOBAL_PERMISSIONS.inviteProjects,
+    PROJECT_PERMISSIONS.inviteProject
+  ),
   createProjectInvitationValidation,
   projectsController.createProjectInvitation
 );

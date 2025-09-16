@@ -3,7 +3,7 @@ import { param } from "express-validator";
 import { validateResult } from "../utils";
 
 const deleteProjectValidation = [
-  param("id").isNumeric().withMessage("project 'id' must be a number"),
+  param("projectID").isNumeric().withMessage("project 'id' must be a number"),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

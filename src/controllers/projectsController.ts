@@ -2,9 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import connectToDB from "../db";
 import {
-  CHECK_PROJECT_EXISTS,
-  CHECK_PROJECT_ROLE_EXISTS,
-  CHECK_VALID_USER_EXISTS,
+  CHECK_VALID_INVITATION,
   COUNT_ALL_PROJECTS,
   COUNT_PROJECTS_FROM_USER,
   CREATE_COLLABORATOR,
@@ -113,7 +111,7 @@ const projectsController = {
     }
   },
   updateProject: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { projectID } = req.params;
     let {
       name,
       shortDescription,
@@ -129,7 +127,7 @@ const projectsController = {
 
     try {
       const getProjectEncryptedKeyResult = await db.query(GET_PROJECT_KEY, [
-        id,
+        projectID,
       ]);
 
       if (!getProjectEncryptedKeyResult.rowCount) {
@@ -160,7 +158,7 @@ const projectsController = {
         startDate,
         endDate,
         estimatedEnd,
-        id,
+        projectID,
       ]);
 
       const resultProjectData = result.rows[0];
@@ -197,11 +195,11 @@ const projectsController = {
     }
   },
   deleteProject: async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const { projectID } = req.params;
     const db = await connectToDB();
 
     try {
-      const result = await db.query(SOFT_DELETE_PROJECT, [id]);
+      const result = await db.query(SOFT_DELETE_PROJECT, [projectID]);
       const affectedRows = result.rowCount;
 
       if (!affectedRows) {
@@ -225,20 +223,19 @@ const projectsController = {
     res: Response,
     next: NextFunction
   ) => {
-    const projectID = req.params.id;
+    const { projectID } = req.params;
     const { userID, projectRoleID } = req.body;
     const secret = process.env.SECRET;
     const db = await connectToDB();
 
     try {
-      const result = await Promise.all([
-        db.query(CHECK_VALID_USER_EXISTS, [userID]),
-        db.query(CHECK_PROJECT_EXISTS, [projectID]),
-        db.query(CHECK_PROJECT_ROLE_EXISTS, [projectRoleID]),
+      const result = await db.query(CHECK_VALID_INVITATION, [
+        userID,
+        projectID,
+        projectRoleID,
       ]);
-      const allEntitiesExists = result.every((r) => r.rows[0].count === "1");
 
-      if (!allEntitiesExists) {
+      if (!result.rowCount) {
         throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
       }
 
@@ -447,7 +444,7 @@ const projectsController = {
         {
           ...DEFAULT_SUCCES_API_RESPONSE,
           message: PROJECT_DETAILS_SUCCESSFULLY_RETRIEVED,
-          data: [{ ...cleanProject, key: "****" }],
+          data: [{ ...cleanProject }],
         },
         res
       );

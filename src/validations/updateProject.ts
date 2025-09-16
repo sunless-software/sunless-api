@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { body } from "express-validator";
+import { param, body } from "express-validator";
 import { validateResult } from "../utils";
 import { PROJECT_STATUS } from "../constants/constants";
 
 const updateProjectsValidation = [
+  param("projectID").isNumeric().withMessage("project 'id' must be a number"),
   body("name")
     .optional()
     .isString()
