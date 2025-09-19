@@ -239,3 +239,8 @@ website_url=COALESCE($3, website_url), linkedin_url=COALESCE($4, linkedin_url), 
 (SELECT 1 FROM users u WHERE u.deleted = FALSE AND u.id = up.user_id) RETURNING user_id, COALESCE(long_description, '') as long_description, 
 COALESCE(repo_url, '') as repo_url, COALESCE(website_url, '') as website_url, COALESCE(linkedin_url, '') as linkedin_url, 
 COALESCE(location, '') as location, created_at, updated_at`;
+
+export const CREATE_GLOBAL_ROLE = `INSERT INTO global_roles (role_name) VALUES($1) RETURNING *;`;
+
+export const RELATE_GLOBAL_ROLE_PERMISSIONS = `INSERT INTO global_role_permissions (global_role_id, permission_id)
+SELECT $1, p.id FROM permissions p WHERE p.id = ANY($2::int[]) AND p.scope = 'GLOBAL' RETURNING *`;

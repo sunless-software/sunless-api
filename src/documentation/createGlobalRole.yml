@@ -1,0 +1,139 @@
+paths:
+  /api/v1/roles/global:
+    post:
+      summary: Create a new global role
+      description: |
+        Creates a new global role with the provided name and permissions.  
+        Requires a role with the global `CREATE_GLOBAL_ROLES` permission.  
+        Validates `roleName` and `permissions` fields.  
+        If any of the provided permission IDs are invalid (nonexistent or not in global scope), the role will still be created but those permissions will be ignored.
+      tags:
+        - Roles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roleName:
+                  type: string
+                  example: "admin"
+                  description: |
+                    Required. Must be a non-empty string.  
+                    Validation rules:  
+                      - Must exist (`'roleName' must be provided`)  
+                      - Must be a string (`'roleName' must be an string`)  
+                      - Cannot be empty (`'roleName' cannot be empty`)
+                permissions:
+                  type: array
+                  items:
+                    type: integer
+                    example: 1
+                  description: |
+                    Required. Must be a non-empty array of permission IDs.  
+                    Validation rules:  
+                      - Must exist (`'permissions' must be provided`)  
+                      - Must be an array (`'permissions' must be a non empty array`)  
+                      - Must contain at least one element.
+      responses:
+        "201":
+          description: Global role successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: The global permission has been successfully created.
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 6
+                      role_name:
+                        type: string
+                        example: admin
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2025-09-19T13:45:22.638Z"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2025-09-19T13:45:22.638Z"
+                      permissions:
+                        type: array
+                        items:
+                          type: integer
+                        example: [1]
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "409":
+          description: Duplicate role name
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: "'role_name' already in use."
+                  data:
+                    type: array
+                    items: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
