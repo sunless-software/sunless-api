@@ -244,3 +244,9 @@ export const CREATE_GLOBAL_ROLE = `INSERT INTO global_roles (role_name) VALUES($
 
 export const RELATE_GLOBAL_ROLE_PERMISSIONS = `INSERT INTO global_role_permissions (global_role_id, permission_id)
 SELECT $1, p.id FROM permissions p WHERE p.id = ANY($2::int[]) AND p.scope = 'GLOBAL' RETURNING *`;
+
+export const UPDATE_GLOBAL_ROLE = `UPDATE global_roles SET role_name=COALESCE($1, role_name) WHERE id = $2 RETURNING *`;
+
+export const DELETE_GLOBAL_ROLE_PERMISSIONS = `DELETE FROM global_role_permissions WHERE global_role_id = $1`;
+
+export const GET_GLOBAL_ROLE_PERMISSIONS_ID = `SELECT permission_id FROM global_role_permissions WHERE global_role_id = $1`;

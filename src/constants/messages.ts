@@ -153,8 +153,10 @@ export const USER_PROFILES_WEBSITE_URL_VIOLATION_MESSAGE =
   "There already is another user profile with the same website url.";
 export const USER_PROFILES_LINKEDIN_URL_VIOLATION_MESSAGE =
   "There already is another user profile with the same linkedin url.";
-export const GLOBAL_PERMISSION_SUCCESSFULLY_CREATE_MESSAGE =
-  "The global permission has been successfully created.";
+export const GLOBAL_ROLE_SUCCESSFULLY_CREATED_MESSAGE =
+  "The global role has been successfully created.";
+export const GLOBAL_ROLE_SUCCESSFULLY_UPDATED_MESSAGE =
+  "The global role has been successfully updated.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

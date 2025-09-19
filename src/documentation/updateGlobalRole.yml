@@ -1,0 +1,181 @@
+paths:
+  /api/v1/roles/global/{roleID}:
+    patch:
+      summary: Update a global role
+      description: |
+        Updates an existing global role's name and/or permissions.  
+        Requires a role with the global `UPDATE_GLOBAL_ROLES` permission.  
+        Validates `roleID`, `roleName`, and `permissions`.  
+        - If `permissions` is not provided, existing permissions are preserved.  
+        - If `permissions` is provided, all previous permissions are replaced by the new array.
+        - If any of the provided permission IDs are invalid (nonexistent or not in global scope), the role will still be updated but those permissions will be ignored.   
+        - Global role with ID `1` cannot be modified.
+      tags:
+        - Roles
+      parameters:
+        - name: roleID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: |
+            The ID of the global role to update.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roleName:
+                  type: string
+                  example: "user"
+                  description: |
+                    Optional. New name for the role.  
+                    Validation rules:  
+                      - Must be a string (`'roleName' must be an string`)  
+                      - Cannot be empty if provided (`'roleName' cannot be empty`)
+                permissions:
+                  type: array
+                  items:
+                    type: integer
+                  example: [1, 2]
+                  description: |
+                    Optional. New permissions array.  
+                    Validation rules:  
+                      - Must be a non-empty array if provided (`'permissions' must be a non empty array`)  
+                      - Permission with ID 1 cannot be modified
+      responses:
+        "200":
+          description: Global role successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The global role has been successfully updated.
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                      role_name:
+                        type: string
+                        example: user
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2025-09-19T15:13:37.089Z"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2025-09-19T15:13:56.356Z"
+                      permissions:
+                        type: array
+                        items:
+                          type: integer
+                        example: [1, 2]
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Role not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "409":
+          description: Duplicate role name
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: "'role_name' already in use."
+                  data:
+                    type: array
+                    items: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

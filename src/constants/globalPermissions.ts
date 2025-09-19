@@ -204,4 +204,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 62,
     name: "CREATE_GLOBAL_ROLES",
   },
+  updateGlobalRoles: {
+    id: 63,
+    name: "UPDATE_GLOBAL_ROLES",
+  },
 } satisfies Record<string, Permission>;
