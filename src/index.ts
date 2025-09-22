@@ -35,6 +35,7 @@ import skillsRouter from "./routes/skills";
 import userProfilesRouter from "./routes/userProfiles";
 import tagsRouter from "./routes/tagsRouter";
 import globalRolesRouter from "./routes/globalRoles";
+import permissionsRouter from "./routes/permissions";
 
 async function start() {
   const app = express();
@@ -104,6 +105,7 @@ async function start() {
     projectsTechnologiesRouter
   );
 
+  apiRouter.use("/roles/permissions", authMiddleware, permissionsRouter);
   apiRouter.use("/roles/global", authMiddleware, globalRolesRouter);
 
   apiRouter.use(errorHandlerMiddleware);
