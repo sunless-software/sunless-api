@@ -162,6 +162,8 @@ export const PERMISSIONS_SUCCESSFULLY_RETRIEVED =
 export const PROJECT_ROLE_SUCCESSFULLY_CREATED =
   "The project role has been successfully created.";
 export const MALFORMED_BODY = "The body is malformed.";
+export const PROJECT_ROLE_SUCCESSFULLY_UPDATED_MESSAGE =
+  "The project role has been successfully updated.";
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

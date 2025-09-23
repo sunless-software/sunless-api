@@ -260,3 +260,9 @@ export const CREATE_PROJECT_ROLE = `INSERT INTO project_roles (role_name) VALUES
 
 export const RELATE_PROJECT_ROLE_PERMISSIONS = `INSERT INTO project_role_permissions (project_role_id, permission_id)
 SELECT $1, p.id FROM permissions p WHERE p.id = ANY($2::int[]) AND p.scope = 'PROJECT' RETURNING *`;
+
+export const UPDATE_PROJECT_ROLE = `UPDATE project_roles SET role_name=COALESCE($1, role_name) WHERE id = $2 RETURNING *`;
+
+export const DELETE_PROJECT_ROLE_PERMISSIONS = `DELETE FROM project_role_permissions WHERE project_role_id = $1`;
+
+export const GET_PROJECT_ROLE_PERMISSIONS_ID = `SELECT permission_id FROM project_role_permissions WHERE project_role_id = $1`;
