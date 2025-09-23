@@ -5,17 +5,21 @@ import {
   COUNT_USERS,
   CREATE_USER,
   CREATE_USER_PROFILE,
+  GET_USER_CREDENTIALS,
   GET_USER_DETAILS,
+  GET_USER_PASSWORD,
   GET_USERS,
   PATCH_USER,
   RECOVER_USER,
   SOFT_DELETE_USER,
   UNBAN_USER,
+  UPDATE_USER_PASSWORD,
   UPDATE_USER_ROLE,
 } from "../constants/queries";
-import { encryptPassword, sendResponse } from "../utils";
+import { checkPassword, encryptPassword, sendResponse } from "../utils";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
+  PASSWORD_SUCCESSFULLY_UPDATED,
   USER_DETAILS_SUCCESSFULLY_RETRIEVED_MESSAGE,
   USER_ROLE_SUCCESSFULY_UPDATED,
   USER_SUCCESSFUL_CREATION_MESSAGE,
@@ -29,8 +33,9 @@ import {
 import {
   HTTP_STATUS_CODE_CREATED,
   HTTP_STATUS_CODE_NOT_FOUND,
+  HTTP_STATUS_CODE_UNAUTHORIZED,
 } from "../constants/httpStatusCodes";
-import { User } from "../interfaces";
+import { AuthRequest, User } from "../interfaces";
 import { GET_USERS_DEFAULT_LIMIT } from "../constants/setup";
 
 const usersController = {
@@ -257,11 +262,54 @@ const usersController = {
       return next(err);
     }
   },
-  recoverPassword: async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {},
+  changePassword: async (req: Request, res: Response, next: NextFunction) => {
+    const { userID } = req.params;
+    const { currentPassword, newPassword } = req.body;
+    const id = userID || (req as AuthRequest).user.id;
+
+    const db = await connectToDB();
+
+    try {
+      const resultUserCredentials = await db.query(GET_USER_PASSWORD, [id]);
+
+      if (!resultUserCredentials.rowCount) {
+        throw new Error(HTTP_STATUS_CODE_NOT_FOUND.toString());
+      }
+
+      const currentHashedPassword = resultUserCredentials.rows[0].password;
+
+      if (!userID) {
+        const passwordMatch = await checkPassword(
+          currentPassword,
+          currentHashedPassword
+        );
+
+        if (!passwordMatch) {
+          return sendResponse(
+            {
+              ...DEFAULT_SUCCES_API_RESPONSE,
+              status: HTTP_STATUS_CODE_UNAUTHORIZED,
+              message: "Invalid credentials",
+            },
+            res
+          );
+        }
+      }
+
+      const newHashedPassword = await encryptPassword(newPassword);
+      await db.query(UPDATE_USER_PASSWORD, [newHashedPassword, id]);
+
+      return sendResponse(
+        {
+          ...DEFAULT_SUCCES_API_RESPONSE,
+          message: PASSWORD_SUCCESSFULLY_UPDATED,
+        },
+        res
+      );
+    } catch (err) {
+      return next(err);
+    }
+  },
   updateUser: async (req: Request, res: Response, next: NextFunction) => {
     const { userID } = req.params;
     const {

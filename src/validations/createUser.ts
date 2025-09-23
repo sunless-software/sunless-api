@@ -5,28 +5,28 @@ import { validateResult } from "../utils";
 const createUserValidation = [
   body("username")
     .exists()
-    .withMessage("username must be provided")
+    .withMessage("'username' must be provided")
     .isString()
-    .withMessage("username must an string")
+    .withMessage("'username' must an string")
     .isLength({ min: 1 })
-    .withMessage("username cannot be empty")
+    .withMessage("'username' cannot be empty")
     .trim()
     .escape(),
   body("password")
     .exists()
-    .withMessage("password must be provided")
+    .withMessage("'password' must be provided")
     .isString()
-    .withMessage("password must be an string")
+    .withMessage("'password' must be an string")
     .isStrongPassword()
     .withMessage(
-      "password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character"
+      "'password' must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character"
     )
     .trim(),
   body("roleID")
     .exists()
-    .withMessage("roleID must be provided")
+    .withMessage("'roleID' must be provided")
     .isNumeric()
-    .withMessage("roleID must be a number"),
+    .withMessage("'roleID' must be a number"),
   body("jobTitle")
     .exists()
     .withMessage("'jobTitle' must be provided")
@@ -42,22 +42,22 @@ const createUserValidation = [
   body("profilePhoto")
     .optional()
     .isURL()
-    .withMessage("profilePhoto must be a valid url")
+    .withMessage("'profilePhoto' must be a valid url")
     .trim(),
   body("phone")
     .optional()
     .isString()
-    .withMessage("phone must be an string")
+    .withMessage("'phone' must be an string")
     .isMobilePhone("any")
-    .withMessage("phone must valid phone number")
+    .withMessage("'phone' must valid phone number")
     .trim()
     .escape(),
   body("email")
     .optional()
     .isString()
-    .withMessage("email must be an string")
+    .withMessage("'email' must be an string")
     .isEmail()
-    .withMessage("email must be a valid email")
+    .withMessage("'email' must be a valid email")
     .trim()
     .normalizeEmail(),
   body("shortDescription")

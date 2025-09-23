@@ -164,6 +164,7 @@ export const PROJECT_ROLE_SUCCESSFULLY_CREATED =
 export const MALFORMED_BODY = "The body is malformed.";
 export const PROJECT_ROLE_SUCCESSFULLY_UPDATED_MESSAGE =
   "The project role has been successfully updated.";
+export const PASSWORD_SUCCESSFULLY_UPDATED = `The user password has been successfully updated.`;
 
 export const DEFAULT_SUCCES_API_RESPONSE: ApiResponse<[]> = {
   status: 200,

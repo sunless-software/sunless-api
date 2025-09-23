@@ -94,6 +94,7 @@ export default async function authMiddleware(
     logger.warn(
       `A request was rejected because the authorization token was invalid. Token: ${token}`
     );
+
     sendResponse(
       {
         ...DEFAULT_SUCCES_API_RESPONSE,

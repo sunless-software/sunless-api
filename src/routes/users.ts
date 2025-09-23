@@ -13,6 +13,8 @@ import updateUserValidation from "../validations/updateUser";
 import getUserDetailsValidation from "../validations/getUserDetails";
 import conditionalQueryMiddleware from "../middlewares/conditionalQueryMiddleware";
 import ownershipMiddleware from "../middlewares/ownershipMiddleware";
+import updateOwnPasswordValidation from "../validations/updateOwnPassword";
+import updatePasswordValidation from "../validations/updatePassword";
 
 const usersRouter = Router();
 
@@ -34,6 +36,26 @@ usersRouter.get(
   usersController.getUsers
 );
 
+usersRouter.patch(
+  "/change-password",
+  updateOwnPasswordValidation,
+  usersController.changePassword
+);
+
+usersRouter.patch(
+  "/change-password/:userID",
+  roleMiddleware([GLOBAL_PERMISSIONS.updateUsersPassword]),
+  updatePasswordValidation,
+  usersController.changePassword
+);
+
+usersRouter.post(
+  "/",
+  roleMiddleware([GLOBAL_PERMISSIONS.createUsers]),
+  createUserValidation,
+  usersController.createUsers
+);
+
 usersRouter.get(
   "/:userID",
   conditionalQueryMiddleware([
@@ -50,13 +72,6 @@ usersRouter.get(
   ]),
   getUserDetailsValidation,
   usersController.getUserDetails
-);
-
-usersRouter.post(
-  "/",
-  roleMiddleware([GLOBAL_PERMISSIONS.createUsers]),
-  createUserValidation,
-  usersController.createUsers
 );
 
 usersRouter.delete(

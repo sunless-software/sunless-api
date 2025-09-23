@@ -1,6 +1,8 @@
 export const GET_USER_CREDENTIALS =
   "SELECT id, username, password from users WHERE username = $1 AND deleted = false AND banned = false LIMIT 1";
 
+export const GET_USER_PASSWORD = `SELECT password FROM users WHERE id = $1 AND deleted = false LIMIT 1`;
+
 export const GET_USER_GLOBAL_PERMISSIONS = `select p.id, p.name, p.scope from users u
 join global_role_permissions grp on u.rol_id = grp.global_role_id 
 join permissions p on grp.permission_id = p.id
@@ -266,3 +268,5 @@ export const UPDATE_PROJECT_ROLE = `UPDATE project_roles SET role_name=COALESCE(
 export const DELETE_PROJECT_ROLE_PERMISSIONS = `DELETE FROM project_role_permissions WHERE project_role_id = $1`;
 
 export const GET_PROJECT_ROLE_PERMISSIONS_ID = `SELECT permission_id FROM project_role_permissions WHERE project_role_id = $1`;
+
+export const UPDATE_USER_PASSWORD = `UPDATE users SET password=$1 WHERE id = $2`;
