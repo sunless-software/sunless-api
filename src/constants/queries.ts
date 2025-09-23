@@ -240,7 +240,7 @@ website_url=COALESCE($3, website_url), linkedin_url=COALESCE($4, linkedin_url), 
 COALESCE(repo_url, '') as repo_url, COALESCE(website_url, '') as website_url, COALESCE(linkedin_url, '') as linkedin_url, 
 COALESCE(location, '') as location, created_at, updated_at`;
 
-export const CREATE_GLOBAL_ROLE = `INSERT INTO global_roles (role_name) VALUES($1) RETURNING *;`;
+export const CREATE_GLOBAL_ROLE = `INSERT INTO global_roles (role_name) VALUES($1) RETURNING *`;
 
 export const RELATE_GLOBAL_ROLE_PERMISSIONS = `INSERT INTO global_role_permissions (global_role_id, permission_id)
 SELECT $1, p.id FROM permissions p WHERE p.id = ANY($2::int[]) AND p.scope = 'GLOBAL' RETURNING *`;
@@ -255,3 +255,8 @@ export const GET_PERMISSIONS = `SELECT * FROM permissions p WHERE ($1::boolean I
 ORDER by p.created_at DESC OFFSET $2 LIMIT $3`;
 
 export const COUNT_PERMISSIONS = `SELECT count(*) AS total FROM permissions p WHERE ($1::boolean IS FALSE OR p.scope = 'GLOBAL')`;
+
+export const CREATE_PROJECT_ROLE = `INSERT INTO project_roles (role_name) VALUES($1) RETURNING *`;
+
+export const RELATE_PROJECT_ROLE_PERMISSIONS = `INSERT INTO project_role_permissions (project_role_id, permission_id)
+SELECT $1, p.id FROM permissions p WHERE p.id = ANY($2::int[]) AND p.scope = 'PROJECT' RETURNING *`;

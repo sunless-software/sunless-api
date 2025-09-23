@@ -70,6 +70,7 @@ export const DEVELOPMENT_GLOBAL_ROLES = [
       GLOBAL_PERMISSIONS.createGlobalRoles,
       GLOBAL_PERMISSIONS.updateGlobalRoles,
       GLOBAL_PERMISSIONS.listPermissions,
+      GLOBAL_PERMISSIONS.createProjectRoles,
     ],
   },
   {

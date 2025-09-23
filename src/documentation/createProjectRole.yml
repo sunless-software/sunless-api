@@ -1,12 +1,12 @@
 paths:
-  /api/v1/roles/global:
+  /api/v1/roles/project:
     post:
-      summary: Create a new global role
+      summary: Create a new project role
       description: |
-        Creates a new global role with the provided name and permissions.  
-        Requires a role with the global `CREATE_GLOBAL_ROLES` permission.  
+        Creates a new project role with the provided name and permissions.  
+        Requires a role with the global `CREATE_PROJECT_ROLES` permission.  
         Validates `roleName` and `permissions` fields.  
-        If any of the provided permission IDs are invalid (nonexistent or not in global scope), the role will still be created but those permissions will be ignored.
+        If any of the provided permission IDs are invalid (nonexistent or not in project scope), the role will still be created but those permissions will be ignored.
       tags:
         - Roles
       requestBody:
@@ -18,7 +18,7 @@ paths:
               properties:
                 roleName:
                   type: string
-                  example: "admin"
+                  example: "Project manager"
                   description: |
                     Required. Must be a non-empty string.  
                     Validation rules:  
@@ -38,7 +38,7 @@ paths:
                       - Must contain at least one element.
       responses:
         "201":
-          description: Global role successfully created
+          description: Project role successfully created
           content:
             application/json:
               schema:
@@ -49,7 +49,7 @@ paths:
                     example: 201
                   message:
                     type: string
-                    example: The global role has been successfully created.
+                    example: The project role has been successfully created.
                   data:
                     type: object
                     properties:
@@ -58,7 +58,7 @@ paths:
                         example: 6
                       role_name:
                         type: string
-                        example: admin
+                        example: Project manager
                       created_at:
                         type: string
                         format: date-time
@@ -117,7 +117,7 @@ paths:
                     example: 409
                   message:
                     type: string
-                    example: "'role_name' already in use."
+                    example: "project 'role_name' already in use."
                   data:
                     type: array
                     items: object

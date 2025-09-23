@@ -212,4 +212,8 @@ export const GLOBAL_PERMISSIONS = {
     id: 64,
     name: "LIST_PERMISSIONS",
   },
+  createProjectRoles: {
+    id: 65,
+    name: "CREATE_PROJECT_ROLES",
+  },
 } satisfies Record<string, Permission>;
