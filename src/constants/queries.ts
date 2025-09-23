@@ -251,10 +251,10 @@ export const DELETE_GLOBAL_ROLE_PERMISSIONS = `DELETE FROM global_role_permissio
 
 export const GET_GLOBAL_ROLE_PERMISSIONS_ID = `SELECT permission_id FROM global_role_permissions WHERE global_role_id = $1`;
 
-export const GET_PERMISSIONS = `SELECT * FROM permissions p WHERE ($1::boolean IS FALSE or p.scope = 'GLOBAL')
+export const GET_PERMISSIONS = `SELECT * FROM permissions p WHERE p.scope = COALESCE($1::permission_scope, p.scope)
 ORDER by p.created_at DESC OFFSET $2 LIMIT $3`;
 
-export const COUNT_PERMISSIONS = `SELECT count(*) AS total FROM permissions p WHERE ($1::boolean IS FALSE OR p.scope = 'GLOBAL')`;
+export const COUNT_PERMISSIONS = `SELECT count(*) AS total FROM permissions p WHERE p.scope = COALESCE($1::permission_scope, p.scope)`;
 
 export const CREATE_PROJECT_ROLE = `INSERT INTO project_roles (role_name) VALUES($1) RETURNING *`;
 

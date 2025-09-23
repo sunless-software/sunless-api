@@ -26,11 +26,15 @@ paths:
             default: 0
           description: Number of permissions to skip. Must be a non-negative integer.
         - in: query
-          name: onlyGlobal
+          name: scope
           schema:
-            type: boolean
-          example: false
-          description: If true, only permissions with a global scope are returned.
+            type: string
+            enum: [GLOBAL, PROJECT]
+          example: GLOBAL
+          description: >
+            Filters the results by scope.  
+            If provided, only permissions with the specified scope (`GLOBAL` or `PROJECT`) are returned.  
+            If omitted, all permissions are returned.
       responses:
         "200":
           description: Permissions successfully retrieved

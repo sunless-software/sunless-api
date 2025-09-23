@@ -11,10 +11,10 @@ const getPermissionsValidation = [
     .optional()
     .isInt({ min: 0 })
     .withMessage("'limit' must be a non-negative integer"),
-  query("onlyGlobal")
+  query("scope")
     .optional()
-    .isBoolean()
-    .withMessage("'onlyGlobal' must be a boolean"),
+    .isIn(["GLOBAL", "PROJECT"])
+    .withMessage("'scope' must be one of: 'GLOBAL', 'PROJECT'"),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

@@ -9,13 +9,13 @@ import {
 
 const permissionsController = {
   getPermissions: async (req: Request, res: Response, next: NextFunction) => {
-    const { offset = 0, limit = 20, onlyGlobal = false } = req.query;
+    const { offset = 0, limit = 20, scope } = req.query;
     const db = await connectToDB();
 
     try {
       const [resultPermissions, countPermissions] = await Promise.all([
-        db.query(GET_PERMISSIONS, [onlyGlobal, offset, limit]),
-        db.query(COUNT_PERMISSIONS, [onlyGlobal]),
+        db.query(GET_PERMISSIONS, [scope, offset, limit]),
+        db.query(COUNT_PERMISSIONS, [scope]),
       ]);
 
       return sendResponse(
@@ -37,6 +37,7 @@ const permissionsController = {
         res
       );
     } catch (err) {
+      console.log(err);
       return next(err);
     }
   },
