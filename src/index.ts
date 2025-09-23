@@ -45,13 +45,7 @@ async function start() {
   await connectToDB();
   preload();
 
-  if (process.env.NODE_ENV) {
-    logger.info(
-      `Development environment detect. Documentation available at 'http://locahost:${port}/documentation'`
-    );
-    app.use("/documentation", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-  }
-
+  app.use("/documentation", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.use("/api/v1", apiRouter);
 
   apiRouter.use(express.json());

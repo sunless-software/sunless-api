@@ -7,7 +7,7 @@ export default async function connectToDB() {
   if (connection) return connection;
 
   connection = new Pool({
-    host: "localhost",
+    host: process.env.POSTGRES_HOST || "localhost",
     port: Number(process.env.POSTGRES_PORT),
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,

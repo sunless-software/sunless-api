@@ -10,7 +10,8 @@ export default class EntityPreloader {
 
   public async PreloadDefaultData(
     tableName: string,
-    defaultData: Array<object>
+    defaultData: Array<object>,
+    skipConflict: boolean = false
   ) {
     logger.info(`Loading default data for '${tableName}' ...`);
 
@@ -25,6 +26,10 @@ export default class EntityPreloader {
         return columnValue !== null ? `'${columnValue}'` : "NULL";
       })})`;
     });
+
+    if (skipConflict) {
+      query += " ON CONFLICT DO NOTHING";
+    }
 
     return this.db
       .query(query)

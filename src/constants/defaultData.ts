@@ -1,67 +1,19 @@
-export const DEFAULT_SKILLS = [
-  { name: "Problem solving" },
-  { name: "Logical thinking" },
-  { name: "Attention to detail" },
-  { name: "Communication" },
-  { name: "Teamwork" },
-  { name: "Adaptability" },
-  { name: "Time management" },
-  { name: "Critical thinking" },
-  { name: "Debugging" },
-  { name: "Code readability" },
-  { name: "Algorithmic thinking" },
-  { name: "Version control discipline" },
-  { name: "Writing technical documentation" },
-  { name: "Testing mindset" },
-  { name: "Continuous learning" },
+import { DefaultRole } from "../interfaces";
+import { GLOBAL_PERMISSIONS } from "./globalPermissions";
+import { PROJECT_PERMISSIONS } from "./projectPermissions";
+
+export const PRODUCTION_DEFAULT_GLOBAL_ROLES: Array<DefaultRole> = [
+  {
+    id: 1,
+    role_name: "ADMIN",
+    permissions: Object.values(GLOBAL_PERMISSIONS),
+  },
 ];
 
-export const DEFAULT_TECHNOLOGIES = [
-  { name: "React" },
-  { name: "Vue.js" },
-  { name: "Angular" },
-  { name: "Node.js" },
-  { name: "Express" },
-  { name: "Django" },
-  { name: "Flask" },
-  { name: "Ruby on Rails" },
-  { name: "Spring Boot" },
-  { name: "Laravel" },
-  { name: "GraphQL" },
-  { name: "TypeScript" },
-  { name: "JavaScript" },
-  { name: "Python" },
-  { name: "Java" },
-  { name: "C#" },
-  { name: "Docker" },
-  { name: "Kubernetes" },
-  { name: "Redis" },
-  { name: "PostgreSQL" },
-  { name: "MongoDB" },
-  { name: "AWS" },
-  { name: "Azure" },
-  { name: "GCP" },
-  { name: "Webpack" },
-  { name: "Babel" },
-  { name: "Tailwind CSS" },
-  { name: "Sass" },
-  { name: "Next.js" },
-];
-
-export const DEFAULT_TAGS = [
-  { name: "2D" },
-  { name: "3D" },
-  { name: "Game" },
-  { name: "Mobile" },
-  { name: "Web" },
-  { name: "VR" },
-  { name: "Application" },
-  { name: "Cloud" },
-  { name: "Desktop" },
-  { name: "API" },
-  { name: "Client interface" },
-  { name: "Backend" },
-  { name: "Frontend" },
-  { name: "Monolith" },
-  { name: "Microservices" },
+export const PRODUCTION_DEFAULT_PROJECT_ROLES = [
+  {
+    id: 1,
+    role_name: "OWNER",
+    permissions: Object.values(PROJECT_PERMISSIONS),
+  },
 ];

@@ -1,9 +1,7 @@
 services:
-  postgres:
+  postgres_prod:
     image: postgres:16
     container_name: sunless-postgres
-    ports:
-      - "${POSTGRES_PORT}:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -20,6 +18,32 @@ services:
       -c log_statement=mod
       -c log_min_duration_statement=0
       -c log_destination=stderr
+    networks:
+      - sunlessnet
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sunless-api
+    env_file:
+      - .env
+    networks:
+      - sunlessnet
+    depends_on:
+      postgres_prod:
+        condition: service_healthy
+    ports:
+      - "${PORT}:3002"
+
 volumes:
   pgdata:
   pglogs:
+
+networks:
+  sunlessnet:

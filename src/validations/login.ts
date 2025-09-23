@@ -18,8 +18,7 @@ const authValidation = [
     .withMessage("'password' must be a string")
     .isLength({ min: 1 })
     .withMessage("'password' cannot be blank")
-    .trim()
-    .escape(),
+    .trim(),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

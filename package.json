@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "dev": "docker compose -f docker-compose.dev.yml up -d && ts-node-dev --respawn --transpile-only src/index.ts",
     "db:dev:rm": "docker compose -f docker-compose.dev.yml down -v",
-    "db:dev:up": "docker compose -f docker-compose.dev.yml up",
+    "db:dev:up": "docker compose -f docker-compose.dev.yml up -d",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -72,3 +72,9 @@ export interface ProjectMedia {
   url: string;
   type: string;
 }
+
+export interface DefaultRole {
+  id: number;
+  role_name: string;
+  permissions: Array<Permission>;
+}
