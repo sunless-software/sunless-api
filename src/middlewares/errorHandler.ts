@@ -8,6 +8,7 @@ import {
   INCORRECT_USER_INVITATION_MESSAGE,
   INVALID_JWT_MESSAGE,
   INVALID_JWT_SIGNATURE_MESSAGE,
+  MALFORMED_BODY,
   MALFORMED_JWT_MESSAGE,
   MAX_CHAR_EXCEED_MESSAGE,
 } from "../constants/messages";
@@ -68,7 +69,19 @@ export default async function errorHandlerMiddleware(
         logger.error(JSON.stringify(error));
     }
   } else if (error && typeof error === "object" && "message" in error) {
-    // Handled errors
+    // Malformed body check
+    if ("type" in error && error.type === "entity.parse.failed") {
+      return sendResponse(
+        {
+          ...DEFAULT_ERROR_API_RESPONSE,
+          status: HTTP_STATUS_CODE_BAD_REQUEST,
+          message: MALFORMED_BODY,
+        },
+        res
+      );
+    }
+
+    // Handle errors by message
     switch (error.message) {
       case HTTP_STATUS_CODE_NOT_FOUND.toString():
         return sendResponse(
