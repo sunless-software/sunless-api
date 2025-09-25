@@ -1,0 +1,95 @@
+paths:
+  /api/v1/projects/{projectID}/technologies/{technologyID}:
+    delete:
+      summary: Remove a technology from a project
+      description: |
+        Removes the association between an existing technology and a project.  
+        The technology itself is not deleted.  
+        Requires either a global role with the `UPDATE_PROJECTS` permission or a role within the project with the `REMOVE_TECHNOLOGIES_PROJECT` permission.
+      tags:
+        - Technologies
+      parameters:
+        - in: path
+          name: projectID
+          required: true
+          schema:
+            type: integer
+            example: 12
+          description: The ID of the project from which the technology will be removed.
+        - in: path
+          name: technologyID
+          required: true
+          schema:
+            type: integer
+            example: 4
+          description: The ID of the technology to remove from the project.
+      responses:
+        "200":
+          description: Technology successfully removed from project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The technology has been successfully removed from the project.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+        "400":
+          description: Validation error (e.g., project id not numeric or technologyID missing/invalid)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: The technology or the project does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

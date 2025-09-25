@@ -1,0 +1,278 @@
+openapi: 3.0.3
+info:
+  title: Users Projects API
+  version: 1.0.0
+
+paths:
+  /api/v1/users/{userID}/projects:
+    get:
+      summary: Retrieve projects for a specific user
+      description: >
+        Fetch a paginated list of projects related to the given user.  
+        Requires the global `READ_PROJECTS` permission.  
+        By default, only public projects are returned.  
+        If `showPrivateProjects` is set to `true`, private projects will be included, 
+        but only in their encrypted form unless the requester is the project creator 
+        or a collaborator, in which case the decrypted version is returned.
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+          description: ID of the user whose projects to fetch
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+          description: Number of projects to skip
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 20
+          description: Maximum number of projects to return
+        - in: query
+          name: showPrivateProjects
+          schema:
+            type: boolean
+            default: false
+          description: >
+            Include private projects.  
+            Requires `READ_PROJECTS`.  
+            If requester is not creator or collaborator, only encrypted data is shown.
+        - in: query
+          name: tags
+          schema:
+            type: string
+            example: "1,2,3"
+          description: >
+            Comma-separated list of tag IDs to filter projects by.  
+            Must be integers.
+      responses:
+        "200":
+          description: Projects successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Projects successfully retrived
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: my project
+                        short_description:
+                          type: string
+                          example: project short description
+                        long_description:
+                          type: string
+                          example: long project description
+                        logo:
+                          type: string
+                          format: uri
+                          example: www.project-logo.png
+                        status:
+                          type: string
+                          example: FINISHED
+                        public:
+                          type: boolean
+                          example: true
+                        start_date:
+                          type: string
+                          format: date-time
+                          example: 2024-03-28T03:00:00.000Z
+                        end_date:
+                          type: string
+                          format: date-time
+                          example: 2024-04-27T03:00:00.000Z
+                        estimated_end:
+                          type: string
+                          format: date-time
+                          example: 2024-04-23T03:00:00.000Z
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 2
+                              name:
+                                type: string
+                                example: Web
+                              created_at:
+                                type: string
+                                format: date-time
+                                example: 2025-09-02T02:37:58.303Z
+                              updated_at:
+                                type: string
+                                format: date-time
+                                example: 2025-09-02T02:37:58.303Z
+                        creator_id:
+                          type: number
+                          example: 1
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: 2025-09-02T05:42:58.515Z
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: 2025-09-02T05:42:58.515Z
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 20
+                      count:
+                        type: integer
+                        example: 1
+                      total:
+                        type: integer
+                        example: 1
+
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+
+        "403":
+          description: Forbidden or insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+
+components:
+  schemas:
+    ValidationError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: Invalid request
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: field
+              value:
+                type: string
+                example: ""
+              msg:
+                type: string
+                example: "'limit' must be a number"
+              path:
+                type: string
+                example: limit
+              location:
+                type: string
+                example: query
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
+
+    UnauthorizedError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: You must provide a token
+        data:
+          type: array
+          items:
+            type: object
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
+
+    ForbiddenPermissionError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 403
+        message:
+          type: string
+          example: You shall not pass!
+        data:
+          type: array
+          items:
+            type: object
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0

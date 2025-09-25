@@ -1,9 +1,0 @@
-CREATE TABLE IF NOT EXISTS media_types (
-    id SERIAL PRIMARY KEY,
-    type VARCHAR(50),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-CREATE TRIGGER trg_media_types_updated_at
-BEFORE UPDATE ON media_types
-FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

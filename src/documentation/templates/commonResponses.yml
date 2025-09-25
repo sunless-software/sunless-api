@@ -1,0 +1,62 @@
+UnauthorizedError:
+  description: El cliente no envió un token
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          status:
+            type: integer
+            example: 401
+          message:
+            type: string
+            example: "You must provide a token"
+          data:
+            type: array
+            items:
+              type: object
+            example: []
+          pagination:
+            $ref: "./pagination.yml"
+
+ForbiddenError:
+  description: Token inválido
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          status:
+            type: integer
+            example: 403
+          message:
+            type: string
+            example: "I see you, little mouse... you don't belong here. Run along!"
+          data:
+            type: array
+            items:
+              type: object
+            example: []
+          pagination:
+            $ref: "./pagination.yml"
+
+UserNotFoundError:
+  description: Usuario asociado al token eliminado
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          status:
+            type: integer
+            example: 404
+          message:
+            type: string
+            example: "The user with the given id does not exists."
+          data:
+            type: array
+            items:
+              type: object
+            example: []
+          pagination:
+            $ref: "./pagination.yml"

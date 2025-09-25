@@ -1,0 +1,121 @@
+paths:
+  /api/v1/technologies:
+    post:
+      summary: Create a new technology
+      description: |
+        Creates a new technology.  
+        Requires a global role with the `CREATE_TECHNOLOGIES` permission.  
+        The `technologyName` field is validated according to its type and requirements.
+      tags:
+        - Technologies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                technologyName:
+                  type: string
+                  example: React
+                  description: |
+                    Must be provided, must be a string, and cannot be empty.
+      responses:
+        "201":
+          description: Technology successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: Technology successfully created.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 33
+                        name:
+                          type: string
+                          example: React
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: 2025-09-16T16:51:03.514Z
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: 2025-09-16T16:51:03.514Z
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "409":
+          description: Technology already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: technology 'name' already in use.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

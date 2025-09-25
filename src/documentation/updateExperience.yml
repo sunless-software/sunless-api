@@ -1,0 +1,166 @@
+paths:
+  /api/v1/users/{userID}/experiences/{experienceID}:
+    patch:
+      summary: Update an experience for a specific user
+      description: |
+        Updates an experience identified by `experienceID` for the user `userID`.  
+        All fields in the request body are optional, but will be validated if provided.  
+        Requires `UPDATE_OWN_EXPERIENCES` permission if updating your own experience, otherwise requires `UPDATE_EXPERIENCES`.
+      tags:
+        - Experiences
+      parameters:
+        - in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: ID of the user the experience belongs to. Must be numeric.
+        - in: path
+          name: experienceID
+          required: true
+          schema:
+            type: integer
+            example: 10
+          description: ID of the experience to update. Must be numeric.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                companyName:
+                  type: string
+                  example: Software Corp
+                  description: Optional. Must be a non-empty string if provided.
+                role:
+                  type: string
+                  example: Developer
+                  description: Optional. Must be a non-empty string if provided.
+                description:
+                  type: string
+                  example: I develop software for Software Corp
+                  description: Optional. Must be a non-empty string if provided.
+                location:
+                  type: string
+                  example: Remote
+                  description: Optional. Must be a non-empty string if provided.
+                startDate:
+                  type: string
+                  format: date
+                  example: 2023-09-26
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+                endDate:
+                  type: string
+                  format: date
+                  example: 2023-09-26
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+                companyLogo:
+                  type: string
+                  format: uri
+                  example: "https://www.image.png"
+                  description: Optional. Must be a valid URL if provided.
+      responses:
+        "200":
+          description: Experience successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Experience updated successfully.
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 10
+                      user_id:
+                        type: integer
+                        example: 3
+                      company_name:
+                        type: string
+                        example: Software Corp
+                      role:
+                        type: string
+                        example: Developer
+                      description:
+                        type: string
+                        example: I develop software for Software Corp
+                      location:
+                        type: string
+                        example: Remote
+                      start_date:
+                        type: string
+                        example: 2023-09-26
+                      end_date:
+                        type: string
+                        example: 2023-09-26
+                      company_logo:
+                        type: string
+                        example: "https://www.image.png"
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: 2025-09-02T05:42:58.515Z
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: 2025-09-02T05:42:58.515Z
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Experience or user with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

@@ -1,0 +1,189 @@
+paths:
+  /api/v1/projects:
+    post:
+      summary: Create a new project
+      description: |
+        Creates a new project.  
+        If `publicProject` is `false`, the request requires the global permission `CREATE_PRIVATE_PROJECTS`.  
+        If `publicProject` is `true`, the request requires the global permission `CREATE_PUBLIC_PROJECTS`.  
+        The creator of the project is automatically added as a collaborator with the role `admin`.  
+        All fields are validated according to their type and requirements.
+      tags:
+        - Projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Project 1
+                  description: Required. Must be a non-empty string.
+                shortDescription:
+                  type: string
+                  example: Short description of the project
+                  description: Optional. Must be a non-empty string, max 64 characters long if provided.
+                longDescription:
+                  type: string
+                  example: Long description of the project.
+                  description: Optional. Must be a non-empty string if provided.
+                logo:
+                  type: string
+                  example: https://www.my-project-logo.png
+                  description: Optional. Must be a non-empty string if provided.
+                status:
+                  type: string
+                  example: IN_PROGRESS
+                  description: |
+                    Required. Must be one of the allowed project status values.  
+                    Example values: `IN_PROGRESS`, `PLANNED`, `FINISHED`, etc.
+                publicProject:
+                  type: boolean
+                  example: false
+                  description: |
+                    Required. Defines the visibility of the project.  
+                    Requires specific permissions depending on its value.
+                startDate:
+                  type: string
+                  format: date
+                  example: 2024-03-28
+                  description: Required. Must be a valid ISO 8601 date string.
+                endDate:
+                  type: string
+                  format: date
+                  example: 2024-04-27
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+                estimatedEndDate:
+                  type: string
+                  format: date
+                  example: 2024-04-23
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+      responses:
+        "201":
+          description: Project successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: The project has been successfully created.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: project 2
+                        short_description:
+                          type: string
+                          example: Short description of the project
+                        long_description:
+                          type: string
+                          example: Long description of the project
+                        logo:
+                          type: string
+                          example: https://www.my-project-logo.png
+                        status:
+                          type: string
+                          example: FINISHED
+                        public:
+                          type: boolean
+                          example: false
+                        start_date:
+                          type: string
+                          example: 2024-03-28T03:00:00.000Z
+                        end_date:
+                          type: string
+                          example: 2024-04-27T03:00:00.000Z
+                        estimated_end:
+                          type: string
+                          example: 2024-04-23T03:00:00.000Z
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                          example: []
+                        creator_id:
+                          type: number
+                          example: 1
+                        created_at:
+                          type: string
+                          example: 2025-08-26T00:11:49.326Z
+                        updated_at:
+                          type: string
+                          example: 2025-08-26T00:11:49.326Z
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "409":
+          description: Project name already in use
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: project 'name' already in use.
+                  data:
+                    type: array
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

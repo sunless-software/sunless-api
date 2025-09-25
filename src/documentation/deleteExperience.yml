@@ -1,0 +1,109 @@
+paths:
+  /api/v1/users/{userID}/experiences/{experienceID}:
+    delete:
+      summary: Delete an experience for a specific user
+      description: |
+        Deletes an experience identified by `experienceID` for the user `userID`.  
+        Requires `DELETE_OWN_EXPERIENCES` permission if deleting your own experience, otherwise requires `DELETE_EXPERIENCES`.
+      tags:
+        - Experiences
+      parameters:
+        - in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: ID of the user the experience belongs to. Must be numeric.
+        - in: path
+          name: experienceID
+          required: true
+          schema:
+            type: integer
+            example: 10
+          description: ID of the experience to delete. Must be numeric.
+      responses:
+        "200":
+          description: Experience successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The experience has been successfully deleted.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Experience or user with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: sunless-postgres
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - pglogs:/var/log/postgresql
+      - ./sql:/docker-entrypoint-initdb.d
+    command: >
+      postgres
+      -c logging_collector=on
+      -c log_directory=/var/log/postgresql
+      -c log_filename=api_queries.log
+      -c log_statement=mod
+      -c log_min_duration_statement=0
+      -c log_destination=stderr
+volumes:
+  pgdata:
+  pglogs:

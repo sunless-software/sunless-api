@@ -1,0 +1,102 @@
+paths:
+  /api/v1/projects/{projectID}/blogs/{blogID}:
+    delete:
+      summary: Hard delete a blog
+      description: |
+        Permanently deletes a blog by its ID within a specific project.  
+        Requires a global role with the `DELETE_BLOGS` permission, or a project role with the `DELETE_BLOGS` permission.  
+        This action removes the blog completely from the database.
+      tags:
+        - Blogs
+      parameters:
+        - name: projectID
+          in: path
+          required: true
+          description: Must be a number referencing an existing project.
+          schema:
+            type: integer
+            example: 1
+        - name: blogID
+          in: path
+          required: true
+          description: Must be a number referencing an existing blog.
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: Blog successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The blog has been successfully deleted.
+                  data:
+                    type: array
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Blog or project with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

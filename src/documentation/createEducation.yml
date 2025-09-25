@@ -1,0 +1,163 @@
+paths:
+  /api/v1/users/{userID}/educations:
+    post:
+      summary: Create a new education record for a specific user
+      description: |
+        Creates a new education record for the user identified by `userID`.  
+        Requires `CREATE_OWN_EDUCATIONS` permission if creating your own record, otherwise requires `CREATE_EDUCATIONS`.  
+        All fields are validated according to their type and requirements.
+      tags:
+        - Educations
+      parameters:
+        - name: userID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: Must be a number. Identifies the user for whom the education record is created.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                startDate:
+                  type: string
+                  format: date
+                  example: 2024-03-25
+                  description: Required. Must be a valid ISO 8601 date string.
+                endDate:
+                  type: string
+                  format: date
+                  example: 2024-03-25
+                  description: Optional. Must be a valid ISO 8601 date string if provided.
+                institution:
+                  type: string
+                  example: remote dev academy
+                  description: Required. Must be a non-empty string.
+                field:
+                  type: string
+                  example: dev
+                  description: Required. Must be a non-empty string.
+                location:
+                  type: string
+                  example: remote
+                  description: Required. Must be a non-empty string.
+                description:
+                  type: string
+                  example: i studied things here
+                  description: Optional. Must be a non-empty string if provided.
+      responses:
+        "201":
+          description: Education record successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: Study successfully created.
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 7
+                      start_date:
+                        type: string
+                        example: 2024-03-25
+                      end_date:
+                        type: string
+                        example: 2024-03-25
+                      institution:
+                        type: string
+                        example: remote dev academy
+                      field:
+                        type: string
+                        example: dev
+                      location:
+                        type: string
+                        example: remote
+                      description:
+                        type: string
+                        example: i studied things here
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: "2025-08-31T22:51:20.747Z"
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: "2025-08-31T22:51:20.747Z"
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: User with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

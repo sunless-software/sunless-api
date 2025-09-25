@@ -1,0 +1,57 @@
+import { NextFunction, Request, Response } from "express";
+import { param, body } from "express-validator";
+import { validateResult } from "../utils";
+import { PROJECT_STATUS } from "../constants/constants";
+
+const updateProjectsValidation = [
+  param("projectID").isNumeric().withMessage("project 'id' must be a number"),
+  body("name")
+    .optional()
+    .isString()
+    .withMessage("'name' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'name' cannot be empty"),
+  body("shortDescription")
+    .optional()
+    .isString()
+    .withMessage("'shortDescription' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'shortDescription' cannot be empty")
+    .isLength({ max: 64 })
+    .withMessage("'shortDescription' cannot have more than 64 characters"),
+  body("longDescription")
+    .optional()
+    .isString()
+    .withMessage("'longDescription' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'longDescription' cannot be empty"),
+  body("logo").optional().isURL().withMessage("'logo' must be a valid url"),
+  body("status")
+    .optional()
+    .isIn(PROJECT_STATUS)
+    .withMessage(`'status' must be one of: ${PROJECT_STATUS.join(", ")}`),
+  body("publicProject")
+    .optional()
+    .isBoolean()
+    .withMessage("'publicProject' must be a boolean"),
+  body("startDate")
+    .optional()
+    .isISO8601()
+    .withMessage("'startDate' must be a valid date in format ISO 8601"),
+  body("endDate")
+    .optional()
+    .isISO8601()
+    .withMessage("'endDate' must be a valid date in format ISO 8601"),
+  body("estimatedEnd")
+    .optional()
+    .isISO8601()
+    .withMessage("'estimatedEnd' must be a valid date in format ISO 8601"),
+  (req: Request, res: Response, next: NextFunction) => {
+    validateResult(req, res, next);
+  },
+];
+
+export default updateProjectsValidation;

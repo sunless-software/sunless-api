@@ -1,0 +1,111 @@
+paths:
+  /api/v1/users/{userID}/technologies/{technologyID}:
+    delete:
+      summary: Remove a technology from a user
+      description: |
+        Removes the association between an existing technology and a user.  
+        The technology itself is not deleted.  
+        Requires `REMOVE_OWN_TECHNOLOGIES` permission if removing from your own technologies, otherwise requires `REMOVE_TECHNOLOGIES`.
+      tags:
+        - Technologies
+      parameters:
+        - name: userID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: Must be a number. The ID of the user from whom to remove the technology.
+        - name: technologyID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 2
+          description: Must be a number. The ID of the technology to remove.
+      responses:
+        "200":
+          description: Technology successfully removed from user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The technology has been successfully removed from the user.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: The technology or the user does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

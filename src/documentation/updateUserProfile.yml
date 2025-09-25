@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: Users API
+  version: 1.0.0
+
+paths:
+  /api/v1/users/{userID}/profile:
+    patch:
+      summary: Update user profile
+      description: |
+        Updates the profile of a user.  
+        Requires `UPDATE_PROFILES` permission to update another user's profile.  
+        Requires `UPDATE_OWN_PROFILE` permission to update your own profile.
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: userID
+          required: true
+          schema:
+            type: integer
+          description: Numeric ID of the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserProfileRequest"
+      responses:
+        "200":
+          description: Profile successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The user profile has been successfully updated.
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/UserProfileResponse"
+                  pagination:
+                    $ref: "#/components/schemas/Pagination"
+        "400":
+          description: Validation failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: User profile not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserNotFoundError"
+        "409":
+          description: Unique constraint violation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictError"
+
+components:
+  schemas:
+    UpdateUserProfileRequest:
+      type: object
+      properties:
+        longDescription:
+          type: string
+          nullable: true
+          minLength: 1
+          example: "Experienced software developer"
+        repoUrl:
+          type: string
+          format: uri
+          nullable: true
+          example: "https://www.github.com/my-repo"
+        websiteUrl:
+          type: string
+          format: uri
+          nullable: true
+          example: "https://www.mywebsite.com"
+        linkedinUrl:
+          type: string
+          format: uri
+          nullable: true
+          example: "https://www.linkedin.com/my-linkedin"
+        location:
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 100
+          example: "Buenos Aires"
+
+    UserProfileResponse:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 3
+        long_description:
+          type: string
+          example: ""
+        repo_url:
+          type: string
+          example: "https://www.github.com/my-repo"
+        website_url:
+          type: string
+          example: ""
+        linkedin_url:
+          type: string
+          example: "https://www.linkedin.com/my-linkedin"
+        location:
+          type: string
+          example: "Buenos Aires"
+        created_at:
+          type: string
+          format: date-time
+          example: 2025-09-11T13:32:57.418Z
+        updated_at:
+          type: string
+          format: date-time
+          example: 2025-09-11T13:32:59.025Z
+
+    ConflictError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 409
+        message:
+          type: string
+          example: There already is another user profile with the same repo url.
+        data:
+          type: array
+          items:
+            type: object
+          example: []
+        pagination:
+          $ref: "#/components/schemas/Pagination"

@@ -1,0 +1,221 @@
+/api/v1/projects/{projectID}:
+  get:
+    summary: Retrieve details of a specific project
+    description: >
+      Fetch detailed information of a project by ID.  
+      Requires either a global role with the `GET_PROJECT_DETAILS` permission or a project-specific role with the same permission.  
+
+      - If the project is private and you only have the global permission (not a collaborator), you will only see the encrypted version of the project.  
+      - If you are a collaborator with `GET_PROJECT_DETAILS`, you will see the decrypted details.  
+      - If the project does not exist or is private without proper access, a 404 is returned.
+    tags:
+      - Projects
+    parameters:
+      - in: path
+        name: projectID
+        required: true
+        schema:
+          type: integer
+        description: The ID of the project to retrieve
+    responses:
+      "200":
+        description: Project successfully retrieved
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: integer
+                  example: 200
+                message:
+                  type: string
+                  example: Project details successfully retrieved.
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: my project
+                      short_description:
+                        type: string
+                        example: short desc
+                      long_description:
+                        type: string
+                        example: long project description
+                      logo:
+                        type: string
+                        example: https://www.my-project-logo.png
+                      status:
+                        type: string
+                        example: FINISHED
+                      public:
+                        type: boolean
+                        example: false
+                      start_date:
+                        type: string
+                        format: date-time
+                        example: 2024-03-28T03:00:00.000Z
+                      end_date:
+                        type: string
+                        format: date-time
+                        example: 2024-04-27T03:00:00.000Z
+                      estimated_end:
+                        type: string
+                        format: date-time
+                        example: 2024-04-23T03:00:00.000Z
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: 2025-09-03T09:01:26.107Z
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: 2025-09-03T09:01:26.107Z
+                      collaborators:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            username:
+                              type: string
+                              example: sunless_admin
+                            profile_photo:
+                              type: string
+                              example: ""
+                            project_role_id:
+                              type: integer
+                              example: 1
+                            project_role_name:
+                              type: string
+                              example: owner
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            name:
+                              type: string
+                              example: 2D
+                      technologies:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            name:
+                              type: string
+                              example: React
+                      media:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            url:
+                              type: string
+                              example: https://my-media.png
+                            type:
+                              type: string
+                              example: IMAGE
+                      external_resources:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            url:
+                              type: string
+                              example: https://www.github.com/my-repo
+                            name:
+                              type: string
+                              example: My repo
+                            type:
+                              type: string
+                              example: GITHUB
+                pagination:
+                  type: object
+                  properties:
+                    offset:
+                      type: integer
+                      example: 0
+                    limit:
+                      type: integer
+                      example: 0
+                    count:
+                      type: integer
+                      example: 0
+                    total:
+                      type: integer
+                      example: 0
+
+      "400":
+        description: Validation error (e.g., projectID not numeric)
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidationError"
+
+      "401":
+        description: Missing or invalid token
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnauthorizedError"
+
+      "403":
+        description: Forbidden, insufficient permissions to view project details
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ForbiddenPermissionError"
+
+      "404":
+        description: Project not found or private without access
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: integer
+                  example: 404
+                message:
+                  type: string
+                  example: The entity with the given id does not exists.
+                data:
+                  type: array
+                  items:
+                    type: object
+                pagination:
+                  type: object
+                  properties:
+                    offset:
+                      type: integer
+                      example: 0
+                    limit:
+                      type: integer
+                      example: 0
+                    count:
+                      type: integer
+                      example: 0
+                    total:
+                      type: integer
+                      example: 0

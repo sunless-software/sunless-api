@@ -1,0 +1,110 @@
+paths:
+  /api/v1/users/{userID}/educations/{educationID}:
+    delete:
+      summary: Delete an education record for a specific user
+      description: |
+        Deletes an education record identified by `educationID` for the user identified by `userID`.  
+        Requires `DELETE_OWN_EDUCATIONS` permission if deleting your own record, otherwise requires `DELETE_EDUCATIONS`.  
+        Both `userID` and `educationID` must be numeric.
+      tags:
+        - Educations
+      parameters:
+        - name: userID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: Must be a number. Identifies the user who owns the education record.
+        - name: educationID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 7
+          description: Must be a number. Identifies the education record to delete.
+      responses:
+        "200":
+          description: Education record successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Study successfully deleted.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: User or education record with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exists.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

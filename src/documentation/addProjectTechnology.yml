@@ -1,0 +1,131 @@
+paths:
+  /api/v1/projects/{projectID}/technologies:
+    post:
+      summary: Add a technology to a project
+      description: |
+        Associates an existing technology with a project.  
+        Requires the `UPDATE_PROJECTS` global permission or a project role with the `ADD_TECHNOLOGIES_PROJECT` permission.  
+        This endpoint does not create new technologies, only links an existing one to a project.
+      tags:
+        - Technologies
+      parameters:
+        - in: path
+          name: projectID
+          required: true
+          schema:
+            type: integer
+          description: ID of the project to which the technology will be associated
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                technologyID:
+                  type: integer
+                  example: 5
+                  description: Required. Must be a number. The ID of the existing technology to associate.
+      responses:
+        "201":
+          description: Technology successfully added to project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: The technology was successfully added to the project.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Entity with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "409":
+          description: Technology already associated with project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: The project already has the technology you are trying to add.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

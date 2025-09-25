@@ -1,0 +1,197 @@
+paths:
+  /api/v1/projects/{projectID}/external-resources/{resourceID}:
+    patch:
+      summary: Update an external resource in a project
+      description: |
+        Updates an existing external resource of a project.  
+        Requires the `UPDATE_PROJECT_EXTERNAL_RESOURCES` global permission or a project role with the `UPDATE_PROJECT_EXTERNAL_RESOURCES` permission.  
+        The `type` must be one of: GITHUB, BITBUCKET, OTHER_REPO, JIRA, TRELLO, CONFLUENCE, DRIVE, OTHER, WEB.
+        All fields are optional, but at least one must be provided.
+      tags:
+        - External resources
+      parameters:
+        - name: projectID
+          in: path
+          required: true
+          description: The ID of the project where the external resource belongs.
+          schema:
+            type: integer
+            example: 1
+        - name: resourceID
+          in: path
+          required: true
+          description: The ID of the external resource to update.
+          schema:
+            type: integer
+            example: 10
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: My repo
+                  description: Optional. The name of the external resource.
+                url:
+                  type: string
+                  format: uri
+                  example: https://www.github.com/my-repo
+                  description: Optional. Must be a valid URL.
+                type:
+                  type: string
+                  enum:
+                    - GITHUB
+                    - BITBUCKET
+                    - OTHER_REPO
+                    - JIRA
+                    - TRELLO
+                    - CONFLUENCE
+                    - DRIVE
+                    - OTHER
+                    - WEB
+                  example: GITHUB
+                  description: Optional. Must be one of the allowed external resource types.
+      responses:
+        "200":
+          description: External resource successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The external resource was successfully updated.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        project_id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: My repo
+                        url:
+                          type: string
+                          example: https://www.github.com/my-repo
+                        type:
+                          type: string
+                          example: GITHUB
+                        created_at:
+                          type: string
+                          format: date-time
+                          example: "2025-08-30T06:41:54.545Z"
+                        updated_at:
+                          type: string
+                          format: date-time
+                          example: "2025-08-30T06:43:10.127Z"
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Project or resource with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "409":
+          description: URL already associated with project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: There already is another external resource with the same url.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

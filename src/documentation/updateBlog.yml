@@ -1,0 +1,146 @@
+paths:
+  /api/v1/projects/{projectID}/blogs/{blogID}:
+    patch:
+      summary: Update an existing blog
+      description: |
+        Updates the title and/or content of an existing blog within a specific project.  
+        Requires a global role with the `UPDATE_BLOGS` permission, or a project role with the `UPDATE_BLOGS` permission.  
+        Only the fields provided in the request body will be updated. All fields are validated according to their type and requirements.
+      tags:
+        - Blogs
+      parameters:
+        - name: projectID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+          description: Must be a number referencing an existing project.
+        - name: blogID
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+          description: Must be a number referencing an existing blog.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Updated blog title
+                  description: Optional. Must be a non-empty string if provided.
+                content:
+                  type: string
+                  example: Updated content
+                  description: Optional. Must be a non-empty string if provided.
+      responses:
+        "200":
+          description: Blog successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Blog successfully updated.
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      user_id:
+                        type: integer
+                        example: 3
+                      project_id:
+                        type: integer
+                        example: 1
+                      title:
+                        type: string
+                        example: Updated blog title
+                      body:
+                        type: string
+                        example: Updated content
+                      created_at:
+                        type: string
+                        format: date-time
+                        example: 2025-08-28T21:20:59.452Z
+                      updated_at:
+                        type: string
+                        format: date-time
+                        example: 2025-08-28T21:21:25.395Z
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+        "403":
+          description: Forbidden, insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+        "404":
+          description: Blog or project with given ID does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: The entity with the given id does not exist.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0

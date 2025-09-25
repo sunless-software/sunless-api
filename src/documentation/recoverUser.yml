@@ -1,0 +1,216 @@
+openapi: 3.0.3
+info:
+  title: Users API
+  version: 1.0.0
+
+paths:
+  /api/v1/users/recover/{id}:
+    patch:
+      summary: Recover a user
+      description: Recover a previously soft-deleted user by their ID. Requires a role with RECOVER_USERS permission.
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: userID
+          schema:
+            type: integer
+            example: 5
+          required: true
+          description: The ID of the user to recover
+      responses:
+        "200":
+          description: User successfully recovered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: The user has been successfully recovered.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example: []
+                  pagination:
+                    type: object
+                    properties:
+                      offset:
+                        type: integer
+                        example: 0
+                      limit:
+                        type: integer
+                        example: 0
+                      count:
+                        type: integer
+                        example: 0
+                      total:
+                        type: integer
+                        example: 0
+
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+
+        "401":
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnauthorizedError"
+
+        "403":
+          description: Forbidden, insufficient permissions or user is banned/deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenPermissionError"
+
+        "404":
+          description: User with given ID does not exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserNotFoundError"
+
+components:
+  schemas:
+    ValidationError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: Invalid request
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: field
+              value:
+                type: string
+                example: ""
+              msg:
+                type: string
+                example: "user 'id' must be a number"
+              path:
+                type: string
+                example: id
+              location:
+                type: string
+                example: query
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
+
+    UnauthorizedError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: You must provide a token
+        data:
+          type: array
+          items:
+            type: object
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
+
+    ForbiddenPermissionError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 403
+        message:
+          type: string
+          example: You shall not pass!
+        data:
+          type: array
+          items:
+            type: object
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
+
+    UserNotFoundError:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: The user with the given id does not exist.
+        data:
+          type: array
+          items:
+            type: object
+        pagination:
+          type: object
+          properties:
+            offset:
+              type: integer
+              example: 0
+            limit:
+              type: integer
+              example: 0
+            count:
+              type: integer
+              example: 0
+            total:
+              type: integer
+              example: 0
