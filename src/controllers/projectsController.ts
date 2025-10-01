@@ -346,14 +346,12 @@ const projectsController = {
           return {
             ...cleanProject,
             name: decryptText(project.name, decryptedProjectKey),
-            short_description: decryptText(
-              project.short_description,
-              decryptedProjectKey
-            ),
-            long_description: decryptText(
-              project.long_description,
-              decryptedProjectKey
-            ),
+            short_description: project.short_description
+              ? decryptText(project.short_description, decryptedProjectKey)
+              : "",
+            long_description: project.long_description
+              ? decryptText(project.long_description, decryptedProjectKey)
+              : "",
           };
         }
 
@@ -382,7 +380,6 @@ const projectsController = {
         res
       );
     } catch (err) {
-      console.log(err);
       return next(err);
     }
   },
