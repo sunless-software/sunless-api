@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS projects (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     name_hash CHAR(64) NOT NULL,
-    short_description VARCHAR(64),
+    short_description TEXT,
     long_description TEXT,
     logo TEXT,
     status project_status NOT NULL,
