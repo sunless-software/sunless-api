@@ -8,3 +8,4 @@ NODE_ENV=development
 SECRET=my-secret-32bytes-base64-key
 DEFAULT_USER_USERNAME="default_user"
 DEFAULT_USER_PASSWORD="default_password"
+ALLOWED_ORIGINS="http://localhost:3000, https://my-site.com"
