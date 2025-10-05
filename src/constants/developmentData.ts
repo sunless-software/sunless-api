@@ -203,9 +203,9 @@ export const DEVELOPMENT_USERS_EXPERIENCES = [
   {
     user_id: 3,
     company_name: "Random Software company",
-    role: "SSR developer",
-    description: "I developed software for random software commpany",
-    location: "Semi remote",
+    role_us: "SSR developer",
+    description_us: "I developed software for random software commpany",
+    location_us: "Semi remote",
     start_date: (() => {
       const now = new Date();
       now.setFullYear(now.getFullYear() - 2);
@@ -221,9 +221,9 @@ export const DEVELOPMENT_USERS_EXPERIENCES = [
   {
     user_id: 3,
     company_name: "Sunless Software",
-    role: "SR developer",
-    description: "I developed software for sunless software",
-    location: "Remote",
+    role_us: "SR developer",
+    description_us: "I developed software for sunless software",
+    location_us: "Remote",
     start_date: (() => {
       const now = new Date();
       return now.toISOString();
@@ -247,9 +247,9 @@ export const DEVELOPMENT_USERS_EDUCATIONS = [
       return now.toISOString();
     })(),
     institution: "University of software",
-    field: "Software development",
-    location: "Buenos Aires, Argentina",
-    description:
+    field_us: "Software development",
+    location_us: "Buenos Aires, Argentina",
+    description_us:
       "I studied software development in the university of Buenos Aires",
   },
   {
@@ -261,9 +261,9 @@ export const DEVELOPMENT_USERS_EDUCATIONS = [
     })(),
     end_date: null,
     institution: "Remote software academy",
-    field: "Cibersecurity",
-    location: "Remote",
-    description: null,
+    field_us: "Cibersecurity",
+    location_us: "Remote",
+    description_us: null,
   },
 ];
 

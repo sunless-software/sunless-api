@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS external_resources (
     id SERIAL PRIMARY KEY,
     project_id INT NOT NULL,
-    name VARCHAR(50) NOT NULL,
+    name_us VARCHAR(50) NOT NULL,
+    name_es VARCHAR(50),
     url TEXT NOT NULL,
     url_hash CHAR(64) NOT NULL UNIQUE,
     type external_resource_type NOT NULL,
