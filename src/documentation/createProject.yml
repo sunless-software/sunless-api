@@ -21,13 +21,21 @@ paths:
                   type: string
                   example: Project 1
                   description: Required. Must be a non-empty string.
-                shortDescription:
+                shortDescriptionUS:
                   type: string
-                  example: Short description of the project
+                  example: Short description of the project in english
                   description: Optional. Must be a non-empty string, max 64 characters long if provided.
-                longDescription:
+                shortDescriptionES:
                   type: string
-                  example: Long description of the project.
+                  example: Descripcion corta del proyecto en español
+                  description: Optional. Must be a non-empty string, max 64 characters long if provided.
+                longDescriptionUS:
+                  type: string
+                  example: Long description of the project in english
+                  description: Optional. Must be a non-empty string if provided.
+                longDescriptionES:
+                  type: string
+                  example: Descripcion larga del proyecto en español
                   description: Optional. Must be a non-empty string if provided.
                 logo:
                   type: string
@@ -85,12 +93,18 @@ paths:
                         name:
                           type: string
                           example: project 2
-                        short_description:
+                        short_description_us:
                           type: string
                           example: Short description of the project
-                        long_description:
+                        short_description_es:
+                          type: string
+                          example: Descripcion corta del proyecto
+                        long_description_us:
                           type: string
                           example: Long description of the project
+                        long_description_es:
+                          type: string
+                          example: Descripcion larga del proyecto
                         logo:
                           type: string
                           example: https://www.my-project-logo.png

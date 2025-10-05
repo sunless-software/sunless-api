@@ -45,8 +45,10 @@ const projectsController = {
     const authID = (req as AuthRequest).user.id;
     let {
       name,
-      shortDescription,
-      longDescription,
+      shortDescriptionUS,
+      longDescriptionUS,
+      shortDescriptionES,
+      longDescriptionES,
       logo,
       status,
       publicProject,
@@ -61,10 +63,15 @@ const projectsController = {
     const encryptedProjectKey = encryptText(projectKey);
 
     const encryptedProjectName = encryptText(name, projectKey);
-    const encryptedProjectShortDescription =
-      shortDescription && encryptText(shortDescription, projectKey);
-    const encryptedProjectLongDescription =
-      longDescription && encryptText(longDescription, projectKey);
+
+    const encryptedProjectShortDescriptionUS =
+      shortDescriptionUS && encryptText(shortDescriptionUS, projectKey);
+    const encryptedProjectLongDescriptionUS =
+      longDescriptionUS && encryptText(longDescriptionUS, projectKey);
+    const encryptedProjectShortDescriptionES =
+      shortDescriptionES && encryptText(shortDescriptionES, projectKey);
+    const encryptedProjectLongDescriptionES =
+      longDescriptionES && encryptText(longDescriptionES, projectKey);
 
     try {
       await db.query("BEGIN");
@@ -72,8 +79,10 @@ const projectsController = {
       const createProject = await db.query(CREATE_PROJECT, [
         encryptedProjectName,
         nameHash,
-        encryptedProjectShortDescription,
-        encryptedProjectLongDescription,
+        encryptedProjectShortDescriptionUS,
+        encryptedProjectShortDescriptionES,
+        encryptedProjectLongDescriptionUS,
+        encryptedProjectLongDescriptionES,
         logo,
         status,
         publicProject,
@@ -98,8 +107,10 @@ const projectsController = {
             {
               ...createdProject,
               name: name,
-              short_description: shortDescription || "",
-              long_description: longDescription || "",
+              short_description_us: shortDescriptionUS || "",
+              long_description_us: longDescriptionUS || "",
+              short_description_es: shortDescriptionES || "",
+              long_description_es: longDescriptionES || "",
             },
           ],
         },

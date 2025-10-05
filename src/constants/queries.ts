@@ -117,10 +117,11 @@ export const CREATE_TECHNOLOGY = `INSERT INTO technologies (name) VALUES($1) RET
 
 export const UPDATE_TECHNOLOGY = `UPDATE technologies SET name=$1 WHERE id=$2 RETURNING *`;
 
-export const CREATE_PROJECT = `INSERT INTO projects(name, name_hash, short_description, long_description, logo, status, public, start_date, end_date, 
-estimated_end, key, deleted) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id, name, coalesce(short_description, '') as short_description, 
-coalesce(long_description, '') as long_description, coalesce(logo, '') as logo, status, public, start_date, end_date, estimated_end, '[]'::jsonb as tags,
-$13::integer as creator_id, created_at, updated_at`;
+export const CREATE_PROJECT = `INSERT INTO projects(name, name_hash, short_description_us, short_description_es, long_description_us, long_description_es,
+logo, status, public, start_date, end_date, estimated_end, key, deleted) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) 
+RETURNING id, name, coalesce(short_description_us, '') as short_description_us, coalesce(short_description_es, '') as short_description_es, 
+coalesce(long_description_us, '') as long_description_us, coalesce(long_description_es, '') as long_description_es, coalesce(logo, '')
+as logo, status, public, start_date, end_date, estimated_end, '[]'::jsonb as tags, $15::integer as creator_id, created_at, updated_at`;
 
 export const CREATE_COLLABORATOR = `INSERT INTO collaborators(project_id, user_id, role_id) SELECT p.id, u.id, $3 as role_id FROM users u, projects p
 WHERE u.id = $2 AND u.deleted = FALSE and p.id = $1 and p.deleted = FALSE`;
