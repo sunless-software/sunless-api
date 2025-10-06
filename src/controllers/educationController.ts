@@ -9,7 +9,6 @@ import {
   HTTP_STATUS_CODE_CREATED,
   HTTP_STATUS_CODE_NOT_FOUND,
 } from "../constants/httpStatusCodes";
-import { AuthRequest, CustomError } from "../interfaces";
 import {
   DEFAULT_SUCCES_API_RESPONSE,
   EDUCATION_SUCCESSFULLY_CREATED,
@@ -21,8 +20,17 @@ import { sendResponse } from "../utils";
 const educationController = {
   createEducation: async (req: Request, res: Response, next: NextFunction) => {
     const { userID } = req.params;
-    const { startDate, endDate, institution, field, location, description } =
-      req.body;
+    const {
+      startDate,
+      endDate,
+      institution,
+      fieldUS,
+      fieldES,
+      locationUS,
+      locationES,
+      descriptionUS,
+      descriptionES,
+    } = req.body;
     const db = await connectToDB();
 
     try {
@@ -30,9 +38,12 @@ const educationController = {
         startDate,
         endDate,
         institution,
-        field,
-        location,
-        description,
+        fieldUS,
+        fieldES,
+        locationUS,
+        locationES,
+        descriptionUS,
+        descriptionES,
         userID,
       ]);
       const affectedRows = result.rowCount;
