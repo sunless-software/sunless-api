@@ -69,7 +69,7 @@ async function start() {
     authMiddleware,
     experiencesRouter
   );
-  apiRouter.use("/users/:userID/educations", authMiddleware, educationRouter); // TODO: Revisar
+  apiRouter.use("/users/:userID/educations", authMiddleware, educationRouter);
   apiRouter.use("/users/:userID/skills", userSkillsRouter); // TODO: Revisar
   apiRouter.use(
     // TODO: Revisar

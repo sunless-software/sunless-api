@@ -92,8 +92,10 @@ export const GET_EDUCATION_USER_ID =
   "SELECT user_id FROM educations WHERE id = $1 LIMIT 1";
 
 export const PATCH_EDUCATION = `UPDATE educations SET start_date=COALESCE($1, start_date), end_date=COALESCE($2, end_date), institution=COALESCE($3, institution),
-field=COALESCE($4, field), "location"=COALESCE($5, location), description=COALESCE($6, description) WHERE id=$7 and exists (select 1 from users u where
-u.id = $8 and u.deleted = false) returning id, start_date, end_date, institution, field, location, coalesce(description, '') as description, 
+field_us=COALESCE($4, field_us), field_es=COALESCE($5, field_es), location_us=COALESCE($6, location_us), location_es=COALESCE($7, location_es), 
+description_us=COALESCE($8, description_us), description_es=COALESCE($9, description_es) WHERE id=$10 and exists (select 1 from users u where
+u.id = $11 and u.deleted = false) returning id, start_date, end_date, institution, field_us, COALESCE(field_es, '') as field_es, location_us,
+COALESCE(location_es, '') as location_es, coalesce(description_us, '') as description_us, coalesce(description_es, '') as description_es, 
 created_at, updated_at`;
 
 export const ADD_USER_SKILL = `INSERT INTO users_skills (user_id, skill_id, created_at, updated_at) SELECT u.id, s.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP

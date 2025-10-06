@@ -67,8 +67,17 @@ const educationController = {
   },
   updateEducation: async (req: Request, res: Response, next: NextFunction) => {
     const { userID, educationID } = req.params;
-    const { startDate, endDate, institution, field, location, description } =
-      req.body;
+    const {
+      startDate,
+      endDate,
+      institution,
+      fieldUS,
+      fieldES,
+      locationUS,
+      locationES,
+      descriptionUS,
+      descriptionES,
+    } = req.body;
     const db = await connectToDB();
 
     try {
@@ -76,9 +85,12 @@ const educationController = {
         startDate,
         endDate,
         institution,
-        field,
-        location,
-        description,
+        fieldUS,
+        fieldES,
+        locationUS,
+        locationES,
+        descriptionUS,
+        descriptionES,
         educationID,
         userID,
       ]);

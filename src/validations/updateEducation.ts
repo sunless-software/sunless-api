@@ -34,27 +34,48 @@ const updateEducationValidation = [
     .bail()
     .isLength({ min: 1 })
     .withMessage("'institution' cannot be empty"),
-  body("field")
+  body("fieldUS")
     .optional()
     .isString()
-    .withMessage("'field' must be an string")
+    .withMessage("'fieldUS' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'field' cannot be empty"),
-  body("location")
+    .withMessage("'fieldUS' cannot be empty"),
+  body("fieldES")
     .optional()
     .isString()
-    .withMessage("'location' must be an string")
+    .withMessage("'fieldES' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'location' cannot be empty"),
-  body("description")
+    .withMessage("'fieldES' cannot be empty"),
+  body("locationUS")
     .optional()
     .isString()
-    .withMessage("'description' must be an string")
+    .withMessage("'locationUS' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'description' cannot be empty"),
+    .withMessage("'locationUS' cannot be empty"),
+  body("locationES")
+    .optional()
+    .isString()
+    .withMessage("'locationES' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'locationES' cannot be empty"),
+  body("descriptionUS")
+    .optional()
+    .isString()
+    .withMessage("'descriptionUS' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'descriptionUS' cannot be empty"),
+  body("descriptionES")
+    .optional()
+    .isString()
+    .withMessage("'descriptionES' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'descriptionES' cannot be empty"),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

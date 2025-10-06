@@ -19,7 +19,6 @@ educationRouter.post(
 );
 
 educationRouter.patch(
-  // TODO: Revisar
   "/:educationID",
   ownershipMiddleware(
     GLOBAL_PERMISSIONS.updateOwnEducations,
@@ -30,7 +29,6 @@ educationRouter.patch(
 );
 
 educationRouter.delete(
-  // TODO: Revisar
   "/:educationID",
   ownershipMiddleware(
     GLOBAL_PERMISSIONS.deleteOwnEducation,
