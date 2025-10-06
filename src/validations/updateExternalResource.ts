@@ -8,13 +8,20 @@ const updateExternalResourceValidation = [
   param("resourceID")
     .isNumeric()
     .withMessage("external resource 'id' must be a number"),
-  body("name")
+  body("nameUS")
     .optional()
     .isString()
-    .withMessage("external resource 'name' must be an string")
+    .withMessage("external resource 'nameUS' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("external resource 'name' cannot be empty"),
+    .withMessage("external resource 'nameUS' cannot be empty"),
+  body("nameES")
+    .optional()
+    .isString()
+    .withMessage("external resource 'nameES' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("external resource 'nameES' cannot be empty"),
   body("url")
     .optional()
     .isURL()

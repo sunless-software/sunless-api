@@ -176,8 +176,10 @@ export const CREATE_PROJECT_EXTERNAL_RESOURCE = `INSERT INTO external_resources 
 SELECT p.id, $2, $3, $4, $5, $6 from projects p where p.id = $1 and p.deleted = false RETURNING id, name_us, COALESCE(name_es, '') as name_es,
 url, type, created_at, updated_at`;
 
-export const UPDATE_PROJECT_EXTERNAL_RESOURCE = `UPDATE external_resources SET name=COALESCE($3, name), url=COALESCE($4, url), url_hash=COALESCE($5, url_hash),
-type=COALESCE($6, type) WHERE id = $2 and EXISTS (SELECT 1 FROM projects p WHERE p.id = $1 AND p.deleted = false) RETURNING *`;
+export const UPDATE_PROJECT_EXTERNAL_RESOURCE = `UPDATE external_resources SET name_us=COALESCE($3, name_us), name_es=COALESCE($4, name_es),
+url=COALESCE($5, url), url_hash=COALESCE($6, url_hash), type=COALESCE($7, type) WHERE id = $2 and EXISTS 
+(SELECT 1 FROM projects p WHERE p.id = $1 AND p.deleted = false) RETURNING id, project_id, name_us, COALESCE(name_es, '') as name_es, url, type,
+created_at, updated_at`;
 
 export const DELETE_PROJECT_EXTERNAL_RESOURCE = `DELETE FROM external_resources er USING projects p
 where p.id = $1 AND p.deleted = FALSE AND er.id = $2`;
