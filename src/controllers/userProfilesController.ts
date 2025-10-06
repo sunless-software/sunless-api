@@ -15,17 +15,26 @@ const userProfilesController = {
     next: NextFunction
   ) => {
     const { userID } = req.params;
-    const { longDescription, repoUrl, websiteUrl, linkedinUrl, location } =
-      req.body;
+    const {
+      longDescriptionUS,
+      longDescriptionES,
+      repoUrl,
+      websiteUrl,
+      linkedinUrl,
+      locationUS,
+      locationES,
+    } = req.body;
     const db = await connectToDB();
 
     try {
       const result = await db.query(UPDATE_USER_PROFILE, [
-        longDescription,
+        longDescriptionUS,
+        longDescriptionES,
         repoUrl,
         websiteUrl,
         linkedinUrl,
-        location,
+        locationUS,
+        locationES,
         userID,
       ]);
       const affectedRows = result.rowCount;

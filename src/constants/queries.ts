@@ -243,11 +243,12 @@ p.id = b.project_id and p.deleted = false where p.id = $1`;
 
 export const CREATE_USER_PROFILE = `INSERT INTO user_profiles (user_id) SELECT u.id FROM users u WHERE u.id = $1 AND u.deleted = FALSE`;
 
-export const UPDATE_USER_PROFILE = `UPDATE user_profiles up SET long_description=COALESCE($1, long_description), repo_url=COALESCE($2, repo_url), 
-website_url=COALESCE($3, website_url), linkedin_url=COALESCE($4, linkedin_url), location=COALESCE($5, location) WHERE up.user_id = $6 AND EXISTS 
-(SELECT 1 FROM users u WHERE u.deleted = FALSE AND u.id = up.user_id) RETURNING user_id, COALESCE(long_description, '') as long_description, 
-COALESCE(repo_url, '') as repo_url, COALESCE(website_url, '') as website_url, COALESCE(linkedin_url, '') as linkedin_url, 
-COALESCE(location, '') as location, created_at, updated_at`;
+export const UPDATE_USER_PROFILE = `UPDATE user_profiles up SET long_description_us=COALESCE($1, long_description_us), 
+long_description_es=COALESCE($2, long_description_es), repo_url=COALESCE($3, repo_url), website_url=COALESCE($4, website_url), 
+linkedin_url=COALESCE($5, linkedin_url), location_us=COALESCE($6, location_us), location_es=COALESCE($7, location_es) WHERE up.user_id = $8
+AND EXISTS (SELECT 1 FROM users u WHERE u.deleted = FALSE AND u.id = up.user_id) RETURNING user_id, COALESCE(long_description_us, '') as long_description_us,
+COALESCE(long_description_es, '') as long_description_es, COALESCE(repo_url, '') as repo_url, COALESCE(website_url, '') as website_url, COALESCE(linkedin_url, '')
+as linkedin_url, COALESCE(location_us, '') as location_us, COALESCE(location_es, '') as location_es, created_at, updated_at`;
 
 export const CREATE_GLOBAL_ROLE = `INSERT INTO global_roles (role_name) VALUES($1) RETURNING *`;
 

@@ -259,9 +259,6 @@ const blogsController = {
         res
       );
     } catch (err) {
-      console.log("balabinga");
-      console.log(err);
-
       return next(err);
     }
   },

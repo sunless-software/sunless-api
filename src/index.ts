@@ -78,7 +78,7 @@ async function start() {
     authMiddleware,
     userTechnologiesRouter
   );
-  apiRouter.use("/users/:userID/profile", authMiddleware, userProfilesRouter); // TODO: Revisar
+  apiRouter.use("/users/:userID/profile", authMiddleware, userProfilesRouter);
   apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter); // TODO: Revisar
   apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter);
 
