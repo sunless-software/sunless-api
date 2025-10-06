@@ -491,9 +491,14 @@ const projectsController = {
 
         projectData.external_resources = projectData.external_resources.map(
           (externalResource: ProjectExternalResource) => {
+            const { name_es, name_us, ...cleanExternalResource } =
+              externalResource;
+            const name = lang === "ES" ? name_es : name_us;
+
             return {
-              ...externalResource,
+              ...cleanExternalResource,
               url: decryptText(externalResource.url, decryptedProjectKey),
+              name: name || "",
             };
           }
         );
