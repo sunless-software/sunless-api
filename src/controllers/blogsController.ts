@@ -149,9 +149,6 @@ const blogsController = {
         res
       );
     } catch (err) {
-      console.log("balabinga");
-      console.log(err);
-
       return next(err);
     }
   },
@@ -181,7 +178,12 @@ const blogsController = {
   getBlogs: async (req: Request, res: Response, next: NextFunction) => {
     const authID = (req as AuthRequest).user.id;
     const { userID, projectID } = req.params;
-    const { offset = 0, limit = 20, showPrivateBlogs = false } = req.query;
+    const {
+      offset = 0,
+      limit = 20,
+      showPrivateBlogs = false,
+      lang = "US",
+    } = req.query;
 
     const blogsQuery = userID ? GET_BLOGS_FROM_USER : GET_BLOGS_FROM_PROJECT;
     const countQuery = userID
@@ -200,22 +202,42 @@ const blogsController = {
       ]);
 
       const blogs = resultBlogs.rows.map((blog) => {
-        const { key, collaborators, ["public"]: isPublic, ...cleanBlog } = blog;
+        const {
+          key,
+          collaborators,
+          ["public"]: isPublic,
+          title_us,
+          title_es,
+          body_us,
+          body_es,
+          ...cleanBlog
+        } = blog;
         const isCollaborator = collaborators.some(
           (collaboratorID: number) => collaboratorID === authID
         );
+
+        let blogTitle = "";
+        let blogBody = "";
+
+        if (lang === "ES") {
+          blogTitle = title_es;
+          blogBody = body_es;
+        } else {
+          blogTitle = title_us;
+          blogBody = body_us;
+        }
 
         if (isPublic || isCollaborator) {
           const decryptedProjectKey = decryptText(key);
 
           return {
             ...cleanBlog,
-            title: decryptText(blog.title, decryptedProjectKey),
-            body: decryptText(blog.body, decryptedProjectKey),
+            title: blogTitle ? decryptText(blogTitle, decryptedProjectKey) : "",
+            body: blogBody ? decryptText(blogBody, decryptedProjectKey) : "",
           };
         }
 
-        return cleanBlog;
+        return { ...cleanBlog, title: blogTitle, body: blogBody };
       });
 
       return sendResponse(
@@ -237,6 +259,9 @@ const blogsController = {
         res
       );
     } catch (err) {
+      console.log("balabinga");
+      console.log(err);
+
       return next(err);
     }
   },

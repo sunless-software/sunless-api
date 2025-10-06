@@ -80,14 +80,14 @@ async function start() {
   );
   apiRouter.use("/users/:userID/profile", authMiddleware, userProfilesRouter); // TODO: Revisar
   apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter); // TODO: Revisar
-  apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter); // TODO: Revisar
+  apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter);
 
   apiRouter.use("/tags", authMiddleware, tagsRouter); // TODO: Revisar
   apiRouter.use("/technologies", authMiddleware, technologiesRouter); // TODO: Revisar
   apiRouter.use("/skills", authMiddleware, skillsRouter); // TODO: Revisar
 
   apiRouter.use("/projects", authMiddleware, projectsRouter); // TODO: Revisar
-  apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter); // TODO: Revisar
+  apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter);
   apiRouter.use("/projects/:projectID/tags", authMiddleware, projectTagsRouter); // TODO: Revisar
   apiRouter.use(
     "/projects/:projectID/external-resources",
