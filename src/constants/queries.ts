@@ -61,9 +61,11 @@ WHERE id = $8 and deleted = false RETURNING id, rol_id, username, '****' as "pas
 coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description, '') as "short_description", job_title, public, deleted, 
 banned, created_at, updated_at`;
 
-export const CREATE_EXPERIENCE = `INSERT INTO experiences (user_id, company_name, "role", description, "location", start_date, end_date, 
-company_logo, created_at, updated_at) select u.id, $1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP from users u
-where u.id = $8 and u.deleted = false RETURNING id, user_id, company_name, role, description, location, start_date, end_date, coalesce(company_logo, '') as "company_logo", created_at, updated_at`;
+export const CREATE_EXPERIENCE = `INSERT INTO experiences (user_id, company_name, role_us, role_es, description_us, description_es, location_us, location_es,
+start_date, end_date, company_logo, created_at, updated_at) select u.id, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP 
+from users u where u.id = $11 and u.deleted = false RETURNING id, user_id, company_name, role_us, COALESCE(role_es, '') as role_es, description_us, 
+COALESCE(description_es, '') as description_es, location_us, COALESCE(location_es, '') as location_es, start_date, end_date, coalesce(company_logo, '') 
+as "company_logo", created_at, updated_at`;
 
 export const PATCH_EXPERIENCE = `UPDATE experiences SET company_name=COALESCE($1, company_name), role=COALESCE($2, role), description=COALESCE($3, description), 
 location=COALESCE($4, location), start_date=COALESCE($5, start_date), end_date=COALESCE($6, end_date), company_logo=COALESCE($7, company_logo) WHERE id=$8

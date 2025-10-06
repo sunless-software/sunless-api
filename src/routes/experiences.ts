@@ -16,7 +16,7 @@ experiencesRouter.post(
   ),
   createExperienceValidation,
   experiencesController.createExperience
-);
+); // TODO: Revisar
 
 experiencesRouter.patch(
   "/:experienceID",
@@ -26,7 +26,7 @@ experiencesRouter.patch(
   ),
   updateExperienceValidation,
   experiencesController.updateExperience
-);
+); // TODO: Revisar
 
 experiencesRouter.delete(
   "/:experienceID",
@@ -36,6 +36,6 @@ experiencesRouter.delete(
   ),
   deleteExperienceValidation,
   experiencesController.deleteExperience
-);
+); // TODO: Revisar
 
 export default experiencesRouter;

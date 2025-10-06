@@ -23,9 +23,12 @@ const experiencesController = {
     const { userID } = req.params;
     const {
       companyName,
-      role,
-      description,
-      location,
+      roleUS,
+      roleES,
+      descriptionUS,
+      descriptionES,
+      locationUS,
+      locationES,
       startDate,
       endDate = null,
       companyLogo = null,
@@ -35,9 +38,12 @@ const experiencesController = {
     try {
       const result = await db.query(CREATE_EXPERIENCE, [
         companyName,
-        role,
-        description,
-        location,
+        roleUS,
+        roleES,
+        descriptionUS,
+        descriptionES,
+        locationUS,
+        locationES,
         startDate,
         endDate,
         companyLogo,
