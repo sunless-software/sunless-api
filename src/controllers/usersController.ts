@@ -368,6 +368,7 @@ const usersController = {
       showPrivateUsers = false,
       showBannedUsers = false,
       showDeletedUsers = false,
+      lang = "US",
     } = req.query;
     const db = await connectToDB();
 
@@ -377,6 +378,7 @@ const usersController = {
         showPrivateUsers,
         showBannedUsers,
         showDeletedUsers,
+        lang,
       ]);
 
       if (!result.rowCount) {

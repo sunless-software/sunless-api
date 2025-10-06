@@ -17,6 +17,12 @@
           type: integer
         description: The ID of the user to retrieve
       - in: query
+        name: lang
+        schema:
+          type: string
+          default: false
+        description: Specify a language ("US", "ES") for multi language fields. Default is "US"
+      - in: query
         name: showPrivateUsers
         schema:
           type: boolean

@@ -57,7 +57,6 @@ usersRouter.post(
 );
 
 usersRouter.get(
-  // TODO: Revisar
   "/:userID",
   conditionalQueryMiddleware([
     {

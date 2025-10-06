@@ -63,51 +63,48 @@ async function start() {
 
   apiRouter.use("/auth", authRouter);
 
-  apiRouter.use("/users", authMiddleware, usersRouter); // TODO: Revisar
+  apiRouter.use("/users", authMiddleware, usersRouter);
   apiRouter.use(
     "/users/:userID/experiences",
     authMiddleware,
     experiencesRouter
   );
   apiRouter.use("/users/:userID/educations", authMiddleware, educationRouter);
-  apiRouter.use("/users/:userID/skills", userSkillsRouter); // TODO: Revisar
+  apiRouter.use("/users/:userID/skills", userSkillsRouter);
   apiRouter.use(
-    // TODO: Revisar
     "/users/:userID/technologies",
     authMiddleware,
     userTechnologiesRouter
   );
   apiRouter.use("/users/:userID/profile", authMiddleware, userProfilesRouter);
-  apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter); // TODO: Revisar
+  apiRouter.use("/users/:userID/projects", authMiddleware, usersProjectsRouter);
   apiRouter.use("/users/:userID/blogs", authMiddleware, usersBlogsRouter);
 
-  apiRouter.use("/tags", authMiddleware, tagsRouter); // TODO: Revisar
-  apiRouter.use("/technologies", authMiddleware, technologiesRouter); // TODO: Revisar
-  apiRouter.use("/skills", authMiddleware, skillsRouter); // TODO: Revisar
+  apiRouter.use("/tags", authMiddleware, tagsRouter);
+  apiRouter.use("/technologies", authMiddleware, technologiesRouter);
+  apiRouter.use("/skills", authMiddleware, skillsRouter);
 
-  apiRouter.use("/projects", authMiddleware, projectsRouter); // TODO: Revisar
+  apiRouter.use("/projects", authMiddleware, projectsRouter);
   apiRouter.use("/projects/:projectID/blogs", authMiddleware, blogsRouter);
-  apiRouter.use("/projects/:projectID/tags", authMiddleware, projectTagsRouter); // TODO: Revisar
+  apiRouter.use("/projects/:projectID/tags", authMiddleware, projectTagsRouter);
   apiRouter.use(
     "/projects/:projectID/external-resources",
     authMiddleware,
     externalResourceRouter
   );
   apiRouter.use(
-    // TODO: Revisar
     "/projects/:projectID/media",
     authMiddleware,
     projectsMediaRouter
   );
   apiRouter.use(
-    // TODO: Revisar
     "/projects/:projectID/technologies",
     projectsTechnologiesRouter
   );
 
-  apiRouter.use("/roles/permissions", authMiddleware, permissionsRouter); // TODO: Revisar
-  apiRouter.use("/roles/global", authMiddleware, globalRolesRouter); // TODO: Revisar
-  apiRouter.use("/roles/project", authMiddleware, projectRolesRouter); // TODO: Revisar
+  apiRouter.use("/roles/permissions", authMiddleware, permissionsRouter);
+  apiRouter.use("/roles/global", authMiddleware, globalRolesRouter);
+  apiRouter.use("/roles/project", authMiddleware, projectRolesRouter);
 
   apiRouter.use(errorHandlerMiddleware);
 
