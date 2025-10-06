@@ -56,9 +56,10 @@ export const UNBAN_USER = `UPDATE users SET banned = false WHERE id = $1 AND del
 export const UPDATE_USER_ROLE = `UPDATE users SET rol_id = $1 WHERE id = $2 AND deleted = false`;
 
 export const PATCH_USER = `UPDATE users SET username = COALESCE($1, username), profile_photo = COALESCE($2, profile_photo), phone = COALESCE($3, phone),
-email = COALESCE($4, email), short_description = COALESCE($5, short_description), job_title = COALESCE($6, job_title), public = COALESCE($7, public)
-WHERE id = $8 and deleted = false RETURNING id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", 
-coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description, '') as "short_description", job_title, public, deleted, 
+email = COALESCE($4, email), short_description_us = COALESCE($5, short_description_us), short_description_es = COALESCE($6, short_description_es),
+job_title = COALESCE($7, job_title), public = COALESCE($8, public) WHERE id = $9 and deleted = false RETURNING id, rol_id, username, '****' as "password", 
+coalesce(profile_photo, '') as "profile_photo", coalesce(phone, '') as "phone", coalesce(email, '') as "email", 
+coalesce(short_description_us, '') as short_description_us, coalesce(short_description_es, '') as short_description_es, job_title, public, deleted, 
 banned, created_at, updated_at`;
 
 export const CREATE_EXPERIENCE = `INSERT INTO experiences (user_id, company_name, role_us, role_es, description_us, description_es, location_us, location_es,

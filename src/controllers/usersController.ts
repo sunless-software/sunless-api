@@ -320,7 +320,8 @@ const usersController = {
       phone,
       email,
       publicProfile,
-      shortDescription,
+      shortDescriptionUS,
+      shortDescriptionES,
       jobTitle,
     } = req.body;
     const db = await connectToDB();
@@ -331,7 +332,8 @@ const usersController = {
         profilePhoto,
         phone,
         email,
-        shortDescription,
+        shortDescriptionUS,
+        shortDescriptionES,
         jobTitle,
         publicProfile,
         userID,

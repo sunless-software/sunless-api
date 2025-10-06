@@ -86,7 +86,6 @@ usersRouter.delete(
 );
 
 usersRouter.patch(
-  // TODO: Revisar
   `/:userID`,
   ownershipMiddleware(
     GLOBAL_PERMISSIONS.updateOwnUser,
