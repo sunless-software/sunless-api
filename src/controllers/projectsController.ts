@@ -444,6 +444,7 @@ const projectsController = {
     res: Response,
     next: NextFunction
   ) => {
+    const { lang } = req.query;
     const { projectID } = req.params;
     const authID = (req as AuthRequest).user.id;
     const db = await connectToDB();
@@ -468,14 +469,25 @@ const projectsController = {
         const decryptedProjectKey = decryptText(encryptedProjectKey);
 
         projectData.name = decryptText(projectData.name, decryptedProjectKey);
-        projectData.short_description = decryptText(
-          projectData.short_description,
-          decryptedProjectKey
-        );
-        projectData.long_description = decryptText(
-          projectData.long_description,
-          decryptedProjectKey
-        );
+
+        let shortDescription = "";
+        let longDescription = "";
+
+        if (lang === "ES") {
+          shortDescription = projectData.short_description_es;
+          longDescription = projectData.long_description_es;
+        } else {
+          shortDescription = projectData.short_description_us;
+          longDescription = projectData.long_description_us;
+        }
+
+        projectData.short_description = shortDescription
+          ? decryptText(shortDescription, decryptedProjectKey)
+          : "";
+
+        projectData.long_description = longDescription
+          ? decryptText(longDescription, decryptedProjectKey)
+          : "";
 
         projectData.external_resources = projectData.external_resources.map(
           (externalResource: ProjectExternalResource) => {
@@ -491,7 +503,16 @@ const projectsController = {
         });
       }
 
-      const { name_hash, key, deleted, ...cleanProject } = projectData;
+      const {
+        name_hash,
+        key,
+        deleted,
+        short_description_us,
+        long_description_us,
+        short_description_es,
+        long_description_es,
+        ...cleanProject
+      } = projectData;
 
       sendResponse(
         {
@@ -502,6 +523,9 @@ const projectsController = {
         res
       );
     } catch (err) {
+      console.log("PERUAANO");
+      console.log(err);
+
       return next(err);
     }
   },

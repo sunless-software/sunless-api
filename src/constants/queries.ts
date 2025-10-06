@@ -216,8 +216,8 @@ export const GET_PROJECT_DETAILS = `select p.*, json_agg(jsonb_build_object('id'
 'username', u.username,'profile_photo', coalesce(u.profile_photo, ''))) as collaborators, coalesce(json_agg(distinct jsonb_build_object('id', t.id,
 'name', t.name)) filter (where t.id is not null), '[]') as tags,coalesce(json_agg(distinct jsonb_build_object('id', tc.id,'name', tc.name)) filter 
 (where tc.id is not null), '[]') as technologies, coalesce(json_agg(distinct jsonb_build_object('id', pm.id,'url', pm.url,
-'type', pm.type)) filter (where pm.id is not null), '[]') as media,coalesce(json_agg(distinct jsonb_build_object('id', er.id,'name', er.name,'url', er.url,
-'type', er.type)) filter (where er.id is not null), '[]') as external_resources from projects p join collaborators c on c.project_id = p.id
+'type', pm.type)) filter (where pm.id is not null), '[]') as media, coalesce(json_agg(distinct jsonb_build_object('id', er.id,'name_us', er.name_us, 'name_es', er.name_es, 
+'url', er.url, 'type', er.type)) filter (where er.id is not null), '[]') as external_resources from projects p join collaborators c on c.project_id = p.id
 join project_roles pr on pr.id = c.role_id join users u on u.id = c.user_id left join project_tags pt on pt.project_id = p.id left join tags t on t.id = pt.tag_id
 left join projects_technologies ptc on ptc.project_id = p.id left join technologies tc on tc.id = ptc.technology_id left join projects_media pm on 
 pm.project_id = p.id left join external_resources er on er.project_id  = p.id left join collaborators c2 on c2.project_id = p.id and c2.role_id = 1

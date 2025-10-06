@@ -8,9 +8,16 @@
       - If the project is private and you only have the global permission (not a collaborator), you will only see the encrypted version of the project.  
       - If you are a collaborator with `GET_PROJECT_DETAILS`, you will see the decrypted details.  
       - If the project does not exist or is private without proper access, a 404 is returned.
+
+      You can specify "lang" in query ("US" or "ES"), default to "US"
     tags:
       - Projects
     parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          default: "US"
       - in: path
         name: projectID
         required: true
