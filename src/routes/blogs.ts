@@ -12,6 +12,7 @@ import roleMiddleware from "../middlewares/roleMiddleware";
 const blogsRouter = Router({ mergeParams: true });
 
 blogsRouter.get(
+  // TODO: Revisar
   "/",
   roleMiddleware([GLOBAL_PERMISSIONS.readBlogs]),
   getBlogsFromProjectValidation,
@@ -29,6 +30,7 @@ blogsRouter.post(
 );
 
 blogsRouter.patch(
+  // TODO: Revisar
   "/:blogID",
   projectRoleMiddleware(
     GLOBAL_PERMISSIONS.updateBlogs,
@@ -39,6 +41,7 @@ blogsRouter.patch(
 );
 
 blogsRouter.delete(
+  // TODO: Revisar
   "/:blogID",
   projectRoleMiddleware(
     GLOBAL_PERMISSIONS.deleteBlogs,

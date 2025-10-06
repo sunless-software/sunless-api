@@ -23,14 +23,22 @@ paths:
             schema:
               type: object
               properties:
-                title:
+                titleUS:
+                  type: string
+                  example: My blog
+                  description: Must be provided, must be a string, and cannot be empty.
+                titleES:
                   type: string
                   example: Mi blog
-                  description: Must be provided, must be a string, and cannot be empty.
-                content:
+                  description: Optional, must be a string, and cannot be empty.
+                contentUS:
                   type: string
                   example: This is my new blog
                   description: Must be provided, must be a string, and cannot be empty.
+                contentES:
+                  type: string
+                  example: Este es mi nuevo blog
+                  description: Optional, must be a string, and cannot be empty.
       responses:
         "201":
           description: Blog successfully created
@@ -59,12 +67,18 @@ paths:
                         project_id:
                           type: integer
                           example: 1
-                        title:
+                        title_us:
+                          type: string
+                          example: My blog
+                        title_es:
                           type: string
                           example: Mi blog
-                        body:
+                        body_us:
                           type: string
                           example: This is my new blog
+                        body_es:
+                          type: string
+                          example: Este es mi nuevo blog
                         created_at:
                           type: string
                           format: date-time

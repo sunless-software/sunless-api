@@ -27,7 +27,7 @@ import {
 const blogsController = {
   createBlog: async (req: Request, res: Response, next: NextFunction) => {
     const { projectID } = req.params;
-    const { title, content } = req.body;
+    const { titleUS, titleES, contentUS, contentES } = req.body;
     const authID = (req as AuthRequest).user.id;
     const db = await connectToDB();
 
@@ -41,14 +41,22 @@ const blogsController = {
       const encryptedProjectKey = resultGetProjectKey.rows[0].key;
       const decryptedProjectKey = decryptText(encryptedProjectKey);
 
-      const encryptedTitle = encryptText(title, decryptedProjectKey);
-      const encryptedContent = encryptText(content, decryptedProjectKey);
+      const encryptedTitleUS = encryptText(titleUS, decryptedProjectKey);
+      const encryptedContentUS = encryptText(contentUS, decryptedProjectKey);
+      const encryptedTitleES = titleES
+        ? encryptText(titleES, decryptedProjectKey)
+        : "";
+      const encryptedContentES = contentES
+        ? encryptText(contentES, decryptedProjectKey)
+        : "";
 
       const result = await db.query(CREATE_BLOG, [
         authID,
         projectID,
-        encryptedTitle,
-        encryptedContent,
+        encryptedTitleUS,
+        encryptedTitleES,
+        encryptedContentUS,
+        encryptedContentES,
       ]);
 
       const affectedRows = result.rowCount;
@@ -62,7 +70,15 @@ const blogsController = {
           ...DEFAULT_SUCCES_API_RESPONSE,
           status: HTTP_STATUS_CODE_CREATED,
           message: BLOG_SUCCESSFULLY_CREATED_MESSAGE,
-          data: [{ ...result.rows[0], title: title, body: content }],
+          data: [
+            {
+              ...result.rows[0],
+              title_us: titleUS,
+              title_es: titleES || "",
+              body_us: contentUS,
+              body_es: contentES || "",
+            },
+          ],
         },
         res
       );

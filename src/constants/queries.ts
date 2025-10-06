@@ -149,8 +149,8 @@ AND pt.technology_id = $2 AND p.id = $1`;
 export const CHECK_VALID_INVITATION = `SELECT 1 FROM users WHERE id = $1 AND deleted = FALSE AND EXISTS (SELECT 1 FROM projects WHERE id = $2 
 AND deleted = FALSE) AND EXISTS (SELECT 1 FROM project_roles WHERE id = $3)`;
 
-export const CREATE_BLOG = `INSERT INTO blogs (user_id, project_id, title, body)
-select $1, p.id, $3, $4 from projects p where p.id = $2 and p.deleted = false RETURNING *`;
+export const CREATE_BLOG = `INSERT INTO blogs (user_id, project_id, title_us, title_es, body_us, body_es)
+select $1, p.id, $3, $4, $5, $6 from projects p where p.id = $2 and p.deleted = false RETURNING *`;
 
 export const DELETE_BLOG = `DELETE FROM blogs b USING projects p
 WHERE p.deleted = FALSE AND p.id = $2 AND b.id = $1`;
