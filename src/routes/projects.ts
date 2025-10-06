@@ -15,6 +15,7 @@ import getProjectDetailsValidation from "../validations/getProjectDetails";
 const projectsRouter = Router();
 
 projectsRouter.get(
+  // TODO: Revisar
   "/",
   roleMiddleware([GLOBAL_PERMISSIONS.readProjects]),
   getProjectsValidation,
@@ -22,6 +23,7 @@ projectsRouter.get(
 );
 
 projectsRouter.get(
+  // TODO: Revisar
   "/:projectID",
   projectRoleMiddleware(
     GLOBAL_PERMISSIONS.getProjectDetails,
@@ -51,6 +53,7 @@ projectsRouter.post(
 );
 
 projectsRouter.patch(
+  // TODO: Revisar
   "/:projectID",
   projectRoleMiddleware(
     GLOBAL_PERMISSIONS.updateProjects,
@@ -77,6 +80,7 @@ projectsRouter.patch(
 );
 
 projectsRouter.delete(
+  // TODO: Revisar
   "/:projectID",
   projectRoleMiddleware(
     GLOBAL_PERMISSIONS.deleteProjects,
@@ -87,6 +91,7 @@ projectsRouter.delete(
 );
 
 projectsRouter.post(
+  // TODO: Revisar
   "/:projectID/invite",
   projectRoleMiddleware(
     GLOBAL_PERMISSIONS.inviteProjects,
@@ -97,6 +102,7 @@ projectsRouter.post(
 );
 
 projectsRouter.post(
+  // TODO: Revisar
   "/join",
   acceptInvitationValidation,
   projectsController.acceptProjectInvitation

@@ -125,8 +125,10 @@ const projectsController = {
     const { projectID } = req.params;
     let {
       name,
-      shortDescription,
-      longDescription,
+      shortDescriptionUS,
+      shortDescriptionES,
+      longDescriptionUS,
+      longDescriptionES,
       logo,
       status,
       publicProject,
@@ -151,18 +153,28 @@ const projectsController = {
       const nameHash =
         name && crypto.createHash("sha256").update(name).digest("hex");
       name = name ? encryptText(name, decryptedProjectKey) : name;
-      shortDescription = shortDescription
-        ? encryptText(shortDescription, decryptedProjectKey)
-        : shortDescription;
-      longDescription = longDescription
-        ? encryptText(longDescription, decryptedProjectKey)
-        : longDescription;
+
+      shortDescriptionUS = shortDescriptionUS
+        ? encryptText(shortDescriptionUS, decryptedProjectKey)
+        : shortDescriptionUS;
+      longDescriptionUS = longDescriptionUS
+        ? encryptText(longDescriptionUS, decryptedProjectKey)
+        : longDescriptionUS;
+
+      shortDescriptionES = shortDescriptionES
+        ? encryptText(shortDescriptionES, decryptedProjectKey)
+        : shortDescriptionES;
+      longDescriptionES = longDescriptionES
+        ? encryptText(longDescriptionES, decryptedProjectKey)
+        : longDescriptionES;
 
       const result = await db.query(UPDATE_PROJECT, [
         name,
         nameHash,
-        shortDescription,
-        longDescription,
+        shortDescriptionUS,
+        shortDescriptionES,
+        longDescriptionUS,
+        longDescriptionES,
         logo,
         status,
         publicProject,
@@ -184,18 +196,31 @@ const projectsController = {
               name: resultProjectData.name
                 ? decryptText(resultProjectData.name, decryptedProjectKey)
                 : resultProjectData.name,
-              short_description: resultProjectData.short_description
+              short_description_us: resultProjectData.short_description_us
                 ? decryptText(
-                    resultProjectData.short_description,
+                    resultProjectData.short_description_us,
                     decryptedProjectKey
                   )
-                : resultProjectData.short_description,
-              long_description: resultProjectData.long_description
+                : resultProjectData.short_description_us,
+              long_description_us: resultProjectData.long_description_us
                 ? decryptText(
-                    resultProjectData.long_description,
+                    resultProjectData.long_description_us,
                     decryptedProjectKey
                   )
-                : resultProjectData.long_description,
+                : resultProjectData.long_description_us,
+
+              short_description_es: resultProjectData.short_description_es
+                ? decryptText(
+                    resultProjectData.short_description_es,
+                    decryptedProjectKey
+                  )
+                : resultProjectData.short_description_es,
+              long_description_es: resultProjectData.long_description_es
+                ? decryptText(
+                    resultProjectData.long_description_es,
+                    decryptedProjectKey
+                  )
+                : resultProjectData.long_description_es,
             },
           ],
         },

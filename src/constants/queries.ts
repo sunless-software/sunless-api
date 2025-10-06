@@ -129,10 +129,13 @@ WHERE u.id = $2 AND u.deleted = FALSE and p.id = $1 and p.deleted = FALSE`;
 export const SOFT_DELETE_PROJECT =
   "UPDATE projects SET deleted = true WHERE id = $1 AND deleted = false";
 
-export const UPDATE_PROJECT = `UPDATE projects set name = COALESCE($1, name), name_hash = COALESCE($2, name_hash), short_description = COALESCE($3, short_description),
-long_description = COALESCE($4, long_description), logo = COALESCE($5, logo), status = COALESCE($6, status), public = COALESCE($7, public), start_date = COALESCE($8, start_date), 
-end_date = COALESCE($9, end_date), estimated_end = COALESCE($10, estimated_end), updated_at = CURRENT_TIMESTAMP WHERE id=$11 AND deleted = FALSE 
-RETURNING id, name, coalesce(short_description, '') as short_description, coalesce(long_description, '') as long_description, coalesce(logo, '') as logo, status, 
+export const UPDATE_PROJECT = `UPDATE projects set name = COALESCE($1, name), name_hash = COALESCE($2, name_hash), 
+short_description_us = COALESCE($3, short_description_us), short_description_es = COALESCE($4, short_description_es),
+long_description_us = COALESCE($5, long_description_us), long_description_es = COALESCE($6, long_description_es), 
+logo = COALESCE($7, logo), status = COALESCE($8, status), public = COALESCE($9, public), start_date = COALESCE($10, start_date), 
+end_date = COALESCE($11, end_date), estimated_end = COALESCE($12, estimated_end), updated_at = CURRENT_TIMESTAMP WHERE id=$13 AND deleted = FALSE 
+RETURNING id, name, coalesce(short_description_us, '') as short_description_us, coalesce(short_description_es, '') as short_description_es,
+coalesce(long_description_us, '') as long_description_us, coalesce(long_description_es, '') as long_description_es, coalesce(logo, '') as logo, status, 
 public, start_date, end_date, estimated_end, created_at, updated_at`;
 
 export const GET_PROJECT_KEY = `SELECT key FROM projects WHERE id = $1 AND deleted = FALSE`;
