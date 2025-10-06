@@ -172,8 +172,9 @@ JOIN projects p ON p.id = $1 AND p.deleted = FALSE AND t.id = $2 RETURNING *`;
 export const REMOVE_PROJECT_TAG = `DELETE FROM project_tags pt USING projects p
 WHERE p.deleted = FALSE AND p.id = $1 AND pt.tag_id = $2`;
 
-export const CREATE_PROJECT_EXTERNAL_RESOURCE = `INSERT INTO external_resources (project_id, name, url, url_hash, type)
-SELECT p.id, $2, $3, $4, $5 from projects p where p.id = $1 and p.deleted = false RETURNING *`;
+export const CREATE_PROJECT_EXTERNAL_RESOURCE = `INSERT INTO external_resources (project_id, name_us, name_es, url, url_hash, type)
+SELECT p.id, $2, $3, $4, $5, $6 from projects p where p.id = $1 and p.deleted = false RETURNING id, name_us, COALESCE(name_es, '') as name_es,
+url, type, created_at, updated_at`;
 
 export const UPDATE_PROJECT_EXTERNAL_RESOURCE = `UPDATE external_resources SET name=COALESCE($3, name), url=COALESCE($4, url), url_hash=COALESCE($5, url_hash),
 type=COALESCE($6, type) WHERE id = $2 and EXISTS (SELECT 1 FROM projects p WHERE p.id = $1 AND p.deleted = false) RETURNING *`;

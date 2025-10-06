@@ -9,6 +9,7 @@ import deleteExternalResourceValidation from "../validations/deleteExternalResou
 
 const externalResourceRouter = Router({ mergeParams: true });
 
+// TODO: Revisar
 externalResourceRouter.post(
   "/",
   projectRoleMiddleware(
@@ -19,6 +20,7 @@ externalResourceRouter.post(
   externalResourcesController.createExternalResource
 );
 
+// TODO: Revisar
 externalResourceRouter.patch(
   "/:resourceID",
   projectRoleMiddleware(
@@ -29,6 +31,7 @@ externalResourceRouter.patch(
   externalResourcesController.updateExternalResource
 );
 
+// TODO: Revisar
 externalResourceRouter.delete(
   "/:resourceID",
   projectRoleMiddleware(

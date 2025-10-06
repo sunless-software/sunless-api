@@ -22,7 +22,6 @@ projectsRouter.get(
 );
 
 projectsRouter.get(
-  // TODO: Revisar
   "/:projectID",
   projectRoleMiddleware(
     GLOBAL_PERMISSIONS.getProjectDetails,

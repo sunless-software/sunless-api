@@ -26,7 +26,7 @@ const externalResourcesController = {
     next: NextFunction
   ) => {
     const { projectID } = req.params;
-    const { name, url, type } = req.body;
+    const { nameUS, nameES, url, type } = req.body;
     const urlHash = crypto.createHash("sha256").update(url).digest("hex");
     const db = await connectToDB();
 
@@ -43,7 +43,8 @@ const externalResourcesController = {
 
       const result = await db.query(CREATE_PROJECT_EXTERNAL_RESOURCE, [
         projectID,
-        name,
+        nameUS,
+        nameES,
         encryptedUrl,
         urlHash,
         type,

@@ -523,9 +523,6 @@ const projectsController = {
         res
       );
     } catch (err) {
-      console.log("PERUAANO");
-      console.log(err);
-
       return next(err);
     }
   },

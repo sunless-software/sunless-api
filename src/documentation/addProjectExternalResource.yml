@@ -23,10 +23,14 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                nameUS:
                   type: string
                   example: My repo
-                  description: Required. The name of the external resource.
+                  description: Required. The name of the external resource in english.
+                nameES:
+                  type: string
+                  example: Mi repo
+                  description: Optional. The name of the external resource in spanish.
                 url:
                   type: string
                   format: uri
@@ -71,9 +75,12 @@ paths:
                         project_id:
                           type: integer
                           example: 1
-                        name:
+                        name_us:
                           type: string
                           example: My repo
+                        name_es:
+                          type: string
+                          example: Mi repo
                         url:
                           type: string
                           example: https://www.github.com/mfranco289
