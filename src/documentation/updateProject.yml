@@ -27,15 +27,23 @@ paths:
               properties:
                 name:
                   type: string
-                  example: Project Phoenix Updated
+                  example: My project updated
                   description: Optional. Must be a non-empty string if provided.
-                short_description:
+                shortDescriptionUS:
                   type: string
-                  example: Updated short description of the project
+                  example: Updated short description of the project in english
                   description: Optional. Must be a non-empty string, max 64 characters long if provided.
-                long_description:
+                shortDescriptionES:
                   type: string
-                  example: Updated long description of the project
+                  example: Nueva descripcion corta del proyecto en español
+                  description: Optional. Must be a non-empty string, max 64 characters long if provided.
+                longDescriptionUS:
+                  type: string
+                  example: Updated long description of the project in english
+                  description: Optional. Must be a non-empty string if provided.
+                longDescriptionES:
+                  type: string
+                  example: Nueva descripcion larga del proyecto en español
                   description: Optional. Must be a non-empty string if provided.
                 logo:
                   type: string
@@ -88,13 +96,19 @@ paths:
                           example: 1
                         name:
                           type: string
-                          example: Project Phoenix Updated
-                        short_description:
+                          example: My project updated
+                        short_description_us:
                           type: string
-                          example: Updated short description
-                        long_description:
+                          example: Updated short description of the project in english
+                        short_description_es:
                           type: string
-                          example: Updated long description
+                          example: Nueva descripcion corta del proyecto en español
+                        long_description_us:
+                          type: string
+                          example: Updated long description of the project in english
+                        long_description_es:
+                          type: string
+                          example: Nueva descripcion larga del proyecto en español
                         logo:
                           type: string
                           example: Updated logo

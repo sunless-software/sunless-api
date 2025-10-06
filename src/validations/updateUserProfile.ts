@@ -4,13 +4,20 @@ import { validateResult } from "../utils";
 
 const updateUserProfileValidation = [
   param("userID").isNumeric().withMessage("user 'id' must be provided"),
-  body("longDescription")
+  body("longDescriptionUS")
     .optional()
     .isString()
-    .withMessage("'longDescription' must be an string")
+    .withMessage("'longDescriptionUS' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'longDescription' cannot be empty"),
+    .withMessage("'longDescriptionUS' cannot be empty"),
+  body("longDescriptionES")
+    .optional()
+    .isString()
+    .withMessage("'longDescriptionES' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'longDescriptionES' cannot be empty"),
   body("repoUrl")
     .optional()
     .isURL()
@@ -23,16 +30,26 @@ const updateUserProfileValidation = [
     .optional()
     .isURL()
     .withMessage("'linkedinUrl' must be a valid url"),
-  body("location")
+  body("locationUS")
     .optional()
     .isString()
-    .withMessage("'location' must be an string")
+    .withMessage("'locationUS' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'location' cannot be empty")
+    .withMessage("'locationUS' cannot be empty")
     .bail()
     .isLength({ max: 100 })
-    .withMessage("'location' cannot be longer than 100 characters"),
+    .withMessage("'locationUS' cannot be longer than 100 characters"),
+  body("locationES")
+    .optional()
+    .isString()
+    .withMessage("'locationES' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'locationES' cannot be empty")
+    .bail()
+    .isLength({ max: 100 })
+    .withMessage("'locationES' cannot be longer than 100 characters"),
   async (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

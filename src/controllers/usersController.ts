@@ -47,6 +47,7 @@ const usersController = {
       showBannedUsers = false,
       showDeletedUsers = false,
       username = null,
+      lang = "US",
     } = req.query;
 
     const db = await connectToDB();
@@ -68,7 +69,13 @@ const usersController = {
           limit,
         ]),
       ]);
-      const users: Array<User> = getUsersResult.rows;
+      const users: Array<User> = getUsersResult.rows.map((u) => {
+        const { short_description_us, short_description_es, ...cleanUser } = u;
+        const shortDescription =
+          lang === "ES" ? short_description_es : short_description_us;
+
+        return { ...cleanUser, short_description: shortDescription };
+      });
 
       return sendResponse(
         {
@@ -89,7 +96,6 @@ const usersController = {
         res
       );
     } catch (err) {
-      console.log(err);
       return next(err);
     }
   },
@@ -102,7 +108,8 @@ const usersController = {
       phone,
       email,
       jobTitle,
-      shortDescription,
+      shortDescriptionUS,
+      shortDescriptionES,
       publicProfile,
     } = req.body;
 
@@ -119,7 +126,8 @@ const usersController = {
         profilePhoto,
         phone,
         email,
-        shortDescription,
+        shortDescriptionUS,
+        shortDescriptionES,
         jobTitle,
         publicProfile,
         false,
@@ -318,7 +326,8 @@ const usersController = {
       phone,
       email,
       publicProfile,
-      shortDescription,
+      shortDescriptionUS,
+      shortDescriptionES,
       jobTitle,
     } = req.body;
     const db = await connectToDB();
@@ -329,7 +338,8 @@ const usersController = {
         profilePhoto,
         phone,
         email,
-        shortDescription,
+        shortDescriptionUS,
+        shortDescriptionES,
         jobTitle,
         publicProfile,
         userID,
@@ -358,6 +368,7 @@ const usersController = {
       showPrivateUsers = false,
       showBannedUsers = false,
       showDeletedUsers = false,
+      lang = "US",
     } = req.query;
     const db = await connectToDB();
 
@@ -367,6 +378,7 @@ const usersController = {
         showPrivateUsers,
         showBannedUsers,
         showDeletedUsers,
+        lang,
       ]);
 
       if (!result.rowCount) {

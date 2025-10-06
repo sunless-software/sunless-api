@@ -4,24 +4,38 @@ import { validateResult } from "../utils";
 
 const createBlogValidation = [
   param("projectID").isNumeric().withMessage("'projectID' must be a number"),
-  body("title")
+  body("titleUS")
     .exists()
-    .withMessage("'title' must be provided")
+    .withMessage("'titleUS' must be provided")
     .bail()
     .isString()
-    .withMessage("'title' must be an string")
+    .withMessage("'titleUS' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'title' cannot be empty"),
-  body("content")
+    .withMessage("'titleUS' cannot be empty"),
+  body("titleES")
+    .optional()
+    .isString()
+    .withMessage("'titleES' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'titleES' cannot be empty"),
+  body("contentUS")
     .exists()
-    .withMessage("'content' must be provided")
+    .withMessage("'contentUS' must be provided")
     .bail()
     .isString()
-    .withMessage("'content' must be an string")
+    .withMessage("'contentUS' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'content' cannot be empty"),
+    .withMessage("'contentUS' cannot be empty"),
+  body("contentES")
+    .optional()
+    .isString()
+    .withMessage("'contentES' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'contentES' cannot be empty"),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

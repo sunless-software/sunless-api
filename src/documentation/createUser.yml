@@ -101,9 +101,13 @@ components:
           type: string
           format: email
           example: fakemail@gmail.com
-        shortDescription:
+        shortDescriptionUS:
           type: string
           example: "There is always another secret"
+          nullable: true
+        shortDescriptionES:
+          type: string
+          example: "Siempre hay otro secreto"
           nullable: true
         jobTitle:
           type: string
@@ -136,9 +140,12 @@ components:
         email:
           type: string
           example: fakemail@gmail.com
-        short_description:
+        short_description_us:
           type: string
           example: "There is always another secret"
+        short_description_es:
+          type: string
+          example: "Siempre hay otro secreto"
         job_title:
           type: string
           example: "Software developer"

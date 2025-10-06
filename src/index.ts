@@ -37,6 +37,7 @@ import tagsRouter from "./routes/tagsRouter";
 import globalRolesRouter from "./routes/globalRoles";
 import permissionsRouter from "./routes/permissions";
 import projectRolesRouter from "./routes/projectRoles";
+import corsMiddleware from "./middlewares/cors";
 
 async function start() {
   const app = express();
@@ -45,6 +46,7 @@ async function start() {
   await connectToDB();
   preload();
 
+  app.use(corsMiddleware());
   app.use("/documentation", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.use("/api/v1", apiRouter);
 

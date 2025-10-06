@@ -63,7 +63,8 @@ export interface ProjectCollaborator {
 export interface ProjectExternalResource {
   id: number;
   url: string;
-  name: string;
+  name_us: string;
+  name_es: string;
   type: string;
 }
 

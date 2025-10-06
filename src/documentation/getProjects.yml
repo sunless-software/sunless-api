@@ -14,9 +14,16 @@ paths:
         If `showPrivateProjects` is set to `true`, private projects will be included, 
         but only in their encrypted form unless the requester is the project creator 
         or a collaborator, in which case the decrypted version is returned.
+        You can specify "lang" in query ("US" or "ES"), default to "US"
       tags:
         - Projects
       parameters:
+        - in: query
+          name: lang
+          schema:
+            type: string
+            default: "US"
+          description: Language for "long_description" and "short_description" fields. Must be "US" or "ES".
         - in: query
           name: offset
           schema:

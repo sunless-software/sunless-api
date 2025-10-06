@@ -4,6 +4,7 @@ import { validateResult } from "../utils";
 
 const getBlogsFromUserValidation = [
   param("userID").isNumeric().withMessage("user 'id' must be a number"),
+  query("lang").optional().isIn(["US", "ES"]),
   query("offset")
     .optional()
     .isInt({ min: 0 })

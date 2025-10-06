@@ -15,24 +15,29 @@ join projects pj on pj.id = c.project_id
 where c.user_id = $1 and c.project_id = $2 and pj.deleted = false`;
 
 export const GET_USERS = `select id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", 
-coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description, '') as "short_description", job_title, public, deleted, 
+coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description_us, '') as short_description_us,
+coalesce(short_description_es, '') as short_description_es, job_title, public, deleted, 
 banned, created_at, updated_at FROM users u where ($1::boolean IS TRUE OR u.public = TRUE) and ($2::boolean IS TRUE OR u.banned = FALSE) and 
 ($3::boolean IS TRUE OR u.deleted = FALSE) and ($4::text IS NULL OR username ILIKE '%' || $4 || '%') ORDER BY created_at DESC OFFSET $5 LIMIT $6`;
 
 export const GET_USER_DETAILS = `select u.id, u.rol_id, u.username, '****' as "password", coalesce(u.profile_photo, '') as "profile_photo",
-coalesce(u.phone, '') as "phone", coalesce(u.email, '') as "email", coalesce(u.short_description, '') as "short_description", job_title, u.public, 
-u.deleted, u.banned, u.created_at, u.updated_at, coalesce(up.long_description, '') as long_description, coalesce(up.repo_url, '') as repo_url,
-coalesce(up.website_url, '') as website_url, coalesce(up.linkedin_url, '') as linkedin_url, coalesce(up.location, '') as location,
-coalesce(json_agg(distinct jsonb_build_object('id', s.id, 'name', s.name, 'created_at', s.created_at, 'updated_at', s.updated_at)) filter (where s.id is not null), '[]') 
+coalesce(u.phone, '') as "phone", coalesce(u.email, '') as "email",coalesce(case when $5 = 'ES' then u.short_description_es else u.short_description_us end, '') as short_description,
+job_title, u.public, u.deleted, u.banned, u.created_at, u.updated_at, 
+coalesce(case when $5 = 'ES' then up.long_description_es else up.long_description_us end, '') as long_description, 
+coalesce(up.repo_url, '') as repo_url, coalesce(up.website_url, '') as website_url, coalesce(up.linkedin_url, '') as linkedin_url,
+coalesce(case when $5 = 'ES' then up.location_es else up.location_us end, '') as location, coalesce(json_agg(distinct 
+jsonb_build_object('id', s.id, 'name', s.name, 'created_at', s.created_at, 'updated_at', s.updated_at)) filter (where s.id is not null), '[]') 
 as skills, coalesce(json_agg(distinct jsonb_build_object( 'id', t.id, 'name', t.name, 'created_at', t.created_at, 'updated_at', t.updated_at)) filter 
-(where t.id is not null), '[]') as technologies, coalesce(json_agg(distinct jsonb_build_object('id', e.id, 'company_name', e.company_name, 'role', e.role, 
-'description', e.description, 'location', e.location, 'company_logo', coalesce(e.company_logo, ''), 'start_date', e.start_date, 'end_date', e.end_date, 
-'created_at', e.created_at, 'updated_at', e.updated_at)) filter (where e.id is not null), '[]') as experiences, coalesce(json_agg(distinct 
-jsonb_build_object('id', ed.id, 'start_date', ed.start_date, 'end_date', ed.end_date, 'institution', ed.institution, 'field', ed.field, 'location', ed.location, 
-'description', coalesce(ed.description, ''), 'created_at', ed.created_at, 'updated_at', ed.updated_at)) filter (where ed.id is not null), '[]') as 
-educations from users u left join users_skills us on us.user_id = u.id left join skills s on us.skill_id = s.id left join users_technologies ut on 
-ut.user_id = u.id left join user_profiles up on up.user_id = u.id left join technologies t on t.id = ut.technology_id left join experiences e on
-e.user_id = u.id left join educations ed on ed.user_id = u.id where u.id = $1 and ($2::boolean IS TRUE OR u.public = TRUE) and 
+(where t.id is not null), '[]') as technologies, coalesce(json_agg(distinct jsonb_build_object('id', e.id, 'company_name', e.company_name, 
+ 'role', coalesce(CASE WHEN $5 = 'ES' THEN e.role_es ELSE e.role_us end, ''), 'description', coalesce(case when $5 = 'ES' then e.description_es else e.description_us end, ''), 
+'location', coalesce(case when $5 = 'ES' then e.location_es else e.location_us end, ''), 'company_logo', coalesce(e.company_logo, ''), 'start_date', e.start_date, 'end_date', 
+e.end_date, 'created_at', e.created_at, 'updated_at', e.updated_at)) filter (where e.id is not null), '[]') as experiences, coalesce(json_agg(distinct 
+jsonb_build_object('id', ed.id, 'start_date', ed.start_date, 'end_date', ed.end_date, 'institution', ed.institution, 'field', coalesce(case when $5 = 'ES' then ed.field_es else ed.field_us end , ''), 
+'location', coalesce(case when $5 = 'ES' then ed.location_es else ed.location_us end , ''), 
+'description', coalesce(case when $5 = 'ES' then ed.description_es else ed.description_us end, ''), 'created_at', ed.created_at, 'updated_at', ed.updated_at)) 
+filter (where ed.id is not null), '[]') as educations from users u left join users_skills us on us.user_id = u.id left join skills s on us.skill_id = s.id 
+left join users_technologies ut on ut.user_id = u.id left join user_profiles up on up.user_id = u.id left join technologies t on t.id = ut.technology_id 
+left join experiences e on e.user_id = u.id left join educations ed on ed.user_id = u.id where u.id = $1 and ($2::boolean IS TRUE OR u.public = TRUE) and 
 ($3::boolean IS TRUE OR u.banned = FALSE) and ($4::boolean IS TRUE OR u.deleted = FALSE) group by u.id, up.user_id`;
 
 export const COUNT_USERS = `SELECT COUNT(*) AS total FROM users u where ($1::boolean IS TRUE OR u.public = TRUE) and
@@ -40,10 +45,10 @@ export const COUNT_USERS = `SELECT COUNT(*) AS total FROM users u where ($1::boo
 
 export const GET_USER_STATUS = `SELECT banned FROM users WHERE id = $1 AND deleted = false LIMIT 1`;
 
-export const CREATE_USER = `INSERT INTO users (rol_id, username, password, profile_photo, phone, email, short_description, job_title, public, banned, deleted) 
-VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", 
-coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description, '') as "short_description", job_title, public, deleted, banned, 
-created_at, updated_at`;
+export const CREATE_USER = `INSERT INTO users (rol_id, username, password, profile_photo, phone, email, short_description_us, short_description_es,
+job_title, public, banned, deleted) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id, rol_id, username, '****' as password,
+coalesce(profile_photo, '') as profile_photo, coalesce(phone, '') as phone, coalesce(email, '') as email, coalesce(short_description_us, '') as short_description_us,
+coalesce(short_description_es, '') as short_description_es, job_title, public, deleted, banned, created_at, updated_at`;
 
 export const SOFT_DELETE_USER = `UPDATE users SET deleted = true WHERE id = $1 AND deleted = false`;
 
@@ -56,28 +61,35 @@ export const UNBAN_USER = `UPDATE users SET banned = false WHERE id = $1 AND del
 export const UPDATE_USER_ROLE = `UPDATE users SET rol_id = $1 WHERE id = $2 AND deleted = false`;
 
 export const PATCH_USER = `UPDATE users SET username = COALESCE($1, username), profile_photo = COALESCE($2, profile_photo), phone = COALESCE($3, phone),
-email = COALESCE($4, email), short_description = COALESCE($5, short_description), job_title = COALESCE($6, job_title), public = COALESCE($7, public)
-WHERE id = $8 and deleted = false RETURNING id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", 
-coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description, '') as "short_description", job_title, public, deleted, 
+email = COALESCE($4, email), short_description_us = COALESCE($5, short_description_us), short_description_es = COALESCE($6, short_description_es),
+job_title = COALESCE($7, job_title), public = COALESCE($8, public) WHERE id = $9 and deleted = false RETURNING id, rol_id, username, '****' as "password", 
+coalesce(profile_photo, '') as "profile_photo", coalesce(phone, '') as "phone", coalesce(email, '') as "email", 
+coalesce(short_description_us, '') as short_description_us, coalesce(short_description_es, '') as short_description_es, job_title, public, deleted, 
 banned, created_at, updated_at`;
 
-export const CREATE_EXPERIENCE = `INSERT INTO experiences (user_id, company_name, "role", description, "location", start_date, end_date, 
-company_logo, created_at, updated_at) select u.id, $1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP from users u
-where u.id = $8 and u.deleted = false RETURNING id, user_id, company_name, role, description, location, start_date, end_date, coalesce(company_logo, '') as "company_logo", created_at, updated_at`;
+export const CREATE_EXPERIENCE = `INSERT INTO experiences (user_id, company_name, role_us, role_es, description_us, description_es, location_us, location_es,
+start_date, end_date, company_logo, created_at, updated_at) select u.id, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP 
+from users u where u.id = $11 and u.deleted = false RETURNING id, user_id, company_name, role_us, COALESCE(role_es, '') as role_es, description_us, 
+COALESCE(description_es, '') as description_es, location_us, COALESCE(location_es, '') as location_es, start_date, end_date, coalesce(company_logo, '') 
+as "company_logo", created_at, updated_at`;
 
-export const PATCH_EXPERIENCE = `UPDATE experiences SET company_name=COALESCE($1, company_name), role=COALESCE($2, role), description=COALESCE($3, description), 
-location=COALESCE($4, location), start_date=COALESCE($5, start_date), end_date=COALESCE($6, end_date), company_logo=COALESCE($7, company_logo) WHERE id=$8
-and exists (select 1 from users u where u.id = $9 and u.deleted = false) RETURNING id, user_id, company_name, role, description, location, start_date, 
-end_date, coalesce(company_logo, '') as "company_logo", created_at, updated_at`;
+export const PATCH_EXPERIENCE = `UPDATE experiences SET company_name=COALESCE($1, company_name), role_us=COALESCE($2, role_us), role_es=COALESCE($3, role_es), 
+description_us=COALESCE($4, description_us), description_es=COALESCE($5, description_es), location_us=COALESCE($6, location_us), 
+location_es=COALESCE($7, location_es), start_date=COALESCE($8, start_date), end_date=COALESCE($9, end_date), company_logo=COALESCE($10, company_logo) WHERE id=$11
+and exists (select 1 from users u where u.id = $12 and u.deleted = false) RETURNING id, user_id, company_name, role_us, COALESCE(role_es, '') as role_es,
+description_us, COALESCE(description_es, '') as description_es, location_us, COALESCE(location_es, '') as location_es, start_date, end_date, 
+coalesce(company_logo, '') as "company_logo", created_at, updated_at`;
 
 export const DELETE_EXPERIENCE = `DELETE FROM experiences e USING users u WHERE e.id = $1 AND u.id = $2 AND u.deleted = false`;
 
 export const GET_EXPERIENCE_USER_ID =
   "SELECT user_id FROM experiences WHERE id = $1 LIMIT 1";
 
-export const CREATE_EDUCATION = `INSERT INTO educations (user_id, start_date, end_date, institution, field, "location", description, created_at, updated_at) 
-select u.id, $1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP from users u where u.id = $7 and u.deleted = false returning id, start_date, 
-end_date, institution, field, location, coalesce(description, '') as description, created_at, updated_at`;
+export const CREATE_EDUCATION = `INSERT INTO educations (user_id, start_date, end_date, institution, field_us, field_es, location_us, location_es,
+description_us, description_es, created_at, updated_at) select u.id, $1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP 
+from users u where u.id = $10 and u.deleted = false returning id, start_date, end_date, institution, field_us, COALESCE(field_es, '') as field_es,
+location_us, COALESCE(location_es, '') as location_es, COALESCE(description_us, '') as description_us, COALESCE(description_es, '') as description_es, 
+created_at, updated_at`;
 
 export const DELETE_EDUCATION =
   "DELETE FROM educations e USING users u WHERE e.id = $1 AND u.id = $2 AND u.deleted = FALSE";
@@ -86,8 +98,10 @@ export const GET_EDUCATION_USER_ID =
   "SELECT user_id FROM educations WHERE id = $1 LIMIT 1";
 
 export const PATCH_EDUCATION = `UPDATE educations SET start_date=COALESCE($1, start_date), end_date=COALESCE($2, end_date), institution=COALESCE($3, institution),
-field=COALESCE($4, field), "location"=COALESCE($5, location), description=COALESCE($6, description) WHERE id=$7 and exists (select 1 from users u where
-u.id = $8 and u.deleted = false) returning id, start_date, end_date, institution, field, location, coalesce(description, '') as description, 
+field_us=COALESCE($4, field_us), field_es=COALESCE($5, field_es), location_us=COALESCE($6, location_us), location_es=COALESCE($7, location_es), 
+description_us=COALESCE($8, description_us), description_es=COALESCE($9, description_es) WHERE id=$10 and exists (select 1 from users u where
+u.id = $11 and u.deleted = false) returning id, start_date, end_date, institution, field_us, COALESCE(field_es, '') as field_es, location_us,
+COALESCE(location_es, '') as location_es, coalesce(description_us, '') as description_us, coalesce(description_es, '') as description_es, 
 created_at, updated_at`;
 
 export const ADD_USER_SKILL = `INSERT INTO users_skills (user_id, skill_id, created_at, updated_at) SELECT u.id, s.id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
@@ -117,10 +131,11 @@ export const CREATE_TECHNOLOGY = `INSERT INTO technologies (name) VALUES($1) RET
 
 export const UPDATE_TECHNOLOGY = `UPDATE technologies SET name=$1 WHERE id=$2 RETURNING *`;
 
-export const CREATE_PROJECT = `INSERT INTO projects(name, name_hash, short_description, long_description, logo, status, public, start_date, end_date, 
-estimated_end, key, deleted) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id, name, coalesce(short_description, '') as short_description, 
-coalesce(long_description, '') as long_description, coalesce(logo, '') as logo, status, public, start_date, end_date, estimated_end, '[]'::jsonb as tags,
-$13::integer as creator_id, created_at, updated_at`;
+export const CREATE_PROJECT = `INSERT INTO projects(name, name_hash, short_description_us, short_description_es, long_description_us, long_description_es,
+logo, status, public, start_date, end_date, estimated_end, key, deleted) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) 
+RETURNING id, name, coalesce(short_description_us, '') as short_description_us, coalesce(short_description_es, '') as short_description_es, 
+coalesce(long_description_us, '') as long_description_us, coalesce(long_description_es, '') as long_description_es, coalesce(logo, '')
+as logo, status, public, start_date, end_date, estimated_end, '[]'::jsonb as tags, $15::integer as creator_id, created_at, updated_at`;
 
 export const CREATE_COLLABORATOR = `INSERT INTO collaborators(project_id, user_id, role_id) SELECT p.id, u.id, $3 as role_id FROM users u, projects p
 WHERE u.id = $2 AND u.deleted = FALSE and p.id = $1 and p.deleted = FALSE`;
@@ -128,10 +143,13 @@ WHERE u.id = $2 AND u.deleted = FALSE and p.id = $1 and p.deleted = FALSE`;
 export const SOFT_DELETE_PROJECT =
   "UPDATE projects SET deleted = true WHERE id = $1 AND deleted = false";
 
-export const UPDATE_PROJECT = `UPDATE projects set name = COALESCE($1, name), name_hash = COALESCE($2, name_hash), short_description = COALESCE($3, short_description),
-long_description = COALESCE($4, long_description), logo = COALESCE($5, logo), status = COALESCE($6, status), public = COALESCE($7, public), start_date = COALESCE($8, start_date), 
-end_date = COALESCE($9, end_date), estimated_end = COALESCE($10, estimated_end), updated_at = CURRENT_TIMESTAMP WHERE id=$11 AND deleted = FALSE 
-RETURNING id, name, coalesce(short_description, '') as short_description, coalesce(long_description, '') as long_description, coalesce(logo, '') as logo, status, 
+export const UPDATE_PROJECT = `UPDATE projects set name = COALESCE($1, name), name_hash = COALESCE($2, name_hash), 
+short_description_us = COALESCE($3, short_description_us), short_description_es = COALESCE($4, short_description_es),
+long_description_us = COALESCE($5, long_description_us), long_description_es = COALESCE($6, long_description_es), 
+logo = COALESCE($7, logo), status = COALESCE($8, status), public = COALESCE($9, public), start_date = COALESCE($10, start_date), 
+end_date = COALESCE($11, end_date), estimated_end = COALESCE($12, estimated_end), updated_at = CURRENT_TIMESTAMP WHERE id=$13 AND deleted = FALSE 
+RETURNING id, name, coalesce(short_description_us, '') as short_description_us, coalesce(short_description_es, '') as short_description_es,
+coalesce(long_description_us, '') as long_description_us, coalesce(long_description_es, '') as long_description_es, coalesce(logo, '') as logo, status, 
 public, start_date, end_date, estimated_end, created_at, updated_at`;
 
 export const GET_PROJECT_KEY = `SELECT key FROM projects WHERE id = $1 AND deleted = FALSE`;
@@ -145,14 +163,14 @@ AND pt.technology_id = $2 AND p.id = $1`;
 export const CHECK_VALID_INVITATION = `SELECT 1 FROM users WHERE id = $1 AND deleted = FALSE AND EXISTS (SELECT 1 FROM projects WHERE id = $2 
 AND deleted = FALSE) AND EXISTS (SELECT 1 FROM project_roles WHERE id = $3)`;
 
-export const CREATE_BLOG = `INSERT INTO blogs (user_id, project_id, title, body)
-select $1, p.id, $3, $4 from projects p where p.id = $2 and p.deleted = false RETURNING *`;
+export const CREATE_BLOG = `INSERT INTO blogs (user_id, project_id, title_us, title_es, body_us, body_es)
+select $1, p.id, $3, $4, $5, $6 from projects p where p.id = $2 and p.deleted = false RETURNING *`;
 
 export const DELETE_BLOG = `DELETE FROM blogs b USING projects p
 WHERE p.deleted = FALSE AND p.id = $2 AND b.id = $1`;
 
-export const UPDATE_BLOGS = `UPDATE blogs SET title = COALESCE($1, title), body = COALESCE($2, body) WHERE id = $3 
-AND EXISTS(SELECT 1 FROM projects p WHERE p.id = $4 AND p.deleted = FALSE) RETURNING *`;
+export const UPDATE_BLOGS = `UPDATE blogs SET title_us = COALESCE($1, title_us), title_es = COALESCE($2, title_es), body_us = COALESCE($3, body_us),
+body_es = COALESCE($4, body_es) WHERE id = $5 AND EXISTS(SELECT 1 FROM projects p WHERE p.id = $6 AND p.deleted = FALSE) RETURNING *`;
 
 export const CREATE_TAG = `INSERT INTO tags (name) VALUES($1) RETURNING *`;
 
@@ -168,11 +186,14 @@ JOIN projects p ON p.id = $1 AND p.deleted = FALSE AND t.id = $2 RETURNING *`;
 export const REMOVE_PROJECT_TAG = `DELETE FROM project_tags pt USING projects p
 WHERE p.deleted = FALSE AND p.id = $1 AND pt.tag_id = $2`;
 
-export const CREATE_PROJECT_EXTERNAL_RESOURCE = `INSERT INTO external_resources (project_id, name, url, url_hash, type)
-SELECT p.id, $2, $3, $4, $5 from projects p where p.id = $1 and p.deleted = false RETURNING *`;
+export const CREATE_PROJECT_EXTERNAL_RESOURCE = `INSERT INTO external_resources (project_id, name_us, name_es, url, url_hash, type)
+SELECT p.id, $2, $3, $4, $5, $6 from projects p where p.id = $1 and p.deleted = false RETURNING id, name_us, COALESCE(name_es, '') as name_es,
+url, type, created_at, updated_at`;
 
-export const UPDATE_PROJECT_EXTERNAL_RESOURCE = `UPDATE external_resources SET name=COALESCE($3, name), url=COALESCE($4, url), url_hash=COALESCE($5, url_hash),
-type=COALESCE($6, type) WHERE id = $2 and EXISTS (SELECT 1 FROM projects p WHERE p.id = $1 AND p.deleted = false) RETURNING *`;
+export const UPDATE_PROJECT_EXTERNAL_RESOURCE = `UPDATE external_resources SET name_us=COALESCE($3, name_us), name_es=COALESCE($4, name_es),
+url=COALESCE($5, url), url_hash=COALESCE($6, url_hash), type=COALESCE($7, type) WHERE id = $2 and EXISTS 
+(SELECT 1 FROM projects p WHERE p.id = $1 AND p.deleted = false) RETURNING id, project_id, name_us, COALESCE(name_es, '') as name_es, url, type,
+created_at, updated_at`;
 
 export const DELETE_PROJECT_EXTERNAL_RESOURCE = `DELETE FROM external_resources er USING projects p
 where p.id = $1 AND p.deleted = FALSE AND er.id = $2`;
@@ -212,8 +233,8 @@ export const GET_PROJECT_DETAILS = `select p.*, json_agg(jsonb_build_object('id'
 'username', u.username,'profile_photo', coalesce(u.profile_photo, ''))) as collaborators, coalesce(json_agg(distinct jsonb_build_object('id', t.id,
 'name', t.name)) filter (where t.id is not null), '[]') as tags,coalesce(json_agg(distinct jsonb_build_object('id', tc.id,'name', tc.name)) filter 
 (where tc.id is not null), '[]') as technologies, coalesce(json_agg(distinct jsonb_build_object('id', pm.id,'url', pm.url,
-'type', pm.type)) filter (where pm.id is not null), '[]') as media,coalesce(json_agg(distinct jsonb_build_object('id', er.id,'name', er.name,'url', er.url,
-'type', er.type)) filter (where er.id is not null), '[]') as external_resources from projects p join collaborators c on c.project_id = p.id
+'type', pm.type)) filter (where pm.id is not null), '[]') as media, coalesce(json_agg(distinct jsonb_build_object('id', er.id,'name_us', er.name_us, 'name_es', er.name_es, 
+'url', er.url, 'type', er.type)) filter (where er.id is not null), '[]') as external_resources from projects p join collaborators c on c.project_id = p.id
 join project_roles pr on pr.id = c.role_id join users u on u.id = c.user_id left join project_tags pt on pt.project_id = p.id left join tags t on t.id = pt.tag_id
 left join projects_technologies ptc on ptc.project_id = p.id left join technologies tc on tc.id = ptc.technology_id left join projects_media pm on 
 pm.project_id = p.id left join external_resources er on er.project_id  = p.id left join collaborators c2 on c2.project_id = p.id and c2.role_id = 1
@@ -236,11 +257,12 @@ p.id = b.project_id and p.deleted = false where p.id = $1`;
 
 export const CREATE_USER_PROFILE = `INSERT INTO user_profiles (user_id) SELECT u.id FROM users u WHERE u.id = $1 AND u.deleted = FALSE`;
 
-export const UPDATE_USER_PROFILE = `UPDATE user_profiles up SET long_description=COALESCE($1, long_description), repo_url=COALESCE($2, repo_url), 
-website_url=COALESCE($3, website_url), linkedin_url=COALESCE($4, linkedin_url), location=COALESCE($5, location) WHERE up.user_id = $6 AND EXISTS 
-(SELECT 1 FROM users u WHERE u.deleted = FALSE AND u.id = up.user_id) RETURNING user_id, COALESCE(long_description, '') as long_description, 
-COALESCE(repo_url, '') as repo_url, COALESCE(website_url, '') as website_url, COALESCE(linkedin_url, '') as linkedin_url, 
-COALESCE(location, '') as location, created_at, updated_at`;
+export const UPDATE_USER_PROFILE = `UPDATE user_profiles up SET long_description_us=COALESCE($1, long_description_us), 
+long_description_es=COALESCE($2, long_description_es), repo_url=COALESCE($3, repo_url), website_url=COALESCE($4, website_url), 
+linkedin_url=COALESCE($5, linkedin_url), location_us=COALESCE($6, location_us), location_es=COALESCE($7, location_es) WHERE up.user_id = $8
+AND EXISTS (SELECT 1 FROM users u WHERE u.deleted = FALSE AND u.id = up.user_id) RETURNING user_id, COALESCE(long_description_us, '') as long_description_us,
+COALESCE(long_description_es, '') as long_description_es, COALESCE(repo_url, '') as repo_url, COALESCE(website_url, '') as website_url, COALESCE(linkedin_url, '')
+as linkedin_url, COALESCE(location_us, '') as location_us, COALESCE(location_es, '') as location_es, created_at, updated_at`;
 
 export const CREATE_GLOBAL_ROLE = `INSERT INTO global_roles (role_name) VALUES($1) RETURNING *`;
 

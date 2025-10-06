@@ -15,6 +15,12 @@ paths:
         - Users
       parameters:
         - in: query
+          name: lang
+          schema:
+            type: integer
+            default: 20
+          description: Language for field "short_description". Either "US" or "ES". Defaults is "US"
+        - in: query
           name: limit
           schema:
             type: integer
