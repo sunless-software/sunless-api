@@ -40,10 +40,10 @@ export const COUNT_USERS = `SELECT COUNT(*) AS total FROM users u where ($1::boo
 
 export const GET_USER_STATUS = `SELECT banned FROM users WHERE id = $1 AND deleted = false LIMIT 1`;
 
-export const CREATE_USER = `INSERT INTO users (rol_id, username, password, profile_photo, phone, email, short_description, job_title, public, banned, deleted) 
-VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", 
-coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description, '') as "short_description", job_title, public, deleted, banned, 
-created_at, updated_at`;
+export const CREATE_USER = `INSERT INTO users (rol_id, username, password, profile_photo, phone, email, short_description_us, short_description_es,
+job_title, public, banned, deleted) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id, rol_id, username, '****' as password,
+coalesce(profile_photo, '') as profile_photo, coalesce(phone, '') as phone, coalesce(email, '') as email, coalesce(short_description_us, '') as short_description_us,
+coalesce(short_description_es, '') as short_description_es, job_title, public, deleted, banned, created_at, updated_at`;
 
 export const SOFT_DELETE_USER = `UPDATE users SET deleted = true WHERE id = $1 AND deleted = false`;
 

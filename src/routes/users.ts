@@ -19,6 +19,7 @@ import updatePasswordValidation from "../validations/updatePassword";
 const usersRouter = Router();
 
 usersRouter.get(
+  // TODO: Revisar
   "/",
   conditionalQueryMiddleware([
     {
@@ -37,6 +38,7 @@ usersRouter.get(
 );
 
 usersRouter.patch(
+  // TODO: Revisar
   "/change-password",
   updateOwnPasswordValidation,
   usersController.changePassword
@@ -57,6 +59,7 @@ usersRouter.post(
 );
 
 usersRouter.get(
+  // TODO: Revisar
   "/:userID",
   conditionalQueryMiddleware([
     {
@@ -75,6 +78,7 @@ usersRouter.get(
 );
 
 usersRouter.delete(
+  // TODO: Revisar
   "/:userID",
   ownershipMiddleware(null, GLOBAL_PERMISSIONS.deleteUsers),
   deleteUserValidation,
@@ -82,6 +86,7 @@ usersRouter.delete(
 );
 
 usersRouter.patch(
+  // TODO: Revisar
   `/:userID`,
   ownershipMiddleware(
     GLOBAL_PERMISSIONS.updateOwnUser,
@@ -92,6 +97,7 @@ usersRouter.patch(
 );
 
 usersRouter.patch(
+  // TODO: Revisar
   "/recover/:userID",
   roleMiddleware([GLOBAL_PERMISSIONS.recoverUsers]),
   recoverUserValidation,
@@ -99,6 +105,7 @@ usersRouter.patch(
 );
 
 usersRouter.patch(
+  // TODO: Revisar
   `/ban/:userID`,
   roleMiddleware([GLOBAL_PERMISSIONS.banUsers]),
   banUserValidation,
@@ -106,6 +113,7 @@ usersRouter.patch(
 );
 
 usersRouter.patch(
+  // TODO: Revisar
   `/unban/:userID`,
   ownershipMiddleware(
     GLOBAL_PERMISSIONS.unbanOwnUser,
@@ -116,6 +124,7 @@ usersRouter.patch(
 );
 
 usersRouter.patch(
+  // TODO: Revisar
   `/:userID/role`,
   roleMiddleware([GLOBAL_PERMISSIONS.manageUserRoles]),
   updateUserRoleValidation,

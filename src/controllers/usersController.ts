@@ -102,7 +102,8 @@ const usersController = {
       phone,
       email,
       jobTitle,
-      shortDescription,
+      shortDescriptionUS,
+      shortDescriptionES,
       publicProfile,
     } = req.body;
 
@@ -119,7 +120,8 @@ const usersController = {
         profilePhoto,
         phone,
         email,
-        shortDescription,
+        shortDescriptionUS,
+        shortDescriptionES,
         jobTitle,
         publicProfile,
         false,
