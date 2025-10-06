@@ -346,6 +346,7 @@ const projectsController = {
   getProjects: async (req: Request, res: Response, next: NextFunction) => {
     const { userID } = req.params;
     const {
+      lang = "US",
       offset = 0,
       limit = 20,
       showPrivateProjects = false,
@@ -373,20 +374,39 @@ const projectsController = {
       ]);
 
       const projects = resultProjects.rows.map((project) => {
-        const { name_hash, key, is_collaborator, deleted, ...cleanProject } =
-          project;
+        const {
+          name_hash,
+          key,
+          is_collaborator,
+          deleted,
+          short_description_us,
+          long_description_us,
+          short_description_es,
+          long_description_es,
+          ...cleanProject
+        } = project;
 
         if (project.public || project.is_collaborator) {
           const decryptedProjectKey = decryptText(project.key);
+          let shortDescription = "";
+          let longDescription = "";
+
+          if (lang === "ES") {
+            shortDescription = short_description_es;
+            longDescription = long_description_es;
+          } else {
+            shortDescription = short_description_us;
+            longDescription = long_description_us;
+          }
 
           return {
             ...cleanProject,
             name: decryptText(project.name, decryptedProjectKey),
-            short_description: project.short_description
-              ? decryptText(project.short_description, decryptedProjectKey)
+            short_description: shortDescription
+              ? decryptText(shortDescription, decryptedProjectKey)
               : "",
-            long_description: project.long_description
-              ? decryptText(project.long_description, decryptedProjectKey)
+            long_description: longDescription
+              ? decryptText(longDescription, decryptedProjectKey)
               : "",
           };
         }
