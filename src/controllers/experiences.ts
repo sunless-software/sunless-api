@@ -73,9 +73,12 @@ const experiencesController = {
     const { userID, experienceID } = req.params;
     const {
       companyName,
-      role,
-      description,
-      location,
+      roleUS,
+      roleES,
+      descriptionUS,
+      descriptionES,
+      locationUS,
+      locationES,
       startDate,
       endDate,
       companyLogo,
@@ -85,9 +88,12 @@ const experiencesController = {
     try {
       const result = await db.query(PATCH_EXPERIENCE, [
         companyName,
-        role,
-        description,
-        location,
+        roleUS,
+        roleES,
+        descriptionUS,
+        descriptionES,
+        locationUS,
+        locationES,
         startDate,
         endDate,
         companyLogo,

@@ -65,7 +65,6 @@ async function start() {
 
   apiRouter.use("/users", authMiddleware, usersRouter); // TODO: Revisar
   apiRouter.use(
-    // TODO: Revisar
     "/users/:userID/experiences",
     authMiddleware,
     experiencesRouter

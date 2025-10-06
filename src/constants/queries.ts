@@ -67,10 +67,12 @@ from users u where u.id = $11 and u.deleted = false RETURNING id, user_id, compa
 COALESCE(description_es, '') as description_es, location_us, COALESCE(location_es, '') as location_es, start_date, end_date, coalesce(company_logo, '') 
 as "company_logo", created_at, updated_at`;
 
-export const PATCH_EXPERIENCE = `UPDATE experiences SET company_name=COALESCE($1, company_name), role=COALESCE($2, role), description=COALESCE($3, description), 
-location=COALESCE($4, location), start_date=COALESCE($5, start_date), end_date=COALESCE($6, end_date), company_logo=COALESCE($7, company_logo) WHERE id=$8
-and exists (select 1 from users u where u.id = $9 and u.deleted = false) RETURNING id, user_id, company_name, role, description, location, start_date, 
-end_date, coalesce(company_logo, '') as "company_logo", created_at, updated_at`;
+export const PATCH_EXPERIENCE = `UPDATE experiences SET company_name=COALESCE($1, company_name), role_us=COALESCE($2, role_us), role_es=COALESCE($3, role_es), 
+description_us=COALESCE($4, description_us), description_es=COALESCE($5, description_es), location_us=COALESCE($6, location_us), 
+location_es=COALESCE($7, location_es), start_date=COALESCE($8, start_date), end_date=COALESCE($9, end_date), company_logo=COALESCE($10, company_logo) WHERE id=$11
+and exists (select 1 from users u where u.id = $12 and u.deleted = false) RETURNING id, user_id, company_name, role_us, COALESCE(role_es, '') as role_es,
+description_us, COALESCE(description_es, '') as description_es, location_us, COALESCE(location_es, '') as location_es, start_date, end_date, 
+coalesce(company_logo, '') as "company_logo", created_at, updated_at`;
 
 export const DELETE_EXPERIENCE = `DELETE FROM experiences e USING users u WHERE e.id = $1 AND u.id = $2 AND u.deleted = false`;
 
