@@ -30,7 +30,6 @@ blogsRouter.post(
 );
 
 blogsRouter.patch(
-  // TODO: Revisar
   "/:blogID",
   projectRoleMiddleware(
     GLOBAL_PERMISSIONS.updateBlogs,

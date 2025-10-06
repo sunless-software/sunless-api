@@ -88,7 +88,7 @@ const blogsController = {
   },
   updateBlogs: async (req: Request, res: Response, next: NextFunction) => {
     const { projectID, blogID } = req.params;
-    const { title, content } = req.body;
+    const { titleUS, titleES, contentUS, contentES } = req.body;
     const db = await connectToDB();
 
     try {
@@ -101,16 +101,25 @@ const blogsController = {
       const encryptedProjectKey = getProjectKeyResult.rows[0].key;
       const decryptedProjectKey = decryptText(encryptedProjectKey);
 
-      const encryptedTitle = title
-        ? encryptText(title, decryptedProjectKey)
-        : title;
-      const encryptedContent = content
-        ? encryptText(content, decryptedProjectKey)
-        : content;
+      const encryptedTitleUS = titleUS
+        ? encryptText(titleUS, decryptedProjectKey)
+        : titleUS;
+      const encryptedContentUS = contentUS
+        ? encryptText(contentUS, decryptedProjectKey)
+        : contentUS;
+
+      const encryptedTitleES = titleES
+        ? encryptText(titleES, decryptedProjectKey)
+        : titleES;
+      const encryptedContentES = contentES
+        ? encryptText(contentES, decryptedProjectKey)
+        : contentES;
 
       const result = await db.query(UPDATE_BLOGS, [
-        encryptedTitle,
-        encryptedContent,
+        encryptedTitleUS,
+        encryptedTitleES,
+        encryptedContentUS,
+        encryptedContentES,
         blogID,
         projectID,
       ]);
@@ -127,13 +136,22 @@ const blogsController = {
           message: BLOG_SUCCESSFULY_UPDATED,
           data: {
             ...updatedBlog,
-            title: decryptText(updatedBlog.title, decryptedProjectKey),
-            body: decryptText(updatedBlog.body, decryptedProjectKey),
+            title_us: decryptText(updatedBlog.title_us, decryptedProjectKey),
+            body_us: decryptText(updatedBlog.body_us, decryptedProjectKey),
+            title_es: updatedBlog.title_es
+              ? decryptText(updatedBlog.title_es, decryptedProjectKey)
+              : "",
+            body_es: updatedBlog.body_es
+              ? decryptText(updatedBlog.body_es, decryptedProjectKey)
+              : "",
           },
         },
         res
       );
     } catch (err) {
+      console.log("balabinga");
+      console.log(err);
+
       return next(err);
     }
   },

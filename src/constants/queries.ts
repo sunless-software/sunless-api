@@ -155,8 +155,8 @@ select $1, p.id, $3, $4, $5, $6 from projects p where p.id = $2 and p.deleted = 
 export const DELETE_BLOG = `DELETE FROM blogs b USING projects p
 WHERE p.deleted = FALSE AND p.id = $2 AND b.id = $1`;
 
-export const UPDATE_BLOGS = `UPDATE blogs SET title = COALESCE($1, title), body = COALESCE($2, body) WHERE id = $3 
-AND EXISTS(SELECT 1 FROM projects p WHERE p.id = $4 AND p.deleted = FALSE) RETURNING *`;
+export const UPDATE_BLOGS = `UPDATE blogs SET title_us = COALESCE($1, title_us), title_es = COALESCE($2, title_es), body_us = COALESCE($3, body_us),
+body_es = COALESCE($4, body_es) WHERE id = $5 AND EXISTS(SELECT 1 FROM projects p WHERE p.id = $6 AND p.deleted = FALSE) RETURNING *`;
 
 export const CREATE_TAG = `INSERT INTO tags (name) VALUES($1) RETURNING *`;
 
