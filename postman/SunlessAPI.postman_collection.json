@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"sunless_user\",\n    \"password\": \"Password12345!\"\n}",
+							"raw": "{\n    \"username\": \"sunless_admin\",\n    \"password\": \"Password123!\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -252,7 +252,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n   \"description\": \"i did things here\"\n}",
+									"raw": "{\n   \"descriptionUS\": \"updated education description\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -289,7 +289,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"startDate\": \"2024-03-25\",\n    \"endDate\": \"2024-03-25\",\n    \"institution\": \"remote dev academy\",\n    \"field\": \"dev\",\n    \"location\": \"remote\",\n    \"description\": \"i studied things here\"\n}",
+									"raw": "{\n    \"startDate\": \"2024-03-25\",\n    \"endDate\": \"2024-03-25\",\n    \"institution\": \"remote dev academy\",\n    \"fieldUS\": \"dev\",\n    \"locationUS\": \"remote\",\n    \"descriptionUS\": \"i studied things here\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -330,7 +330,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"userID\": 1,\n    \"companyName\": \"Software Corp\",\n    \"role\": \"Developer\",\n    \"description\": \"I develop software for Software Corp\",\n    \"location\": \"Remote\",\n    \"startDate\": \"2023-09-26\",\n    \"endDate\": \"2023-09-26\",\n    \"companyLogo\": \"www.google.png\"\n}",
+									"raw": "{\n    \"userID\": 1,\n    \"companyName\": \"Software Corp\",\n    \"roleUS\": \"Developer\",\n    \"descriptionUS\": \"I develop software for Software Corp\",\n    \"locationUS\": \"Remote\",\n    \"startDate\": \"2023-09-26\",\n    \"endDate\": \"2023-09-26\",\n    \"companyLogo\": \"www.google.png\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -394,7 +394,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"role\": \"Cloud engineer\"\n}",
+									"raw": "{\n    \"roleUS\": \"Cloud engineer\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -436,7 +436,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"linkedinUrl\": \"https://www.linkedin.com/my-linkedin\",\n    \"repoUrl\": \"https://www.github.com/my-repo\",\n    \"location\": \"Buenos Aires\"\n}",
+									"raw": "{\n    \"linkedinUrl\": \"https://www.linkedin.com/my-linkedin\",\n    \"repoUrl\": \"https://www.github.com/my-repo\",\n    \"locationUS\": \"Buenos Aires\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -505,6 +505,11 @@
 									"key": "showBannedUsers",
 									"value": "true",
 									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ES",
+									"disabled": true
 								}
 							]
 						}
@@ -524,7 +529,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"roleID\": 1,\n    \"username\": \"john\",\n    \"password\": \"Password123!\",\n    \"profilePhoto\": \"http://myphoto.png\",\n    \"phone\": \"1131758941\",\n    \"email\": \"emailfalso123@gmail.com\",\n    \"jobTitle\": \"Software developer\",\n    \"shortDescription\": \"There is always another secret\",\n    \"publicProfile\": true\n}",
+							"raw": "{\n    \"roleID\": 1,\n    \"username\": \"john\",\n    \"password\": \"Password123!\",\n    \"profilePhoto\": \"http://myphoto.png\",\n    \"phone\": \"1131758941\",\n    \"email\": \"emailfalso123@gmail.com\",\n    \"jobTitle\": \"Software developer\",\n    \"shortDescriptionUS\": \"There is always another secret\",\n    \"publicProfile\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -738,7 +743,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/v1/users/1",
+							"raw": "{{host}}/api/v1/users/3",
 							"host": [
 								"{{host}}"
 							],
@@ -746,7 +751,7 @@
 								"api",
 								"v1",
 								"users",
-								"1"
+								"3"
 							],
 							"query": [
 								{
@@ -762,6 +767,11 @@
 								{
 									"key": "showDeletedUsers",
 									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ES",
 									"disabled": true
 								}
 							]
@@ -1192,7 +1202,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/api/v1/projects/1/blogs?offset=0&limit=20",
+									"raw": "{{host}}/api/v1/projects/1/blogs?offset=0&limit=20&lang=ES",
 									"host": [
 										"{{host}}"
 									],
@@ -1211,6 +1221,10 @@
 										{
 											"key": "limit",
 											"value": "20"
+										},
+										{
+											"key": "lang",
+											"value": "ES"
 										}
 									]
 								}
@@ -1230,7 +1244,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"title\": \"my blog\",\n    \"content\": \"my blog content\"\n}",
+									"raw": "{\n    \"titleUS\": \"my blog\",\n    \"contentUS\": \"my blog content\",\n    \"titleES\": \"mi blog\",\n    \"contentES\": \"contenido de mi blog\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1294,7 +1308,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"title\": \"updated blog title\",\n    \"content\": \"updated blog content\"\n}",
+									"raw": "{\n    \"titleUS\": \"updated blog title\",\n    \"contentUS\": \"updated blog content\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1302,7 +1316,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/api/v1/projects/1/blogs/2",
+									"raw": "{{host}}/api/v1/projects/1/blogs/1",
 									"host": [
 										"{{host}}"
 									],
@@ -1312,7 +1326,7 @@
 										"projects",
 										"1",
 										"blogs",
-										"2"
+										"1"
 									]
 								}
 							},
@@ -1580,7 +1594,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"My repo\",\n    \"url\": \"https://www.github.com/my-repo\",\n    \"type\": \"GITHUB\"\n}",
+									"raw": "{\n    \"nameUS\": \"My repo\",\n    \"url\": \"https://www.github.com/my-repo\",\n    \"type\": \"GITHUB\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1683,7 +1697,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"my project\",\n    \"shortDescription\": \"short desc\",\n    \"longDescription\": \"long project description\",\n    \"logo\": \"https://www.my-project-logo.png\",\n    \"status\": \"FINISHED\",\n    \"publicProject\": false,\n    \"startDate\": \"2024-03-28\",\n    \"endDate\": \"2024-04-27\",\n    \"estimatedEnd\": \"2024-04-23\"\n}",
+							"raw": "{\n    \"name\": \"my project\",\n    \"shortDescriptionUS\": \"short desc\",\n    \"shortDescriptionES\": \"descripcion corta\",\n    \"longDescriptionUS\": \"long project description\",\n    \"longDescriptionES\": \"descripcion larga del proyecto\",\n    \"logo\": \"https://www.my-project-logo.png\",\n    \"status\": \"FINISHED\",\n    \"publicProject\": false,\n    \"startDate\": \"2024-03-28\",\n    \"endDate\": \"2024-04-27\",\n    \"estimatedEnd\": \"2024-04-23\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1848,7 +1862,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/v1/projects?showPrivateProjects=true",
+							"raw": "{{host}}/api/v1/projects?showPrivateProjects=true&lang=ES&offset=0&limit=20",
 							"host": [
 								"{{host}}"
 							],
@@ -1861,6 +1875,23 @@
 								{
 									"key": "showPrivateProjects",
 									"value": "true"
+								},
+								{
+									"key": "lang",
+									"value": "ES"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "tags",
+									"value": "1, 2",
+									"disabled": true
 								}
 							]
 						}
@@ -1891,6 +1922,13 @@
 								"v1",
 								"projects",
 								"1"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "ES",
+									"disabled": true
+								}
 							]
 						}
 					},
