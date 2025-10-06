@@ -12,22 +12,38 @@ const updateProjectsValidation = [
     .bail()
     .isLength({ min: 1 })
     .withMessage("'name' cannot be empty"),
-  body("shortDescription")
+  body("shortDescriptionUS")
     .optional()
     .isString()
-    .withMessage("'shortDescription' must be an string")
+    .withMessage("'shortDescriptionUS' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'shortDescription' cannot be empty")
+    .withMessage("'shortDescriptionUS' cannot be empty")
     .isLength({ max: 64 })
-    .withMessage("'shortDescription' cannot have more than 64 characters"),
-  body("longDescription")
+    .withMessage("'shortDescriptionUS' cannot have more than 64 characters"),
+  body("shortDescriptionES")
     .optional()
     .isString()
-    .withMessage("'longDescription' must be an string")
+    .withMessage("'shortDescriptionES' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'longDescription' cannot be empty"),
+    .withMessage("'shortDescriptionES' cannot be empty")
+    .isLength({ max: 64 })
+    .withMessage("'shortDescriptionES' cannot have more than 64 characters"),
+  body("longDescriptionUS")
+    .optional()
+    .isString()
+    .withMessage("'longDescriptionUS' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'longDescriptionUS' cannot be empty"),
+  body("longDescriptionES")
+    .optional()
+    .isString()
+    .withMessage("'longDescriptionES' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'longDescriptionES' cannot be empty"),
   body("logo").optional().isURL().withMessage("'logo' must be a valid url"),
   body("status")
     .optional()

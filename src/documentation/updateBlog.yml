@@ -30,13 +30,21 @@ paths:
             schema:
               type: object
               properties:
-                title:
+                titleUS:
                   type: string
                   example: Updated blog title
                   description: Optional. Must be a non-empty string if provided.
-                content:
+                titleES:
+                  type: string
+                  example: Titulo del blog actualizado
+                  description: Optional. Must be a non-empty string if provided.
+                contentUS:
                   type: string
                   example: Updated content
+                  description: Optional. Must be a non-empty string if provided.
+                contentES:
+                  type: string
+                  example: Contenido actualizado
                   description: Optional. Must be a non-empty string if provided.
       responses:
         "200":
@@ -64,12 +72,18 @@ paths:
                       project_id:
                         type: integer
                         example: 1
-                      title:
+                      title_us:
                         type: string
                         example: Updated blog title
-                      body:
+                      title_es:
+                        type: string
+                        example: Titulo del blog actualizado
+                      body_us:
                         type: string
                         example: Updated content
+                      body_es:
+                        type: string
+                        example: Contenido actualizado
                       created_at:
                         type: string
                         format: date-time

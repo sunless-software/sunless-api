@@ -4,6 +4,7 @@ import { validateResult } from "../utils";
 
 const getBlogsFromProjectValidation = [
   param("projectID").isNumeric().withMessage("project 'id' must be a number"),
+  query("lang").optional().isIn(["US", "ES"]),
   query("offset")
     .optional()
     .isInt({ min: 0 })

@@ -45,8 +45,10 @@ const projectsController = {
     const authID = (req as AuthRequest).user.id;
     let {
       name,
-      shortDescription,
-      longDescription,
+      shortDescriptionUS,
+      longDescriptionUS,
+      shortDescriptionES,
+      longDescriptionES,
       logo,
       status,
       publicProject,
@@ -61,10 +63,15 @@ const projectsController = {
     const encryptedProjectKey = encryptText(projectKey);
 
     const encryptedProjectName = encryptText(name, projectKey);
-    const encryptedProjectShortDescription =
-      shortDescription && encryptText(shortDescription, projectKey);
-    const encryptedProjectLongDescription =
-      longDescription && encryptText(longDescription, projectKey);
+
+    const encryptedProjectShortDescriptionUS =
+      shortDescriptionUS && encryptText(shortDescriptionUS, projectKey);
+    const encryptedProjectLongDescriptionUS =
+      longDescriptionUS && encryptText(longDescriptionUS, projectKey);
+    const encryptedProjectShortDescriptionES =
+      shortDescriptionES && encryptText(shortDescriptionES, projectKey);
+    const encryptedProjectLongDescriptionES =
+      longDescriptionES && encryptText(longDescriptionES, projectKey);
 
     try {
       await db.query("BEGIN");
@@ -72,8 +79,10 @@ const projectsController = {
       const createProject = await db.query(CREATE_PROJECT, [
         encryptedProjectName,
         nameHash,
-        encryptedProjectShortDescription,
-        encryptedProjectLongDescription,
+        encryptedProjectShortDescriptionUS,
+        encryptedProjectShortDescriptionES,
+        encryptedProjectLongDescriptionUS,
+        encryptedProjectLongDescriptionES,
         logo,
         status,
         publicProject,
@@ -98,8 +107,10 @@ const projectsController = {
             {
               ...createdProject,
               name: name,
-              short_description: shortDescription || "",
-              long_description: longDescription || "",
+              short_description_us: shortDescriptionUS || "",
+              long_description_us: longDescriptionUS || "",
+              short_description_es: shortDescriptionES || "",
+              long_description_es: longDescriptionES || "",
             },
           ],
         },
@@ -114,8 +125,10 @@ const projectsController = {
     const { projectID } = req.params;
     let {
       name,
-      shortDescription,
-      longDescription,
+      shortDescriptionUS,
+      shortDescriptionES,
+      longDescriptionUS,
+      longDescriptionES,
       logo,
       status,
       publicProject,
@@ -140,18 +153,28 @@ const projectsController = {
       const nameHash =
         name && crypto.createHash("sha256").update(name).digest("hex");
       name = name ? encryptText(name, decryptedProjectKey) : name;
-      shortDescription = shortDescription
-        ? encryptText(shortDescription, decryptedProjectKey)
-        : shortDescription;
-      longDescription = longDescription
-        ? encryptText(longDescription, decryptedProjectKey)
-        : longDescription;
+
+      shortDescriptionUS = shortDescriptionUS
+        ? encryptText(shortDescriptionUS, decryptedProjectKey)
+        : shortDescriptionUS;
+      longDescriptionUS = longDescriptionUS
+        ? encryptText(longDescriptionUS, decryptedProjectKey)
+        : longDescriptionUS;
+
+      shortDescriptionES = shortDescriptionES
+        ? encryptText(shortDescriptionES, decryptedProjectKey)
+        : shortDescriptionES;
+      longDescriptionES = longDescriptionES
+        ? encryptText(longDescriptionES, decryptedProjectKey)
+        : longDescriptionES;
 
       const result = await db.query(UPDATE_PROJECT, [
         name,
         nameHash,
-        shortDescription,
-        longDescription,
+        shortDescriptionUS,
+        shortDescriptionES,
+        longDescriptionUS,
+        longDescriptionES,
         logo,
         status,
         publicProject,
@@ -173,18 +196,31 @@ const projectsController = {
               name: resultProjectData.name
                 ? decryptText(resultProjectData.name, decryptedProjectKey)
                 : resultProjectData.name,
-              short_description: resultProjectData.short_description
+              short_description_us: resultProjectData.short_description_us
                 ? decryptText(
-                    resultProjectData.short_description,
+                    resultProjectData.short_description_us,
                     decryptedProjectKey
                   )
-                : resultProjectData.short_description,
-              long_description: resultProjectData.long_description
+                : resultProjectData.short_description_us,
+              long_description_us: resultProjectData.long_description_us
                 ? decryptText(
-                    resultProjectData.long_description,
+                    resultProjectData.long_description_us,
                     decryptedProjectKey
                   )
-                : resultProjectData.long_description,
+                : resultProjectData.long_description_us,
+
+              short_description_es: resultProjectData.short_description_es
+                ? decryptText(
+                    resultProjectData.short_description_es,
+                    decryptedProjectKey
+                  )
+                : resultProjectData.short_description_es,
+              long_description_es: resultProjectData.long_description_es
+                ? decryptText(
+                    resultProjectData.long_description_es,
+                    decryptedProjectKey
+                  )
+                : resultProjectData.long_description_es,
             },
           ],
         },
@@ -310,6 +346,7 @@ const projectsController = {
   getProjects: async (req: Request, res: Response, next: NextFunction) => {
     const { userID } = req.params;
     const {
+      lang = "US",
       offset = 0,
       limit = 20,
       showPrivateProjects = false,
@@ -337,20 +374,39 @@ const projectsController = {
       ]);
 
       const projects = resultProjects.rows.map((project) => {
-        const { name_hash, key, is_collaborator, deleted, ...cleanProject } =
-          project;
+        const {
+          name_hash,
+          key,
+          is_collaborator,
+          deleted,
+          short_description_us,
+          long_description_us,
+          short_description_es,
+          long_description_es,
+          ...cleanProject
+        } = project;
 
         if (project.public || project.is_collaborator) {
           const decryptedProjectKey = decryptText(project.key);
+          let shortDescription = "";
+          let longDescription = "";
+
+          if (lang === "ES") {
+            shortDescription = short_description_es;
+            longDescription = long_description_es;
+          } else {
+            shortDescription = short_description_us;
+            longDescription = long_description_us;
+          }
 
           return {
             ...cleanProject,
             name: decryptText(project.name, decryptedProjectKey),
-            short_description: project.short_description
-              ? decryptText(project.short_description, decryptedProjectKey)
+            short_description: shortDescription
+              ? decryptText(shortDescription, decryptedProjectKey)
               : "",
-            long_description: project.long_description
-              ? decryptText(project.long_description, decryptedProjectKey)
+            long_description: longDescription
+              ? decryptText(longDescription, decryptedProjectKey)
               : "",
           };
         }
@@ -388,6 +444,7 @@ const projectsController = {
     res: Response,
     next: NextFunction
   ) => {
+    const { lang } = req.query;
     const { projectID } = req.params;
     const authID = (req as AuthRequest).user.id;
     const db = await connectToDB();
@@ -412,20 +469,36 @@ const projectsController = {
         const decryptedProjectKey = decryptText(encryptedProjectKey);
 
         projectData.name = decryptText(projectData.name, decryptedProjectKey);
-        projectData.short_description = decryptText(
-          projectData.short_description,
-          decryptedProjectKey
-        );
-        projectData.long_description = decryptText(
-          projectData.long_description,
-          decryptedProjectKey
-        );
+
+        let shortDescription = "";
+        let longDescription = "";
+
+        if (lang === "ES") {
+          shortDescription = projectData.short_description_es;
+          longDescription = projectData.long_description_es;
+        } else {
+          shortDescription = projectData.short_description_us;
+          longDescription = projectData.long_description_us;
+        }
+
+        projectData.short_description = shortDescription
+          ? decryptText(shortDescription, decryptedProjectKey)
+          : "";
+
+        projectData.long_description = longDescription
+          ? decryptText(longDescription, decryptedProjectKey)
+          : "";
 
         projectData.external_resources = projectData.external_resources.map(
           (externalResource: ProjectExternalResource) => {
+            const { name_es, name_us, ...cleanExternalResource } =
+              externalResource;
+            const name = lang === "ES" ? name_es : name_us;
+
             return {
-              ...externalResource,
+              ...cleanExternalResource,
               url: decryptText(externalResource.url, decryptedProjectKey),
+              name: name || "",
             };
           }
         );
@@ -435,7 +508,16 @@ const projectsController = {
         });
       }
 
-      const { name_hash, key, deleted, ...cleanProject } = projectData;
+      const {
+        name_hash,
+        key,
+        deleted,
+        short_description_us,
+        long_description_us,
+        short_description_es,
+        long_description_es,
+        ...cleanProject
+      } = projectData;
 
       sendResponse(
         {

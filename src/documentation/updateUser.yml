@@ -50,9 +50,13 @@ paths:
                   format: email
                   example: "johndoe@example.com"
                   description: Must be a valid email
-                shortDescription:
+                shortDescriptionUS:
                   type: string
                   example: "There is always another secret"
+                  description: Must be a non-empty string and max 80 characters
+                shortDescriptionES:
+                  type: string
+                  example: "Siempre hay otro secreto"
                   description: Must be a non-empty string and max 80 characters
                 jobTitle:
                   type: string
@@ -91,9 +95,13 @@ paths:
                   email:
                     type: string
                     example: johndoe@example.com
-                  short_description:
+                  short_description_us:
                     type: string
                     example: There is always another secret
+                    nullable: true
+                  short_description_es:
+                    type: string
+                    example: Siempre hay otro secreto
                     nullable: true
                   job_title:
                     type: string

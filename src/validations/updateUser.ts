@@ -42,14 +42,22 @@ const updateUserValidation = [
     .withMessage("email must be a valid email")
     .trim()
     .normalizeEmail(),
-  body("shortDescription")
+  body("shortDescriptionUS")
     .optional()
     .isString()
-    .withMessage("'shortDescription' must be an string")
+    .withMessage("'shortDescriptionUS' must be an string")
     .isLength({ min: 1 })
-    .withMessage("'shortDescription' cannot be empty")
+    .withMessage("'shortDescriptionUS' cannot be empty")
     .isLength({ max: 80 })
-    .withMessage("'shortDescription' cannot be longer than 80 characters"),
+    .withMessage("'shortDescriptionUS' cannot be longer than 80 characters"),
+  body("shortDescriptionES")
+    .optional()
+    .isString()
+    .withMessage("'shortDescriptionES' must be an string")
+    .isLength({ min: 1 })
+    .withMessage("'shortDescriptionES' cannot be empty")
+    .isLength({ max: 80 })
+    .withMessage("'shortDescriptionES' cannot be longer than 80 characters"),
   body("publicProfile")
     .optional()
     .isBoolean()

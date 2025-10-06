@@ -82,11 +82,16 @@ components:
     UpdateUserProfileRequest:
       type: object
       properties:
-        longDescription:
+        longDescriptionUS:
           type: string
           nullable: true
           minLength: 1
           example: "Experienced software developer"
+        longDescriptionES:
+          type: string
+          nullable: true
+          minLength: 1
+          example: "Desarrollador de software experimentado"
         repoUrl:
           type: string
           format: uri
@@ -102,7 +107,13 @@ components:
           format: uri
           nullable: true
           example: "https://www.linkedin.com/my-linkedin"
-        location:
+        locationUS:
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 100
+          example: "Buenos Aires"
+        locationES:
           type: string
           nullable: true
           minLength: 1
@@ -115,9 +126,12 @@ components:
         user_id:
           type: integer
           example: 3
-        long_description:
+        long_description_us:
           type: string
-          example: ""
+          example: "Experienced software developer"
+        long_description_es:
+          type: string
+          example: "Desarrollador de software experimentado"
         repo_url:
           type: string
           example: "https://www.github.com/my-repo"
@@ -127,7 +141,10 @@ components:
         linkedin_url:
           type: string
           example: "https://www.linkedin.com/my-linkedin"
-        location:
+        location_us:
+          type: string
+          example: "Buenos Aires"
+        location_es:
           type: string
           example: "Buenos Aires"
         created_at:

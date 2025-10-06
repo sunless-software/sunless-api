@@ -44,17 +44,29 @@ paths:
                   type: string
                   example: remote dev academy
                   description: Optional. Must be a non-empty string if provided.
-                field:
+                fieldUS:
                   type: string
-                  example: dev
+                  example: Software devlopment
                   description: Optional. Must be a non-empty string if provided.
-                location:
+                fieldES:
+                  type: string
+                  example: Desarrollo de software
+                  description: Optional. Must be a non-empty string if provided.
+                location_us:
                   type: string
                   example: remote
                   description: Optional. Must be a non-empty string if provided.
-                description:
+                location_es:
+                  type: string
+                  example: remota
+                  description: Optional. Must be a non-empty string if provided.
+                description_us:
                   type: string
                   example: i studied things here
+                  description: Optional. Must be a non-empty string if provided.
+                description_es:
+                  type: string
+                  example: Estudie cosas aqui
                   description: Optional. Must be a non-empty string if provided.
       responses:
         "200":
@@ -85,15 +97,24 @@ paths:
                       institution:
                         type: string
                         example: remote dev academy
-                      field:
+                      field_us:
                         type: string
-                        example: dev
-                      location:
+                        example: Software development
+                      field_es:
+                        type: string
+                        example: Desarrollo de software
+                      location_us:
                         type: string
                         example: remote
-                      description:
+                      location_es:
+                        type: string
+                        example: remota
+                      description_us:
                         type: string
                         example: i studied things here
+                      description_es:
+                        type: string
+                        example: Estudie cosas aqui
                       created_at:
                         type: string
                         format: date-time

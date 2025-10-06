@@ -3,6 +3,10 @@ import { query } from "express-validator";
 import { validateResult } from "../utils";
 
 const getProjectsValidation = [
+  query("lang")
+    .optional()
+    .isIn(["US", "ES"])
+    .withMessage("'lang' must be one of: 'US', 'ES'"),
   query("offset")
     .optional()
     .isInt({ min: 0 })

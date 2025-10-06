@@ -27,7 +27,7 @@ import {
 const blogsController = {
   createBlog: async (req: Request, res: Response, next: NextFunction) => {
     const { projectID } = req.params;
-    const { title, content } = req.body;
+    const { titleUS, titleES, contentUS, contentES } = req.body;
     const authID = (req as AuthRequest).user.id;
     const db = await connectToDB();
 
@@ -41,14 +41,22 @@ const blogsController = {
       const encryptedProjectKey = resultGetProjectKey.rows[0].key;
       const decryptedProjectKey = decryptText(encryptedProjectKey);
 
-      const encryptedTitle = encryptText(title, decryptedProjectKey);
-      const encryptedContent = encryptText(content, decryptedProjectKey);
+      const encryptedTitleUS = encryptText(titleUS, decryptedProjectKey);
+      const encryptedContentUS = encryptText(contentUS, decryptedProjectKey);
+      const encryptedTitleES = titleES
+        ? encryptText(titleES, decryptedProjectKey)
+        : "";
+      const encryptedContentES = contentES
+        ? encryptText(contentES, decryptedProjectKey)
+        : "";
 
       const result = await db.query(CREATE_BLOG, [
         authID,
         projectID,
-        encryptedTitle,
-        encryptedContent,
+        encryptedTitleUS,
+        encryptedTitleES,
+        encryptedContentUS,
+        encryptedContentES,
       ]);
 
       const affectedRows = result.rowCount;
@@ -62,7 +70,15 @@ const blogsController = {
           ...DEFAULT_SUCCES_API_RESPONSE,
           status: HTTP_STATUS_CODE_CREATED,
           message: BLOG_SUCCESSFULLY_CREATED_MESSAGE,
-          data: [{ ...result.rows[0], title: title, body: content }],
+          data: [
+            {
+              ...result.rows[0],
+              title_us: titleUS,
+              title_es: titleES || "",
+              body_us: contentUS,
+              body_es: contentES || "",
+            },
+          ],
         },
         res
       );
@@ -72,7 +88,7 @@ const blogsController = {
   },
   updateBlogs: async (req: Request, res: Response, next: NextFunction) => {
     const { projectID, blogID } = req.params;
-    const { title, content } = req.body;
+    const { titleUS, titleES, contentUS, contentES } = req.body;
     const db = await connectToDB();
 
     try {
@@ -85,16 +101,25 @@ const blogsController = {
       const encryptedProjectKey = getProjectKeyResult.rows[0].key;
       const decryptedProjectKey = decryptText(encryptedProjectKey);
 
-      const encryptedTitle = title
-        ? encryptText(title, decryptedProjectKey)
-        : title;
-      const encryptedContent = content
-        ? encryptText(content, decryptedProjectKey)
-        : content;
+      const encryptedTitleUS = titleUS
+        ? encryptText(titleUS, decryptedProjectKey)
+        : titleUS;
+      const encryptedContentUS = contentUS
+        ? encryptText(contentUS, decryptedProjectKey)
+        : contentUS;
+
+      const encryptedTitleES = titleES
+        ? encryptText(titleES, decryptedProjectKey)
+        : titleES;
+      const encryptedContentES = contentES
+        ? encryptText(contentES, decryptedProjectKey)
+        : contentES;
 
       const result = await db.query(UPDATE_BLOGS, [
-        encryptedTitle,
-        encryptedContent,
+        encryptedTitleUS,
+        encryptedTitleES,
+        encryptedContentUS,
+        encryptedContentES,
         blogID,
         projectID,
       ]);
@@ -111,8 +136,14 @@ const blogsController = {
           message: BLOG_SUCCESSFULY_UPDATED,
           data: {
             ...updatedBlog,
-            title: decryptText(updatedBlog.title, decryptedProjectKey),
-            body: decryptText(updatedBlog.body, decryptedProjectKey),
+            title_us: decryptText(updatedBlog.title_us, decryptedProjectKey),
+            body_us: decryptText(updatedBlog.body_us, decryptedProjectKey),
+            title_es: updatedBlog.title_es
+              ? decryptText(updatedBlog.title_es, decryptedProjectKey)
+              : "",
+            body_es: updatedBlog.body_es
+              ? decryptText(updatedBlog.body_es, decryptedProjectKey)
+              : "",
           },
         },
         res
@@ -147,7 +178,12 @@ const blogsController = {
   getBlogs: async (req: Request, res: Response, next: NextFunction) => {
     const authID = (req as AuthRequest).user.id;
     const { userID, projectID } = req.params;
-    const { offset = 0, limit = 20, showPrivateBlogs = false } = req.query;
+    const {
+      offset = 0,
+      limit = 20,
+      showPrivateBlogs = false,
+      lang = "US",
+    } = req.query;
 
     const blogsQuery = userID ? GET_BLOGS_FROM_USER : GET_BLOGS_FROM_PROJECT;
     const countQuery = userID
@@ -166,22 +202,42 @@ const blogsController = {
       ]);
 
       const blogs = resultBlogs.rows.map((blog) => {
-        const { key, collaborators, ["public"]: isPublic, ...cleanBlog } = blog;
+        const {
+          key,
+          collaborators,
+          ["public"]: isPublic,
+          title_us,
+          title_es,
+          body_us,
+          body_es,
+          ...cleanBlog
+        } = blog;
         const isCollaborator = collaborators.some(
           (collaboratorID: number) => collaboratorID === authID
         );
+
+        let blogTitle = "";
+        let blogBody = "";
+
+        if (lang === "ES") {
+          blogTitle = title_es;
+          blogBody = body_es;
+        } else {
+          blogTitle = title_us;
+          blogBody = body_us;
+        }
 
         if (isPublic || isCollaborator) {
           const decryptedProjectKey = decryptText(key);
 
           return {
             ...cleanBlog,
-            title: decryptText(blog.title, decryptedProjectKey),
-            body: decryptText(blog.body, decryptedProjectKey),
+            title: blogTitle ? decryptText(blogTitle, decryptedProjectKey) : "",
+            body: blogBody ? decryptText(blogBody, decryptedProjectKey) : "",
           };
         }
 
-        return cleanBlog;
+        return { ...cleanBlog, title: blogTitle, body: blogBody };
       });
 
       return sendResponse(

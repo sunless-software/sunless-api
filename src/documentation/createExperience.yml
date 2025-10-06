@@ -27,18 +27,30 @@ paths:
                   type: string
                   example: Software Corp
                   description: Required. Must be a non-empty string.
-                role:
+                roleUS:
                   type: string
                   example: Developer
                   description: Required. Must be a non-empty string.
-                description:
+                roleES:
+                  type: string
+                  example: Desarrollador
+                  description: Optional. Must be a non-empty string if provided.
+                descriptionUS:
                   type: string
                   example: I develop software for Software Corp
                   description: Required. Must be a non-empty string.
-                location:
+                descriptionES:
+                  type: string
+                  example: Desarrollo software para una compaña de software
+                  description: Optional. Must be a non-empty string if provided.
+                locationUS:
                   type: string
                   example: Remote
                   description: Required. Must be a non-empty string.
+                locationES:
+                  type: string
+                  example: Remota
+                  description: Optional. Must be a non-empty string if provided.
                 startDate:
                   type: string
                   format: date
@@ -80,15 +92,24 @@ paths:
                       company_name:
                         type: string
                         example: Software Corp
-                      role:
+                      role_us:
                         type: string
                         example: Developer
-                      description:
+                      role_es:
+                        type: string
+                        example: Desarrollador
+                      description_us:
                         type: string
                         example: I develop software for Software Corp
-                      location:
+                      description_es:
+                        type: string
+                        example: Desarrollo software para una compaña de software
+                      location_us:
                         type: string
                         example: Remote
+                      location_es:
+                        type: string
+                        example: Remota
                       start_date:
                         type: string
                         example: 2023-09-26

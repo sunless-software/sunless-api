@@ -25,6 +25,12 @@ paths:
             type: integer
           description: ID of the user whose blogs to fetch
         - in: query
+          name: lang
+          schema:
+            type: string
+            default: "US"
+          description: Language for title and body
+        - in: query
           name: offset
           schema:
             type: integer
