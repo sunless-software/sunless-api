@@ -15,7 +15,8 @@ join projects pj on pj.id = c.project_id
 where c.user_id = $1 and c.project_id = $2 and pj.deleted = false`;
 
 export const GET_USERS = `select id, rol_id, username, '****' as "password", coalesce(profile_photo, '') as "profile_photo", 
-coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description, '') as "short_description", job_title, public, deleted, 
+coalesce(phone, '') as "phone", coalesce(email, '') as "email", coalesce(short_description_us, '') as short_description_us,
+coalesce(short_description_es, '') as short_description_es, job_title, public, deleted, 
 banned, created_at, updated_at FROM users u where ($1::boolean IS TRUE OR u.public = TRUE) and ($2::boolean IS TRUE OR u.banned = FALSE) and 
 ($3::boolean IS TRUE OR u.deleted = FALSE) and ($4::text IS NULL OR username ILIKE '%' || $4 || '%') ORDER BY created_at DESC OFFSET $5 LIMIT $6`;
 
