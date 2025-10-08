@@ -8,7 +8,7 @@ export default function corsMiddleware() {
   return cors({
     origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Authorization"],
+    allowedHeaders: ["Authorization", "Content-Type"],
     credentials: true,
   });
 }
