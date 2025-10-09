@@ -38,6 +38,7 @@ import globalRolesRouter from "./routes/globalRoles";
 import permissionsRouter from "./routes/permissions";
 import projectRolesRouter from "./routes/projectRoles";
 import corsMiddleware from "./middlewares/cors";
+import rateLimitMiddleware from "./middlewares/rateLimitMiddleware";
 
 async function start() {
   const app = express();
@@ -47,6 +48,7 @@ async function start() {
   preload();
 
   app.use(corsMiddleware());
+  app.use(rateLimitMiddleware);
   app.use("/documentation", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.use("/api/v1", apiRouter);
 
