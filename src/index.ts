@@ -42,6 +42,7 @@ import rateLimitMiddleware from "./middlewares/rateLimitMiddleware";
 
 async function start() {
   const app = express();
+  app.set("trust proxy", 1);
   const apiRouter = Router();
   const port = process.env.PORT || API_DEFAULT_PORT;
   await connectToDB();

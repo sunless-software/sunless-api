@@ -207,7 +207,8 @@ AND EXISTS (SELECT 1 FROM projects p WHERE p.id = $5 AND p.deleted = FALSE) RETU
 export const DELETE_PROJECT_MEDIA = `DELETE from projects_media pm USING projects p
 WHERE p.id = $1 AND p.deleted = false AND pm.id = $2`;
 
-export const GET_PROJECTS_BY_USER = `SELECT p.id, p.name, p.short_description, p.long_description, p.logo, p.status, p.public, p.start_date,
+export const GET_PROJECTS_BY_USER = `SELECT p.id, p.name, p.short_description_us, p.short_description_es, p.long_description_us, p.long_description_es,
+ p.logo, p.status, p.public, p.start_date,
 p.end_date, p.estimated_end, p.key, coalesce(json_agg(distinct jsonb_build_object('id', t.id, 'name', t.name, 'created_at',
 t.created_at, 'updated_at', t.updated_at)) filter (where t.id is not null), '[]') as tags, CASE WHEN c2.user_id IS NOT NULL 
 THEN true ELSE false END AS is_collaborator, $1::int as creator_id, p.created_at, p.updated_at
