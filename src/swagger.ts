@@ -14,14 +14,17 @@ const swaggerDefinition = {
   servers: [
     {
       url: `http://localhost:${port}`,
-      description: "Local server",
+      description: "Sunless swagger docs",
     },
   ],
 };
 
 const options = {
   swaggerDefinition,
-  apis: [path.join(__dirname, "documentation", "*.yml")],
+  apis: [
+    path.join(__dirname, "documentation", "*.yml"),
+    path.join(__dirname, "../src/documentation/*.yml"),
+  ],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
