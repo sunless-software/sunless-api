@@ -230,7 +230,7 @@ IS NULL OR $5::int[] <@ array_agg(t.id)) ORDER BY p.created_at DESC OFFSET $3 LI
 
 export const COUNT_ALL_PROJECTS = `SELECT count(*) AS total FROM projects p WHERE p.deleted = FALSE`;
 
-export const GET_PROJECT_DETAILS = `select p.*, json_agg(jsonb_build_object('id', c.user_id,'project_role_id', c.role_id, 'project_role_name', pr.role_name, 
+export const GET_PROJECT_DETAILS = `select p.*, json_agg(distinct jsonb_build_object('id', c.user_id,'project_role_id', c.role_id, 'project_role_name', pr.role_name, 
 'username', u.username,'profile_photo', coalesce(u.profile_photo, ''))) as collaborators, coalesce(json_agg(distinct jsonb_build_object('id', t.id,
 'name', t.name)) filter (where t.id is not null), '[]') as tags,coalesce(json_agg(distinct jsonb_build_object('id', tc.id,'name', tc.name)) filter 
 (where tc.id is not null), '[]') as technologies, coalesce(json_agg(distinct jsonb_build_object('id', pm.id,'url', pm.url,
