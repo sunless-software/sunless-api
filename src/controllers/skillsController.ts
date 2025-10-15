@@ -20,13 +20,13 @@ import {
 
 const skillsController = {
   getSkills: async (req: Request, res: Response, next: NextFunction) => {
-    const { offset = 0, limit = 20 } = req.query;
+    const { lang = "US", offset = 0, limit = 20 } = req.query;
     const db = await connectToDB();
 
     try {
       const [countSkillsResult, getSkillsResult] = await Promise.all([
         db.query(COUNT_SKILLS),
-        db.query(GET_SKILLS, [offset, limit]),
+        db.query(GET_SKILLS, [lang, offset, limit]),
       ]);
       const skills = getSkillsResult.rows;
 
@@ -53,11 +53,11 @@ const skillsController = {
     }
   },
   createSkill: async (req: Request, res: Response, next: NextFunction) => {
-    const { skillName } = req.body;
+    const { skillNameUS, skillNameES } = req.body;
     const db = await connectToDB();
 
     try {
-      const result = await db.query(CREATE_SKILL, [skillName]);
+      const result = await db.query(CREATE_SKILL, [skillNameUS, skillNameES]);
 
       sendResponse(
         {
@@ -74,11 +74,15 @@ const skillsController = {
   },
   updateSkills: async (req: Request, res: Response, next: NextFunction) => {
     const { skillID } = req.params;
-    const { skillName } = req.body;
+    const { skillNameUS, skillNameES } = req.body;
     const db = await connectToDB();
 
     try {
-      const result = await db.query(UPDATE_SKILL, [skillName, skillID]);
+      const result = await db.query(UPDATE_SKILL, [
+        skillNameUS,
+        skillNameES,
+        skillID,
+      ]);
       const affectedRows = result.rowCount;
 
       if (!affectedRows) {
