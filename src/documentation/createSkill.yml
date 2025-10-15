@@ -5,7 +5,7 @@ paths:
       description: |
         Creates a new skill.  
         Requires a global role with the `CREATE_SKILLS` permission.  
-        The `skillName` field is validated according to its type and requirements.
+        The `skillNameUS` and `skillNameES` fields are validated according to its type and requirements.
       tags:
         - Skills
       requestBody:
@@ -15,11 +15,16 @@ paths:
             schema:
               type: object
               properties:
-                skillName:
+                skillNameUS:
                   type: string
                   example: Problem solving
                   description: |
                     Must be provided, must be a string, and cannot be empty.
+                skillNameES:
+                  type: string
+                  example: Resolucion de problemas
+                  description: |
+                    Optional. Must be a string, and cannot be empty if provided.
       responses:
         "201":
           description: Skill successfully created
@@ -42,9 +47,12 @@ paths:
                         id:
                           type: integer
                           example: 18
-                        name:
+                        name_us:
                           type: string
                           example: Problem solving
+                        name_es:
+                          type: string
+                          example: Resolucion de problemas
                         created_at:
                           type: string
                           format: date-time

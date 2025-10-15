@@ -4,15 +4,20 @@ import { validateResult } from "../utils";
 
 const updateSkillValidations = [
   param("skillID").isNumeric().withMessage("skill 'id' must be a number"),
-  body("skillName")
-    .exists()
-    .withMessage("'skillName' must be provided")
-    .bail()
+  body("skillNameUS")
+    .optional()
     .isString()
-    .withMessage("'skillName' must be an string")
+    .withMessage("'skillNameUS' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'skillName' cannot be empty"),
+    .withMessage("'skillNameUS' cannot be empty"),
+  body("skillNameES")
+    .optional()
+    .isString()
+    .withMessage("'skillNameES' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'skillNameES' cannot be empty"),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

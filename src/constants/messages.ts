@@ -61,7 +61,10 @@ export const PROJECTS_NAME_VIOLATION_MESSAGE = "project 'name' already in use.";
 export const PROJECTS_KEY_VIOLATION_MESSAGE = "project 'key' already in use.";
 export const GLOBAL_ROLES_ROLENAME_VIOLATION_MESSAGE =
   "'role_name' already in use.";
-export const SKILLS_NAME_VIOLATION_MESSAGE = "skill 'name' already in use.";
+export const SKILLS_NAME_US_VIOLATION_MESSAGE =
+  "skill 'skillNameUS' already in use.";
+export const SKILLS_NAME_ES_VIOLATION_MESSAGE =
+  "skill 'skillNameES' already in use.";
 export const PERMISSIONS_NAME_VIOLATION_MESSAGE =
   "permission 'name' already in use.";
 export const PROJECT_ROLES_ROLENAME_VIOLATION_MESSAGE =

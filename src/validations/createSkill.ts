@@ -3,15 +3,22 @@ import { body } from "express-validator";
 import { validateResult } from "../utils";
 
 const createSkillValidations = [
-  body("skillName")
+  body("skillNameUS")
     .exists()
-    .withMessage("'skillName' must be provided")
+    .withMessage("'skillNameUS' must be provided")
     .bail()
     .isString()
-    .withMessage("'skillName' must be an string")
+    .withMessage("'skillNameUS' must be an string")
     .bail()
     .isLength({ min: 1 })
-    .withMessage("'skillName' cannot be empty"),
+    .withMessage("'skillNameUS' cannot be empty"),
+  body("skillNameES")
+    .optional()
+    .isString()
+    .withMessage("'skillNameES' must be an string")
+    .bail()
+    .isLength({ min: 1 })
+    .withMessage("'skillNameES' cannot be empty"),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

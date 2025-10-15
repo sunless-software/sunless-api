@@ -13,7 +13,8 @@ import {
   PROJECTS_NAME_HASH_VIOLATION_MESSAGE,
   PROJECTS_NAME_VIOLATION_MESSAGE,
   PROJECTS_TECHNOLOGIES_PK_VIOLATION_MESSAGE,
-  SKILLS_NAME_VIOLATION_MESSAGE,
+  SKILLS_NAME_US_VIOLATION_MESSAGE,
+  SKILLS_NAME_ES_VIOLATION_MESSAGE,
   TAGS_NAME_VIOLATION_MESSAGE,
   TECHNOLOGIES_NAME_VIOLATION_MESSAGE,
   USER_PROFILES_LINKEDIN_URL_VIOLATION_MESSAGE,
@@ -41,7 +42,10 @@ export function handleDuplicatedKeyViolation(violation: string) {
   const PROJECTS_NAME_VIOLATION = "projects_name_key";
   const PROJECTS_KEY_VIOLATION = "projects_key_key";
   const GLOBAL_ROLES_ROLENAME_VIOLATION = "global_roles_role_name_key";
-  const SKILLS_NAME_VIOLATION = "skills_name_key";
+
+  const SKILLS_NAME_US_VIOLATION = "skills_name_us_key";
+  const SKILLS_NAME_ES_VIOLATION = "skills_name_es_key";
+
   const PERMISSIONS_NAME_VIOLATION = "permissions_name_key";
   const PROJECT_ROLES_ROLENAME_VIOLATION = "project_roles_role_name_key";
   const TECHNOLOGIES_NAME_VIOLATION = "technologies_name_key";
@@ -87,10 +91,15 @@ export function handleDuplicatedKeyViolation(violation: string) {
         ...response,
         message: GLOBAL_ROLES_ROLENAME_VIOLATION_MESSAGE,
       };
-    case SKILLS_NAME_VIOLATION:
+    case SKILLS_NAME_US_VIOLATION:
       return {
         ...response,
-        message: SKILLS_NAME_VIOLATION_MESSAGE,
+        message: SKILLS_NAME_US_VIOLATION_MESSAGE,
+      };
+    case SKILLS_NAME_ES_VIOLATION:
+      return {
+        ...response,
+        message: SKILLS_NAME_ES_VIOLATION_MESSAGE,
       };
     case PERMISSIONS_NAME_VIOLATION:
       return {

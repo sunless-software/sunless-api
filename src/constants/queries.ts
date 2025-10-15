@@ -26,7 +26,8 @@ job_title, u.public, u.deleted, u.banned, u.created_at, u.updated_at,
 coalesce(case when $5 = 'ES' then up.long_description_es else up.long_description_us end, '') as long_description, 
 coalesce(up.repo_url, '') as repo_url, coalesce(up.website_url, '') as website_url, coalesce(up.linkedin_url, '') as linkedin_url,
 coalesce(case when $5 = 'ES' then up.location_es else up.location_us end, '') as location, coalesce(json_agg(distinct 
-jsonb_build_object('id', s.id, 'name', s.name, 'created_at', s.created_at, 'updated_at', s.updated_at)) filter (where s.id is not null), '[]') 
+jsonb_build_object('id', s.id, 'name', coalesce(case when $5 = 'ES' then s.name_es else s.name_us end, ''), 
+'created_at', s.created_at, 'updated_at', s.updated_at)) filter (where s.id is not null), '[]') 
 as skills, coalesce(json_agg(distinct jsonb_build_object( 'id', t.id, 'name', t.name, 'created_at', t.created_at, 'updated_at', t.updated_at)) filter 
 (where t.id is not null), '[]') as technologies, coalesce(json_agg(distinct jsonb_build_object('id', e.id, 'company_name', e.company_name, 
  'role', coalesce(CASE WHEN $5 = 'ES' THEN e.role_es ELSE e.role_us end, ''), 'description', coalesce(case when $5 = 'ES' then e.description_es else e.description_us end, ''), 
@@ -110,11 +111,13 @@ FROM users u JOIN skills s ON s.id = $2 WHERE u.id = $1 AND u.deleted = false`;
 export const REMOVE_USER_SKILL = `DELETE from users_skills us USING users u WHERE us.user_id = u.id 
 AND u.deleted = false AND us.skill_id = $2 AND u.id = $1`;
 
-export const GET_SKILLS = `SELECT * FROM skills ORDER BY created_at DESC OFFSET $1 LIMIT $2`;
+export const GET_SKILLS = `SELECT id, coalesce(case when $1 = 'ES' then name_es else name_us end, '') as name, created_at, updated_at 
+FROM skills ORDER BY created_at DESC OFFSET $2 LIMIT $3`;
 
-export const CREATE_SKILL = `INSERT INTO skills (name) VALUES($1) RETURNING *`;
+export const CREATE_SKILL = `INSERT INTO skills (name_us, name_es) VALUES($1, $2) RETURNING name_us, COALESCE(name_es, '') as name_es, created_at, updated_at`;
 
-export const UPDATE_SKILL = `UPDATE skills SET name=$1 WHERE id=$2 RETURNING *`;
+export const UPDATE_SKILL = `UPDATE skills SET name_us=COALESCE($1, name_us), name_es=COALESCE($2, name_es) WHERE id=$3 RETURNING name_us, COALESCE(name_es, '') 
+as name_es, created_at, updated_at`;
 
 export const COUNT_SKILLS = `SELECT COUNT(*) AS total FROM skills`;
 
