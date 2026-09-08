@@ -39,7 +39,7 @@ services:
       postgres_prod:
         condition: service_healthy
     ports:
-      - "${PORT}:3002"
+      - "127.0.0.1:${PORT}:${PORT}"
 
 volumes:
   pgdata:
