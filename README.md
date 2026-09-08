@@ -11,12 +11,6 @@ Ensure that the _NODE_ENV_ variable is set to "development".
 npm run db:dev:up
 ```
 
-2 - Then run the following command to start the Postgres Docker container and execute the initial SQL scripts:
-
-```bash
-npm run db:dev:up
-```
-
 3 - Once the database has been initialized successfully, you can stop the process.
 
 4 - From the root folder of the sunless-api project, run the following command to install the required dependencies:
