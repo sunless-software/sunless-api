@@ -302,21 +302,21 @@ export const DEVELOPMENT_USERS_SKILLS = [
 ];
 
 export const DEVELOPMENT_SKILLS = [
-  { name: "Problem solving" },
-  { name: "Logical thinking" },
-  { name: "Attention to detail" },
-  { name: "Communication" },
-  { name: "Teamwork" },
-  { name: "Adaptability" },
-  { name: "Time management" },
-  { name: "Critical thinking" },
-  { name: "Debugging" },
-  { name: "Code readability" },
-  { name: "Algorithmic thinking" },
-  { name: "Version control discipline" },
-  { name: "Writing technical documentation" },
-  { name: "Testing mindset" },
-  { name: "Continuous learning" },
+  { name_us: "Problem solving", name_es: "Resolución de problemas" },
+  { name_us: "Logical thinking", name_es: "Pensamiento lógico" },
+  { name_us: "Attention to detail", name_es: "Atención al detalle" },
+  { name_us: "Communication", name_es: "Comunicación" },
+  { name_us: "Teamwork", name_es: "Trabajo en equipo" },
+  { name_us: "Adaptability", name_es: "Adaptabilidad" },
+  { name_us: "Time management", name_es: "Gestión del tiempo" },
+  { name_us: "Critical thinking", name_es: "Pensamiento crítico" },
+  { name_us: "Debugging", name_es: "Depuración" },
+  { name_us: "Code readability", name_es: "Legibilidad del código" },
+  { name_us: "Algorithmic thinking", name_es: "Pensamiento algorítmico" },
+  { name_us: "Version control discipline", name_es: "Disciplina de control de versiones" },
+  { name_us: "Writing technical documentation", name_es: "Redacción de documentación técnica" },
+  { name_us: "Testing mindset", name_es: "Mentalidad de pruebas" },
+  { name_us: "Continuous learning", name_es: "Aprendizaje continuo" },
 ];
 
 export const DEVELOPMENT_TECHNOLOGIES = [
