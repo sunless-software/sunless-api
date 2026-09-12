@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
+import { TECHNOLOGY_TYPES } from "../constants/constants";
 import { validateResult } from "../utils";
 
 const createTechnologyValidation = [
@@ -12,6 +13,14 @@ const createTechnologyValidation = [
     .bail()
     .isLength({ min: 1 })
     .withMessage("'technologyName' cannot be empty"),
+  body("technologyType")
+    .exists()
+    .withMessage("'technologyType' must be provided")
+    .bail()
+    .isIn(TECHNOLOGY_TYPES)
+    .withMessage(
+      `'technologyType' must be one of: ${TECHNOLOGY_TYPES.join(", ")}`
+    ),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);
   },

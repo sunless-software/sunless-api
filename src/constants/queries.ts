@@ -28,7 +28,7 @@ coalesce(up.repo_url, '') as repo_url, coalesce(up.website_url, '') as website_u
 coalesce(case when $5 = 'ES' then up.location_es else up.location_us end, '') as location, coalesce(json_agg(distinct 
 jsonb_build_object('id', s.id, 'name', coalesce(case when $5 = 'ES' then s.name_es else s.name_us end, ''), 
 'created_at', s.created_at, 'updated_at', s.updated_at)) filter (where s.id is not null), '[]') 
-as skills, coalesce(json_agg(distinct jsonb_build_object( 'id', t.id, 'name', t.name, 'created_at', t.created_at, 'updated_at', t.updated_at)) filter 
+as skills, coalesce(json_agg(distinct jsonb_build_object( 'id', t.id, 'name', t.name, 'technology_type', t.technology_type, 'created_at', t.created_at, 'updated_at', t.updated_at)) filter 
 (where t.id is not null), '[]') as technologies, coalesce((select json_agg(jsonb_build_object('id', e.id, 'company_name', e.company_name, 
 'role', coalesce(CASE WHEN $5 = 'ES' THEN e.role_es ELSE e.role_us end, ''), 'description', coalesce(case when $5 = 'ES' then e.description_es else e.description_us end, ''), 
 'location', coalesce(case when $5 = 'ES' then e.location_es else e.location_us end, ''), 'company_logo', coalesce(e.company_logo, ''), 'start_date', e.start_date, 'end_date', 
@@ -130,9 +130,9 @@ export const GET_TECHNOLOGIES = `SELECT * FROM technologies ORDER BY created_at 
 
 export const COUNT_TECHNOLOGIES = `SELECT COUNT(*) AS total FROM technologies`;
 
-export const CREATE_TECHNOLOGY = `INSERT INTO technologies (name) VALUES($1) RETURNING *`;
+export const CREATE_TECHNOLOGY = `INSERT INTO technologies (name, technology_type) VALUES($1, $2) RETURNING *`;
 
-export const UPDATE_TECHNOLOGY = `UPDATE technologies SET name=$1 WHERE id=$2 RETURNING *`;
+export const UPDATE_TECHNOLOGY = `UPDATE technologies SET name=$1, technology_type=COALESCE($2::technology_type, technology_type) WHERE id=$3 RETURNING *`;
 
 export const CREATE_PROJECT = `INSERT INTO projects(name, name_hash, short_description_us, short_description_es, long_description_us, long_description_es,
 logo, status, public, start_date, end_date, estimated_end, key, deleted) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) 
@@ -235,7 +235,7 @@ export const COUNT_ALL_PROJECTS = `SELECT count(*) AS total FROM projects p WHER
 
 export const GET_PROJECT_DETAILS = `select p.*, json_agg(distinct jsonb_build_object('id', c.user_id,'project_role_id', c.role_id, 'project_role_name', pr.role_name, 
 'username', u.username,'profile_photo', coalesce(u.profile_photo, ''))) as collaborators, coalesce(json_agg(distinct jsonb_build_object('id', t.id,
-'name', t.name)) filter (where t.id is not null), '[]') as tags,coalesce(json_agg(distinct jsonb_build_object('id', tc.id,'name', tc.name)) filter 
+'name', t.name)) filter (where t.id is not null), '[]') as tags,coalesce(json_agg(distinct jsonb_build_object('id', tc.id,'name', tc.name,'technology_type', tc.technology_type)) filter 
 (where tc.id is not null), '[]') as technologies, coalesce(json_agg(distinct jsonb_build_object('id', pm.id,'url', pm.url,
 'type', pm.type)) filter (where pm.id is not null), '[]') as media, coalesce(json_agg(distinct jsonb_build_object('id', er.id,'name_us', er.name_us, 'name_es', er.name_es, 
 'url', er.url, 'type', er.type)) filter (where er.id is not null), '[]') as external_resources from projects p join collaborators c on c.project_id = p.id

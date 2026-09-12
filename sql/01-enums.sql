@@ -10,6 +10,25 @@ DO $$ BEGIN
     END IF;
 END $$;
 
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'technology_type') THEN
+        CREATE TYPE technology_type AS ENUM (
+            'LANGUAGES',
+            'FRONTEND',
+            'BACKEND',
+            'MOBILE',
+            'DB',
+            'GAME DEVELOPMENT',
+            'INFRA',
+            'TESTING',
+            'VERSION CONTROL',
+            'METHODOLOGIES',
+            'TOOLS',
+            'OTHERS'
+        );
+    END IF;
+END $$;
+
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'external_resource_type') THEN

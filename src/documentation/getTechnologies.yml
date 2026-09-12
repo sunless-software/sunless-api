@@ -50,6 +50,9 @@ paths:
                         name:
                           type: string
                           example: React
+                        technology_type:
+                          type: string
+                          example: FRONTEND
                         created_at:
                           type: string
                           format: date-time

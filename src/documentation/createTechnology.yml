@@ -5,7 +5,7 @@ paths:
       description: |
         Creates a new technology.  
         Requires a global role with the `CREATE_TECHNOLOGIES` permission.  
-        The `technologyName` field is validated according to its type and requirements.
+        The `technologyName` and `technologyType` fields are validated according to their types and requirements.
       tags:
         - Technologies
       requestBody:
@@ -20,6 +20,13 @@ paths:
                   example: React
                   description: |
                     Must be provided, must be a string, and cannot be empty.
+                technologyType:
+                  type: string
+                  example: FRONTEND
+                  description: |
+                    Must be provided and must be one of the valid technology types
+                    (LANGUAGES, FRONTEND, BACKEND, MOBILE, DB, GAME DEVELOPMENT,
+                    INFRA, TESTING, VERSION CONTROL, METHODOLOGIES, TOOLS, OTHERS).
       responses:
         "201":
           description: Technology successfully created
@@ -45,6 +52,9 @@ paths:
                         name:
                           type: string
                           example: React
+                        technology_type:
+                          type: string
+                          example: FRONTEND
                         created_at:
                           type: string
                           format: date-time

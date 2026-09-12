@@ -54,11 +54,14 @@ const technologiesController = {
     }
   },
   createTechnology: async (req: Request, res: Response, next: NextFunction) => {
-    const { technologyName } = req.body;
+    const { technologyName, technologyType } = req.body;
     const db = await connectToDB();
 
     try {
-      const result = await db.query(CREATE_TECHNOLOGY, [technologyName]);
+      const result = await db.query(CREATE_TECHNOLOGY, [
+        technologyName,
+        technologyType,
+      ]);
 
       return sendResponse(
         {
@@ -75,12 +78,13 @@ const technologiesController = {
   },
   updateTechnology: async (req: Request, res: Response, next: NextFunction) => {
     const { technologyID } = req.params;
-    const { technologyName } = req.body;
+    const { technologyName, technologyType } = req.body;
     const db = await connectToDB();
 
     try {
       const result = await db.query(UPDATE_TECHNOLOGY, [
         technologyName,
+        technologyType,
         technologyID,
       ]);
       const affectedRows = result.rowCount;

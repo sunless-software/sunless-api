@@ -22,3 +22,18 @@ export const EXTERNAL_RESOURCE_TYPES = [
 ];
 
 export const MEDIA_TPYES = ["IMAGE", "VIDEO", "GIF"];
+
+export const TECHNOLOGY_TYPES = [
+  "LANGUAGES",
+  "FRONTEND",
+  "BACKEND",
+  "MOBILE",
+  "DB",
+  "GAME DEVELOPMENT",
+  "INFRA",
+  "TESTING",
+  "VERSION CONTROL",
+  "METHODOLOGIES",
+  "TOOLS",
+  "OTHERS",
+];

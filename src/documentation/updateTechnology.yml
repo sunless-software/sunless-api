@@ -5,7 +5,7 @@ paths:
       description: |
         Updates a technology entry.  
         Requires a role with the global `UPDATE_TECHNOLOGIES` permission.  
-        Validates `technologyID` in the path and `technologyName` in the request body.
+        Validates `technologyID` in the path and `technologyName`, `technologyType` in the request body.
       tags:
         - Technologies
       parameters:
@@ -31,6 +31,13 @@ paths:
                   description: |
                     Required. Must be a non-empty string.  
                     Cannot be duplicated across technologies.
+                technologyType:
+                  type: string
+                  example: "FRONTEND"
+                  description: |
+                    Optional. Must be one of the valid technology types
+                    (LANGUAGES, FRONTEND, BACKEND, MOBILE, DB, GAME DEVELOPMENT,
+                    INFRA, TESTING, VERSION CONTROL, METHODOLOGIES, TOOLS, OTHERS).
       responses:
         "200":
           description: Technology successfully updated
@@ -56,6 +63,9 @@ paths:
                         name:
                           type: string
                           example: "React"
+                        technology_type:
+                          type: string
+                          example: "FRONTEND"
                         created_at:
                           type: string
                           format: date-time

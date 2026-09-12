@@ -1126,7 +1126,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"technologyName\": \"React\"\n}",
+							"raw": "{\n    \"technologyName\": \"React\",\n    \"technologyType\": \"FRONTEND\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1160,7 +1160,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"technologyName\": \"React\"\n}",
+							"raw": "{\n    \"technologyName\": \"React\",\n    \"technologyType\": \"FRONTEND\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
